@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proyectos</title>
+<meta name="description" content="Los proyectos que voy desarrollando: qué son, en qué punto están, qué falta y cómo retomarlos.">
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cabecera">
+<div class="ancho">
+<h1>Proyectos</h1>
+<p class="presentacion">Los proyectos que voy desarrollando: qué son, en qué punto están, qué falta y cómo retomarlos.</p>
+</div>
+</header>
+<main id="contenido" class="ancho">
+<section aria-labelledby="t-resumen">
+<h2 id="t-resumen" class="oculto">Resumen</h2>
+<dl class="cifras">
+<div><dt>Proyectos</dt><dd>1</dd></div>
+<div><dt>Activos</dt><dd>1</dd></div>
+<div class="cifra-larga"><dt>Último movimiento</dt><dd>Aventura paso a paso, 25 de noviembre de 2026</dd></div>
+</dl>
+</section>
+<section aria-labelledby="t-lista">
+<h2 id="t-lista">Todos los proyectos</h2>
+<div class="filtros">
+<label for="buscar">Buscar</label>
+<input id="buscar" type="search" placeholder="Nombre, tecnología, palabra…" autocomplete="off">
+<div class="grupo" role="group" aria-label="Filtrar por estado">
+<button type="button" class="filtro" data-estado="" aria-pressed="true">Todos</button>
+<button type="button" class="filtro" data-estado="activo" aria-pressed="false">Activo</button>
+</div>
+</div>
+<p id="cuantos" class="nota" role="status" aria-live="polite"></p>
+<div class="tarjetas">
+<article class="tarjeta" data-estado="activo" data-texto="aventura paso a paso un programa que juega solo aventuras gráficas clásicas, aprendiendo cada juego sobre la marcha. python scummvm tkinter opencv gemini windows un programa en python que maneja scummvm y juega solo aventuras gráficas clásicas de sierra. primero explora el mapa andando, sala por sala. después sigue una guía del juego paso a paso: va a la sala, teclea la orden, lee lo que el juego contesta y comprueba por los puntos si de verdad salió. la norma del proyecto es que todo sea genérico: no lleva nada escrito a mano para un juego concreto. cuando aparece una mecánica nueva, el programa la aprende y la apunta. cada atasco se trata como una clase de problema, no como un caso suelto. el juego de prueba es leisure suit larry 3. hoy lleva 34 salas en el mapa, 1587 puntos y va por el paso 86 de los 132 de la guía, al empezar la parte de patti. etapa 2: seguir la guía y avanzar en el juego" data-fecha="2026-11-25">
+<div class="tarjeta-cabeza">
+<h3><a href="p/aventura-pasos.html">Aventura paso a paso</a></h3>
+<span class="estado estado-activo">Activo</span>
+</div>
+<p class="lema">Un programa que juega solo aventuras gráficas clásicas, aprendiendo cada juego sobre la marcha.</p>
+<div class="avance"><div class="avance-riel" role="img" aria-label="Avance: 55 por ciento"><div class="avance-lleno" style="width:55%"></div></div><span class="avance-num" aria-hidden="true">55 %</span></div>
+<dl class="datos">
+<div><dt>Etapa</dt><dd>Etapa 2: seguir la guía y avanzar en el juego</dd></div>
+<div><dt>Siguiente paso</dt><dd>Sacar adelante la parte de Patti (pasos 86 en adelante) y cerrar los pasos que quedaron pendientes en el hotel: el 79 y los del estudio de aeróbic (66 a 68).</dd></div>
+<div><dt>Último movimiento</dt><dd>25 de noviembre de 2026 <span class="hace"></span></dd></div>
+</dl>
+<ul class="tecnologias" aria-label="Tecnologías"><li>Python</li><li>ScummVM</li><li>Tkinter</li><li>OpenCV</li><li>Gemini</li><li>Windows</li></ul>
+</article>
+</div>
+</section>
+</main>
+<footer class="pie">
+<p>Proyectos. Página actualizada el 25 de noviembre de 2026.</p>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

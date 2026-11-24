@@ -1,0 +1,67 @@
+{
+ "nombre": "Aventura paso a paso",
+ "lema": "Un programa que juega solo aventuras gráficas clásicas, aprendiendo cada juego sobre la marcha.",
+ "estado": "activo",
+ "inicio": "2026-11-20",
+ "ultima_actividad": "2026-11-24",
+ "avance": 55,
+ "avance_nota": "Estimación. Etapa 1 terminada; etapa 2 en el paso 86 de 132 de la guía del juego de prueba.",
+ "etapa_actual": "Etapa 2: seguir la guía y avanzar en el juego",
+ "tecnologias": ["Python", "ScummVM", "Tkinter", "OpenCV", "Gemini", "Windows"],
+ "repositorio": "aventura-pasos",
+ "codigo_privado": true,
+ "resumen": [
+  "Un programa en Python que maneja ScummVM y juega solo aventuras gráficas clásicas de Sierra. Primero explora el mapa andando, sala por sala. Después sigue una guía del juego paso a paso: va a la sala, teclea la orden, lee lo que el juego contesta y comprueba por los puntos si de verdad salió.",
+  "La norma del proyecto es que todo sea genérico: no lleva nada escrito a mano para un juego concreto. Cuando aparece una mecánica nueva, el programa la aprende y la apunta. Cada atasco se trata como una clase de problema, no como un caso suelto.",
+  "El juego de prueba es Leisure Suit Larry 3. Hoy lleva 34 salas en el mapa, 1587 puntos y va por el paso 86 de los 132 de la guía, al empezar la parte de Patti."
+ ],
+ "siguiente_paso": "Sacar adelante la parte de Patti (pasos 86 en adelante) y cerrar los pasos que quedaron pendientes en el hotel: el 79 y los del estudio de aeróbic (66 a 68).",
+ "etapas": [
+  {"nombre": "Etapa 1: mapa, movimiento y no atascarse", "estado": "hecha", "detalle": "Explora andando, dibuja el mapa con miniaturas, guarda puntos seguros y no se queda parado ante carteles ni protecciones de copia."},
+  {"nombre": "Etapa 2: seguir la guía y avanzar", "estado": "en curso", "detalle": "Paso 86 de 132. 1587 puntos. Aprende mecánicas, revisa el rumbo cada diez minutos y pide ayuda a una IA más potente si lleva mucho rato sin avanzar."},
+  {"nombre": "Etapa 3: terminar el juego de prueba", "estado": "pendiente", "detalle": "Llegar al final de Larry 3 sin ayuda."},
+  {"nombre": "Etapa 4: probarlo con otro juego", "estado": "pendiente", "detalle": "Comprobar que de verdad es genérico con una aventura distinta."}
+ ],
+ "hecho": [
+  "Enlace con ScummVM por su depurador y lectura directa de la memoria del juego.",
+  "Exploración del mapa solo andando, con mapa dibujado y leyenda.",
+  "Puntos seguros: solo se guarda partida donde consta que se llegó andando.",
+  "Plan sacado de la guía por la IA: 132 pasos con sala, orden y puntos.",
+  "Aprendizaje genérico de mecánicas: minijuegos de teclas, estados como estar sentado, puertas, carteles que piden escribir.",
+  "Modo rápido, atajos dentro de la sala y saltos entre salas ya andadas.",
+  "Revisión periódica del rumbo e IA de emergencia.",
+  "Ventana con pestañas: guía, mapa, registro y ajustes.",
+  "Vídeos cómicos de las muertes del personaje.",
+  "Diario escrito de todo lo que hace el programa, para depurar después."
+ ],
+ "pendiente": [
+  "Parte de Patti: pasos 86 a 132.",
+  "Paso 79 (salir del hotel) y pasos 66 a 68 (estudio de aeróbic, 99 puntos): no aparece el personaje que la guía espera.",
+  "Las órdenes del ascensor y de la cerradura dan por bueno lo que no lo es.",
+  "Tras lograr un paso sentado, el siguiente se teclea sin levantarse.",
+  "La sala a la que se entra tecleando una orden aún gasta cinco minutos buscando puertas.",
+  "El aviso de «llevas cinco minutos sin guardar» estorba cada poco.",
+  "El juego se cerró una vez sin causa conocida.",
+  "Los modelos potentes gratuitos de Gemini suelen estar sin cupo: valorar uno de pago o uno local con Ollama."
+ ],
+ "diario": [
+  {"fecha": "2026-11-20", "texto": "Arranca el proyecto desde cero, con la idea de ir en pasos cortos y firmes. Primera exploración: ocho salas andando. Primera ventana. El juego se acelera desde el depurador y un cruce de sala baja de veinte segundos a dos."},
+  {"fecha": "2026-11-22", "texto": "Se descubre que parte del mapa se había explorado cargando una partida y no andando. Regla firme desde entonces: una partida guardada nunca se usa para viajar. Mapa limpio de 22 salas. Leer la memoria del juego hace los cruces cuatro veces más rápidos. Primeros vídeos de muertes. Se abre la etapa 2: 24 puntos en los ocho primeros pasos."},
+  {"fecha": "2026-11-23", "texto": "1382 puntos y paso 72. Aprendizaje genérico de mecánicas, que resuelve los aparatos del gimnasio. Modo rápido, atajos y saltos legales entre salas. Ventana rehecha con pestañas. Revisión de rumbo cada diez minutos."},
+  {"fecha": "2026-11-24", "texto": "IA de emergencia. Se resuelve el atasco del bar, que tenía cuatro causas generales. 1587 puntos. El programa deja de repetir pasos sin sentido: memoria de intentos, salas cerradas y rehacer el tramo más antiguo. Paso 86 de 132."}
+ ],
+ "lecciones": [
+  "Intentar resolver el juego entero de golpe no funciona. Dos intentos anteriores se estancaron así. Funciona ir por etapas y no abrir la siguiente hasta que la anterior convence.",
+  "Los puntos son la única señal fiable de avance. Si la guía dice que un paso da puntos y no suben, no está hecho, diga lo que diga la IA.",
+  "Una IA ligera da pasos por hechos sin estarlo. Solo propone; las reglas del programa deciden.",
+  "Todo fallo tiene que contar como intento, o se repite sin fin. Llegó a probar 125 veces la misma salida.",
+  "Con el juego acelerado sus relojes también corren y las cosas caducan. Las escenas con prisa se juegan a velocidad real.",
+  "A veces el juego niega un paso y la razón que da no es la causa. Pasar por otras salas lo endereza.",
+  "Ante un atasco, ordenar las acciones de lo barato a lo caro antes de añadir reglas nuevas.",
+  "Las pruebas largas cansan y enseñan poco. Mejor pruebas de pocos minutos y pocos pasos, sobre una copia de la partida."
+ ],
+ "relacionados": [
+  {"nombre": "Dos intentos anteriores, abandonados", "relacion": "Este proyecto los sustituye. No se reutilizó su código, solo el aspecto de la ventana."}
+ ],
+ "texto_para_claude": "Vamos a retomar el proyecto aventura-pasos. Antes de tocar nada, lee el README del proyecto y la memoria para retomar de su ficha en la web de proyectos. Después lee el final de datos\\diario.txt para ver qué hizo el programa la última vez. Dime en pocas líneas en qué punto estamos y cuál es el siguiente paso, y espera mi visto bueno. Recuerda las normas: todo genérico, nada propio de un juego concreto; pasos cortos y comprobados; las pruebas, sobre una copia de la partida y de pocos minutos."
+}
