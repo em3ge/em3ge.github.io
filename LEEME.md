@@ -39,7 +39,9 @@ Las memorias de cada ficha no se escriben solas: hay que actualizarlas a mano o 
 
 ## Añadir un proyecto desde otro ordenador
 
-1. Clonar este repositorio.
-2. `python generar.py nuevo nombre-del-proyecto` y rellenar la ficha.
-3. Crear `local.json` con la ruta del código, si se quiere que se mida solo.
+1. Clonar este repositorio: `git clone https://github.com/em3ge/em3ge.github.io.git proyectos-web`
+2. `python generar.py nuevo nombre-del-proyecto` y rellenar `ficha.json` y `retomar.md` en `fichas\nombre-del-proyecto`.
+3. Crear `local.json` con la ruta del código, para que se mida solo y entre en el guardado automático. Ejemplo: `{"nombre-del-proyecto": "C:/Users/yo/Documents/nombre-del-proyecto"}`
 4. `publicar.bat`.
+
+En la web pública no deben ir correos, claves ni rutas con nombres de persona.

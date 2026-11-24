@@ -1,6 +1,14 @@
 @echo off
 rem Rehace la web con las fichas de ahora y la sube a GitHub.
 cd /d "%~dp0"
+rem Primero se trae lo que otro ordenador haya subido.
+git pull --rebase --autostash
+if errorlevel 1 (
+    git rebase --abort >nul 2>nul
+    echo No se ha podido traer lo que hay en GitHub. No subo nada.
+    pause
+    exit /b 1
+)
 python generar.py
 if errorlevel 1 (
     echo La web no se ha podido generar. No subo nada.

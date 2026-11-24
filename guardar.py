@@ -71,6 +71,12 @@ def main():
         aqui = json.loads((RAIZ / "local.json").read_text(encoding="utf-8"))
     except (OSError, ValueError):
         aqui = {}
+    # Traer primero lo que otro ordenador haya subido a la web
+    if git(RAIZ, "remote")[1]:
+        cod, salida = git(RAIZ, "pull", "--rebase", "--autostash")
+        if cod != 0:
+            git(RAIZ, "rebase", "--abort")
+            decir(f"NO  proyectos-web: no se pudo traer lo de GitHub: {salida.splitlines()[-1] if salida else ''}")
     mensaje = f"Guardado automatico del {datetime.now():%Y-%m-%d %H:%M}"
     cambiados = [n for n, c in aqui.items() if not n.startswith("_") and guardar(n, c, mensaje)]
     if cambiados:
