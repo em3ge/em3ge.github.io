@@ -16,7 +16,17 @@ Cada proyecto es una carpeta dentro de `fichas`, con dos archivos que se escribe
 - `python generar.py`: rehace la web.
 - `python generar.py nuevo mi-proyecto`: crea la ficha vacía de un proyecto nuevo.
 - `publicar.bat`: rehace la web y la sube a GitHub.
-- `python copia.py`: guarda una copia de seguridad de cada proyecto.
+- `python copia.py`: guarda una copia de seguridad de cada proyecto en OneDrive.
+- `python guardar.py`: guarda en git y sube a GitHub lo que haya cambiado en los proyectos de `local.json`, y pone al día la web. Lo que hace queda en `guardar.log`.
+
+## Lo que va solo en el ordenador principal
+
+Dos tareas programadas de Windows:
+
+- «Guardar proyectos»: ejecuta `guardar.py` cada dos horas.
+- «Copia de proyectos»: ejecuta `copia.py` cada domingo a las doce.
+
+Las memorias de cada ficha no se escriben solas: hay que actualizarlas a mano o pedírselo a Claude.
 
 ## Estados que entiende
 
