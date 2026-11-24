@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aventura paso a paso · Proyectos</title>
-<meta name="description" content="Un programa que juega solo aventuras gráficas clásicas, aprendiendo cada juego sobre la marcha.">
+<meta name="description" content="Un programa que resuelve solo cualquier aventura gráfica de ScummVM a partir de sus guías, aprendiendo cada juego sobre la marcha.">
 <link rel="stylesheet" href="../estilo.css">
 </head>
 <body>
@@ -16,7 +16,7 @@
 <h1>Aventura paso a paso</h1>
 <span class="estado estado-activo">Activo</span>
 </div>
-<p class="presentacion">Un programa que juega solo aventuras gráficas clásicas, aprendiendo cada juego sobre la marcha.</p>
+<p class="presentacion">Un programa que resuelve solo cualquier aventura gráfica de ScummVM a partir de sus guías, aprendiendo cada juego sobre la marcha.</p>
 </div>
 </header>
 <main id="contenido" class="ancho proyecto" data-fecha="2026-11-25">
@@ -38,7 +38,7 @@
 <nav class="indice" aria-label="Apartados de esta página"><ul><li><a href="#corto">En corto</a></li><li><a href="#siguiente">Siguiente paso</a></li><li><a href="#etapas">Etapas</a></li><li><a href="#pendiente">Qué falta</a></li><li><a href="#hecho">Qué hay hecho</a></li><li><a href="#retomar">Memoria para retomar</a></li><li><a href="#lecciones">Lecciones aprendidas</a></li><li><a href="#diario">Diario</a></li><li><a href="#relacionados">Proyectos relacionados</a></li><li><a href="#claude">Texto para retomarlo con Claude</a></li></ul></nav>
 <section id="corto" aria-labelledby="t-corto">
 <h2 id="t-corto">En corto</h2>
-<p>Un programa en Python que maneja ScummVM y juega solo aventuras gráficas clásicas de Sierra. Primero explora el mapa andando, sala por sala. Después sigue una guía del juego paso a paso: va a la sala, teclea la orden, lee lo que el juego contesta y comprueba por los puntos si de verdad salió.</p><p>La norma del proyecto es que todo sea genérico: no lleva nada escrito a mano para un juego concreto. Cuando aparece una mecánica nueva, el programa la aprende y la apunta. Cada atasco se trata como una clase de problema, no como un caso suelto.</p><p>El juego de prueba es Leisure Suit Larry 3. Hoy lleva 34 salas en el mapa, 1587 puntos y va por el paso 86 de los 132 de la guía, al empezar la parte de Patti.</p>
+<p>Un programa en Python que maneja ScummVM y resuelve solo cualquier aventura gráfica clásica de las que ScummVM puede abrir, siempre que tenga las guías del juego. Primero explora el mapa andando, sala por sala. Después sigue una guía del juego paso a paso: va a la sala, teclea la orden, lee lo que el juego contesta y comprueba por los puntos si de verdad salió.</p><p>La norma del proyecto es que todo sea genérico: no lleva nada escrito a mano para un juego concreto. Cuando aparece una mecánica nueva, el programa la aprende y la apunta. Cada atasco se trata como una clase de problema, no como un caso suelto.</p><p>El juego de prueba es Leisure Suit Larry 3, y por eso la única pieza de enlace escrita hasta hoy es la del motor de ese juego. El resto del programa no depende de él. Hoy lleva 34 salas en el mapa, 1587 puntos y va por el paso 86 de los 132 de la guía, al empezar la parte de Patti.</p>
 </section>
 <section id="siguiente" aria-labelledby="t-siguiente">
 <h2 id="t-siguiente">Siguiente paso</h2>
@@ -46,7 +46,7 @@
 </section>
 <section id="etapas" aria-labelledby="t-etapas">
 <h2 id="t-etapas">Etapas</h2>
-<ol class="etapas"><li class="etapa etapa-hecha"><span class="etapa-estado">Hecha</span><div><strong>Etapa 1: mapa, movimiento y no atascarse</strong><p>Explora andando, dibuja el mapa con miniaturas, guarda puntos seguros y no se queda parado ante carteles ni protecciones de copia.</p></div></li><li class="etapa etapa-en-curso"><span class="etapa-estado">En curso</span><div><strong>Etapa 2: seguir la guía y avanzar</strong><p>Paso 86 de 132. 1587 puntos. Aprende mecánicas, revisa el rumbo cada diez minutos y pide ayuda a una IA más potente si lleva mucho rato sin avanzar.</p></div></li><li class="etapa etapa-pendiente"><span class="etapa-estado">Pendiente</span><div><strong>Etapa 3: terminar el juego de prueba</strong><p>Llegar al final de Larry 3 sin ayuda.</p></div></li><li class="etapa etapa-pendiente"><span class="etapa-estado">Pendiente</span><div><strong>Etapa 4: probarlo con otro juego</strong><p>Comprobar que de verdad es genérico con una aventura distinta.</p></div></li></ol>
+<ol class="etapas"><li class="etapa etapa-hecha"><span class="etapa-estado">Hecha</span><div><strong>Etapa 1: mapa, movimiento y no atascarse</strong><p>Explora andando, dibuja el mapa con miniaturas, guarda puntos seguros y no se queda parado ante carteles ni protecciones de copia.</p></div></li><li class="etapa etapa-en-curso"><span class="etapa-estado">En curso</span><div><strong>Etapa 2: seguir la guía y avanzar</strong><p>Paso 86 de 132. 1587 puntos. Aprende mecánicas, revisa el rumbo cada diez minutos y pide ayuda a una IA más potente si lleva mucho rato sin avanzar.</p></div></li><li class="etapa etapa-pendiente"><span class="etapa-estado">Pendiente</span><div><strong>Etapa 3: terminar el juego de prueba</strong><p>Llegar al final de Larry 3 sin ayuda.</p></div></li><li class="etapa etapa-pendiente"><span class="etapa-estado">Pendiente</span><div><strong>Etapa 4: probarlo con otro juego</strong><p>Comprobar que de verdad es genérico con una aventura distinta, y después con juegos de otros motores de ScummVM.</p></div></li></ol>
 </section>
 <section id="pendiente" aria-labelledby="t-pendiente">
 <h2 id="t-pendiente">Qué falta</h2>
@@ -59,7 +59,8 @@
 <section id="retomar" aria-labelledby="t-retomar">
 <h2 id="t-retomar">Memoria para retomar</h2>
 <h3 id="r-qu-es-y-qu-se-busca">Qué es y qué se busca</h3>
-<p>Un programa que juega solo aventuras gráficas de Sierra dentro de ScummVM. La meta no es acabar un juego concreto, sino tener un jugador que sirva para cualquiera: explora, lee una guía, la sigue y aprende las mecánicas por su cuenta.</p>
+<p>Un programa que resuelve solo aventuras gráficas clásicas dentro de ScummVM. La meta no es acabar un juego concreto ni los de una sola casa, sino tener un jugador que sirva para cualquier aventura de ese estilo que ScummVM pueda abrir, con tal de tener las guías del juego: explora, lee las guías, las sigue y aprende las mecánicas por su cuenta.</p>
+<p>Hoy se prueba con un juego de Sierra, y la única pieza de enlace con un motor que hay escrita es la de ese motor (<code>nucleo/sci.py</code>). Para juegos de otros motores hará falta una pieza equivalente; el resto del programa no debe cambiar.</p>
 <p>Se resuelve de forma orgánica: explorar el mapa, avanzar en el juego, volver a explorar cuando haga falta, y así hasta el final.</p>
 <h3 id="r-normas-del-proyecto">Normas del proyecto</h3>
 <p>Estas normas se han ido fijando por el camino y siguen en pie.</p>

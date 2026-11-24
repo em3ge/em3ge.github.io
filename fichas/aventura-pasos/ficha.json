@@ -1,6 +1,6 @@
 {
  "nombre": "Aventura paso a paso",
- "lema": "Un programa que juega solo aventuras gráficas clásicas, aprendiendo cada juego sobre la marcha.",
+ "lema": "Un programa que resuelve solo cualquier aventura gráfica de ScummVM a partir de sus guías, aprendiendo cada juego sobre la marcha.",
  "estado": "activo",
  "inicio": "2026-11-20",
  "ultima_actividad": "2026-11-24",
@@ -11,16 +11,16 @@
  "repositorio": "aventura-pasos",
  "codigo_privado": true,
  "resumen": [
-  "Un programa en Python que maneja ScummVM y juega solo aventuras gráficas clásicas de Sierra. Primero explora el mapa andando, sala por sala. Después sigue una guía del juego paso a paso: va a la sala, teclea la orden, lee lo que el juego contesta y comprueba por los puntos si de verdad salió.",
+  "Un programa en Python que maneja ScummVM y resuelve solo cualquier aventura gráfica clásica de las que ScummVM puede abrir, siempre que tenga las guías del juego. Primero explora el mapa andando, sala por sala. Después sigue una guía del juego paso a paso: va a la sala, teclea la orden, lee lo que el juego contesta y comprueba por los puntos si de verdad salió.",
   "La norma del proyecto es que todo sea genérico: no lleva nada escrito a mano para un juego concreto. Cuando aparece una mecánica nueva, el programa la aprende y la apunta. Cada atasco se trata como una clase de problema, no como un caso suelto.",
-  "El juego de prueba es Leisure Suit Larry 3. Hoy lleva 34 salas en el mapa, 1587 puntos y va por el paso 86 de los 132 de la guía, al empezar la parte de Patti."
+  "El juego de prueba es Leisure Suit Larry 3, y por eso la única pieza de enlace escrita hasta hoy es la del motor de ese juego. El resto del programa no depende de él. Hoy lleva 34 salas en el mapa, 1587 puntos y va por el paso 86 de los 132 de la guía, al empezar la parte de Patti."
  ],
  "siguiente_paso": "Sacar adelante la parte de Patti (pasos 86 en adelante) y cerrar los pasos que quedaron pendientes en el hotel: el 79 y los del estudio de aeróbic (66 a 68).",
  "etapas": [
   {"nombre": "Etapa 1: mapa, movimiento y no atascarse", "estado": "hecha", "detalle": "Explora andando, dibuja el mapa con miniaturas, guarda puntos seguros y no se queda parado ante carteles ni protecciones de copia."},
   {"nombre": "Etapa 2: seguir la guía y avanzar", "estado": "en curso", "detalle": "Paso 86 de 132. 1587 puntos. Aprende mecánicas, revisa el rumbo cada diez minutos y pide ayuda a una IA más potente si lleva mucho rato sin avanzar."},
   {"nombre": "Etapa 3: terminar el juego de prueba", "estado": "pendiente", "detalle": "Llegar al final de Larry 3 sin ayuda."},
-  {"nombre": "Etapa 4: probarlo con otro juego", "estado": "pendiente", "detalle": "Comprobar que de verdad es genérico con una aventura distinta."}
+  {"nombre": "Etapa 4: probarlo con otro juego", "estado": "pendiente", "detalle": "Comprobar que de verdad es genérico con una aventura distinta, y después con juegos de otros motores de ScummVM."}
  ],
  "hecho": [
   "Enlace con ScummVM por su depurador y lectura directa de la memoria del juego.",

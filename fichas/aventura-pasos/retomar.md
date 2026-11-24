@@ -1,6 +1,8 @@
 ## Qué es y qué se busca
 
-Un programa que juega solo aventuras gráficas de Sierra dentro de ScummVM. La meta no es acabar un juego concreto, sino tener un jugador que sirva para cualquiera: explora, lee una guía, la sigue y aprende las mecánicas por su cuenta.
+Un programa que resuelve solo aventuras gráficas clásicas dentro de ScummVM. La meta no es acabar un juego concreto ni los de una sola casa, sino tener un jugador que sirva para cualquier aventura de ese estilo que ScummVM pueda abrir, con tal de tener las guías del juego: explora, lee las guías, las sigue y aprende las mecánicas por su cuenta.
+
+Hoy se prueba con un juego de Sierra, y la única pieza de enlace con un motor que hay escrita es la de ese motor (`nucleo/sci.py`). Para juegos de otros motores hará falta una pieza equivalente; el resto del programa no debe cambiar.
 
 Se resuelve de forma orgánica: explorar el mapa, avanzar en el juego, volver a explorar cuando haga falta, y así hasta el final.
 
