@@ -16,6 +16,8 @@ Dos cosas más, opcionales, hacen la página de cada proyecto más vistosa:
   - `"grupos"`: cajas con nombre. Cada una lleva `"columna"` (1, 2, 3… de izquierda a derecha; dos grupos con la misma columna se apilan) y sus `"elementos"`, cada uno con `"id"`, `"nombre"`, `"detalle"` y, si se quiere resaltar, `"destacado": true`. Nombres y detalles cortos, de unas 25 letras.
   - `"conexiones"`: flechas, con `"de"` y `"a"` (los `id`), y opcionales `"texto"`, `"fuerte": true` (línea de trazos de color) y `"doble": true` (flecha en los dos sentidos). Quedan mejor entre columnas vecinas.
 
+- En `ficha.json`, `"muestra"`: una muestra de ejecución real del programa, que sale en su página como «Una muestra de ejecución», con un botón para reproducirla línea a línea. Lleva `"nota"` (de dónde sale y cuándo se grabó), `"papeles"` opcional (cómo se llama cada quien) y `"escenas"`, cada una con `"titulo"` y `"lineas"`; cada línea tiene `"de"` (`tu`, `programa`, `dentro`, `juego` o `nota`) y `"texto"`. Solo debe llevar cosas que hayan pasado de verdad. La de Jarvis se graba con `pruebas\hablar.py` de ese proyecto y la variable `JARVIS_MUESTRA`.
+
 El aspecto de portfolio (titular, presentación, «cómo trabajo») sale de `config.json`.
 
 `generar.py` lee las fichas y escribe la web: `index.html` y una página por proyecto en la carpeta `p`.

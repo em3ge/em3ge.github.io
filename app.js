@@ -83,3 +83,44 @@
     });
   });
 })();
+
+// La muestra de ejecucion: sin esto se lee entera; con esto, un boton la reproduce linea a linea.
+(function () {
+  var mandos = document.querySelector(".muestra-mandos");
+  var lineas = Array.prototype.slice.call(document.querySelectorAll(".muestra .linea"));
+  if (!mandos || !lineas.length) return;
+  var reproducir = mandos.querySelector('[data-muestra="reproducir"]');
+  var todo = mandos.querySelector('[data-muestra="todo"]');
+  var estado = mandos.querySelector('[data-muestra="estado"]');
+  var reloj = null;
+  mandos.hidden = false;
+
+  function parar(mensaje) {
+    clearTimeout(reloj);
+    reloj = null;
+    reproducir.textContent = "Reproducir paso a paso";
+    estado.textContent = mensaje || "";
+  }
+  function verTodo() {
+    lineas.forEach(function (l) { l.hidden = false; l.classList.remove("recien"); });
+    parar("");
+  }
+  function paso(i) {
+    if (i >= lineas.length) { parar("Fin de la muestra."); return; }
+    var l = lineas[i];
+    l.hidden = false;
+    l.classList.add("recien");
+    if (l.scrollIntoView) l.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    // Cada linea se queda a la vista un rato segun lo larga que es.
+    var espera = Math.min(4200, 700 + l.textContent.length * 22);
+    reloj = setTimeout(function () { paso(i + 1); }, espera);
+  }
+  reproducir.addEventListener("click", function () {
+    if (reloj) { verTodo(); return; }
+    lineas.forEach(function (l) { l.hidden = true; });
+    reproducir.textContent = "Parar";
+    estado.textContent = "Reproduciendo…";
+    paso(0);
+  });
+  todo.addEventListener("click", verTodo);
+})();

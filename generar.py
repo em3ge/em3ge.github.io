@@ -546,6 +546,42 @@ def portada(proyectos, cfg):
 
 # ---------- pagina de un proyecto ----------
 
+PAPELES = {"tu": "Tú", "dentro": "Por dentro", "juego": "El juego", "nota": "Nota"}
+
+
+def muestra(p):
+    """La muestra de ejecución: una conversación o una sesión real del programa, escena a escena.
+
+    En la ficha, "muestra" lleva "nota" (de dónde sale), "papeles" opcional (cómo se llama cada quien) y
+    "escenas": cada una con "titulo" y "lineas", y cada línea con "de" (tu, programa, dentro, juego, nota)
+    y "texto". Sin JavaScript se lee entera; con él, hay un botón que la reproduce línea a línea.
+    """
+    m = p.get("muestra") or {}
+    escenas = [x for x in m.get("escenas", []) if x.get("lineas")]
+    if not escenas:
+        return ""
+    papeles = {**PAPELES, "programa": p.get("nombre", "El programa"), **m.get("papeles", {})}
+    out = []
+    if m.get("nota"):
+        out.append(f'<p class="nota">{en_linea(m["nota"])}</p>')
+    out.append('<p class="muestra-mandos" hidden><button type="button" class="boton" data-muestra="reproducir">Reproducir paso a paso</button>'
+               '<button type="button" class="boton boton-claro" data-muestra="todo">Verla entera</button>'
+               '<span class="nota" role="status" aria-live="polite" data-muestra="estado"></span></p>')
+    out.append('<div class="muestra">')
+    for escena in escenas:
+        out.append('<section class="escena">')
+        if escena.get("titulo"):
+            out.append(f'<h3>{e(escena["titulo"])}</h3>')
+        out.append('<ol class="lineas">')
+        for linea in escena["lineas"]:
+            de = re.sub(r"[^a-z]", "", str(linea.get("de", "programa")).lower()) or "programa"
+            out.append(f'<li class="linea linea-{de}"><span class="quien">{e(papeles.get(de, de.capitalize()))}</span>'
+                       f'<p>{en_linea(linea.get("texto", ""))}</p></li>')
+        out.append('</ol></section>')
+    out.append('</div>')
+    return "\n".join(out)
+
+
 def pagina(p, cfg):
     m = p.get("medidas", {})
     sec = []  # (ancla, titulo, html, clase)
@@ -555,6 +591,8 @@ def pagina(p, cfg):
         dibujo = esquema(p["esquema"], re.sub(r"[^a-z0-9]", "", p["id"]))
         if dibujo:
             sec.append(("esquema", "Cómo está hecho", dibujo, ""))
+    if muestra(p):
+        sec.append(("muestra", "Una muestra de ejecución", muestra(p), ""))
     if p.get("siguiente_paso"):
         sec.append(("siguiente", "Siguiente paso", f'<p class="destacado">{en_linea(p["siguiente_paso"])}</p>', "texto"))
     if p.get("etapas"):

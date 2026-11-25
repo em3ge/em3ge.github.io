@@ -120,5 +120,148 @@
  "relacionados": [
   {"nombre": "Dos intentos anteriores, abandonados", "relacion": "Este proyecto los sustituye. No se reutilizó su código, solo el aspecto de la ventana."}
  ],
- "texto_para_claude": "Vamos a retomar el proyecto aventura-pasos. Antes de tocar nada, lee el README del proyecto y la memoria para retomar de su ficha en la web de proyectos. Después lee el final de datos\\diario.txt para ver qué hizo el programa la última vez. Dime en pocas líneas en qué punto estamos y cuál es el siguiente paso, y espera mi visto bueno. Recuerda las normas: todo genérico, nada propio de un juego concreto; pasos cortos y comprobados; las pruebas, sobre una copia de la partida y de pocos minutos."
+ "texto_para_claude": "Vamos a retomar el proyecto aventura-pasos. Antes de tocar nada, lee el README del proyecto y la memoria para retomar de su ficha en la web de proyectos. Después lee el final de datos\\diario.txt para ver qué hizo el programa la última vez. Dime en pocas líneas en qué punto estamos y cuál es el siguiente paso, y espera mi visto bueno. Recuerda las normas: todo genérico, nada propio de un juego concreto; pasos cortos y comprobados; las pruebas, sobre una copia de la partida y de pocos minutos.",
+ "muestra": {
+  "papeles": {
+   "programa": "El programa"
+  },
+  "nota": "Sacado del estado guardado de la partida real de Leisure Suit Larry 3 (los archivos `plan.json` y `jugar.json` del proyecto), a 25 de noviembre de 2026: lo que el programa tecleó en cada paso y lo que el juego le dio. No es un vídeo. De los 132 pasos del plan, constan 58 que salieron bien.",
+  "escenas": [
+   {
+    "titulo": "Los primeros pasos de la guía",
+    "lineas": [
+     {
+      "de": "programa",
+      "texto": "Paso 1, sala 200. Va hasta allí y teclea `look in binoculars`, para ver a la mujer."
+     },
+     {
+      "de": "juego",
+      "texto": "Lo acepta. Suma 2 puntos."
+     },
+     {
+      "de": "programa",
+      "texto": "Paso 2, sala 200. Va hasta allí y teclea `look plaque`, para leer la placa."
+     },
+     {
+      "de": "juego",
+      "texto": "Contesta «You're not close enough»: el personaje no estaba bastante cerca."
+     },
+     {
+      "de": "dentro",
+      "texto": "Lo apunta como «lejos» y sigue con el plan."
+     },
+     {
+      "de": "programa",
+      "texto": "Paso 3. Desde la sala 200, camina: ir a la selva."
+     },
+     {
+      "de": "programa",
+      "texto": "Paso 4. Desde la sala 220, camina: ir a la casa de Kalalau."
+     },
+     {
+      "de": "programa",
+      "texto": "Paso 5, sala 210. Va hasta allí y teclea `get wood`, para obtener madera."
+     },
+     {
+      "de": "juego",
+      "texto": "Lo acepta. Suma 2 puntos."
+     },
+     {
+      "de": "programa",
+      "texto": "Paso 6, sala 216. Va hasta allí y teclea `open mailbox`, para abrir buzón."
+     },
+     {
+      "de": "juego",
+      "texto": "No contesta nada que se pueda leer."
+     },
+     {
+      "de": "dentro",
+      "texto": "Lo apunta como «nada»: sin respuesta y sin puntos, no puede dar el paso por comprobado."
+     },
+     {
+      "de": "programa",
+      "texto": "Paso 7, sala 216. Va hasta allí y teclea `get card`, para obtener tarjeta."
+     },
+     {
+      "de": "juego",
+      "texto": "Lo acepta. Suma 20 puntos."
+     }
+    ]
+   },
+   {
+    "titulo": "Conseguir dinero: una cadena de pasos que dependen unos de otros",
+    "lineas": [
+     {
+      "de": "programa",
+      "texto": "Paso 14, sala 260. Va hasta allí y teclea `give card`, para dar tarjeta."
+     },
+     {
+      "de": "juego",
+      "texto": "Lo acepta. Suma 90 puntos."
+     },
+     {
+      "de": "dentro",
+      "texto": "La guía prometía 50 puntos para este paso y el marcador subió 90. El programa apunta lo que marca el juego."
+     },
+     {
+      "de": "programa",
+      "texto": "Paso 15, sala 250. Va hasta allí y teclea `rub knife on steps`, para afilar cuchillo."
+     },
+     {
+      "de": "juego",
+      "texto": "Lo acepta. Suma 50 puntos."
+     },
+     {
+      "de": "programa",
+      "texto": "Paso 16, sala 230. Va hasta allí y teclea `cut grass with knife`, para cortar hierba."
+     },
+     {
+      "de": "juego",
+      "texto": "Lo acepta. Suma 20 puntos."
+     },
+     {
+      "de": "programa",
+      "texto": "Paso 17, sala 340. Va hasta allí y teclea `talk al`, para hablar con Al."
+     },
+     {
+      "de": "juego",
+      "texto": "Lo acepta. Suma 5 puntos."
+     },
+     {
+      "de": "programa",
+      "texto": "Paso 18, sala 340. Va hasta allí y teclea `sit`, para sentarse."
+     },
+     {
+      "de": "juego",
+      "texto": "Lo acepta. Suma 100 puntos."
+     },
+     {
+      "de": "dentro",
+      "texto": "Sentarse deja al personaje ocupado. «Estar sentado» es uno de los estados que el programa reconoce, aunque todavía falla a veces al levantarse antes del paso siguiente: está en su lista de fallos conocidos."
+     }
+    ]
+   },
+   {
+    "titulo": "Una mecánica que aprendió solo",
+    "lineas": [
+     {
+      "de": "programa",
+      "texto": "Sala 380, el gimnasio. Teclea `use machine`."
+     },
+     {
+      "de": "juego",
+      "texto": "Deja de aceptar órdenes escritas: espera pulsaciones de teclas."
+     },
+     {
+      "de": "dentro",
+      "texto": "Lo que el programa dejó apuntado, traducido: tras `use machine` el juego pide teclas; pulsando arriba y abajo unas treinta veces, el juego da el ejercicio por hecho y el personaje puede volver a andar. En sus apuntes consta nueve veces."
+     },
+     {
+      "de": "nota",
+      "texto": "Nada de esto está escrito a mano para este juego: es la norma del proyecto. Cada atasco se apunta como una clase de problema, para reconocerlo en el siguiente juego."
+     }
+    ]
+   }
+  ]
+ }
 }
