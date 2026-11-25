@@ -3,3 +3,5 @@ local.json
 guardar.log
 guardar.aviso
 __pycache__/
+# Copias de los proyectos que no están en este ordenador, traídas de GitHub solo para medirlos
+.copias/

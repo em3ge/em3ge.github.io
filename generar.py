@@ -14,6 +14,7 @@ Solo usa lo que trae Python."""
 import hashlib
 import html
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -164,10 +165,36 @@ def medir(carpeta):
     return m
 
 
+def traer(usuario, repo):
+    """Una copia al día del repositorio de GitHub, para medir un proyecto que no está en este ordenador.
+
+    Se guarda en la carpeta .copias (que no se sube). Devuelve None si no se puede: sin red, sin permiso…
+    """
+    if not usuario or not repo or not re.fullmatch(r"[\w.-]+", f"{usuario}{repo}"):
+        return None
+    copia = RAIZ / ".copias" / repo
+    if (copia / ".git").is_dir():
+        ordenes = [["git", "-C", str(copia), "fetch", "-q", "origin"],
+                   ["git", "-C", str(copia), "reset", "-q", "--hard", "FETCH_HEAD"]]
+    else:
+        copia.parent.mkdir(parents=True, exist_ok=True)
+        ordenes = [["git", "clone", "-q", f"https://github.com/{usuario}/{repo}.git", str(copia)]]
+    for orden in ordenes:
+        try:
+            hecho = subprocess.run(orden, capture_output=True, text=True, timeout=300,
+                                   env={**os.environ, "GIT_TERMINAL_PROMPT": "0"})
+        except (OSError, subprocess.SubprocessError):
+            return None
+        if hecho.returncode != 0:
+            return None
+    return copia
+
+
 # ---------- cargar ----------
 
 def cargar():
     aqui = leer_json(RAIZ / "local.json")
+    usuario = leer_json(RAIZ / "config.json").get("usuario_github", "")
     proyectos = []
     for carpeta in sorted(FICHAS.iterdir()) if FICHAS.is_dir() else []:
         ficha = carpeta / "ficha.json"
@@ -180,14 +207,29 @@ def cargar():
             continue
         p["id"] = carpeta.name
         p["_carpeta"] = carpeta
+        # Las cifras generales (líneas, archivos, cambios guardados) se miden siempre al generar: del código de
+        # este ordenador si está aquí y, si no, de una copia recién traída de GitHub.
+        m, origen = None, ""
         if aqui.get(p["id"]):
-            m = medir(aqui[p["id"]])
-            if m:
-                (carpeta / "medidas.json").write_text(
-                    json.dumps(m, ensure_ascii=False, indent=1), encoding="utf-8")
-            else:
+            m, origen = medir(aqui[p["id"]]), "en este ordenador"
+            if not m:
                 print(f"OJO: no encuentro la carpeta de {p['id']}: {aqui[p['id']]}")
+        if not m and p.get("repositorio"):
+            copia = traer(usuario, p["repositorio"])
+            m, origen = (medir(copia) if copia else None), "desde GitHub"
+            if m:
+                # En una copia recién bajada todos los archivos tienen fecha de hoy: vale la del último guardado.
+                m.pop("ultimo_cambio", None)
+        if m:
+            (carpeta / "medidas.json").write_text(json.dumps(m, ensure_ascii=False, indent=1), encoding="utf-8")
         p["medidas"] = leer_json(carpeta / "medidas.json")
+        if m:
+            print(f"  {p['id']}: {miles(m['lineas'])} líneas en {m['archivos_de_codigo']} archivos de código, "
+                  f"{m.get('cambios_guardados', 0)} cambios guardados. Medido hoy {origen}.")
+        elif p["medidas"]:
+            print(f"OJO: no he podido medir {p['id']}. Se quedan las cifras del {p['medidas'].get('medido', '?')}, sin comprobar.")
+        else:
+            print(f"OJO: {p['id']} no tiene cifras: ni está en este ordenador ni he podido traerlo de GitHub.")
         try:
             p["retomar"] = (carpeta / "retomar.md").read_text(encoding="utf-8")
         except OSError:

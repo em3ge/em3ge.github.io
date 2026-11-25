@@ -49,6 +49,7 @@ Las memorias de cada ficha no se escriben solas: hay que actualizarlas a mano o 
 
 - `config.json`: título de la web y nombre de usuario de GitHub. Se comparte.
 - `local.json`: dónde está en este ordenador el código de cada proyecto. No se sube, porque cada ordenador tiene sus rutas. Si un proyecto consta ahí, la web mide sola sus líneas de código y su último cambio.
+- Las cifras generales de cada proyecto (líneas, archivos de código, cambios guardados y fecha del último) se miden siempre al generar la web. Si el proyecto no está en este ordenador, `generar.py` trae una copia de su repositorio de GitHub a la carpeta `.copias`, que no se sube, y lo mide ahí. Al acabar dice de cada proyecto qué ha medido y dónde; si pone «OJO», esas cifras no están comprobadas.
 
 ## Añadir un proyecto desde otro ordenador
 
