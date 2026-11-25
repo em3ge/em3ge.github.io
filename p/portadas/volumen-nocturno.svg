@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+<defs>
+<linearGradient id="fondo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1026"/><stop offset=".6" stop-color="#141a44"/><stop offset="1" stop-color="#262a6e"/></linearGradient>
+<radialGradient id="luz" cx="24%" cy="48%" r="42%"><stop offset="0" stop-color="#ffd86b" stop-opacity=".26"/><stop offset="1" stop-color="#ffd86b" stop-opacity="0"/></radialGradient>
+<radialGradient id="luz2" cx="78%" cy="52%" r="40%"><stop offset="0" stop-color="#c4b5fd" stop-opacity=".22"/><stop offset="1" stop-color="#c4b5fd" stop-opacity="0"/></radialGradient>
+<pattern id="puntos" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.2" fill="#c7cbf5" fill-opacity=".10"/></pattern>
+</defs>
+<rect width="1200" height="675" fill="url(#fondo)"/>
+<rect width="1200" height="675" fill="url(#puntos)"/>
+<rect width="1200" height="675" fill="url(#luz)"/>
+<rect width="1200" height="675" fill="url(#luz2)"/>
+
+<!-- estrellas -->
+<g fill="#ffffff">
+<circle cx="120" cy="110" r="2.6" fill-opacity=".7"/><circle cx="470" cy="92" r="2" fill-opacity=".55"/><circle cx="96" cy="520" r="2" fill-opacity=".5"/>
+<circle cx="520" cy="560" r="2.4" fill-opacity=".5"/><circle cx="1090" cy="96" r="2.2" fill-opacity=".6"/><circle cx="640" cy="130" r="1.6" fill-opacity=".5"/>
+</g>
+
+<!-- la luna con sus tres barras -->
+<g transform="translate(130 146) scale(16)">
+<path fill="#ffd86b" d="M12,3a9,9 0,1 0,9 9c0,-0.46 -0.04,-0.92 -0.1,-1.36a5.389,5.389 0,0 1,-4.4 2.26,5.403 5.403,0 0,1 -3.14,-9.8c-0.44,-0.06 -0.9,-0.1 -1.36,-0.1z"/>
+</g>
+<g stroke="#ffffff" stroke-width="22" stroke-linecap="round">
+<path d="M359 245 v42"/><path d="M394 218 v96"/><path d="M429 240 v52"/>
+</g>
+
+<!-- la grafica: lo que ha sonado, la raya de ahora y lo que viene -->
+<rect x="610" y="150" width="500" height="380" rx="26" fill="#ffffff" fill-opacity=".07"/>
+<rect x="978" y="150" width="132" height="380" fill="#ffffff" fill-opacity=".07"/>
+<g fill="#9aa0e6">
+<rect x="640" y="372" width="16" height="128"/><rect x="662" y="356" width="16" height="144"/><rect x="684" y="388" width="16" height="112"/>
+<rect x="706" y="364" width="16" height="136"/><rect x="728" y="352" width="16" height="148"/><rect x="750" y="352" width="16" height="148"/>
+<rect x="772" y="352" width="16" height="148"/><rect x="794" y="380" width="16" height="120"/><rect x="816" y="366" width="16" height="134"/>
+<rect x="838" y="398" width="16" height="102"/><rect x="860" y="372" width="16" height="128"/><rect x="882" y="360" width="16" height="140"/>
+<rect x="904" y="384" width="16" height="116"/><rect x="926" y="370" width="16" height="130"/><rect x="948" y="392" width="16" height="108"/>
+</g>
+<!-- lo recortado, ya sonado -->
+<g fill="#ff6b6b">
+<rect x="728" y="262" width="16" height="90"/><rect x="750" y="236" width="16" height="116"/><rect x="772" y="278" width="16" height="74"/>
+</g>
+<!-- lo que viene -->
+<g fill="#c9ccf5">
+<rect x="990" y="380" width="16" height="120"/><rect x="1012" y="352" width="16" height="148"/><rect x="1034" y="352" width="16" height="148"/>
+<rect x="1056" y="352" width="16" height="148"/><rect x="1078" y="376" width="16" height="124"/>
+</g>
+<g fill="#ff6b6b">
+<rect x="1012" y="270" width="16" height="82"/><rect x="1034" y="228" width="16" height="124"/><rect x="1056" y="254" width="16" height="98"/>
+</g>
+<!-- umbral y ahora -->
+<path d="M626 352 H1094" stroke="#ffd86b" stroke-opacity=".7" stroke-width="2" stroke-dasharray="10 8"/>
+<path d="M978 164 V516" stroke="#ffd86b" stroke-width="4" stroke-linecap="round"/>
+<text x="968" y="190" text-anchor="end" font-family="ui-sans-serif,Segoe UI,sans-serif" font-size="20" fill="#c7cbf5">ahora</text>
+<text x="990" y="190" font-family="ui-sans-serif,Segoe UI,sans-serif" font-size="20" fill="#c7cbf5">lo que viene</text>
+</svg>

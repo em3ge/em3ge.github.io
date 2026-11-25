@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chitón · Proyectos</title>
+<meta name="description" content="Una aplicación de Android que suaviza los picos de volumen de lo que suena en el móvil, para dormirse con un programa puesto sin que los aplausos te despierten.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap">
+<link rel="stylesheet" href="../estilo.css">
+</head>
+<body style="--color:#c4b5fd">
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="barra">
+<div class="ancho barra-dentro">
+<a class="marca" href="../index.html">em3ge<span aria-hidden="true">_</span></a>
+<nav aria-label="Principal">
+<a href="../index.html#proyectos">Proyectos</a>
+<a href="../index.html#oficio">Cómo trabajo</a>
+<a href="../index.html#tecnologias">Tecnologías</a>
+<a class="barra-gh" href="https://github.com/em3ge">GitHub</a>
+</nav>
+</div>
+</header>
+<main id="contenido" class="proyecto" data-fecha="2026-11-25">
+<section class="heroe heroe-proyecto" aria-labelledby="t-proyecto">
+<div class="ancho heroe-dos">
+<div>
+<p class="miga"><a href="../index.html#proyectos">← Todos los proyectos</a></p>
+<div class="tarjeta-cabeza">
+<h1 id="t-proyecto">Chitón</h1>
+<span class="estado estado-activo">Activo</span>
+</div>
+<p class="presentacion">Una aplicación de Android que suaviza los picos de volumen de lo que suena en el móvil, para dormirse con un programa puesto sin que los aplausos te despierten.</p>
+<div class="avance"><div class="avance-riel" role="img" aria-label="Avance: 55 por ciento"><div class="avance-lleno" style="width:55%"></div></div><span class="avance-num" aria-hidden="true">55 %</span></div>
+<p class="nota">Estimación. Los dos modos están escritos y el anticipado se ha visto funcionar en el móvil real (captura, gráfica y teclas de volumen); falta el juicio de oído del dueño y afinar los niveles.</p>
+<ul class="tecnologias" aria-label="Tecnologías"><li>Android</li><li>Java</li><li>DynamicsProcessing</li><li>MediaProjection</li><li>AudioRecord</li><li>AudioTrack</li><li>adb</li><li>PowerShell</li></ul>
+<div class="botones"><a class="boton" href="vscode://vscode.git/clone?url=https%3A%2F%2Fgithub.com%2Fem3ge%2Fvolumen-nocturno.git">Abrir en VS Code</a><a class="boton boton-claro" href="https://vscode.dev/github/em3ge/volumen-nocturno">Editar en el navegador</a><a class="boton boton-claro" href="https://github.com/em3ge/volumen-nocturno">Ver el código</a><a class="boton boton-claro" href="https://github.com/em3ge/volumen-nocturno/archive/refs/heads/main.zip">Descargar en zip</a></div><p class="nota">«Abrir en VS Code» abre el programa, pregunta en qué carpeta guardarlo y lo trae de GitHub. Si ya lo tienes en ese ordenador, ábrelo desde VS Code y pulsa sincronizar. «Editar en el navegador» lo abre al día, sin instalar nada, pero no puede ejecutarlo.</p><p class="nota">El código es privado: GitHub pedirá iniciar sesión con una cuenta que tenga permiso.</p>
+</div>
+<figure class="foto"><img src="portadas/volumen-nocturno.svg" alt="Ilustración del proyecto Chitón" width="1200" height="675"></figure>
+</div>
+</section>
+<div class="ancho">
+<dl class="datos datos-ficha">
+<div><dt>Etapa</dt><dd>Etapa 4: probar de oído y afinar</dd></div>
+<div><dt>Empezó</dt><dd>25 de noviembre de 2026</dd></div>
+<div><dt>Último movimiento</dt><dd>25 de noviembre de 2026</dd></div>
+<div><dt>Tamaño</dt><dd>2.017 líneas en 6 archivos de código</dd></div>
+<div><dt>Cambios guardados en git</dt><dd>7</dd></div>
+</dl>
+<nav class="indice" aria-label="Apartados de esta página"><ul><li><a href="#corto">En corto</a></li><li><a href="#esquema">Cómo está hecho</a></li><li><a href="#muestra">Una muestra de ejecución</a></li><li><a href="#siguiente">Siguiente paso</a></li><li><a href="#etapas">Etapas</a></li><li><a href="#hecho">Qué hay hecho</a></li><li><a href="#pendiente">Qué falta</a></li><li><a href="#lecciones">Lecciones aprendidas</a></li><li><a href="#diario">Diario</a></li><li><a href="#retomar">Memoria para retomar</a></li><li><a href="#claude">Texto para retomarlo con Claude</a></li></ul></nav>
+<section id="corto" aria-labelledby="t-corto" class="texto">
+<h2 id="t-corto">En corto</h2>
+<p>En un programa de humor la voz suena a un nivel y los aplausos, las risas y la música bastante más alto. Chitón vigila lo que suena en el móvil, sea YouTube u otra aplicación, aprende cuál es el nivel habitual de la voz y recorta lo que lo supera.</p><p>Tiene dos modos. El directo coloca un compresor y un limitador de Android sobre la salida general de sonido: recorta el pico en el instante en que suena, sin retraso. El anticipado captura el sonido de las otras aplicaciones, lo retiene entre una décima y un segundo, y lo vuelve a emitir ya corregido: como conoce lo que viene, empieza a bajar antes de que el pico suene.</p><p>Una gráfica en vivo enseña el volumen de lo que suena, la parte que se recorta y, en el modo anticipado, lo que ya está capturado y todavía no ha salido por el altavoz. Fuera de la aplicación, un aviso y un rótulo sobre la pantalla dicen cuándo viene un pico y cuánto se baja.</p><p>Está hecha en Java sin ninguna biblioteca añadida y se fabrica con un guion propio, sin Gradle ni Android Studio. El paquete ocupa menos de 40 KB.</p>
+</section>
+<section id="esquema" aria-labelledby="t-esquema">
+<h2 id="t-esquema">Cómo está hecho</h2>
+<p>El sonido de la aplicación que suena sigue uno de dos caminos. En el modo directo, Android lo pasa por un compresor antes del altavoz. En el modo anticipado, Chitón lo captura, lo retiene un momento, mira lo que viene y lo emite ya corregido.</p><div class="esq-marco" tabindex="0" role="group" aria-label="Esquema. Se puede desplazar a los lados."><svg class="esq" viewBox="0 0 1240 474" style="min-width:769px" role="img" aria-label="Cómo está hecho. Debajo está el mismo esquema en texto."><defs><marker id="punta-volumennocturno" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="esq-punta" d="M0 1 L10 5 L0 9 z"/></marker><marker id="punta-volumennocturno-f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="esq-punta fuerte" d="M0 1 L10 5 L0 9 z"/></marker></defs><g class="esq-grupo"><rect x="18" y="184" width="232" height="106" rx="16"/><text x="34" y="207">Lo que suena</text></g><g class="esq-grupo"><rect x="342" y="18" width="232" height="242" rx="16"/><text x="358" y="41">Modo anticipado</text></g><g class="esq-grupo"><rect x="342" y="282" width="232" height="174" rx="16"/><text x="358" y="305">Modo directo</text></g><g class="esq-grupo"><rect x="666" y="116" width="232" height="242" rx="16"/><text x="682" y="139">Salida y pantalla</text></g><g class="esq-grupo"><rect x="990" y="150" width="232" height="174" rx="16"/><text x="1006" y="173">Tú</text></g><path class="esq-linea fuerte" d="M236 248 C296 248 296 82 356 82" marker-end="url(#punta-volumennocturno-f)"/><path class="esq-linea" d="M236 248 C296 248 296 346 356 346" marker-end="url(#punta-volumennocturno)"/><path class="esq-linea fuerte" d="M560 218 C620 218 620 180 680 180" marker-end="url(#punta-volumennocturno-f)"/><path class="esq-linea" d="M560 218 C620 218 620 248 680 248" marker-end="url(#punta-volumennocturno)"/><path class="esq-linea" d="M560 414 C620 414 620 316 680 316" marker-end="url(#punta-volumennocturno)"/><path class="esq-linea fuerte" d="M884 180 C944 180 944 214 1004 214" marker-end="url(#punta-volumennocturno-f)"/><path class="esq-linea" d="M1004 282 C944 282 944 180 884 180" marker-end="url(#punta-volumennocturno)"/><g class="esq-nodo"><rect x="32" y="220" width="204" height="56" rx="11"/><text class="esq-nombre" x="46" y="244">YouTube u otra</text><text class="esq-detalle" x="46" y="262">El sonido original</text></g><g class="esq-nodo"><rect x="356" y="54" width="204" height="56" rx="11"/><text class="esq-nombre" x="370" y="78">Captura</text><text class="esq-detalle" x="370" y="96">Oye a las otras apps</text></g><g class="esq-nodo"><rect x="356" y="122" width="204" height="56" rx="11"/><text class="esq-nombre" x="370" y="146">Retraso</text><text class="esq-detalle" x="370" y="164">De 0,1 a 1 segundo</text></g><g class="esq-nodo destacado"><rect x="356" y="190" width="204" height="56" rx="11"/><text class="esq-nombre" x="370" y="214">Mirar adelante</text><text class="esq-detalle" x="370" y="232">Baja antes del pico</text></g><g class="esq-nodo"><rect x="356" y="318" width="204" height="56" rx="11"/><text class="esq-nombre" x="370" y="342">Compresor y limitador</text><text class="esq-detalle" x="370" y="360">En la salida general</text></g><g class="esq-nodo"><rect x="356" y="386" width="204" height="56" rx="11"/><text class="esq-nombre" x="370" y="410">Medidor</text><text class="esq-detalle" x="370" y="428">Nivel, diez veces por s</text></g><g class="esq-nodo"><rect x="680" y="152" width="204" height="56" rx="11"/><text class="esq-nombre" x="694" y="176">Emisión</text><text class="esq-detalle" x="694" y="194">Por el canal de alarma</text></g><g class="esq-nodo"><rect x="680" y="220" width="204" height="56" rx="11"/><text class="esq-nombre" x="694" y="244">Gráfica</text><text class="esq-detalle" x="694" y="262">Lo que suena y viene</text></g><g class="esq-nodo"><rect x="680" y="288" width="204" height="56" rx="11"/><text class="esq-nombre" x="694" y="312">Aviso y rótulo</text><text class="esq-detalle" x="694" y="330">«Viene un pico»</text></g><g class="esq-nodo"><rect x="1004" y="186" width="204" height="56" rx="11"/><text class="esq-nombre" x="1018" y="210">El altavoz</text><text class="esq-detalle" x="1018" y="228">Sin sobresaltos</text></g><g class="esq-nodo"><rect x="1004" y="254" width="204" height="56" rx="11"/><text class="esq-nombre" x="1018" y="278">Teclas de volumen</text><text class="esq-detalle" x="1018" y="296">Mandan como siempre</text></g><text class="esq-rotulo fuerte" x="296" y="158" text-anchor="middle">sonido</text><text class="esq-rotulo fuerte" x="620" y="192" text-anchor="middle">corregido</text><text class="esq-rotulo" x="620" y="226" text-anchor="middle">lo que viene</text><text class="esq-rotulo" x="944" y="224" text-anchor="middle">volumen</text></svg></div><details class="plegable"><summary>Leer el esquema como texto</summary><h3>Elementos</h3><ul><li><strong>Lo que suena.</strong> YouTube u otra: El sonido original.</li><li><strong>Modo anticipado.</strong> Captura: Oye a las otras apps; Retraso: De 0,1 a 1 segundo; Mirar adelante: Baja antes del pico.</li><li><strong>Modo directo.</strong> Compresor y limitador: En la salida general; Medidor: Nivel, diez veces por s.</li><li><strong>Salida y pantalla.</strong> Emisión: Por el canal de alarma; Gráfica: Lo que suena y viene; Aviso y rótulo: «Viene un pico».</li><li><strong>Tú.</strong> El altavoz: Sin sobresaltos; Teclas de volumen: Mandan como siempre.</li></ul><h3>Conexiones</h3><ul><li>YouTube u otra → Captura: sonido</li><li>YouTube u otra → Compresor y limitador</li><li>Mirar adelante → Emisión: corregido</li><li>Mirar adelante → Gráfica: lo que viene</li><li>Medidor → Aviso y rótulo</li><li>Emisión → El altavoz</li><li>Teclas de volumen → Emisión: volumen</li></ul></details>
+</section>
+<section id="muestra" aria-labelledby="t-muestra">
+<h2 id="t-muestra">Una muestra de ejecución</h2>
+<p class="nota">Prueba real en el móvil del dueño, el 25 de noviembre de 2026, con la versión 1.6 y el modo anticipado encendido. Las pulsaciones de las teclas de volumen se simularon por cable desde el ordenador; lo de «por dentro» son líneas del registro que la propia aplicación escribió en el teléfono.</p>
+<p class="muestra-mandos" hidden><button type="button" class="boton" data-muestra="reproducir">Reproducir paso a paso</button><button type="button" class="boton boton-claro" data-muestra="todo">Verla entera</button><span class="nota" role="status" aria-live="polite" data-muestra="estado"></span></p>
+<div class="muestra">
+<section class="escena">
+<h3>Con el vídeo parado, las teclas llegan por el canal de alarma</h3>
+<ol class="lineas">
+<li class="linea linea-nota"><span class="quien">Nota</span><p>Chitón encendido con el volumen en el paso 5 de 16. No suena ningún vídeo.</p></li>
+<li class="linea linea-tu"><span class="quien">Tecla</span><p>Bajar volumen</p></li>
+<li class="linea linea-dentro"><span class="quien">Por dentro</span><p>tecla en alarma: de 15 a 14</p></li>
+<li class="linea linea-programa"><span class="quien">Chitón</span><p>volumen 4 de 16</p></li>
+<li class="linea linea-tu"><span class="quien">Tecla</span><p>Bajar volumen</p></li>
+<li class="linea linea-dentro"><span class="quien">Por dentro</span><p>tecla en alarma: de 15 a 14</p></li>
+<li class="linea linea-programa"><span class="quien">Chitón</span><p>volumen 3 de 16</p></li>
+<li class="linea linea-tu"><span class="quien">Tecla</span><p>Subir volumen</p></li>
+<li class="linea linea-dentro"><span class="quien">Por dentro</span><p>tecla en alarma: de 15 a 16</p></li>
+<li class="linea linea-programa"><span class="quien">Chitón</span><p>volumen 4 de 16</p></li>
+<li class="linea linea-tu"><span class="quien">Tecla</span><p>Subir volumen</p></li>
+<li class="linea linea-dentro"><span class="quien">Por dentro</span><p>tecla en alarma: de 15 a 16</p></li>
+<li class="linea linea-programa"><span class="quien">Chitón</span><p>volumen 5 de 16</p></li>
+<li class="linea linea-tu"><span class="quien">Tecla</span><p>Subir volumen</p></li>
+<li class="linea linea-dentro"><span class="quien">Por dentro</span><p>tecla en alarma: de 15 a 16</p></li>
+<li class="linea linea-programa"><span class="quien">Chitón</span><p>volumen 6 de 16</p></li>
+<li class="linea linea-nota"><span class="quien">Nota</span><p>Tras cada pulsación, Chitón devuelve la alarma al paso 15, donde la sujeta mientras está encendido.</p></li>
+</ol></section>
+<section class="escena">
+<h3>Con un vídeo sonando, llegan por el canal de música</h3>
+<ol class="lineas">
+<li class="linea linea-nota"><span class="quien">Nota</span><p>Se abre un vídeo en YouTube. El canal de música está silenciado y el sonido sale por Chitón.</p></li>
+<li class="linea linea-dentro"><span class="quien">Por dentro</span><p>capturado -21 dB, habitual -22, bajando 0</p></li>
+<li class="linea linea-tu"><span class="quien">Tecla</span><p>Bajar volumen</p></li>
+<li class="linea linea-dentro"><span class="quien">Por dentro</span><p>tecla en música: de 5 a 4</p></li>
+<li class="linea linea-programa"><span class="quien">Chitón</span><p>volumen 5 de 16</p></li>
+<li class="linea linea-tu"><span class="quien">Tecla</span><p>Bajar volumen</p></li>
+<li class="linea linea-dentro"><span class="quien">Por dentro</span><p>tecla en música: de 4 a 3</p></li>
+<li class="linea linea-programa"><span class="quien">Chitón</span><p>volumen 4 de 16</p></li>
+<li class="linea linea-tu"><span class="quien">Tecla</span><p>Subir volumen</p></li>
+<li class="linea linea-programa"><span class="quien">Chitón</span><p>volumen 5 de 16</p></li>
+<li class="linea linea-tu"><span class="quien">Tecla</span><p>Subir volumen</p></li>
+<li class="linea linea-programa"><span class="quien">Chitón</span><p>volumen 6 de 16</p></li>
+</ol></section>
+</div>
+</section>
+<section id="siguiente" aria-labelledby="t-siguiente" class="texto">
+<h2 id="t-siguiente">Siguiente paso</h2>
+<p class="destacado">Que el dueño la use una noche con el modo anticipado y diga de oído si suena limpio, si la bajada es la que quiere y qué ventaja (0,1, 0,3 o 1 segundo) le vale; con eso, afinar los tres niveles de fuerza.</p>
+</section>
+<section id="etapas" aria-labelledby="t-etapas">
+<h2 id="t-etapas">Etapas</h2>
+<ol class="etapas"><li class="etapa etapa-hecha"><span class="etapa-estado">Hecha</span><div><strong>Etapa 1: modo directo</strong><p>Compresor y limitador sobre la salida general, servicio en primer plano, tres niveles de fuerza y pitido de prueba. Instalado y abre sin fallos; que se note de oído en el móvil está sin confirmar.</p></div></li><li class="etapa etapa-hecha"><span class="etapa-estado">Hecha</span><div><strong>Etapa 2: que se vea</strong><p>Medidor del nivel de salida, umbral que se adapta a lo que suena, aviso, rótulo sobre la pantalla, gráfica, nombre, logotipo e interfaz.</p></div></li><li class="etapa etapa-hecha"><span class="etapa-estado">Hecha</span><div><strong>Etapa 3: modo anticipado</strong><p>Captura, retraso ajustable, bajada antes del pico y volumen con las teclas del móvil. Visto funcionar en el móvil real con capturas de pantalla, el registro del teléfono y pulsaciones simuladas por cable.</p></div></li><li class="etapa etapa-en-curso"><span class="etapa-estado">En curso</span><div><strong>Etapa 4: probar de oído y afinar</strong><p>Falta que el dueño confirme cómo suena y ajustar umbrales, proporciones y tiempos a su gusto.</p></div></li><li class="etapa etapa-pendiente"><span class="etapa-estado">Pendiente</span><div><strong>Etapa 5: comodidades</strong><p>Botón en los ajustes rápidos, medir el retraso real del móvil, apagado automático a una hora y lista de aplicaciones que no dejan capturar.</p></div></li></ol>
+</section>
+<section id="hecho" aria-labelledby="t-hecho">
+<h2 id="t-hecho">Qué hay hecho</h2>
+<ul class="marcas hechas"><li>Modo directo: compresor y limitador de Android sobre la salida general del móvil, mantenidos por un servicio en primer plano.</li><li>Nivel habitual aprendido: mide lo que suena, sigue despacio el nivel de la voz y coloca el umbral un poco por encima, sea cual sea el volumen del móvil.</li><li>Modo anticipado: captura el sonido de las otras aplicaciones, lo retiene y lo emite corregido, bajando el volumen antes de que llegue el pico.</li><li>Ventaja ajustable del modo anticipado: 0,1, 0,3 o 1 segundo, para elegir entre ver venir el pico con margen o ir casi sincronizado con la imagen.</li><li>Gráfica en vivo: lo que suena, lo que se recorta, el umbral y, en anticipado, lo que está por sonar.</li><li>Aviso en las notificaciones y rótulo sobre la pantalla: «Viene un pico» y los decibelios que se bajan.</li><li>Volumen con las teclas del móvil en el modo anticipado, tanto con el vídeo sonando como parado, y botones «Más bajo» y «Más alto».</li><li>Devuelve el volumen de música y el de alarma al apagar, y también tras un cierre brusco.</li><li>Nombre, logotipo (una luna que acuna tres barras de sonido) e interfaz de noche con botón grande de encendido.</li><li>Guion que fabrica el paquete paso a paso con las herramientas de Android, sin Gradle, y otro que descarga esas herramientas.</li></ul>
+</section>
+<section id="pendiente" aria-labelledby="t-pendiente">
+<h2 id="t-pendiente">Qué falta</h2>
+<ul class="marcas faltan"><li>Confirmar de oído en el móvil que el modo anticipado suena limpio, sin doble sonido ni cortes.</li><li>Confirmar de oído que el modo directo recorta de verdad en este móvil.</li><li>Afinar los tres niveles de fuerza con programas reales.</li><li>Medir el retraso propio de capturar y volver a emitir, que se suma a la ventaja elegida.</li><li>Botón en los ajustes rápidos para encender y apagar sin abrir la aplicación.</li><li>Qué hacer con auriculares: el canal de alarma suena también por el altavoz.</li></ul>
+</section>
+<section id="lecciones" aria-labelledby="t-lecciones">
+<h2 id="t-lecciones">Lecciones aprendidas</h2>
+<ul class="lecciones"><li>Con el efecto puesto sobre la salida general, la aplicación conoce el sonido en el mismo instante en que suena. Para adelantarse de verdad hay que capturarlo, retenerlo y volver a emitirlo.</li><li>Silenciar el canal de música deja pasar entera la captura y conserva el paso de volumen; por eso es mejor que ponerlo a cero.</li><li>En este móvil, si lo único que suena va por el canal de alarma, las teclas de volumen mueven la alarma, no la música. Se averiguó simulando pulsaciones por cable y leyendo el estado del sonido del teléfono.</li><li>Dar por bloqueada la captura tras unos segundos de silencio fue un error: otra aplicación reproducía silencio y el aviso saltaba con el vídeo en pausa. Mejor avisar y no cambiar de modo solo.</li><li>Una aplicación de Android sin bibliotecas se puede fabricar sin Gradle: compilar recursos, compilar el código, convertirlo, empaquetar, alinear y firmar, cada paso con su herramienta.</li><li>Con el móvil enchufado por cable se puede instalar, pulsar, sacar capturas y leer el registro: así se prueba de verdad en vez de suponer.</li></ul>
+</section>
+<section id="diario" aria-labelledby="t-diario">
+<h2 id="t-diario">Diario</h2>
+<ol class="diario"><li><time datetime="2026-11-25">25 de noviembre de 2026</time><p>Nace el proyecto y en una tarde pasa por siete versiones. Primero el modo directo, con un guion propio para fabricar el paquete sin Gradle. Después el indicador de bajadas y el umbral que aprende el nivel habitual. Nombre, logotipo e interfaz. Luego el modo anticipado, que captura y retrasa el sonido para bajar antes del pico, y la gráfica que enseña lo que viene; se ve funcionar en el móvil real. Se arregla un aviso falso de «no deja capturar», se hace ajustable la ventaja para reducir el desfase con la imagen y se rehace el manejo del volumen tras medir en el teléfono adónde van las teclas.</p></li></ol>
+</section>
+<section id="retomar" aria-labelledby="t-retomar" class="texto">
+<h2 id="t-retomar">Memoria para retomar</h2>
+<p class="nota">El cuaderno técnico del proyecto: lo necesario para ponerse al día y seguir.</p><details class="plegable cuaderno"><summary>Abrir la memoria para retomar</summary><h3 id="r-qu-es-y-qu-se-busca">Qué es y qué se busca</h3>
+<p>Chitón es una aplicación de Android que suaviza los picos de volumen de lo que suena en el móvil. Nació de un caso concreto: dormirse con un programa de humor puesto y que los aplausos, mucho más altos que la voz, no despierten. La idea de partida era que la aplicación «viera el futuro» y bajara el volumen antes del pico.</p>
+<p>La carpeta y el repositorio se llaman <code>volumen-nocturno</code>; «Chitón» es el nombre de la aplicación.</p>
+<h3 id="r-normas-del-proyecto">Normas del proyecto</h3>
+<ul>
+<li><strong>No dar por bueno lo que no se ha probado en el móvil.</strong> Compilar no es probar. Con el teléfono enchufado se instala, se pulsa, se leen el registro y las capturas.</li>
+<li><strong>Dejar el móvil como estaba.</strong> El modo anticipado silencia la música y sujeta el volumen de la alarma; al apagar, y también tras un cierre brusco, los dos vuelven a su sitio. Al reinstalar con el modo encendido hay que comprobarlo.</li>
+<li><strong>Sin bibliotecas añadidas.</strong> Solo lo que trae Android, para que el paquete se pueda fabricar con el guion propio.</li>
+<li><strong>Textos claros y botones con descripción</strong>, para que se pueda usar sin mirar la pantalla.</li>
+</ul>
+<h3 id="r-c-mo-ponerlo-en-marcha">Cómo ponerlo en marcha</h3>
+<p>En PowerShell, dentro de la carpeta del proyecto:</p>
+<ol>
+<li>Una sola vez, <code>preparar_herramientas.ps1</code>: descarga Java 17 y las piezas mínimas de Android a la carpeta de datos locales del usuario. No hace falta Android Studio ni permisos de administrador.</li>
+<li><code>construir.ps1</code>: fabrica <code>salida\volumen-nocturno.apk</code>. El número de versión está dentro de ese guion.</li>
+<li>Con el móvil enchufado y la depuración USB activada: <code>adb install -r salida\volumen-nocturno.apk</code>.</li>
+</ol>
+<p>La clave de firma se crea sola la primera vez en la carpeta <code>firma</code>, que no se sube a GitHub. Si se pierde, para instalar una versión nueva hay que desinstalar antes la aplicación.</p>
+<h3 id="r-c-mo-est-hecho">Cómo está hecho</h3>
+<p>Cuatro archivos Java en <code>src</code>, sin dependencias, para Android 9 o posterior (el modo anticipado pide Android 10).</p>
+<ul>
+<li><code>ServicioCalma.java</code>: el motor. Un servicio en primer plano con los dos modos.</li>
+<li>Directo: un efecto <code>DynamicsProcessing</code> (compresor de una banda y limitador) sobre la sesión de audio 0, que es la salida general. Un <code>Visualizer</code> mide el nivel diez veces por segundo.</li>
+<li>Anticipado: pide permiso de captura (<code>MediaProjection</code>), graba el sonido de las otras aplicaciones con <code>AudioRecord</code>, lo guarda en una cola de tramos de 20 milisegundos y lo emite con retraso por un <code>AudioTrack</code> del canal de alarma. Para cada tramo que sale mira los siguientes (hasta tres décimas) y va bajando la ganancia antes de que llegue el pico.</li>
+<li>Los dos aprenden el «nivel habitual»: siguen despacio lo que suena (muy despacio hacia arriba, para que unos aplausos largos no pasen a ser lo normal) y ponen el umbral unos decibelios por encima, según la fuerza elegida. La tabla <code>NIVELES</code> tiene los tres niveles.</li>
+<li>Los dos apuntan en una «historia» lo que suena y lo que recortan; de ahí sale la gráfica.</li>
+<li><code>MainActivity.java</code>: la pantalla, hecha por código, sin archivos de diseño.</li>
+<li><code>Grafica.java</code> y <code>Medidor.java</code>: la gráfica y la barra de bajada.</li>
+</ul>
+<p>El volumen en el modo anticipado: se silencia el canal de música, para no oír el original, sin mover su paso. Chitón suena tan alto como sonaría la música en ese paso. Las teclas del móvil siguen funcionando porque Chitón escucha los cambios de volumen de dos canales: el de música (cuando hay un vídeo sonando) y el de alarma (cuando no lo hay, este móvil manda ahí las teclas). La alarma se sujeta un paso por debajo del máximo para notar subidas y bajadas.</p>
+<h3 id="r-d-nde-est-ahora">Dónde está ahora</h3>
+<p>Versión 1.6, instalada en el móvil del dueño (Android 16).</p>
+<p>Comprobado en el móvil real, con capturas de pantalla, el registro del teléfono y pulsaciones simuladas por cable:</p>
+<ul>
+<li>El modo anticipado captura el sonido de su YouTube con la música silenciada.</li>
+<li>La gráfica enseña el pico por venir y el recorte.</li>
+<li>Las teclas de volumen suben y bajan el volumen de Chitón, con vídeo y sin él.</li>
+<li>Al cerrar de golpe y volver a abrir, la música y la alarma vuelven a como estaban.</li>
+</ul>
+<p>Sin comprobar:</p>
+<ul>
+<li>Cómo suena. Nadie ha confirmado de oído que el modo anticipado suene limpio ni que el directo recorte en este móvil.</li>
+<li>El retraso real del modo anticipado: a la ventaja elegida se suma lo que tarda el teléfono en capturar y emitir, y eso no está medido.</li>
+</ul>
+<h3 id="r-qu-falta">Qué falta</h3>
+<ol>
+<li>La prueba de oído del dueño, una noche real, y afinar con eso los tres niveles de fuerza.</li>
+<li>Medir el retraso propio del móvil y, si es grande, descontarlo de la ventaja.</li>
+<li>Botón en los ajustes rápidos.</li>
+<li>Decidir qué hacer con auriculares: el canal de alarma suena también por el altavoz.</li>
+<li>Apagado automático a una hora.</li>
+</ol>
+<h3 id="r-c-mo-se-depura">Cómo se depura</h3>
+<p>Con el móvil enchufado:</p>
+<ul>
+<li><code>adb logcat -s Chiton:I</code>: el registro propio. Cada cinco segundos dice el nivel capturado, el habitual y lo que baja; y apunta cada tecla de volumen y el volumen resultante.</li>
+<li><code>adb shell dumpsys audio</code>: el estado de cada canal de volumen (silenciado o no, y su paso) y qué aplicaciones están sonando.</li>
+<li><code>adb shell input keyevent 24</code> y <code>25</code>: simulan subir y bajar volumen.</li>
+<li><code>adb shell screencap</code> y <code>adb pull</code>: una captura de la pantalla para ver la gráfica.</li>
+<li><code>adb shell dumpsys package &lt;paquete&gt;</code>: dice si una aplicación deja capturar su sonido (<code>ALLOW_AUDIO_PLAYBACK_CAPTURE</code>).</li>
+</ul>
+<h3 id="r-cosas-t-cnicas-que-cost-averiguar">Cosas técnicas que costó averiguar</h3>
+<ul>
+<li>Desde otra aplicación no se puede retrasar el vídeo: cuanta más ventaja se da al sonido, más desfase con la imagen. Por eso la ventaja es ajustable.</li>
+<li>Con el canal de música silenciado, la tecla de bajar cambia el paso sin quitar el silencio, y la de subir lo quita. El paso real solo se conoce por el aviso de cambio de volumen que difunde Android, porque la consulta normal devuelve cero mientras está silenciado.</li>
+<li>Android pide de nuevo el permiso de captura cada vez que se enciende el modo anticipado; no se puede guardar.</li>
+<li>El servicio tiene que declararse de tipo «proyección» además de «reproducción», y ponerse en primer plano antes de pedir la captura.</li>
+<li>Las aplicaciones que prohíben la captura (suelen ser las de música y vídeo de pago) llegan como silencio. No hay forma de distinguirlo de una pausa: Chitón avisa y no cambia de modo solo.</li>
+<li>Los guiones de PowerShell van sin acentos a propósito: PowerShell 5 los estropea en archivos sin marca de codificación.</li>
+</ul></details>
+</section>
+<section id="claude" aria-labelledby="t-claude" class="texto">
+<h2 id="t-claude">Texto para retomarlo con Claude</h2>
+<p>Pega este texto al empezar una sesión y Claude se pone al día.</p><pre id="texto-claude" tabindex="0">Vamos a retomar el proyecto volumen-nocturno, una aplicación de Android que se llama Chitón y suaviza los picos de volumen de lo que suena en el móvil. Antes de tocar nada, lee LEEME.md del proyecto y la memoria para retomar de su ficha en la web de proyectos. El código son cuatro archivos Java en src; el motor está en ServicioCalma.java. Se fabrica con construir.ps1 y se instala con adb. Si el móvil está enchufado, pruébalo de verdad: instala, mira el registro con «adb logcat -s Chiton:I» y saca capturas. Dime en pocas líneas en qué punto estamos y cuál es el siguiente paso, y espera mi visto bueno. Normas: no dar por bueno lo que no se haya probado en el móvil; al reinstalar con el modo anticipado encendido, comprobar que el volumen de música y el de alarma quedan como estaban.</pre><button type="button" class="boton" data-copiar="texto-claude">Copiar el texto</button><span class="nota" role="status" aria-live="polite" id="copiado"></span>
+</section>
+</div>
+</main>
+<footer class="pie">
+<div class="ancho">
+<p>em3ge · Proyectos. Página actualizada el 25 de noviembre de 2026.</p>
+</div>
+</footer>
+<script src="../app.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+{
+ "nombre": "Chitón",
+ "lema": "Una aplicación de Android que suaviza los picos de volumen de lo que suena en el móvil, para dormirse con un programa puesto sin que los aplausos te despierten.",
+ "estado": "activo",
+ "inicio": "2026-11-25",
+ "ultima_actividad": "2026-11-25",
+ "avance": 55,
+ "avance_nota": "Estimación. Los dos modos están escritos y el anticipado se ha visto funcionar en el móvil real (captura, gráfica y teclas de volumen); falta el juicio de oído del dueño y afinar los niveles.",
+ "etapa_actual": "Etapa 4: probar de oído y afinar",
+ "tecnologias": ["Android", "Java", "DynamicsProcessing", "MediaProjection", "AudioRecord", "AudioTrack", "adb", "PowerShell"],
+ "color": "#c4b5fd",
+ "repositorio": "volumen-nocturno",
+ "codigo_privado": true,
+ "resumen": [
+  "En un programa de humor la voz suena a un nivel y los aplausos, las risas y la música bastante más alto. Chitón vigila lo que suena en el móvil, sea YouTube u otra aplicación, aprende cuál es el nivel habitual de la voz y recorta lo que lo supera.",
+  "Tiene dos modos. El directo coloca un compresor y un limitador de Android sobre la salida general de sonido: recorta el pico en el instante en que suena, sin retraso. El anticipado captura el sonido de las otras aplicaciones, lo retiene entre una décima y un segundo, y lo vuelve a emitir ya corregido: como conoce lo que viene, empieza a bajar antes de que el pico suene.",
+  "Una gráfica en vivo enseña el volumen de lo que suena, la parte que se recorta y, en el modo anticipado, lo que ya está capturado y todavía no ha salido por el altavoz. Fuera de la aplicación, un aviso y un rótulo sobre la pantalla dicen cuándo viene un pico y cuánto se baja.",
+  "Está hecha en Java sin ninguna biblioteca añadida y se fabrica con un guion propio, sin Gradle ni Android Studio. El paquete ocupa menos de 40 KB."
+ ],
+ "siguiente_paso": "Que el dueño la use una noche con el modo anticipado y diga de oído si suena limpio, si la bajada es la que quiere y qué ventaja (0,1, 0,3 o 1 segundo) le vale; con eso, afinar los tres niveles de fuerza.",
+ "etapas": [
+  {"nombre": "Etapa 1: modo directo", "estado": "hecha", "detalle": "Compresor y limitador sobre la salida general, servicio en primer plano, tres niveles de fuerza y pitido de prueba. Instalado y abre sin fallos; que se note de oído en el móvil está sin confirmar."},
+  {"nombre": "Etapa 2: que se vea", "estado": "hecha", "detalle": "Medidor del nivel de salida, umbral que se adapta a lo que suena, aviso, rótulo sobre la pantalla, gráfica, nombre, logotipo e interfaz."},
+  {"nombre": "Etapa 3: modo anticipado", "estado": "hecha", "detalle": "Captura, retraso ajustable, bajada antes del pico y volumen con las teclas del móvil. Visto funcionar en el móvil real con capturas de pantalla, el registro del teléfono y pulsaciones simuladas por cable."},
+  {"nombre": "Etapa 4: probar de oído y afinar", "estado": "en curso", "detalle": "Falta que el dueño confirme cómo suena y ajustar umbrales, proporciones y tiempos a su gusto."},
+  {"nombre": "Etapa 5: comodidades", "estado": "pendiente", "detalle": "Botón en los ajustes rápidos, medir el retraso real del móvil, apagado automático a una hora y lista de aplicaciones que no dejan capturar."}
+ ],
+ "hecho": [
+  "Modo directo: compresor y limitador de Android sobre la salida general del móvil, mantenidos por un servicio en primer plano.",
+  "Nivel habitual aprendido: mide lo que suena, sigue despacio el nivel de la voz y coloca el umbral un poco por encima, sea cual sea el volumen del móvil.",
+  "Modo anticipado: captura el sonido de las otras aplicaciones, lo retiene y lo emite corregido, bajando el volumen antes de que llegue el pico.",
+  "Ventaja ajustable del modo anticipado: 0,1, 0,3 o 1 segundo, para elegir entre ver venir el pico con margen o ir casi sincronizado con la imagen.",
+  "Gráfica en vivo: lo que suena, lo que se recorta, el umbral y, en anticipado, lo que está por sonar.",
+  "Aviso en las notificaciones y rótulo sobre la pantalla: «Viene un pico» y los decibelios que se bajan.",
+  "Volumen con las teclas del móvil en el modo anticipado, tanto con el vídeo sonando como parado, y botones «Más bajo» y «Más alto».",
+  "Devuelve el volumen de música y el de alarma al apagar, y también tras un cierre brusco.",
+  "Nombre, logotipo (una luna que acuna tres barras de sonido) e interfaz de noche con botón grande de encendido.",
+  "Guion que fabrica el paquete paso a paso con las herramientas de Android, sin Gradle, y otro que descarga esas herramientas."
+ ],
+ "pendiente": [
+  "Confirmar de oído en el móvil que el modo anticipado suena limpio, sin doble sonido ni cortes.",
+  "Confirmar de oído que el modo directo recorta de verdad en este móvil.",
+  "Afinar los tres niveles de fuerza con programas reales.",
+  "Medir el retraso propio de capturar y volver a emitir, que se suma a la ventaja elegida.",
+  "Botón en los ajustes rápidos para encender y apagar sin abrir la aplicación.",
+  "Qué hacer con auriculares: el canal de alarma suena también por el altavoz."
+ ],
+ "diario": [
+  {"fecha": "2026-11-25", "texto": "Nace el proyecto y en una tarde pasa por siete versiones. Primero el modo directo, con un guion propio para fabricar el paquete sin Gradle. Después el indicador de bajadas y el umbral que aprende el nivel habitual. Nombre, logotipo e interfaz. Luego el modo anticipado, que captura y retrasa el sonido para bajar antes del pico, y la gráfica que enseña lo que viene; se ve funcionar en el móvil real. Se arregla un aviso falso de «no deja capturar», se hace ajustable la ventaja para reducir el desfase con la imagen y se rehace el manejo del volumen tras medir en el teléfono adónde van las teclas."}
+ ],
+ "lecciones": [
+  "Con el efecto puesto sobre la salida general, la aplicación conoce el sonido en el mismo instante en que suena. Para adelantarse de verdad hay que capturarlo, retenerlo y volver a emitirlo.",
+  "Silenciar el canal de música deja pasar entera la captura y conserva el paso de volumen; por eso es mejor que ponerlo a cero.",
+  "En este móvil, si lo único que suena va por el canal de alarma, las teclas de volumen mueven la alarma, no la música. Se averiguó simulando pulsaciones por cable y leyendo el estado del sonido del teléfono.",
+  "Dar por bloqueada la captura tras unos segundos de silencio fue un error: otra aplicación reproducía silencio y el aviso saltaba con el vídeo en pausa. Mejor avisar y no cambiar de modo solo.",
+  "Una aplicación de Android sin bibliotecas se puede fabricar sin Gradle: compilar recursos, compilar el código, convertirlo, empaquetar, alinear y firmar, cada paso con su herramienta.",
+  "Con el móvil enchufado por cable se puede instalar, pulsar, sacar capturas y leer el registro: así se prueba de verdad en vez de suponer."
+ ],
+ "relacionados": [],
+ "texto_para_claude": "Vamos a retomar el proyecto volumen-nocturno, una aplicación de Android que se llama Chitón y suaviza los picos de volumen de lo que suena en el móvil. Antes de tocar nada, lee LEEME.md del proyecto y la memoria para retomar de su ficha en la web de proyectos. El código son cuatro archivos Java en src; el motor está en ServicioCalma.java. Se fabrica con construir.ps1 y se instala con adb. Si el móvil está enchufado, pruébalo de verdad: instala, mira el registro con «adb logcat -s Chiton:I» y saca capturas. Dime en pocas líneas en qué punto estamos y cuál es el siguiente paso, y espera mi visto bueno. Normas: no dar por bueno lo que no se haya probado en el móvil; al reinstalar con el modo anticipado encendido, comprobar que el volumen de música y el de alarma quedan como estaban.",
+ "esquema": {
+  "titulo": "Cómo está hecho",
+  "texto": "El sonido de la aplicación que suena sigue uno de dos caminos. En el modo directo, Android lo pasa por un compresor antes del altavoz. En el modo anticipado, Chitón lo captura, lo retiene un momento, mira lo que viene y lo emite ya corregido.",
+  "grupos": [
+   {"nombre": "Lo que suena", "columna": 1, "elementos": [
+    {"id": "app", "nombre": "YouTube u otra", "detalle": "El sonido original"}
+   ]},
+   {"nombre": "Modo anticipado", "columna": 2, "elementos": [
+    {"id": "captura", "nombre": "Captura", "detalle": "Oye a las otras apps"},
+    {"id": "cola", "nombre": "Retraso", "detalle": "De 0,1 a 1 segundo"},
+    {"id": "mira", "nombre": "Mirar adelante", "detalle": "Baja antes del pico", "destacado": true}
+   ]},
+   {"nombre": "Modo directo", "columna": 2, "elementos": [
+    {"id": "compresor", "nombre": "Compresor y limitador", "detalle": "En la salida general"},
+    {"id": "medidor", "nombre": "Medidor", "detalle": "Nivel, diez veces por s"}
+   ]},
+   {"nombre": "Salida y pantalla", "columna": 3, "elementos": [
+    {"id": "emite", "nombre": "Emisión", "detalle": "Por el canal de alarma"},
+    {"id": "grafica", "nombre": "Gráfica", "detalle": "Lo que suena y viene"},
+    {"id": "aviso", "nombre": "Aviso y rótulo", "detalle": "«Viene un pico»"}
+   ]},
+   {"nombre": "Tú", "columna": 4, "elementos": [
+    {"id": "altavoz", "nombre": "El altavoz", "detalle": "Sin sobresaltos"},
+    {"id": "teclas", "nombre": "Teclas de volumen", "detalle": "Mandan como siempre"}
+   ]}
+  ],
+  "conexiones": [
+   {"de": "app", "a": "captura", "texto": "sonido", "fuerte": true},
+   {"de": "app", "a": "compresor"},
+   {"de": "mira", "a": "emite", "texto": "corregido", "fuerte": true},
+   {"de": "mira", "a": "grafica", "texto": "lo que viene"},
+   {"de": "medidor", "a": "aviso"},
+   {"de": "emite", "a": "altavoz", "fuerte": true},
+   {"de": "teclas", "a": "emite", "texto": "volumen"}
+  ]
+ },
+ "muestra": {
+  "nota": "Prueba real en el móvil del dueño, el 25 de noviembre de 2026, con la versión 1.6 y el modo anticipado encendido. Las pulsaciones de las teclas de volumen se simularon por cable desde el ordenador; lo de «por dentro» son líneas del registro que la propia aplicación escribió en el teléfono.",
+  "papeles": {"tu": "Tecla", "programa": "Chitón", "dentro": "Por dentro"},
+  "escenas": [
+   {"titulo": "Con el vídeo parado, las teclas llegan por el canal de alarma", "lineas": [
+    {"de": "nota", "texto": "Chitón encendido con el volumen en el paso 5 de 16. No suena ningún vídeo."},
+    {"de": "tu", "texto": "Bajar volumen"},
+    {"de": "dentro", "texto": "tecla en alarma: de 15 a 14"},
+    {"de": "programa", "texto": "volumen 4 de 16"},
+    {"de": "tu", "texto": "Bajar volumen"},
+    {"de": "dentro", "texto": "tecla en alarma: de 15 a 14"},
+    {"de": "programa", "texto": "volumen 3 de 16"},
+    {"de": "tu", "texto": "Subir volumen"},
+    {"de": "dentro", "texto": "tecla en alarma: de 15 a 16"},
+    {"de": "programa", "texto": "volumen 4 de 16"},
+    {"de": "tu", "texto": "Subir volumen"},
+    {"de": "dentro", "texto": "tecla en alarma: de 15 a 16"},
+    {"de": "programa", "texto": "volumen 5 de 16"},
+    {"de": "tu", "texto": "Subir volumen"},
+    {"de": "dentro", "texto": "tecla en alarma: de 15 a 16"},
+    {"de": "programa", "texto": "volumen 6 de 16"},
+    {"de": "nota", "texto": "Tras cada pulsación, Chitón devuelve la alarma al paso 15, donde la sujeta mientras está encendido."}
+   ]},
+   {"titulo": "Con un vídeo sonando, llegan por el canal de música", "lineas": [
+    {"de": "nota", "texto": "Se abre un vídeo en YouTube. El canal de música está silenciado y el sonido sale por Chitón."},
+    {"de": "dentro", "texto": "capturado -21 dB, habitual -22, bajando 0"},
+    {"de": "tu", "texto": "Bajar volumen"},
+    {"de": "dentro", "texto": "tecla en música: de 5 a 4"},
+    {"de": "programa", "texto": "volumen 5 de 16"},
+    {"de": "tu", "texto": "Bajar volumen"},
+    {"de": "dentro", "texto": "tecla en música: de 4 a 3"},
+    {"de": "programa", "texto": "volumen 4 de 16"},
+    {"de": "tu", "texto": "Subir volumen"},
+    {"de": "programa", "texto": "volumen 5 de 16"},
+    {"de": "tu", "texto": "Subir volumen"},
+    {"de": "programa", "texto": "volumen 6 de 16"}
+   ]}
+  ]
+ }
+}
