@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chitón</title>
+<style>
+  :root {
+    --fondo1: #0b1026; --fondo2: #262a6e; --tarjeta: rgba(255,255,255,.09);
+    --texto: #ffffff; --tenue: #b8bde8; --acento: #ffd86b; --sobre: #0b1026;
+    --barras: #9aa0e6; --futuro: #c9ccf5; --recorte: #ff6b6b;
+  }
+  * { box-sizing: border-box; }
+  html { min-height: 100%; background: linear-gradient(var(--fondo1) 55%, var(--fondo2)) fixed; }
+  body { margin: 0; color: var(--texto); font: 16px/1.45 system-ui, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 480px; margin: 0 auto; padding: 14px 20px 32px; }
+  header { display: flex; align-items: center; gap: 10px; position: relative; }
+  header h1 { flex: 1; margin: 0; font-size: 24px; font-weight: 600; }
+  header svg.logo { width: 28px; height: 28px; fill: var(--acento); }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  button:focus-visible { outline: 3px solid var(--acento); outline-offset: 3px; }
+  #engranaje { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; }
+  #engranaje svg { width: 26px; height: 26px; fill: var(--tenue); }
+  #engranaje:hover svg { fill: var(--texto); }
+  #menu { position: absolute; right: 0; top: 52px; z-index: 5; width: min(300px, 86vw); padding: 10px;
+          background: var(--fondo1); border: 1px solid var(--tarjeta); border-radius: 18px;
+          box-shadow: 0 18px 40px rgba(0,0,0,.5); }
+  #menu[hidden] { display: none; }
+  #menu h2 { margin: 10px 10px 4px; font-size: 13px; font-weight: 500; color: var(--tenue); }
+  #menu button { display: flex; width: 100%; align-items: center; gap: 10px; padding: 10px; border-radius: 12px; text-align: left; }
+  #menu button:hover { background: var(--tarjeta); }
+  #menu button::before { content: ""; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--tenue); flex: none; }
+  #menu button[aria-checked="true"]::before { border-color: var(--acento); background: radial-gradient(var(--acento) 45%, transparent 50%); }
+  #luna { display: grid; place-items: center; width: 148px; height: 148px; margin: 22px auto 0; border-radius: 50%;
+          background: var(--tarjeta); border: 3px solid color-mix(in srgb, var(--tenue) 40%, transparent); transition: transform .12s; }
+  #luna svg { width: 64px; height: 64px; fill: var(--tenue); }
+  #luna:active { transform: scale(.94); }
+  #luna[aria-pressed="true"] { background: var(--acento); border: 6px solid color-mix(in srgb, var(--texto) 40%, transparent);
+          box-shadow: 0 0 46px color-mix(in srgb, var(--acento) 55%, transparent); }
+  #luna[aria-pressed="true"] svg { fill: var(--sobre); }
+  #estado { min-height: 3em; margin: 14px 0 6px; text-align: center; }
+  .tarjeta { margin-top: 12px; padding: 16px 18px; border-radius: 22px; background: var(--tarjeta); }
+  canvas { display: block; width: 100%; height: 140px; }
+  .pie { display: flex; align-items: center; gap: 10px; margin-top: 10px; font-size: 13px; color: var(--tenue); }
+  .pie span:first-child { flex: 1; }
+  #cifra { font-size: 20px; font-weight: 600; color: var(--acento); }
+  .rotulo { font-size: 14px; color: var(--tenue); }
+  .opciones { display: flex; gap: 8px; margin-top: 8px; }
+  .opciones button { flex: 1; padding: 12px 0; border-radius: 16px; font-weight: 600; font-size: 15px;
+          background: color-mix(in srgb, var(--texto) 9%, transparent); }
+  .opciones button[aria-checked="true"] { background: var(--acento); color: var(--sobre); }
+  #explica { margin: 8px 0 0; font-size: 14px; color: var(--tenue); }
+  #pasos { margin: 14px 0 0; padding: 0 0 0 1.3em; font-size: 14px; color: var(--tenue); }
+  #pasos li { margin: 4px 0; }
+  pre { white-space: pre-wrap; font-size: 13px; color: var(--tenue); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <svg class="logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M12,3a9,9 0,1 0,9 9c0,-0.46 -0.04,-0.92 -0.1,-1.36a5.389,5.389 0,0 1,-4.4 2.26,5.403 5.403,0 0,1 -3.14,-9.8c-0.44,-0.06 -0.9,-0.1 -1.36,-0.1z"/></svg>
+    <h1>Chitón</h1>
+    <button id="engranaje" aria-label="Ajustes" aria-haspopup="true" aria-expanded="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.14,12.94c0.04,-0.3 0.06,-0.61 0.06,-0.94c0,-0.32 -0.02,-0.64 -0.07,-0.94l2.03,-1.58c0.18,-0.14 0.23,-0.41 0.12,-0.61l-1.92,-3.32c-0.12,-0.22 -0.37,-0.29 -0.59,-0.22l-2.39,0.96c-0.5,-0.38 -1.03,-0.7 -1.62,-0.94L14.4,2.81c-0.04,-0.24 -0.24,-0.41 -0.48,-0.41h-3.84c-0.24,0 -0.43,0.17 -0.47,0.41L9.25,5.35C8.66,5.59 8.12,5.92 7.63,6.29L5.24,5.33c-0.22,-0.08 -0.47,0 -0.59,0.22L2.74,8.87C2.62,9.08 2.66,9.34 2.86,9.48l2.03,1.58C4.84,11.36 4.8,11.69 4.8,12s0.02,0.64 0.07,0.94l-2.03,1.58c-0.18,0.14 -0.23,0.41 -0.12,0.61l1.92,3.32c0.12,0.22 0.37,0.29 0.59,0.22l2.39,-0.96c0.5,0.38 1.03,0.7 1.62,0.94l0.36,2.54c0.05,0.24 0.24,0.41 0.48,0.41h3.84c0.24,0 0.44,-0.17 0.47,-0.41l0.36,-2.54c0.59,-0.24 1.13,-0.56 1.62,-0.94l2.39,0.96c0.22,0.08 0.47,0 0.59,-0.22l1.92,-3.32c0.12,-0.22 0.07,-0.47 -0.12,-0.61L19.14,12.94zM12,15.6c-1.98,0 -3.6,-1.62 -3.6,-3.6s1.62,-3.6 3.6,-3.6s3.6,1.62 3.6,3.6S13.98,15.6 12,15.6z"/></svg>
+    </button>
+    <div id="menu" hidden>
+      <h2 id="tituloVentaja">Ventaja</h2>
+      <div role="radiogroup" aria-labelledby="tituloVentaja" id="ventajas"></div>
+      <h2 id="tituloTema">Tema de colores</h2>
+      <div role="radiogroup" aria-labelledby="tituloTema" id="temas"></div>
+    </div>
+  </header>
+
+  <button id="luna" aria-pressed="false" aria-label="Encender Chitón">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12,3a9,9 0,1 0,9 9c0,-0.46 -0.04,-0.92 -0.1,-1.36a5.389,5.389 0,0 1,-4.4 2.26,5.403 5.403,0 0,1 -3.14,-9.8c-0.44,-0.06 -0.9,-0.1 -1.36,-0.1z"/></svg>
+  </button>
+  <p id="estado" aria-live="polite"></p>
+
+  <section class="tarjeta">
+    <canvas id="grafica" aria-hidden="true"></canvas>
+    <div class="pie"><span>Barras, lo que suena. Rojo, lo que se quita.</span><span id="cifra"></span></div>
+  </section>
+
+  <section class="tarjeta">
+    <div class="rotulo" id="tituloFuerza">Fuerza</div>
+    <div class="opciones" role="radiogroup" aria-labelledby="tituloFuerza" id="fuerzas"></div>
+    <p id="explica"></p>
+  </section>
+
+  <ol id="pasos">
+    <li>Pon tu vídeo en otra pestaña de este navegador.</li>
+    <li>Toca la luna, elige esa pestaña y deja marcado «Compartir también el audio de la pestaña».</li>
+    <li>Deja esta página abierta. El sonido saldrá por aquí, ya suavizado.</li>
+  </ol>
+  <pre id="prueba" hidden></pre>
+</main>
+
+<script>
+"use strict";
+
+/* ------------------------------------------------------------------ el motor
+   Las mismas cuentas que el motor anticipado de la aplicación de Android
+   (ServicioCalma.java) y que pruebas/simular.py. Si se cambian en un sitio,
+   hay que cambiarlas en los tres.
+
+   Recibe el sonido muestra a muestra, lo retiene «ventaja» tramos de 20 ms y lo
+   devuelve con la ganancia ya decidida, mirando lo que viene. */
+class Motor {
+  constructor(ritmo) {
+    this.B = Math.round(ritmo * 0.02);              // muestras de un tramo
+    this.filtro = Math.exp(-2 * Math.PI * 800 / ritmo);
+    // Por fuerza: margen del nivel sostenido, proporción, decibelios de más, tope de los golpes.
+    this.NIVELES = [[6, 3, 0, 12], [5, 8, 3, 9], [4, 20, 6, 7]];
+    this.TOPE = 18;
+    this.nivel = 1;
+    this.ventaja = 15;                              // tramos de ventaja
+    this.LARGO = 52 * this.B;                       // la cola: algo más de un segundo
+    this.colaI = new Float32Array(this.LARGO);
+    this.colaD = new Float32Array(this.LARGO);
+    this.deseada = new Float32Array(4096);          // bajada que pide cada tramo capturado
+    this.n = 0;                                     // muestras recibidas
+    this.enTramo = 0; this.suma = 0; this.fe = 0; this.fs = 0;
+    this.ventana = new Float64Array(15); this.sumaVentana = 0; this.enVentana = 0;
+    this.c = 0;                                     // tramos capturados
+    this.cuentas = new Int32Array(101); this.recuerdo = new Uint8Array(3000);
+    this.recordados = 0; this.sitio = 0; this.conSonido = 0; this.puesto = false;
+    this.habitual = -24;
+    this.g = 0; this.desde = 1; this.hasta = 1;
+    this.eventos = [];
+  }
+
+  /** La voz normal: el nivel que se supera la mitad del tiempo en el último minuto. */
+  aprender(sostenido) {
+    if (sostenido < -75) return;
+    this.conSonido += 0.02;
+    const casilla = Math.max(0, Math.min(100, Math.round(sostenido) + 100));
+    if (this.recordados === this.recuerdo.length) this.cuentas[this.recuerdo[this.sitio]]--;
+    else this.recordados++;
+    this.recuerdo[this.sitio] = casilla;
+    this.cuentas[casilla]++;
+    this.sitio = (this.sitio + 1) % this.recuerdo.length;
+    const mitad = Math.max(1, Math.floor(this.recordados / 2));
+    let vistos = 0, voz = -100;
+    for (let i = 100; i >= 0; i--) { vistos += this.cuentas[i]; if (vistos >= mitad) { voz = i - 100; break; } }
+    if (!this.puesto || this.conSonido < 1) { this.habitual = voz; this.puesto = true; }
+    else this.habitual += (voz - this.habitual) * (1 - Math.exp(-0.02 / 0.5));
+  }
+
+  tramoCapturado() {
+    const potencia = this.suma / this.B;
+    const db = potencia > 1e-12 ? 10 * Math.log10(potencia) : -120;
+    const s = this.c % this.ventana.length;
+    this.sumaVentana += potencia - this.ventana[s];
+    this.ventana[s] = potencia;
+    this.enVentana = Math.min(this.ventana.length, this.enVentana + 1);
+    const media = Math.max(0, this.sumaVentana) / this.enVentana;
+    const sostenido = media > 1e-12 ? 10 * Math.log10(media) : -120;
+    const nv = this.NIVELES[this.nivel];
+    let d = 0;
+    if (db > -85) {
+      this.aprender(sostenido);
+      const sobra = sostenido - (this.habitual + nv[0]);
+      if (sobra > 0) d = sobra * (1 - 1 / nv[1]) + nv[2] * Math.min(1, sobra / 4);
+      d = Math.min(this.TOPE, Math.max(d, db - (this.habitual + nv[3])));
+    }
+    this.deseada[this.c % this.deseada.length] = d;
+    this.eventos.push([0, this.c, db, d, this.habitual, this.habitual + nv[0]]);
+    this.c++;
+    this.suma = 0;
+  }
+
+  /** Empieza a sonar el tramo p: se mira lo que viene y se decide la ganancia. */
+  tramoQueSale(p) {
+    const mira = Math.min(15, this.ventaja);
+    let objetivo = 0;
+    for (let k = 0; k <= mira; k++) objetivo = Math.max(objetivo, this.deseada[(p + k) % this.deseada.length]);
+    const antes = this.g;
+    const prisa = 1 - Math.pow(0.05, 1 / mira);
+    this.g += (objetivo - this.g) * (objetivo > this.g ? prisa : 0.04);
+    this.desde = Math.pow(10, -antes / 20);
+    this.hasta = Math.pow(10, -this.g / 20);
+    this.eventos.push([1, p, this.g]);
+  }
+
+  procesa(entraI, entraD, saleI, saleD, cuantas) {
+    const B = this.B, L = this.LARGO;
+    for (let i = 0; i < cuantas; i++) {
+      // 1. Lo que sale: la muestra de hace (ventaja + 1) tramos.
+      const atras = this.n - (this.ventaja + 1) * B;
+      if (atras >= 0) {
+        const k = atras % B;
+        if (k === 0) this.tramoQueSale(atras / B);
+        const f = this.desde + (this.hasta - this.desde) * k / B;
+        const r = atras % L;
+        saleI[i] = this.colaI[r] * f;
+        saleD[i] = this.colaD[r] * f;
+      } else { saleI[i] = 0; saleD[i] = 0; }
+      // 2. Lo que entra: a la cola y a la medida (sin graves, como lo oye el oído).
+      const a = entraI ? entraI[i] : 0, b = entraD ? entraD[i] : a;
+      const w = this.n % L;
+      this.colaI[w] = a; this.colaD[w] = b;
+      const x = (a + b) * 0.5;
+      this.fs = this.filtro * (this.fs + x - this.fe);
+      this.fe = x;
+      this.suma += this.fs * this.fs;
+      this.n++;
+      if (++this.enTramo === B) { this.enTramo = 0; this.tramoCapturado(); }
+    }
+  }
+}
+
+/* --------------------------------------------------------------- la pantalla */
+const TEMAS = [
+  ["Luna", "#0b1026", "#262a6e", "rgba(255,255,255,.09)", "#ffffff", "#b8bde8", "#ffd86b", "#0b1026", "#9aa0e6", "#c9ccf5", "#ff6b6b"],
+  ["Nord", "#2e3440", "#242933", "#3b4252", "#eceff4", "#c3ccdc", "#88c0d0", "#2e3440", "#81a1c1", "#8fbcbb", "#bf616a"],
+  ["Dracula", "#282a36", "#1e1f29", "#343746", "#f8f8f2", "#b4b9d6", "#bd93f9", "#282a36", "#8be9fd", "#c4f3fe", "#ff5555"],
+  ["Catppuccin", "#1e1e2e", "#11111b", "#313244", "#cdd6f4", "#a6adc8", "#cba6f7", "#1e1e2e", "#89b4fa", "#b4befe", "#f38ba8"],
+  ["Gruvbox", "#282828", "#1d2021", "#3c3836", "#ebdbb2", "#a89984", "#fabd2f", "#282828", "#83a598", "#8ec07c", "#fb4934"],
+];
+const VARIABLES = ["fondo1", "fondo2", "tarjeta", "texto", "tenue", "acento", "sobre", "barras", "futuro", "recorte"];
+const FUERZAS = [["Suave", "Recorta solo lo que destaca mucho."], ["Media", "Lo ruidoso queda a la altura de la voz."], ["Fuerte", "Lo ruidoso queda por debajo de la voz."]];
+const VENTAJAS = [["0,1 s: casi sin desfase", 5], ["0,3 s: recomendada", 15], ["1 s: más margen, más desfase", 50]];
+
+const $ = id => document.getElementById(id);
+const guardado = (clave, porDefecto) => { try { const v = localStorage.getItem("chiton." + clave); return v === null ? porDefecto : Number(v); } catch (e) { return porDefecto; } };
+const guardar = (clave, valor) => { try { localStorage.setItem("chiton." + clave, String(valor)); } catch (e) { /* sin memoria: da igual */ } };
+const dentro = (v, n) => (Number.isInteger(v) && v >= 0 && v < n ? v : 0);
+
+let tema = dentro(guardado("tema", 0), TEMAS.length);
+let fuerza = dentro(guardado("fuerza", 1), 3);
+let ventaja = dentro(guardado("ventaja", 1), 3);
+let color = {};
+
+function ponerTema() {
+  VARIABLES.forEach((v, i) => { document.documentElement.style.setProperty("--" + v, TEMAS[tema][i + 1]); color[v] = TEMAS[tema][i + 1]; });
+}
+
+function grupo(donde, nombres, elegida, alElegir) {
+  const caja = $(donde);
+  caja.textContent = "";
+  nombres.forEach((nombre, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = nombre;
+    b.setAttribute("role", "radio"); b.setAttribute("aria-checked", String(i === elegida));
+    b.addEventListener("click", () => { [...caja.children].forEach((o, j) => o.setAttribute("aria-checked", String(j === i))); alElegir(i); });
+    caja.appendChild(b);
+  });
+}
+
+ponerTema();
+grupo("fuerzas", FUERZAS.map(f => f[0]), fuerza, i => { fuerza = i; guardar("fuerza", i); $("explica").textContent = FUERZAS[i][1]; mandar(); });
+$("explica").textContent = FUERZAS[fuerza][1];
+grupo("ventajas", VENTAJAS.map(v => v[0]), ventaja, i => { ventaja = i; guardar("ventaja", i); mandar(); });
+grupo("temas", TEMAS.map(t => t[0]), tema, i => { tema = i; guardar("tema", i); ponerTema(); });
+
+$("engranaje").addEventListener("click", e => { e.stopPropagation(); abrirMenu($("menu").hidden); });
+document.addEventListener("click", e => { if (!$("menu").contains(e.target)) abrirMenu(false); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") abrirMenu(false); });
+function abrirMenu(abrir) { $("menu").hidden = !abrir; $("engranaje").setAttribute("aria-expanded", String(abrir)); }
+
+/* --------------------------------------------------------------- el sonido */
+const ANILLO = 1024;
+const hNivel = new Float32Array(ANILLO), hBaja = new Float32Array(ANILLO);
+let capturados = 0, sonados = 0, habitual = -24, umbral = -19, bajada = 0, picos = 0, enPico = false;
+let contexto = null, flujo = null, nodo = null, activo = false, nota = "";
+
+function mandar() { if (nodo) nodo.port.postMessage({ nivel: fuerza, ventaja: VENTAJAS[ventaja][1] }); }
+
+async function encender() {
+  nota = "";
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia || !window.AudioWorkletNode) {
+    nota = "Este navegador no puede capturar el sonido de una pestaña. Usa Chrome o Edge en un ordenador.";
+    return;
+  }
+  try {
+    flujo = await navigator.mediaDevices.getDisplayMedia({
+      video: { displaySurface: "browser" },
+      audio: { suppressLocalAudioPlayback: true, echoCancellation: false, noiseSuppression: false, autoGainControl: false },
+      selfBrowserSurface: "exclude", systemAudio: "exclude", monitorTypeSurfaces: "exclude", surfaceSwitching: "include",
+    });
+  } catch (e) {
+    nota = "No se ha elegido ninguna pestaña.";
+    return;
+  }
+  const video = flujo.getVideoTracks()[0], sonido = flujo.getAudioTracks()[0];
+  const superficie = video && video.getSettings ? video.getSettings().displaySurface : "";
+  if (!sonido) {
+    apagar();
+    nota = "Esa pestaña ha llegado sin sonido. Vuelve a tocar la luna y deja marcado «Compartir también el audio de la pestaña».";
+    return;
+  }
+  if (superficie && superficie !== "browser") {
+    apagar();
+    nota = "Hay que elegir una pestaña, no una ventana ni la pantalla entera: si no, Chitón se oiría a sí mismo.";
+    return;
+  }
+  if (sonido.getSettings && sonido.getSettings().suppressLocalAudioPlayback !== true) {
+    nota = "Este navegador no deja callar la pestaña original: puede que se oiga doble. Silénciala a mano (clic derecho en la pestaña, «Silenciar sitio»).";
+  }
+  if (video) video.stop();                // la imagen no hace falta; el sonido sigue
+  sonido.addEventListener("ended", apagar);
+
+  contexto = new AudioContext({ latencyHint: "interactive" });
+  const codigo = Motor.toString() + `
+    registerProcessor("chiton", class extends AudioWorkletProcessor {
+      constructor() {
+        super();
+        this.motor = new Motor(sampleRate);
+        this.port.onmessage = e => { this.motor.nivel = e.data.nivel; this.motor.ventaja = e.data.ventaja; };
+      }
+      process(entradas, salidas) {
+        const entra = entradas[0] || [], sale = salidas[0];
+        this.motor.procesa(entra[0], entra[1], sale[0], sale[1] || sale[0], sale[0].length);
+        if (this.motor.eventos.length) { this.port.postMessage(this.motor.eventos); this.motor.eventos = []; }
+        return true;
+      }
+    });`;
+  const direccion = URL.createObjectURL(new Blob([codigo], { type: "application/javascript" }));
+  try {
+    await contexto.audioWorklet.addModule(direccion);
+  } finally {
+    URL.revokeObjectURL(direccion);
+  }
+  nodo = new AudioWorkletNode(contexto, "chiton", { numberOfInputs: 1, numberOfOutputs: 1, outputChannelCount: [2] });
+  nodo.port.onmessage = e => e.data.forEach(apuntar);
+  mandar();
+  contexto.createMediaStreamSource(new MediaStream([sonido])).connect(nodo).connect(contexto.destination);
+  capturados = 0; sonados = 0; picos = 0; bajada = 0; enPico = false;
+  activo = true;
+}
+
+function apuntar(ev) {
+  if (ev[0] === 0) {              // tramo capturado
+    hNivel[ev[1] % ANILLO] = ev[2]; hBaja[ev[1] % ANILLO] = ev[3];
+    capturados = ev[1] + 1; habitual = ev[4]; umbral = ev[5];
+  } else {                        // tramo que suena
+    hBaja[ev[1] % ANILLO] = ev[2]; sonados = ev[1] + 1; bajada = ev[2];
+    if (!enPico && bajada >= 3) { enPico = true; picos++; } else if (enPico && bajada < 1) enPico = false;
+  }
+}
+
+function apagar() {
+  activo = false;
+  if (flujo) { flujo.getTracks().forEach(p => p.stop()); flujo = null; }
+  if (nodo) { nodo.disconnect(); nodo = null; }
+  if (contexto) { contexto.close(); contexto = null; }
+  bajada = 0;
+}
+
+$("luna").addEventListener("click", async () => {
+  if (activo) apagar(); else { $("luna").disabled = true; try { await encender(); } catch (e) { apagar(); nota = "No se ha podido encender: " + e.message; } $("luna").disabled = false; }
+});
+
+/* --------------------------------------------------------------- pintar */
+const lienzo = $("grafica"), tinta = lienzo.getContext("2d");
+function altura(db, techo, alto) { return alto * Math.max(0, Math.min(1, (techo - db) / 60)); }
+
+function pintar() {
+  const escala = window.devicePixelRatio || 1;
+  const ancho = lienzo.clientWidth, alto = lienzo.clientHeight;
+  if (lienzo.width !== Math.round(ancho * escala)) { lienzo.width = Math.round(ancho * escala); lienzo.height = Math.round(alto * escala); }
+  tinta.setTransform(escala, 0, 0, escala, 0, 0);
+  tinta.clearRect(0, 0, ancho, alto);
+  const PASADO = 4000, FUTURO = 1200, porMs = ancho / (PASADO + FUTURO), xAhora = PASADO * porMs, paso = 20;
+  if (activo) {
+    tinta.globalAlpha = 0.08; tinta.fillStyle = color.texto; tinta.fillRect(xAhora, 0, ancho - xAhora, alto); tinta.globalAlpha = 1;
+    const techo = habitual + 28, anchoBarra = Math.max(1, paso * porMs);
+    const primero = Math.max(0, sonados - Math.ceil(PASADO / paso), capturados - ANILLO + 1);
+    for (let b = primero; b < capturados; b++) {
+      const nivel = hNivel[b % ANILLO]; if (nivel < -100) continue;
+      const baja = hBaja[b % ANILLO], x = xAhora + (b - sonados) * paso * porMs; if (x > ancho) break;
+      const yEntra = altura(nivel, techo, alto), ySale = altura(nivel - baja, techo, alto);
+      tinta.fillStyle = b >= sonados ? color.futuro : color.barras; tinta.fillRect(x, ySale, anchoBarra + 0.5, alto - ySale);
+      if (baja > 0.5) { tinta.fillStyle = color.recorte; tinta.fillRect(x, yEntra, anchoBarra + 0.5, ySale - yEntra); }
+    }
+    const y = altura(umbral, techo, alto);
+    tinta.strokeStyle = color.acento; tinta.globalAlpha = 0.6; tinta.setLineDash([6, 5]); tinta.lineWidth = 1;
+    tinta.beginPath(); tinta.moveTo(0, y); tinta.lineTo(ancho, y); tinta.stroke(); tinta.setLineDash([]); tinta.globalAlpha = 1;
+  }
+  tinta.strokeStyle = color.acento; tinta.lineWidth = 2; tinta.beginPath(); tinta.moveTo(xAhora, 0); tinta.lineTo(xAhora, alto); tinta.stroke();
+  tinta.fillStyle = color.tenue; tinta.font = "11px system-ui, sans-serif"; tinta.textAlign = "right"; tinta.fillText("ahora", xAhora - 5, 13);
+  if (activo) { tinta.textAlign = "left"; tinta.fillText("lo que viene", xAhora + 5, 13); }
+
+  const luna = $("luna");
+  if ((luna.getAttribute("aria-pressed") === "true") !== activo) {
+    luna.setAttribute("aria-pressed", String(activo));
+    luna.setAttribute("aria-label", activo ? "Apagar Chitón" : "Encender Chitón");
+    $("pasos").hidden = activo;
+  }
+  const cifra = activo && bajada >= 0.5 ? "▼ " + Math.round(bajada) + " dB" : "";
+  if ($("cifra").textContent !== cifra) $("cifra").textContent = cifra;
+  const texto = nota ? nota : !activo ? "Apagado. Toca la luna y elige la pestaña de tu vídeo."
+    : bajada >= 3 ? "Bajando el volumen." : "Encendido. Picos suavizados: " + picos + ".";
+  if ($("estado").textContent !== texto) $("estado").textContent = texto;
+  requestAnimationFrame(pintar);
+}
+requestAnimationFrame(pintar);
+
+/* --------------------------------------------------------------- prueba
+   Con #prueba al final de la dirección, la página pasa por el motor una señal
+   fabricada (voz, risas 5 dB más fuertes casi la mitad del tiempo y tres golpes
+   secos 12 dB más fuertes) y escribe cuánto destacan antes y después. Sirve
+   para comprobar que estas cuentas dan lo mismo que pruebas/simular.py. */
+if (location.hash === "#prueba") {
+  const R = 48000, B = 960;
+  let semilla = 7;
+  const azar = () => { semilla = (semilla * 1664525 + 1013904223) >>> 0; return semilla / 2147483648 - 1; };
+  const eficaz = (v, a, b) => { let s = 0; for (let i = a; i < b; i++) s += v[i] * v[i]; return Math.sqrt(s / (b - a)); };
+  const db = x => (x > 1e-9 ? 20 * Math.log10(x) : -120);
+  const trozos = [], risas = [], golpes = [];
+  let largo = 0;
+  const anadir = v => { trozos.push(v); largo += v.length; };
+  const escalar = (v, nivel) => { const k = Math.pow(10, nivel / 20) / eficaz(v, 0, v.length); for (let i = 0; i < v.length; i++) v[i] *= k; return v; };
+  const voz = (seg, nivel) => { const v = new Float32Array(R * seg), a = Math.exp(-2 * Math.PI * 500 / R); let y = 0;
+    for (let i = 0; i < v.length; i++) { y = a * y + (1 - a) * azar(); v[i] = y * (0.15 + 0.85 * Math.pow(Math.max(0, Math.sin(2 * Math.PI * 4 * i / R)), 2)); } return escalar(v, nivel); };
+  const ruido = (seg, nivel) => { const v = new Float32Array(Math.round(R * seg)); for (let i = 0; i < v.length; i++) v[i] = azar(); return escalar(v, nivel); };
+  anadir(voz(4, -39)); anadir(voz(10, -24));
+  for (let vuelta = 0; vuelta < 6; vuelta++) {
+    const t = voz(2, -24);
+    if (vuelta % 2 === 0) { t.set(ruido(0.06, -12), R); golpes.push(largo + R); }
+    anadir(t); risas.push([largo, largo + R * 1.5]); anadir(ruido(1.5, -19));
+  }
+  anadir(voz(4, -24));
+  const senal = new Float32Array(largo); let o = 0; trozos.forEach(t => { senal.set(t, o); o += t.length; });
+  const nivelRisas = (s, d) => { let suma = 0, n = 0; risas.forEach(([a, b]) => { for (let i = a + d; i < b + d; i++) { suma += s[i] * s[i]; n++; } }); return db(Math.sqrt(suma / n)); };
+  const nivelGolpes = (s, d) => Math.max(...golpes.flatMap(g => [0, B, 2 * B].map(i => db(eficaz(s, g + d + i, g + d + i + B)))));
+  const vozAntes = db(eficaz(senal, 8 * R, 14 * R));
+  const lineas = ["Sin Chitón: risas " + (nivelRisas(senal, 0) - vozAntes).toFixed(1) + " dB respecto a la voz, golpes " + (nivelGolpes(senal, 0) - vozAntes).toFixed(1) + " dB"];
+  ["Suave", "Media", "Fuerte"].forEach((nombre, nivel) => {
+    const m = new Motor(R); m.nivel = nivel; m.ventaja = 15;
+    const sale = new Float32Array(largo), sobra = new Float32Array(largo);
+    m.procesa(senal, senal, sale, sobra, largo);
+    const d = (m.ventaja + 1) * B;      // lo que sale va ese tanto por detrás
+    const vozDespues = db(eficaz(sale, 8 * R + d, 14 * R + d));
+    lineas.push(nombre + ": risas " + (nivelRisas(sale, d) - vozDespues).toFixed(1) + " dB, golpes " + (nivelGolpes(sale, d) - vozDespues).toFixed(1)
+      + " dB | la voz baja " + (vozAntes - vozDespues).toFixed(1) + " dB");
+  });
+  $("prueba").hidden = false; $("prueba").textContent = lineas.join("\n");
+}
+</script>
+</body>
+</html>
