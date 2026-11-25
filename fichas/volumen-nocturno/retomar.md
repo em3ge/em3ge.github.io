@@ -41,7 +41,7 @@ El volumen en el modo anticipado tiene dos maneras:
 
 ## Dónde está ahora
 
-Versión 2.1, instalada en el móvil del dueño (Android 16), con el permiso DUMP ya concedido. La 2.1 pasó los ajustes a un engranaje con menú desplegable, añadió cinco temas de colores (`Tema.java`) y quitó el botón de comparar.
+Versión 2.2, instalada en el móvil del dueño (Android 16), con el permiso DUMP ya concedido. La 2.2 añadió la pantalla de «Permisos y privacidad» (sale la primera vez y está en el engranaje). Medido el 26 de noviembre con un programa de humor real y fuerza «Fuerte»: en 45 segundos, ningún instante salió más de 7 decibelios por encima de la voz normal, que es el tope de ese nivel. La 2.1 pasó los ajustes a un engranaje con menú desplegable, añadió cinco temas de colores (`Tema.java`) y quitó el botón de comparar.
 
 Hay además una versión para el ordenador: `web/index.html`, una página sola para Chrome o Edge de escritorio. Captura el sonido de una pestaña (la calla con `suppressLocalAudioPlayback`), lo pasa por el mismo motor, escrito en JavaScript dentro de un AudioWorklet, y lo emite. Se abre con `abrir_web.ps1` o con doble clic. Comprobado: carga sin errores y su prueba interna (`#prueba` al final de la dirección) da lo mismo que `pruebas/simular.py`. Sin probar: la captura real con un vídeo, que pide elegir la pestaña a mano.
 
