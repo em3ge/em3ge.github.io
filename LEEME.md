@@ -32,7 +32,9 @@ El aspecto de portfolio (titular, presentación, «cómo trabajo») sale de `con
 
 Dos tareas programadas de Windows:
 
-- «Guardar proyectos»: ejecuta `guardar.py` cada dos horas.
+- «Guardar proyectos»: ejecuta `guardar.py` al iniciar sesión y cada quince minutos. Guarda lo de este ordenador, trae lo que otro haya subido y sube lo propio. Si el mismo archivo se cambió en dos ordenadores, no pisa nada: deja las dos versiones a salvo y saca una ventana de aviso.
+
+Para que un proyecto esté al día en dos ordenadores, tiene que estar clonado en los dos, constar en el `local.json` de cada uno, y los dos deben tener esta tarea programada.
 - «Copia de proyectos»: ejecuta `copia.py` cada domingo a las doce.
 
 Las memorias de cada ficha no se escriben solas: hay que actualizarlas a mano o pedírselo a Claude.

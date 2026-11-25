@@ -18,6 +18,7 @@ REGISTRO = RAIZ / "guardar.log"
 SIN_VENTANA = getattr(subprocess, "CREATE_NO_WINDOW", 0)
 ENTORNO = dict(os.environ, GIT_TERMINAL_PROMPT="0", GCM_INTERACTIVE="never")
 lineas = []
+choques = []
 
 
 def decir(texto):
@@ -51,19 +52,51 @@ def guardar(nombre, carpeta, mensaje):
         if cod != 0:
             decir(f"NO  {nombre}: no se pudo guardar: {salida.splitlines()[-1] if salida else ''}")
             return False
-    # Subir tambien lo que quedara sin subir de otra vez
-    if git(carpeta, "remote")[1]:
-        pendiente = git(carpeta, "rev-list", "--count", "@{u}..HEAD")
-        if nuevo or pendiente[0] != 0 or pendiente[1] not in ("0", ""):
-            cod, salida = git(carpeta, "push")
-            if cod != 0:
-                decir(f"NO  {nombre}: guardado aqui, pero no se pudo subir: "
-                      f"{salida.splitlines()[-1] if salida else ''}")
-                return nuevo
-            decir(f"BIEN  {nombre}: guardado y subido")
-    elif nuevo:
-        decir(f"BIEN  {nombre}: guardado (sin sitio al que subir)")
+    if not git(carpeta, "remote")[1]:
+        if nuevo:
+            decir(f"BIEN  {nombre}: guardado (sin sitio al que subir)")
+        return nuevo
+    # Traer lo que otro ordenador haya subido, y poner lo de aqui encima
+    cod, salida = git(carpeta, "fetch")
+    if cod != 0:
+        decir(f"NO  {nombre}: sin conexion con GitHub: {salida.splitlines()[-1] if salida else ''}")
+        return nuevo
+    detras = git(carpeta, "rev-list", "--count", "HEAD..@{u}")[1]
+    if detras not in ("0", ""):
+        cod, salida = git(carpeta, "rebase", "@{u}")
+        if cod != 0:
+            git(carpeta, "rebase", "--abort")
+            decir(f"NO  {nombre}: HAY DOS VERSIONES. El mismo archivo se ha cambiado en dos ordenadores.")
+            choques.append(nombre)
+            return nuevo
+        decir(f"BIEN  {nombre}: traido lo nuevo de GitHub")
+    delante = git(carpeta, "rev-list", "--count", "@{u}..HEAD")
+    if delante[0] != 0 or delante[1] not in ("0", ""):
+        cod, salida = git(carpeta, "push")
+        if cod != 0:
+            decir(f"NO  {nombre}: guardado aqui, pero no se pudo subir: "
+                  f"{salida.splitlines()[-1] if salida else ''}")
+            return nuevo
+        decir(f"BIEN  {nombre}: guardado y subido")
     return nuevo
+
+
+def avisar():
+    """Ventana de aviso si quedaron dos versiones. Como mucho una cada seis horas."""
+    marca = RAIZ / "guardar.aviso"
+    try:
+        if marca.is_file() and datetime.now().timestamp() - marca.stat().st_mtime < 6 * 3600:
+            return
+        marca.write_text(", ".join(choques), encoding="utf-8")
+        import ctypes
+        ctypes.windll.user32.MessageBoxW(
+            0, "Hay dos versiones distintas de: " + ", ".join(choques) + ".\n\n"
+            "El mismo archivo se cambió en dos ordenadores antes de sincronizar. No se ha perdido nada: "
+            "lo de este ordenador está guardado aquí y lo del otro está en GitHub.\n\n"
+            "Abre Claude en la carpeta del proyecto y dile: «hay dos versiones, júntalas».",
+            "Proyectos sin sincronizar", 0x30 | 0x40000)
+    except (OSError, AttributeError):
+        pass
 
 
 def main():
@@ -72,11 +105,7 @@ def main():
     except (OSError, ValueError):
         aqui = {}
     # Traer primero lo que otro ordenador haya subido a la web
-    if git(RAIZ, "remote")[1]:
-        cod, salida = git(RAIZ, "pull", "--rebase", "--autostash")
-        if cod != 0:
-            git(RAIZ, "rebase", "--abort")
-            decir(f"NO  proyectos-web: no se pudo traer lo de GitHub: {salida.splitlines()[-1] if salida else ''}")
+    guardar("proyectos-web", RAIZ, "Actualiza la web de proyectos")
     mensaje = f"Guardado automatico del {datetime.now():%Y-%m-%d %H:%M}"
     cambiados = [n for n, c in aqui.items() if not n.startswith("_") and guardar(n, c, mensaje)]
     if cambiados:
@@ -94,6 +123,8 @@ def main():
         REGISTRO.write_text("\n".join((antes + lineas)[-300:]) + "\n", encoding="utf-8")
     except OSError:
         pass
+    if choques:
+        avisar()
 
 
 if __name__ == "__main__":
