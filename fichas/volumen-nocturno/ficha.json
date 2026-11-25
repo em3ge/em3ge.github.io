@@ -5,7 +5,7 @@
  "inicio": "2026-11-25",
  "ultima_actividad": "2026-11-25",
  "avance": 55,
- "avance_nota": "Estimación. Los dos modos están escritos y el anticipado se ha visto funcionar en el móvil real (captura, gráfica y teclas de volumen); pero en la primera prueba de oído el dueño no notó la bajada. Se encontró la causa con una simulación y se rehízo el cálculo; esa corrección está sin probar en el móvil.",
+ "avance_nota": "Estimación. Los dos modos están escritos y el anticipado se ha visto funcionar en el móvil real (captura, gráfica y teclas de volumen); pero en la primera prueba de oído el dueño no notó la bajada. Se encontró la causa con una simulación, se rehízo el cálculo y se midió en el móvil con una charla real; falta que el dueño lo confirme de oído con sus programas.",
  "etapa_actual": "Etapa 4: probar de oído y afinar",
  "tecnologias": ["Android", "Java", "DynamicsProcessing", "MediaProjection", "AudioRecord", "AudioTrack", "adb", "PowerShell"],
  "color": "#c4b5fd",
@@ -17,17 +17,17 @@
   "Una gráfica en vivo enseña el volumen de lo que suena, la parte que se recorta y, en el modo anticipado, lo que ya está capturado y todavía no ha salido por el altavoz. Fuera de la aplicación, un aviso y un rótulo sobre la pantalla dicen cuándo viene un pico y cuánto se baja.",
   "Está hecha en Java sin ninguna biblioteca añadida y se fabrica con un guion propio, sin Gradle ni Android Studio. El paquete ocupa menos de 40 KB."
  ],
- "siguiente_paso": "Instalar la versión 1.7 en el móvil y que el dueño diga de oído, con el botón de comparar, si ahora los aplausos y la música alta bajan de verdad; con eso, afinar los tres niveles de fuerza.",
+ "siguiente_paso": "Que el dueño diga de oído, con el botón de comparar y con sus programas, si ahora los aplausos y la música alta bajan de verdad; con eso, afinar los tres niveles de fuerza.",
  "etapas": [
   {"nombre": "Etapa 1: modo directo", "estado": "hecha", "detalle": "Compresor y limitador sobre la salida general, servicio en primer plano, tres niveles de fuerza y pitido de prueba. Instalado y abre sin fallos; que se note de oído en el móvil está sin confirmar."},
   {"nombre": "Etapa 2: que se vea", "estado": "hecha", "detalle": "Medidor del nivel de salida, umbral que se adapta a lo que suena, aviso, rótulo sobre la pantalla, gráfica, nombre, logotipo e interfaz."},
   {"nombre": "Etapa 3: modo anticipado", "estado": "hecha", "detalle": "Captura, retraso ajustable, bajada antes del pico y volumen con las teclas del móvil. Visto funcionar en el móvil real con capturas de pantalla, el registro del teléfono y pulsaciones simuladas por cable."},
-  {"nombre": "Etapa 4: probar de oído y afinar", "estado": "en curso", "detalle": "Primera prueba de oído: no se notaba la bajada. Rehecho el cálculo en la versión 1.7; falta instalarla, que el dueño confirme cómo suena y ajustar a su gusto."},
+  {"nombre": "Etapa 4: probar de oído y afinar", "estado": "en curso", "detalle": "Primera prueba de oído: no se notaba la bajada. Rehecho el cálculo en la versión 1.7, instalada y medida en el móvil con una charla real: la voz queda sin tocar y las risas del público bajan entre 4 y 7 decibelios. Falta que el dueño confirme cómo suena y ajustar a su gusto."},
   {"nombre": "Etapa 5: comodidades", "estado": "pendiente", "detalle": "Botón en los ajustes rápidos, medir el retraso real del móvil, apagado automático a una hora y lista de aplicaciones que no dejan capturar."}
  ],
  "hecho": [
   "Modo directo: compresor y limitador de Android sobre la salida general del móvil, mantenidos por un servicio en primer plano.",
-  "Nivel de la voz aprendido: mide el sonido sin los graves, mira el nivel sostenido de las últimas tres décimas y toma como voz normal el que solo se supera una cuarta parte del tiempo. Lo que pasa de ahí se baja.",
+  "Nivel de la voz aprendido: mide el sonido sin los graves, mira el nivel sostenido de las últimas tres décimas y toma como voz normal el que solo se ha superado una cuarta parte del tiempo en el último minuto. Lo que pasa de ahí se baja.",
   "Botón de comparar: diez segundos sin corregir, para oír la diferencia.",
   "Simulación en el ordenador con una señal fabricada de voz y aplausos, que dice cuánto baja cada cosa.",
   "Modo anticipado: captura el sonido de las otras aplicaciones, lo retiene y lo emite corregido, bajando el volumen antes de que llegue el pico.",
@@ -40,7 +40,8 @@
   "Guion que fabrica el paquete paso a paso con las herramientas de Android, sin Gradle, y otro que descarga esas herramientas."
  ],
  "pendiente": [
-  "Instalar la versión 1.7 y confirmar de oído que los aplausos y la música alta bajan y la voz no.",
+  "Confirmar de oído, con programas reales, que los aplausos y la música alta bajan y la voz no.",
+  "Al empezar un vídeo tarda unos diez segundos en asentarse y en ese rato baja de más.",
   "Confirmar de oído en el móvil que el modo anticipado suena limpio, sin doble sonido ni cortes.",
   "Confirmar de oído que el modo directo recorta de verdad en este móvil.",
   "Afinar los tres niveles de fuerza con programas reales.",
@@ -49,10 +50,11 @@
   "Qué hacer con auriculares: el canal de alarma suena también por el altavoz."
  ],
  "diario": [
-  {"fecha": "2026-11-25", "texto": "Nace el proyecto y en una tarde pasa por ocho versiones. Primero el modo directo, con un guion propio para fabricar el paquete sin Gradle. Después el indicador de bajadas y el umbral que aprende el nivel habitual. Nombre, logotipo e interfaz. Luego el modo anticipado, que captura y retrasa el sonido para bajar antes del pico, y la gráfica que enseña lo que viene; se ve funcionar en el móvil real. Se arregla un aviso falso de «no deja capturar», se hace ajustable la ventaja para reducir el desfase con la imagen y se rehace el manejo del volumen tras medir en el teléfono adónde van las teclas. Al final del día el dueño lo prueba de oído y no nota que baje. Una simulación en el ordenador enseña por qué: se estaba bajando la voz, sílaba a sílaba, tanto como los aplausos. Se rehace el cálculo (versión 1.7); en la simulación los aplausos pasan de sonar 4 decibelios por encima de la voz a quedar 2 y medio por debajo con la fuerza media, sin tocar la voz. Falta probarlo en el móvil."}
+  {"fecha": "2026-11-25", "texto": "Nace el proyecto y en una tarde pasa por ocho versiones. Primero el modo directo, con un guion propio para fabricar el paquete sin Gradle. Después el indicador de bajadas y el umbral que aprende el nivel habitual. Nombre, logotipo e interfaz. Luego el modo anticipado, que captura y retrasa el sonido para bajar antes del pico, y la gráfica que enseña lo que viene; se ve funcionar en el móvil real. Se arregla un aviso falso de «no deja capturar», se hace ajustable la ventaja para reducir el desfase con la imagen y se rehace el manejo del volumen tras medir en el teléfono adónde van las teclas. Al final del día el dueño lo prueba de oído y no nota que baje. Una simulación en el ordenador enseña por qué: se estaba bajando la voz, sílaba a sílaba, tanto como los aplausos. Se rehace el cálculo (versión 1.7); en la simulación los aplausos pasan de sonar 4 decibelios por encima de la voz a quedar 2 y medio por debajo con la fuerza media, sin tocar la voz. Al medirlo en el móvil con una charla real sale otro fallo: si el vídeo empieza flojo, se toma por voz normal un nivel demasiado bajo y se le quitan unos 20 decibelios a la propia voz. Se cambia a tomar la voz normal del último minuto de sonido; medido de nuevo, se asienta en unos diez segundos, deja la voz sin tocar y baja las risas del público entre 4 y 7 decibelios."}
  ],
  "lecciones": [
   "Que la gráfica enseñe recortes no quiere decir que se oiga la diferencia. Se bajaba la voz tanto como los aplausos y el oído no notaba nada; hasta que no se midió la diferencia entre una cosa y otra con una señal de prueba no se vio.",
+  "Una señal fabricada no avisa de todo: la simulación empezaba con voz, y un vídeo real empieza con una cabecera floja. El segundo fallo solo salió al medir en el móvil con un vídeo de verdad.",
   "Una sílaba fuerte no es un pico. Hay que decidir con el nivel sostenido de unas décimas de segundo, no con cada instante.",
   "Con el efecto puesto sobre la salida general, la aplicación conoce el sonido en el mismo instante en que suena. Para adelantarse de verdad hay que capturarlo, retenerlo y volver a emitirlo.",
   "Silenciar el canal de música deja pasar entera la captura y conserva el paso de volumen; por eso es mejor que ponerlo a cero.",

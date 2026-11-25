@@ -28,7 +28,7 @@ Cuatro archivos Java en `src`, sin dependencias, para Android 9 o posterior (el 
 - `ServicioCalma.java`: el motor. Un servicio en primer plano con los dos modos.
   - Directo: un efecto `DynamicsProcessing` (compresor de una banda y limitador) sobre la sesión de audio 0, que es la salida general. Un `Visualizer` mide el nivel diez veces por segundo.
   - Anticipado: pide permiso de captura (`MediaProjection`), graba el sonido de las otras aplicaciones con `AudioRecord`, lo guarda en una cola de tramos de 20 milisegundos y lo emite con retraso por un `AudioTrack` del canal de alarma. Para cada tramo que sale mira los siguientes (hasta tres décimas) y va bajando la ganancia antes de que llegue el pico.
-  - Los dos aprenden el nivel de la «voz normal» (función `aprender`): el nivel que el sonido solo supera una cuarta parte del tiempo. El umbral va unos decibelios por encima, según la fuerza elegida (tabla `NIVELES`). El anticipado mide sin los graves y decide con el nivel sostenido de las últimas tres décimas, para que una sílaba fuerte no cuente como pico.
+  - Los dos aprenden el nivel de la «voz normal» (función `aprender`): el nivel que el sonido solo ha superado una cuarta parte del tiempo en el último minuto. El umbral va unos decibelios por encima, según la fuerza elegida (tabla `NIVELES`). El anticipado mide sin los graves y decide con el nivel sostenido de las últimas tres décimas, para que una sílaba fuerte no cuente como pico.
   - Los dos apuntan en una «historia» lo que suena y lo que recortan; de ahí sale la gráfica.
 - `MainActivity.java`: la pantalla, hecha por código, sin archivos de diseño.
 - `Grafica.java` y `Medidor.java`: la gráfica y la barra de bajada.
@@ -37,9 +37,11 @@ El volumen en el modo anticipado: se silencia el canal de música, para no oír 
 
 ## Dónde está ahora
 
-Versión 1.7, fabricada y subida a GitHub pero SIN instalar: el móvil del dueño (Android 16) tiene la 1.6.
+Versión 1.7, instalada en el móvil del dueño (Android 16).
 
-La 1.6 se probó de oído y el dueño no notó que bajara los aplausos ni la música alta. La causa se vio con `pruebas/simular.py`: se bajaba la voz, sílaba a sílaba, tanto como los picos. La 1.7 rehace el cálculo; en la simulación, con la fuerza media, los aplausos pasan de 4 decibelios por encima de la voz a 2 y medio por debajo, y la voz no se toca. Es una señal fabricada, no un programa real: falta la prueba en el móvil.
+La 1.6 se probó de oído y el dueño no notó que bajara los aplausos ni la música alta. Hubo dos causas. La primera se vio con `pruebas/simular.py`: se bajaba la voz, sílaba a sílaba, tanto como los picos. La segunda salió al medir en el móvil con una charla real: si el vídeo empezaba flojo, se tomaba por voz normal un nivel demasiado bajo y se le quitaban unos 20 decibelios a la propia voz.
+
+La 1.7 corrige las dos. Medida en el móvil con esa charla (registro propio, minuto y medio): la voz normal se asienta en unos diez segundos, la voz queda sin tocar y las risas del público bajan entre 4 y 7 decibelios. Falta la prueba de oído del dueño con sus programas.
 
 Lo que sigue se comprobó con la 1.6.
 
@@ -52,13 +54,14 @@ Comprobado en el móvil real, con capturas de pantalla, el registro del teléfon
 
 Sin comprobar:
 
-- Que la 1.7 baje de verdad lo que tiene que bajar, de oído y con programas reales.
+- Que la 1.7 se note de oído con los programas del dueño. Con la charla de prueba las risas solo pasaban 2 o 3 decibelios del umbral; unos aplausos fuertes deberían bajar más, pero no se ha medido.
 - Que el modo anticipado suene limpio, sin doble sonido ni cortes, y que el directo recorte en este móvil.
 - El retraso real del modo anticipado: a la ventaja elegida se suma lo que tarda el teléfono en capturar y emitir, y eso no está medido.
 
 ## Qué falta
 
-1. Instalar la 1.7, la prueba de oído del dueño con el botón «Comparar», y afinar con eso los tres niveles de fuerza.
+1. La prueba de oído del dueño con el botón «Comparar», y afinar con eso los tres niveles de fuerza.
+2. Los diez primeros segundos de un vídeo: mientras se asienta la voz normal, baja de más.
 2. Medir el retraso propio del móvil y, si es grande, descontarlo de la ventaja.
 3. Botón en los ajustes rápidos.
 4. Decidir qué hacer con auriculares: el canal de alarma suena también por el altavoz.
