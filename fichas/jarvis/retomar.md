@@ -46,9 +46,11 @@ Cliente (`cliente`):
 
 Servidor (`servidor`):
 
-- `servidor.py`: la pieza central y la más grande. Atiende la orden de principio a fin y reparte el trabajo.
+- `servidor.py`: el centro. Arranca todo, atiende al móvil y al panel, lleva la conversación y reparte cada orden.
+- `comun.py`: lo compartido (las piezas cargadas y el estado de la conversación). `ordenes.py`: las instrucciones que se mandan a la IA y cómo se interpreta su respuesta.
+- Los que atienden cada tipo de orden: `en_archivos.py`, `en_internet.py`, `en_correo.py`, `en_whatsapp.py` y `en_aparatos.py`.
 - Las IA: `cerebro.py` (fila con relevo), `catalogo.py` (servicios y modelos), `cupos.py` (cuenta de lo gastado), `selector.py` (cuál conviene a cada petición), `pulso.py` (cuál va rápida ahora), `equipo.py` (qué modelos locales caben).
-- El oído: `vocabulario.py` y `entrenamiento.py`.
+- Oír y hablar: `oido.py`, `voz.py`, `vocabulario.py` y `entrenamiento.py`.
 - WhatsApp: `whatsapp.py`, `mensajes.py` (lo recibido, en una base de datos) y `conversaciones.py` (contarlo de viva voz).
 - `correo.py`, `alarmas.py`, `internet.py` e `investigador.py`.
 - Archivos: `archivos.py`, `explorador.py`, `lector.py`, `taller.py` y `guardian.py`.
@@ -56,7 +58,11 @@ Servidor (`servidor`):
 - `memoria.py`: lo que sabe del dueño. `conciencia.py`: lo que sabe de sí mismo, con las listas de lo que sabe y no sabe hacer.
 - `panel.html`, `valoraciones.py` y `tareas.py`: el panel de control.
 
-La IA no hace nada por sí misma: contesta con una orden en una línea, como `WHATSAPP|contacto|mensaje` o `ALARMA|cuándo|mensaje`, y es el programa quien la ejecuta. Al añadir una función real hay que apuntarla en la lista de capacidades de `conciencia.py`.
+La IA no hace nada por sí misma: contesta con una orden en una línea, como `WHATSAPP|contacto|mensaje` o `ALARMA|cuándo|mensaje`, y es el programa quien la ejecuta. Al añadir una función real hay que apuntarla en la lista de capacidades de `conciencia.py` y en `tareas.py`.
+
+Las dependencias van en una sola dirección: `servidor.py` usa los módulos `en_`, estos usan las piezas, y ningún módulo importa a `servidor.py`. El archivo `ESQUEMA.md` del proyecto lo explica entero y trae un mapa de todos los archivos, que escribe `pruebas\mapa.py`.
+
+Pruebas (carpeta `pruebas`): `todas.py` no usa Internet ni toca nada real y tarda menos de un minuto. Para probar de punta a punta con las IA de verdad, `servidor_de_prueba.py` (puerto 8011, con casa, ordenador, correo y teléfono de mentira) y `hablar.py`, que manda frases escritas y dice qué orden dio la IA.
 
 Fuera del repositorio quedan, a propósito: los modelos descargados, las grabaciones, la contraseña, la sesión de WhatsApp, los mensajes guardados y los logotipos del panel. Los modelos se bajan solos al arrancar.
 
@@ -68,7 +74,8 @@ Fuera del repositorio quedan, a propósito: los modelos descargados, las grabaci
 - La cuenta de correo propia de Jarvis existe y el inicio de sesión funciona.
 - Tailscale está instalado en el ordenador y en el móvil.
 - Casi todo lo demás está escrito y probado solo con simulaciones.
-- El cliente va por la versión «20 de noviembre, décima». El último cambio de código es del 20 de noviembre de 2026.
+- El cliente va por la versión «20 de noviembre, décima».
+- El 25 de noviembre de 2026 el servidor se repartió en módulos. Se comprobó con las pruebas y de punta a punta con servicios de mentira; WhatsApp, que nunca se prueba con la sesión real, es lo único que no se ha visto funcionar después del reparto.
 
 ## Qué falta
 
@@ -77,7 +84,7 @@ Fuera del repositorio quedan, a propósito: los modelos descargados, las grabaci
 3. Un servidor siempre encendido.
 4. Funciones apuntadas como pendientes en la pestaña de tareas: contestar correos, buscar fotos por lo que se ve, decir dónde está el móvil, cerrar programas y escribir en el ordenador lo dictado.
 5. Reconocer quién habla. La idea es entrenar un reconocedor con las grabaciones ya valoradas.
-6. Poner al día `LEEME.md`, que empieza describiendo la primera versión, y partir `servidor.py`, que ha crecido mucho.
+6. Reordenar `LEEME.md` por temas, que ha crecido por capas. En `servidor.py` aún quedan el reparto de las órdenes y las direcciones del panel.
 
 ## Cómo se depura
 

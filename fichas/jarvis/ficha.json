@@ -44,7 +44,10 @@
   "Mejora del oído: vocabulario propio, modo de entrenamiento y guardado de lo que entendió mal.",
   "Jarvis se conoce: explica cómo está hecho y escribe propuestas de mejora de su propio programa, que no aplica él solo.",
   "Uso fuera de casa con Tailscale; el cliente elige solo entre la dirección de casa y la de fuera.",
-  "Pantalla instalable en el móvil y puerta local para llamarlo con un botón."
+  "Pantalla instalable en el móvil y puerta local para llamarlo con un botón.",
+  "Código repartido en módulos: un centro que conversa y reparte, un módulo por cada tipo de orden y las piezas que hacen el trabajo, sin dependencias en círculo.",
+  "Pruebas automáticas que no usan Internet ni tocan nada real, y un servidor de pruebas con casa, correo y teléfono de mentira.",
+  "Esquema del proyecto con un mapa de todos los archivos, que se escribe solo a partir del propio código."
  ],
  "pendiente": [
   "Probar con la cuenta real de WhatsApp: recibir y resumir mensajes, y enviar una nota de voz.",
@@ -57,15 +60,15 @@
   "Reconocer quién habla, para no atender a otras personas de la casa.",
   "Letras deletreadas: el reconocedor las junta en palabras.",
   "Con auricular Bluetooth, Termux graba con el micrófono del móvil y no con el del auricular.",
-  "El archivo principal del servidor ha crecido mucho y convendría partirlo.",
-  "Las instrucciones del proyecto empiezan describiendo la primera versión y hay que ponerlas al día."
+  "El archivo central del servidor aún guarda el reparto de las órdenes y las direcciones del panel, que están muy entrelazados.",
+  "Las instrucciones del proyecto son largas y han crecido por capas: conviene reordenarlas por temas."
  ],
  "diario": [
   {"fecha": "2026-11-16", "texto": "Nace el proyecto y en un día llega lejos. Voz de ida y vuelta comprobada en el móvil real. Fila de IA gratuitas con relevo. Modelo de la voz del dueño, porque el detector general falla con acento castellano. WhatsApp, correo, carpeta compartida, lectura de archivos, memoria personal, Internet, alarmas, panel de cupos y propuestas de mejora escritas por el propio Jarvis. Se arreglan las activaciones falsas con una segunda comprobación en el servidor."},
   {"fecha": "2026-11-17", "texto": "WhatsApp completo: leer, resumir y buscar. Selector que elige la IA más rentable y pulso de rapidez. Panel rehecho con pestañas, conversación por escrito y valoraciones. Datos en vivo e investigador en Internet. Tailscale para usarlo fuera de casa. Manejar el móvil: «abre YouTube» y «pon tal cosa en YouTube» funcionan en el móvil real. Primer lote de funciones entre móvil y ordenador."},
   {"fecha": "2026-11-18", "texto": "El ordenador pasa a tener más memoria y el servidor elige solo el modelo local y el reconocedor local que le caben."},
   {"fecha": "2026-11-20", "texto": "Archivos de todo el ordenador, con papelera propia y deshacer. Pestaña de tareas en el panel. Conversiones y PDF, copias de seguridad, informes, lectura del correo, alarmas repetidas, más control del ordenador, llamadas y SMS. Probado con casa, correo y teléfono de mentira."},
-  {"fecha": "2026-11-25", "texto": "El código se guarda en git y se sube a un repositorio privado de GitHub. Se crea esta ficha."}
+  {"fecha": "2026-11-25", "texto": "El código se guarda en git y se sube a un repositorio privado de GitHub. Se crea esta ficha. El archivo central del servidor, que tenía 4.000 líneas, se reparte en módulos sin cambiar lo que hace: queda en 1.700, y antes y después se comprueba que 60 órdenes de muestra se interpretan igual. Se unifica código repetido, las pruebas pasan a vivir en el proyecto y se escribe el esquema con el mapa de archivos. Se graba una conversación real para la muestra de ejecución de esta página."}
  ],
  "lecciones": [
   "Las IA gratuitas tienen topes por minuto y por día. Unas instrucciones largas los agotan enseguida: hay que medir los tokens antes de engordarlas.",
@@ -79,12 +82,15 @@
   "Las pruebas con IA de verdad gastan el cupo del día. Mejor funciones sueltas y servicios de mentira, y las conversaciones completas, las justas.",
   "Cuando «va lento», la causa puede estar fuera del programa: el ordenador se suspendía y perdía la red.",
   "Para un tema nuevo funciona añadir una fuente de datos ordenados, no afinar la búsqueda en la web.",
-  "Al texto de los mensajes ajenos no se le deja llegar a la IA que da las órdenes, para que un mensaje no pueda mandar."
+  "Al texto de los mensajes ajenos no se le deja llegar a la IA que da las órdenes, para que un mensaje no pueda mandar.",
+  "Una IA puede decir «hecho» sin haber dado ninguna orden. El programa lo detecta y dice que no ha hecho nada.",
+  "Para partir un archivo grande sin romperlo: guardar antes cómo se comporta con casos de muestra, mover el código con una herramienta que compruebe sola que no queda ningún nombre suelto, y comparar después.",
+  "Las pruebas tienen que vivir dentro del proyecto. Las que se quedan en una carpeta temporal se pierden."
  ],
  "color": "#5eead4",
  "esquema": {
   "titulo": "Estructura de Jarvis: del móvil al servidor y de ahí a las IA y a los servicios",
-  "texto": "La orden sale de la voz, pasa por el móvil y llega al servidor por un canal en directo. El servidor la entiende, elige una IA, ejecuta lo que haga falta y devuelve la respuesta hablada. La línea de trazos es el camino de la voz.",
+  "texto": "La orden sale de la voz, pasa por el móvil y llega al servidor por un canal en directo. El servidor la pasa a texto y elige una IA, que contesta con una frase o con una orden escrita. Un módulo por cada tipo de orden la ejecuta con las piezas de la derecha, y la respuesta vuelve hablada. La línea de trazos es el camino de la voz.",
   "grupos": [
    {"nombre": "Tú", "columna": 1, "elementos": [
     {"id": "voz", "nombre": "Tu voz", "detalle": "«Hey Jarvis» y la orden"},
@@ -97,15 +103,17 @@
     {"id": "pantalla", "nombre": "app_movil.py", "detalle": "Pantalla y botón de llamar"}
    ]},
    {"nombre": "Servidor · FastAPI", "columna": 3, "elementos": [
-    {"id": "servidor", "nombre": "servidor.py", "detalle": "Atiende la orden entera", "destacado": true},
+    {"id": "servidor", "nombre": "servidor.py", "detalle": "Conversa y reparte cada orden", "destacado": true},
+    {"id": "ordenes", "nombre": "ordenes.py", "detalle": "El idioma entre la IA y Jarvis"},
+    {"id": "acciones", "nombre": "en_archivos.py y otros cuatro", "detalle": "Un módulo por tipo de orden"},
     {"id": "memoria", "nombre": "memoria.py", "detalle": "Lo que sabe de su dueño"},
     {"id": "conciencia", "nombre": "conciencia.py", "detalle": "Lo que sabe de sí mismo"},
     {"id": "panel", "nombre": "panel.html", "detalle": "Panel de control"}
    ]},
    {"nombre": "Entender y hablar", "columna": 4, "elementos": [
-    {"id": "oido", "nombre": "El oído", "detalle": "Whisper: de voz a texto"},
+    {"id": "oido", "nombre": "oido.py", "detalle": "Whisper: de voz a texto"},
     {"id": "cerebro", "nombre": "cerebro.py · selector.py", "detalle": "Elige la IA y la releva"},
-    {"id": "habla", "nombre": "La voz", "detalle": "De texto a voz, por frases"}
+    {"id": "habla", "nombre": "voz.py", "detalle": "De texto a voz, por frases"}
    ]},
    {"nombre": "Lo que sabe hacer", "columna": 4, "elementos": [
     {"id": "whatsapp", "nombre": "whatsapp.py", "detalle": "Mensajes y notas de voz"},
@@ -135,12 +143,12 @@
    {"de": "servidor", "a": "oido", "fuerte": true},
    {"de": "servidor", "a": "cerebro", "fuerte": true},
    {"de": "servidor", "a": "habla", "fuerte": true},
-   {"de": "servidor", "a": "whatsapp"},
-   {"de": "servidor", "a": "correo"},
-   {"de": "servidor", "a": "internet"},
-   {"de": "servidor", "a": "archivos"},
+   {"de": "acciones", "a": "whatsapp"},
+   {"de": "acciones", "a": "correo"},
+   {"de": "acciones", "a": "internet"},
+   {"de": "acciones", "a": "archivos"},
    {"de": "servidor", "a": "alarmas"},
-   {"de": "servidor", "a": "mandos"},
+   {"de": "acciones", "a": "mandos"},
    {"de": "oido", "a": "nube"},
    {"de": "cerebro", "a": "nube", "texto": "con relevo"},
    {"de": "cerebro", "a": "local", "texto": "reserva"},
@@ -153,7 +161,7 @@
   ]
  },
  "relacionados": [],
- "texto_para_claude": "Vamos a retomar el proyecto jarvis, un asistente de voz con el cliente en un móvil Android (Termux) y el servidor en el ordenador. Antes de tocar nada, lee LEEME.md del proyecto y la memoria para retomar de su ficha en la web de proyectos. Después mira el final de modelos\\jarvis.log y de modelos\\diagnostico\\registro.txt para ver qué pasó la última vez. Dime en pocas líneas en qué punto estamos y cuál es el siguiente paso, y espera mi visto bueno. Normas: Jarvis no inventa; todo gratuito; lo delicado se confirma de viva voz; las pruebas, con servicios de mentira y en otro puerto, sin tocar mi sesión real de WhatsApp, mi buzón, mis carpetas ni mi ordenador; y gastar pocos tokens de las IA.",
+ "texto_para_claude": "Vamos a retomar el proyecto jarvis, un asistente de voz con el cliente en un móvil Android (Termux) y el servidor en el ordenador. Antes de tocar nada, lee ESQUEMA.md (cómo está organizado el código) y LEEME.md del proyecto, y la memoria para retomar de su ficha en la web de proyectos. Después mira el final de modelos\\jarvis.log y de modelos\\diagnostico\\registro.txt para ver qué pasó la última vez. Dime en pocas líneas en qué punto estamos y cuál es el siguiente paso, y espera mi visto bueno. Normas: Jarvis no inventa; todo gratuito; lo delicado se confirma de viva voz; las pruebas, con servicios de mentira y en otro puerto, sin tocar mi sesión real de WhatsApp, mi buzón, mis carpetas ni mi ordenador; y gastar pocos tokens de las IA. Tras cualquier cambio, pasa pruebas\\todas.py.",
  "muestra": {
   "nota": "Conversación real, grabada el 25 de noviembre de 2026 con el servidor de pruebas del proyecto (`pruebas/servidor_de_prueba.py` y `pruebas/hablar.py`). Las inteligencias artificiales son las de verdad; las carpetas, el correo y el teléfono son de mentira, para no tocar nada personal, y las órdenes se escribieron en vez de dictarse. «Por dentro» cuenta lo que no se oye: qué inteligencia contestó, qué orden escribió y cuánto tardó.",
   "escenas": [
