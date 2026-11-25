@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jarvis · Proyectos</title>
+<meta name="description" content="Un asistente de voz personal y gratuito: se le dice «hey Jarvis» al móvil Android, se da una orden y contesta por el auricular.">
+<link rel="stylesheet" href="../estilo.css">
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cabecera cabecera-proyecto">
+<div class="ancho">
+<p class="miga"><a href="../index.html">← Todos los proyectos</a></p>
+<div class="tarjeta-cabeza">
+<h1>Jarvis</h1>
+<span class="estado estado-activo">Activo</span>
+</div>
+<p class="presentacion">Un asistente de voz personal y gratuito: se le dice «hey Jarvis» al móvil Android, se da una orden y contesta por el auricular.</p>
+</div>
+</header>
+<main id="contenido" class="ancho proyecto" data-fecha="2026-11-25">
+<section aria-labelledby="t-ficha" class="ficha">
+<h2 id="t-ficha" class="oculto">Ficha</h2>
+<div class="avance"><div class="avance-riel" role="img" aria-label="Avance: 60 por ciento"><div class="avance-lleno" style="width:60%"></div></div><span class="avance-num" aria-hidden="true">60 %</span></div>
+<p class="nota">Estimación. Casi todo lo previsto está escrito y la voz de ida y vuelta funciona en el móvil real; buena parte de lo demás solo se ha probado con simulaciones.</p>
+<dl class="datos datos-ficha">
+<div><dt>Estado</dt><dd>Activo</dd></div>
+<div><dt>Etapa</dt><dd>Etapa 3: probar en el móvil y con las cuentas reales lo que solo se ha simulado</dd></div>
+<div><dt>Empezó</dt><dd>16 de noviembre de 2026</dd></div>
+<div><dt>Último movimiento</dt><dd>25 de noviembre de 2026</dd></div>
+<div><dt>Tamaño</dt><dd>17.908 líneas en 44 archivos de código</dd></div>
+<div><dt>Cambios guardados en git</dt><dd>1</dd></div>
+<div><dt>Tecnologías</dt><dd>Python, Android, Termux, FastAPI, Whisper, Piper, Ollama, Groq, Gemini, Tailscale, Windows</dd></div>
+</dl>
+<div class="botones"><a class="boton" href="https://github.com/em3ge/jarvis">Ver el código</a><a class="boton boton-claro" href="https://github.com/em3ge/jarvis/archive/refs/heads/main.zip">Descargar en zip</a></div><p class="nota">El código es privado: GitHub pedirá iniciar sesión con una cuenta que tenga permiso.</p>
+</section>
+<nav class="indice" aria-label="Apartados de esta página"><ul><li><a href="#corto">En corto</a></li><li><a href="#siguiente">Siguiente paso</a></li><li><a href="#etapas">Etapas</a></li><li><a href="#pendiente">Qué falta</a></li><li><a href="#hecho">Qué hay hecho</a></li><li><a href="#retomar">Memoria para retomar</a></li><li><a href="#lecciones">Lecciones aprendidas</a></li><li><a href="#diario">Diario</a></li><li><a href="#claude">Texto para retomarlo con Claude</a></li></ul></nav>
+<section id="corto" aria-labelledby="t-corto">
+<h2 id="t-corto">En corto</h2>
+<p>Un asistente de voz en dos piezas. El móvil Android, con Termux, escucha sin parar y no manda nada hasta oír «hey Jarvis». Entonces graba la orden y la envía a un servidor en el ordenador de casa, que la pasa a texto, pregunta a una inteligencia artificial, ejecuta lo que haga falta y devuelve la respuesta hablada, frase a frase.</p><p>Todo es gratuito. El servidor reparte las preguntas entre varias IA gratuitas de Internet, lleva la cuenta de lo que le queda a cada una y pasa sola a la siguiente; un modelo pequeño en el propio ordenador queda de reserva solo para conversar.</p><p>Además de conversar, hace cosas: WhatsApp, correo, alarmas, búsquedas en Internet, archivos del ordenador, documentos e informes, manejar el móvil y el ordenador. Lo delicado (enviar, borrar, apagar) pide siempre un «sí» de viva voz. Tiene un panel de control en el navegador con cupos, conversación por escrito, valoraciones y lista de tareas.</p><p>La norma principal es que no invente: si no sabe o no puede averiguarlo, lo dice.</p>
+</section>
+<section id="siguiente" aria-labelledby="t-siguiente">
+<h2 id="t-siguiente">Siguiente paso</h2>
+<p class="destacado">Probar en el móvil real, una por una, las funciones que solo se han probado con simulaciones, empezando por las de WhatsApp con la cuenta de verdad y las alarmas, y apuntar lo que falle.</p>
+</section>
+<section id="etapas" aria-labelledby="t-etapas">
+<h2 id="t-etapas">Etapas</h2>
+<ol class="etapas"><li class="etapa etapa-hecha"><span class="etapa-estado">Hecha</span><div><strong>Etapa 1: voz de ida y vuelta</strong><p>Palabra de llamada en el móvil, orden al servidor, reconocimiento de voz, IA y respuesta hablada. Comprobado en el móvil real.</p></div></li><li class="etapa etapa-hecha"><span class="etapa-estado">Hecha</span><div><strong>Etapa 2: que haga cosas</strong><p>WhatsApp, correo, Internet, alarmas, archivos, documentos, memoria personal, manejar el móvil y el ordenador, panel de control. Escrito y probado con simulaciones y con las IA de verdad.</p></div></li><li class="etapa etapa-en-curso"><span class="etapa-estado">En curso</span><div><strong>Etapa 3: probarlo todo en real</strong><p>En el móvil real funcionan la activación, las órdenes y abrir y poner vídeos de YouTube. Falta comprobar en real casi todo lo demás.</p></div></li><li class="etapa etapa-pendiente"><span class="etapa-estado">Pendiente</span><div><strong>Etapa 4: servidor siempre encendido</strong><p>Hoy el servidor es el ordenador de casa. Falta decidir y montar una máquina que no se apague.</p></div></li><li class="etapa etapa-pendiente"><span class="etapa-estado">Pendiente</span><div><strong>Etapa 5: lo que aún no sabe</strong><p>Contestar correos, buscar fotos por lo que se ve, decir dónde está el móvil, cerrar programas, dictar al ordenador y reconocer quién habla.</p></div></li></ol>
+</section>
+<section id="pendiente" aria-labelledby="t-pendiente">
+<h2 id="t-pendiente">Qué falta</h2>
+<ul><li>Probar con la cuenta real de WhatsApp: recibir y resumir mensajes, y enviar una nota de voz.</li><li>Probar en el móvil real: alarmas, interrumpir a Jarvis mientras habla, pantalla del móvil, mandos de reproducción, pasar fotos y archivos, llamadas y SMS.</li><li>Probar un envío real de correo y la lectura del buzón con la IA.</li><li>Probar el uso real en la calle con Tailscale.</li><li>El botón del reloj: falta una aplicación de automatización en el móvil que capture el botón y llame a la puerta local.</li><li>Servidor definitivo en una máquina siempre encendida.</li><li>Funciones sin hacer: contestar correos, buscar fotos por lo que se ve, decir dónde está el móvil, cerrar programas, escribir en el ordenador lo dictado.</li><li>Reconocer quién habla, para no atender a otras personas de la casa.</li><li>Letras deletreadas: el reconocedor las junta en palabras.</li><li>Con auricular Bluetooth, Termux graba con el micrófono del móvil y no con el del auricular.</li><li>El archivo principal del servidor ha crecido mucho y convendría partirlo.</li><li>Las instrucciones del proyecto empiezan describiendo la primera versión y hay que ponerlas al día.</li></ul>
+</section>
+<section id="hecho" aria-labelledby="t-hecho">
+<h2 id="t-hecho">Qué hay hecho</h2>
+<ul><li>Cliente para Termux: detector de «hey Jarvis» con un modelo entrenado con la voz del dueño, que además aprende solo de sus activaciones falsas.</li><li>Servidor con canal de voz en directo: reconocimiento con Whisper, respuesta de la IA y voz neuronal, con una voz local de reserva.</li><li>Segunda comprobación en el servidor de que de verdad se ha dicho «Jarvis», para descartar conversación de casa.</li><li>Fila de IA gratuitas con relevo: catálogo de servicios, cuenta de cupos, pulso de rapidez y selector que elige la más rentable para cada petición.</li><li>Instrucciones cortas para la charla y completas solo para las órdenes, para gastar pocos tokens.</li><li>WhatsApp: enviar mensajes y notas de voz a contactos y grupos, leer y resumir lo recibido, buscar en las conversaciones, avisos y mensajes programados.</li><li>Correo: enviar con adjuntos y leer en voz alta lo que llega.</li><li>Internet: el tiempo, noticias, búsquedas, precio de la luz, precios del supermercado, aviones en el aire y un investigador de varios pasos.</li><li>Alarmas, temporizadores y recordatorios, también repetidos.</li><li>Archivos del ordenador: buscar, mover, copiar, renombrar, borrar a una papelera propia, ordenar, comprimir y deshacer.</li><li>Documentos e informes en texto o PDF, conversiones de archivos y copias de seguridad.</li><li>Leer archivos: texto, PDF, Word, Excel, fotos y audios.</li><li>Memoria personal que se va llenando con lo que el dueño cuenta de sí mismo.</li><li>Manejar el móvil: abrir aplicaciones, YouTube, mapas, volumen, linterna, llamadas y SMS; con el permiso de depuración, pulsar, escribir y leer la pantalla.</li><li>Manejar el ordenador desde el móvil y pasar cosas entre los dos: portapapeles, fotos y archivos.</li><li>Panel de control con pestañas: resumen, conversación por escrito, inteligencias, actividad, valoraciones y tareas.</li><li>Mejora del oído: vocabulario propio, modo de entrenamiento y guardado de lo que entendió mal.</li><li>Jarvis se conoce: explica cómo está hecho y escribe propuestas de mejora de su propio programa, que no aplica él solo.</li><li>Uso fuera de casa con Tailscale; el cliente elige solo entre la dirección de casa y la de fuera.</li><li>Pantalla instalable en el móvil y puerta local para llamarlo con un botón.</li></ul>
+</section>
+<section id="retomar" aria-labelledby="t-retomar">
+<h2 id="t-retomar">Memoria para retomar</h2>
+<h3 id="r-qu-es-y-qu-se-busca">Qué es y qué se busca</h3>
+<p>Un asistente de voz personal, gratuito y sin servicios de pago. Se dice «hey Jarvis» al móvil Android, se da una orden y la respuesta suena por el auricular. La meta es poder manejar de viva voz, sin mirar la pantalla, los mensajes, el correo, los archivos, el móvil y el ordenador.</p>
+<p>Tiene dos piezas. El <strong>cliente</strong> va en el móvil, dentro de Termux: escucha sin parar, pero el audio no sale del móvil hasta que oye la palabra de llamada. El <strong>servidor</strong> va en un ordenador encendido: pasa la voz a texto, pregunta a una IA, ejecuta la orden y devuelve la respuesta hablada.</p>
+<h3 id="r-normas-del-proyecto">Normas del proyecto</h3>
+<ul>
+<li><strong>No inventar.</strong> Si Jarvis no sabe algo o no puede averiguarlo, lo dice.</li>
+<li><strong>Todo gratuito.</strong> Solo IA y servicios sin coste; las claves van en variables de entorno, nunca en archivos.</li>
+<li><strong>Lo delicado se confirma de viva voz.</strong> Enviar, borrar, apagar o llamar piden un «sí».</li>
+<li><strong>Nada se destruye.</strong> Lo borrado y las versiones anteriores van a una papelera propia.</li>
+<li><strong>Jarvis propone, no se cambia solo.</strong> Escribe propuestas de mejora; aplicarlas es cosa de una persona, y hay que revisarlas antes.</li>
+<li><strong>Pruebas sin tocar lo real.</strong> Servidor de prueba en otro puerto, WhatsApp, correo, casa y teléfono de mentira.</li>
+<li><strong>Gastar pocos tokens.</strong> Medir antes de alargar las instrucciones a la IA.</li>
+</ul>
+<h3 id="r-c-mo-ponerlo-en-marcha">Cómo ponerlo en marcha</h3>
+<p>El servidor, en Windows: <code>servidor\arrancar.ps1</code>. En Linux: <code>servidor/instalar_servidor.sh</code> y luego <code>servidor/arrancar.sh</code>. Al arrancar dice la dirección y la contraseña que hay que poner en el móvil. El entorno de Python del proyecto es de la versión 3.12, porque una de las piezas no existe para versiones más nuevas.</p>
+<p>El panel de control se abre en el navegador, en <code>/panel</code> del servidor, o con <code>servidor\abrir_panel.ps1</code>.</p>
+<p>El móvil: instalar Termux y Termux API, ejecutar <code>instalar_termux.sh</code> y después <code>python cliente.py</code>. La primera vez pregunta la dirección del servidor y la contraseña. Para ponerlo al día, <code>bash actualizar.sh</code> en la carpeta del cliente; el cliente dice su versión al arrancar.</p>
+<p>Otras órdenes útiles:</p>
+<ul>
+<li><code>python cliente.py --conexion</code>: comprueba paso a paso si el móvil llega al servidor.</li>
+<li><code>python cliente.py --fuera DIRECCIÓN</code>: guarda la dirección para usarlo fuera de casa.</li>
+<li><code>python entrenar.py</code>: graba la voz del dueño y entrena su detector; con <code>--repasar</code> reentrena con las activaciones falsas.</li>
+<li><code>servidor\clave_ia.ps1</code>: guarda la clave de un servicio de IA y la prueba.</li>
+<li><code>python catalogo.py</code>: dice qué IA hay y si contestan.</li>
+<li><code>servidor\comprobar_conexion.ps1</code>: revisa la red desde el ordenador.</li>
+</ul>
+<p>Las variables de entorno que cambian el comportamiento empiezan todas por <code>JARVIS_</code>. Las instrucciones completas están en <code>LEEME.md</code>.</p>
+<h3 id="r-c-mo-est-hecho">Cómo está hecho</h3>
+<p>Python en las dos piezas. El servidor es una aplicación FastAPI con un canal en directo para la voz y otro para el panel.</p>
+<p>Cliente (<code>cliente</code>):</p>
+<ul>
+<li><code>cliente.py</code>: escucha, graba la orden, la envía y reproduce la respuesta. También vigila para poder interrumpir.</li>
+<li><code>palabra_clave.py</code>: el detector de la palabra de llamada. <code>entrenar.py</code>: el modelo de la voz del dueño.</li>
+<li><code>manos.py</code>: lo que el móvil hace cuando el servidor se lo pide (abrir aplicaciones, pulsar, leer la pantalla).</li>
+<li><code>app_movil.py</code>: la pantalla instalable del móvil.</li>
+</ul>
+<p>Servidor (<code>servidor</code>):</p>
+<ul>
+<li><code>servidor.py</code>: la pieza central y la más grande. Atiende la orden de principio a fin y reparte el trabajo.</li>
+<li>Las IA: <code>cerebro.py</code> (fila con relevo), <code>catalogo.py</code> (servicios y modelos), <code>cupos.py</code> (cuenta de lo gastado), <code>selector.py</code> (cuál conviene a cada petición), <code>pulso.py</code> (cuál va rápida ahora), <code>equipo.py</code> (qué modelos locales caben).</li>
+<li>El oído: <code>vocabulario.py</code> y <code>entrenamiento.py</code>.</li>
+<li>WhatsApp: <code>whatsapp.py</code>, <code>mensajes.py</code> (lo recibido, en una base de datos) y <code>conversaciones.py</code> (contarlo de viva voz).</li>
+<li><code>correo.py</code>, <code>alarmas.py</code>, <code>internet.py</code> e <code>investigador.py</code>.</li>
+<li>Archivos: <code>archivos.py</code>, <code>explorador.py</code>, <code>lector.py</code>, <code>taller.py</code> y <code>guardian.py</code>.</li>
+<li><code>movil.py</code> y <code>pc.py</code>: las órdenes para el móvil y para el ordenador.</li>
+<li><code>memoria.py</code>: lo que sabe del dueño. <code>conciencia.py</code>: lo que sabe de sí mismo, con las listas de lo que sabe y no sabe hacer.</li>
+<li><code>panel.html</code>, <code>valoraciones.py</code> y <code>tareas.py</code>: el panel de control.</li>
+</ul>
+<p>La IA no hace nada por sí misma: contesta con una orden en una línea, como <code>WHATSAPP|contacto|mensaje</code> o <code>ALARMA|cuándo|mensaje</code>, y es el programa quien la ejecuta. Al añadir una función real hay que apuntarla en la lista de capacidades de <code>conciencia.py</code>.</p>
+<p>Fuera del repositorio quedan, a propósito: los modelos descargados, las grabaciones, la contraseña, la sesión de WhatsApp, los mensajes guardados y los logotipos del panel. Los modelos se bajan solos al arrancar.</p>
+<h3 id="r-d-nde-est-ahora">Dónde está ahora</h3>
+<ul>
+<li>La voz de ida y vuelta funciona en el móvil real: activación, orden y respuesta.</li>
+<li>En el móvil real también funcionan «abre YouTube» y «pon tal cosa en YouTube».</li>
+<li>Las claves de varios servicios de IA gratuitos están puestas y contestan.</li>
+<li>La cuenta de correo propia de Jarvis existe y el inicio de sesión funciona.</li>
+<li>Tailscale está instalado en el ordenador y en el móvil.</li>
+<li>Casi todo lo demás está escrito y probado solo con simulaciones.</li>
+<li>El cliente va por la versión «20 de noviembre, décima». El último cambio de código es del 20 de noviembre de 2026.</li>
+</ul>
+<h3 id="r-qu-falta">Qué falta</h3>
+<ol>
+<li>Probar en real lo simulado: WhatsApp recibido y notas de voz, alarmas en el móvil, interrumpir, pantalla del móvil, mandos de reproducción, pasar fotos y archivos, llamadas y SMS, envío de correo, y el uso en la calle.</li>
+<li>El botón del reloj: falta que una aplicación de automatización del móvil capture el botón y llame a la puerta local del cliente.</li>
+<li>Un servidor siempre encendido.</li>
+<li>Funciones apuntadas como pendientes en la pestaña de tareas: contestar correos, buscar fotos por lo que se ve, decir dónde está el móvil, cerrar programas y escribir en el ordenador lo dictado.</li>
+<li>Reconocer quién habla. La idea es entrenar un reconocedor con las grabaciones ya valoradas.</li>
+<li>Poner al día <code>LEEME.md</code>, que empieza describiendo la primera versión, y partir <code>servidor.py</code>, que ha crecido mucho.</li>
+</ol>
+<h3 id="r-c-mo-se-depura">Cómo se depura</h3>
+<ol>
+<li>Leer <code>modelos\jarvis.log</code>: dice los tiempos de cada orden y qué IA contestó.</li>
+<li>Leer <code>modelos\diagnostico\registro.txt</code>: es el registro que sube el móvil, con activaciones, falsos y tiempos.</li>
+<li>Si falla el oído, mirar <code>modelos\fallos_de_oido</code> y medir con esos audios antes de cambiar nada.</li>
+<li>Si el dueño dice «mira el informe», leer <code>modelos\informe_no_sabe.md</code>.</li>
+<li>Si el móvil no conecta, comprobar primero qué versión del cliente lleva.</li>
+</ol>
+<h3 id="r-cosas-t-cnicas-que-cost-averiguar">Cosas técnicas que costó averiguar</h3>
+<ul>
+<li>El detector general de la palabra falla con acento castellano. Por eso hay un modelo propio de la voz del dueño.</li>
+<li>En Termux no entra el paquete del detector; se usan sus modelos directamente con numpy y onnxruntime.</li>
+<li>El reconocedor de voz escribe mejor la orden si se le corta antes el «hey Jarvis» y se le pasa sin pista.</li>
+<li>Los servicios gratuitos cambian: unos piden tarjeta, otros se saturan. <code>catalogo.py</code> pregunta a cada uno qué modelos tiene de verdad.</li>
+<li>Para saber si una IA va rápida vale más el tiempo de las preguntas reales que una sonda mínima.</li>
+<li>Termux no recibe los botones multimedia del reloj. De ahí la puerta local para una aplicación de automatización.</li>
+<li>El móvil solo conecta al dar una orden, así que pregunta cada pocos segundos si hay avisos o alarmas vencidas.</li>
+<li>No hay ffmpeg en el ordenador: las notas de voz se convierten con otra biblioteca de Python.</li>
+<li>El buscador solo contesta bien con una identificación de navegador sencilla.</li>
+</ul>
+</section>
+<section id="lecciones" aria-labelledby="t-lecciones">
+<h2 id="t-lecciones">Lecciones aprendidas</h2>
+<ul><li>Las IA gratuitas tienen topes por minuto y por día. Unas instrucciones largas los agotan enseguida: hay que medir los tokens antes de engordarlas.</li><li>Un modelo pequeño de reserva inventa órdenes y datos. Solo se le deja conversar.</li><li>Las IA gratuitas fallan con tablas de números. Las cuentas se hacen en el programa y a la IA se le da la cifra ya hecha.</li><li>No endurecer la activación a ciegas. Antes de tocar un umbral, mirar el registro real del móvil.</li><li>Una comprobación nueva que puede dejar callado a Jarvis hay que vigilarla en el registro el mismo día.</li><li>Dar al reconocedor de voz una pista con la palabra esperada hace que la escriba aunque no se haya dicho.</li><li>Un pitido de aviso se cuela por el micrófono y cuenta como voz. Hace falta un detector de voz humana.</li><li>En la memoria de la conversación se guarda la orden que dio la IA, no el «hecho» que dice el sistema; si no, la siguiente IA imita el «hecho» sin dar la orden.</li><li>Las pruebas con IA de verdad gastan el cupo del día. Mejor funciones sueltas y servicios de mentira, y las conversaciones completas, las justas.</li><li>Cuando «va lento», la causa puede estar fuera del programa: el ordenador se suspendía y perdía la red.</li><li>Para un tema nuevo funciona añadir una fuente de datos ordenados, no afinar la búsqueda en la web.</li><li>Al texto de los mensajes ajenos no se le deja llegar a la IA que da las órdenes, para que un mensaje no pueda mandar.</li></ul>
+</section>
+<section id="diario" aria-labelledby="t-diario">
+<h2 id="t-diario">Diario</h2>
+<ol class="diario"><li><time datetime="2026-11-25">25 de noviembre de 2026</time><p>El código se guarda en git y se sube a un repositorio privado de GitHub. Se crea esta ficha.</p></li><li><time datetime="2026-11-20">20 de noviembre de 2026</time><p>Archivos de todo el ordenador, con papelera propia y deshacer. Pestaña de tareas en el panel. Conversiones y PDF, copias de seguridad, informes, lectura del correo, alarmas repetidas, más control del ordenador, llamadas y SMS. Probado con casa, correo y teléfono de mentira.</p></li><li><time datetime="2026-11-18">18 de noviembre de 2026</time><p>El ordenador pasa a tener más memoria y el servidor elige solo el modelo local y el reconocedor local que le caben.</p></li><li><time datetime="2026-11-17">17 de noviembre de 2026</time><p>WhatsApp completo: leer, resumir y buscar. Selector que elige la IA más rentable y pulso de rapidez. Panel rehecho con pestañas, conversación por escrito y valoraciones. Datos en vivo e investigador en Internet. Tailscale para usarlo fuera de casa. Manejar el móvil: «abre YouTube» y «pon tal cosa en YouTube» funcionan en el móvil real. Primer lote de funciones entre móvil y ordenador.</p></li><li><time datetime="2026-11-16">16 de noviembre de 2026</time><p>Nace el proyecto y en un día llega lejos. Voz de ida y vuelta comprobada en el móvil real. Fila de IA gratuitas con relevo. Modelo de la voz del dueño, porque el detector general falla con acento castellano. WhatsApp, correo, carpeta compartida, lectura de archivos, memoria personal, Internet, alarmas, panel de cupos y propuestas de mejora escritas por el propio Jarvis. Se arreglan las activaciones falsas con una segunda comprobación en el servidor.</p></li></ol>
+</section>
+<section id="claude" aria-labelledby="t-claude">
+<h2 id="t-claude">Texto para retomarlo con Claude</h2>
+<p>Pega este texto al empezar una sesión y Claude se pone al día.</p><pre id="texto-claude" tabindex="0">Vamos a retomar el proyecto jarvis, un asistente de voz con el cliente en un móvil Android (Termux) y el servidor en el ordenador. Antes de tocar nada, lee LEEME.md del proyecto y la memoria para retomar de su ficha en la web de proyectos. Después mira el final de modelos\jarvis.log y de modelos\diagnostico\registro.txt para ver qué pasó la última vez. Dime en pocas líneas en qué punto estamos y cuál es el siguiente paso, y espera mi visto bueno. Normas: Jarvis no inventa; todo gratuito; lo delicado se confirma de viva voz; las pruebas, con servicios de mentira y en otro puerto, sin tocar mi sesión real de WhatsApp, mi buzón, mis carpetas ni mi ordenador; y gastar pocos tokens de las IA.</pre><button type="button" class="boton" data-copiar="texto-claude">Copiar el texto</button><span class="nota" role="status" aria-live="polite" id="copiado"></span>
+</section>
+</main>
+<footer class="pie">
+<p>Proyectos. Página actualizada el 25 de noviembre de 2026.</p>
+</footer>
+<script src="../app.js"></script>
+</body>
+</html>
