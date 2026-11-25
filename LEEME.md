@@ -9,6 +9,15 @@ Cada proyecto es una carpeta dentro de `fichas`, con dos archivos que se escribe
 - `ficha.json`: nombre, estado, avance, etapas, lo hecho, lo pendiente, diario y lecciones.
 - `retomar.md`: la memoria larga para ponerse al día.
 
+Dos cosas más, opcionales, hacen la página de cada proyecto más vistosa:
+
+- `portada.svg` (o `.jpg`, `.png`, `.webp`) dentro de la carpeta de la ficha: la imagen del proyecto, apaisada, de 1200 por 675. Si falta, `generar.py` dibuja una sencilla.
+- En `ficha.json`, `"color"` (el color del proyecto, como `"#5eead4"`) y `"esquema"`, el dibujo de la estructura del programa:
+  - `"grupos"`: cajas con nombre. Cada una lleva `"columna"` (1, 2, 3… de izquierda a derecha; dos grupos con la misma columna se apilan) y sus `"elementos"`, cada uno con `"id"`, `"nombre"`, `"detalle"` y, si se quiere resaltar, `"destacado": true`. Nombres y detalles cortos, de unas 25 letras.
+  - `"conexiones"`: flechas, con `"de"` y `"a"` (los `id`), y opcionales `"texto"`, `"fuerte": true` (línea de trazos de color) y `"doble": true` (flecha en los dos sentidos). Quedan mejor entre columnas vecinas.
+
+El aspecto de portfolio (titular, presentación, «cómo trabajo») sale de `config.json`.
+
 `generar.py` lee las fichas y escribe la web: `index.html` y una página por proyecto en la carpeta `p`.
 
 ## Órdenes

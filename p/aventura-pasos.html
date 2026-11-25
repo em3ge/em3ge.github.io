@@ -5,42 +5,60 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aventura paso a paso · Proyectos</title>
 <meta name="description" content="Un programa que resuelve solo cualquier aventura gráfica de ScummVM a partir de sus guías, aprendiendo cada juego sobre la marcha.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap">
 <link rel="stylesheet" href="../estilo.css">
 </head>
-<body>
+<body style="--color:#fbbf24">
 <a class="saltar" href="#contenido">Saltar al contenido</a>
-<header class="cabecera cabecera-proyecto">
-<div class="ancho">
-<p class="miga"><a href="../index.html">← Todos los proyectos</a></p>
+<header class="barra">
+<div class="ancho barra-dentro">
+<a class="marca" href="../index.html">em3ge<span aria-hidden="true">_</span></a>
+<nav aria-label="Principal">
+<a href="../index.html#proyectos">Proyectos</a>
+<a href="../index.html#oficio">Cómo trabajo</a>
+<a href="../index.html#tecnologias">Tecnologías</a>
+<a class="barra-gh" href="https://github.com/em3ge">GitHub</a>
+</nav>
+</div>
+</header>
+<main id="contenido" class="proyecto" data-fecha="2026-11-25">
+<section class="heroe heroe-proyecto" aria-labelledby="t-proyecto">
+<div class="ancho heroe-dos">
+<div>
+<p class="miga"><a href="../index.html#proyectos">← Todos los proyectos</a></p>
 <div class="tarjeta-cabeza">
-<h1>Aventura paso a paso</h1>
+<h1 id="t-proyecto">Aventura paso a paso</h1>
 <span class="estado estado-activo">Activo</span>
 </div>
 <p class="presentacion">Un programa que resuelve solo cualquier aventura gráfica de ScummVM a partir de sus guías, aprendiendo cada juego sobre la marcha.</p>
-</div>
-</header>
-<main id="contenido" class="ancho proyecto" data-fecha="2026-11-25">
-<section aria-labelledby="t-ficha" class="ficha">
-<h2 id="t-ficha" class="oculto">Ficha</h2>
 <div class="avance"><div class="avance-riel" role="img" aria-label="Avance: 55 por ciento"><div class="avance-lleno" style="width:55%"></div></div><span class="avance-num" aria-hidden="true">55 %</span></div>
 <p class="nota">Estimación. Etapa 1 terminada; etapa 2 en el paso 86 de 132 de la guía del juego de prueba.</p>
+<ul class="tecnologias" aria-label="Tecnologías"><li>Python</li><li>ScummVM</li><li>Tkinter</li><li>OpenCV</li><li>Gemini</li><li>Windows</li></ul>
+<div class="botones"><a class="boton" href="https://github.com/em3ge/aventura-pasos">Ver el código</a><a class="boton boton-claro" href="https://github.com/em3ge/aventura-pasos/archive/refs/heads/main.zip">Descargar en zip</a></div><p class="nota">El código es privado: GitHub pedirá iniciar sesión con una cuenta que tenga permiso.</p>
+</div>
+<figure class="foto"><img src="portadas/aventura-pasos.svg" alt="Ilustración del proyecto Aventura paso a paso" width="1200" height="675"></figure>
+</div>
+</section>
+<div class="ancho">
 <dl class="datos datos-ficha">
-<div><dt>Estado</dt><dd>Activo</dd></div>
 <div><dt>Etapa</dt><dd>Etapa 2: seguir la guía y avanzar en el juego</dd></div>
 <div><dt>Empezó</dt><dd>20 de noviembre de 2026</dd></div>
 <div><dt>Último movimiento</dt><dd>25 de noviembre de 2026</dd></div>
 <div><dt>Tamaño</dt><dd>9.504 líneas en 26 archivos de código</dd></div>
 <div><dt>Cambios guardados en git</dt><dd>1</dd></div>
-<div><dt>Tecnologías</dt><dd>Python, ScummVM, Tkinter, OpenCV, Gemini, Windows</dd></div>
 </dl>
-<div class="botones"><a class="boton" href="https://github.com/em3ge/aventura-pasos">Ver el código</a><a class="boton boton-claro" href="https://github.com/em3ge/aventura-pasos/archive/refs/heads/main.zip">Descargar en zip</a></div><p class="nota">El código es privado: GitHub pedirá iniciar sesión con una cuenta que tenga permiso.</p>
-</section>
-<nav class="indice" aria-label="Apartados de esta página"><ul><li><a href="#corto">En corto</a></li><li><a href="#siguiente">Siguiente paso</a></li><li><a href="#etapas">Etapas</a></li><li><a href="#pendiente">Qué falta</a></li><li><a href="#hecho">Qué hay hecho</a></li><li><a href="#retomar">Memoria para retomar</a></li><li><a href="#lecciones">Lecciones aprendidas</a></li><li><a href="#diario">Diario</a></li><li><a href="#relacionados">Proyectos relacionados</a></li><li><a href="#claude">Texto para retomarlo con Claude</a></li></ul></nav>
-<section id="corto" aria-labelledby="t-corto">
+<nav class="indice" aria-label="Apartados de esta página"><ul><li><a href="#corto">En corto</a></li><li><a href="#esquema">Cómo está hecho</a></li><li><a href="#siguiente">Siguiente paso</a></li><li><a href="#etapas">Etapas</a></li><li><a href="#hecho">Qué hay hecho</a></li><li><a href="#pendiente">Qué falta</a></li><li><a href="#lecciones">Lecciones aprendidas</a></li><li><a href="#diario">Diario</a></li><li><a href="#retomar">Memoria para retomar</a></li><li><a href="#relacionados">Proyectos relacionados</a></li><li><a href="#claude">Texto para retomarlo con Claude</a></li></ul></nav>
+<section id="corto" aria-labelledby="t-corto" class="texto">
 <h2 id="t-corto">En corto</h2>
 <p>Un programa en Python que maneja ScummVM y resuelve solo cualquier aventura gráfica clásica de las que ScummVM puede abrir, siempre que tenga las guías del juego. Primero explora el mapa andando, sala por sala. Después sigue una guía del juego paso a paso: va a la sala, teclea la orden, lee lo que el juego contesta y comprueba por los puntos si de verdad salió.</p><p>La norma del proyecto es que todo sea genérico: no lleva nada escrito a mano para un juego concreto. Cuando aparece una mecánica nueva, el programa la aprende y la apunta. Cada atasco se trata como una clase de problema, no como un caso suelto.</p><p>El juego de prueba es Leisure Suit Larry 3, y por eso la única pieza de enlace escrita hasta hoy es la del motor de ese juego. El resto del programa no depende de él. Hoy lleva 34 salas en el mapa, 1587 puntos y va por el paso 86 de los 132 de la guía, al empezar la parte de Patti.</p>
 </section>
-<section id="siguiente" aria-labelledby="t-siguiente">
+<section id="esquema" aria-labelledby="t-esquema">
+<h2 id="t-esquema">Cómo está hecho</h2>
+<p>El jugador sigue el plan sacado de la guía. Para cada paso pide moverse por el juego, y todo lo que toca al juego pasa por una sola pieza de enlace con ScummVM. La línea de trazos es el camino de una orden hasta el juego.</p><div class="esq-marco" tabindex="0" role="group" aria-label="Esquema. Se puede desplazar a los lados."><svg class="esq" viewBox="0 0 1564 542" style="min-width:970px" role="img" aria-label="Estructura de Aventura paso a paso: del jugador al motor del juego. Debajo está el mismo esquema en texto."><defs><marker id="punta-aventurapasos" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="esq-punta" d="M0 1 L10 5 L0 9 z"/></marker><marker id="punta-aventurapasos-f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="esq-punta fuerte" d="M0 1 L10 5 L0 9 z"/></marker></defs><g class="esq-grupo"><rect x="18" y="184" width="232" height="174" rx="16"/><text x="34" y="207">Tú</text></g><g class="esq-grupo"><rect x="342" y="116" width="232" height="310" rx="16"/><text x="358" y="139">El jugador</text></g><g class="esq-grupo"><rect x="666" y="18" width="232" height="310" rx="16"/><text x="682" y="41">Moverse por el juego</text></g><g class="esq-grupo"><rect x="666" y="350" width="232" height="174" rx="16"/><text x="682" y="373">Saber</text></g><g class="esq-grupo"><rect x="990" y="52" width="232" height="242" rx="16"/><text x="1006" y="75">Enlace con el motor</text></g><g class="esq-grupo"><rect x="990" y="316" width="232" height="174" rx="16"/><text x="1006" y="339">Fuera</text></g><g class="esq-grupo"><rect x="1314" y="218" width="232" height="106" rx="16"/><text x="1330" y="241">El juego</text></g><path class="esq-linea" d="M236 248 C296 248 296 180 356 180" marker-end="url(#punta-aventurapasos)"/><path class="esq-linea" d="M236 316 C296 316 296 180 356 180" marker-end="url(#punta-aventurapasos)"/><path class="esq-linea" d="M458 208 L458 220" marker-end="url(#punta-aventurapasos)"/><path class="esq-linea fuerte" d="M560 180 C620 180 620 82 680 82" marker-end="url(#punta-aventurapasos-f)"/><path class="esq-linea" d="M560 180 C620 180 620 286 680 286" marker-end="url(#punta-aventurapasos)"/><path class="esq-linea" d="M782 110 L782 122" marker-end="url(#punta-aventurapasos)"/><path class="esq-linea" d="M560 248 C620 248 620 414 680 414" marker-end="url(#punta-aventurapasos)"/><path class="esq-linea" d="M560 248 C620 248 620 482 680 482" marker-end="url(#punta-aventurapasos)"/><path class="esq-linea" d="M560 384 C620 384 620 482 680 482" marker-end="url(#punta-aventurapasos)"/><path class="esq-linea fuerte" d="M884 82 C944 82 944 116 1004 116" marker-end="url(#punta-aventurapasos-f)"/><path class="esq-linea" d="M884 286 C944 286 944 116 1004 116" marker-end="url(#punta-aventurapasos)"/><path class="esq-linea fuerte" d="M1106 144 L1106 156" marker-end="url(#punta-aventurapasos-f)"/><path class="esq-linea fuerte" d="M1208 184 C1268 184 1268 282 1328 282" marker-end="url(#punta-aventurapasos-f)"/><path class="esq-linea" d="M1208 252 C1268 252 1268 282 1328 282" marker-end="url(#punta-aventurapasos)"/><path class="esq-linea" d="M884 414 C944 414 944 380 1004 380" marker-end="url(#punta-aventurapasos)"/><path class="esq-linea" d="M884 482 C944 482 944 448 1004 448" marker-end="url(#punta-aventurapasos)"/><g class="esq-nodo"><rect x="32" y="220" width="204" height="56" rx="11"/><text class="esq-nombre" x="46" y="244">interfaz.py</text><text class="esq-detalle" x="46" y="262">Ventana con el juego dentro</text></g><g class="esq-nodo"><rect x="32" y="288" width="204" height="56" rx="11"/><text class="esq-nombre" x="46" y="312">aventura.py</text><text class="esq-detalle" x="46" y="330">Las órdenes</text></g><g class="esq-nodo destacado"><rect x="356" y="152" width="204" height="56" rx="11"/><text class="esq-nombre" x="370" y="176">jugar.py</text><text class="esq-detalle" x="370" y="194">Sigue la guía paso a paso</text></g><g class="esq-nodo"><rect x="356" y="220" width="204" height="56" rx="11"/><text class="esq-nombre" x="370" y="244">plan.py</text><text class="esq-detalle" x="370" y="262">La guía, convertida en pasos</text></g><g class="esq-nodo"><rect x="356" y="288" width="204" height="56" rx="11"/><text class="esq-nombre" x="370" y="312">mecanica.py</text><text class="esq-detalle" x="370" y="330">Aprende mecánicas nuevas</text></g><g class="esq-nodo"><rect x="356" y="356" width="204" height="56" rx="11"/><text class="esq-nombre" x="370" y="380">rumbo.py</text><text class="esq-detalle" x="370" y="398">Revisa el rumbo y repesca</text></g><g class="esq-nodo"><rect x="680" y="54" width="204" height="56" rx="11"/><text class="esq-nombre" x="694" y="78">viaje.py</text><text class="esq-detalle" x="694" y="96">Andar, cruzar y explorar</text></g><g class="esq-nodo"><rect x="680" y="122" width="204" height="56" rx="11"/><text class="esq-nombre" x="694" y="146">mapa.py</text><text class="esq-detalle" x="694" y="164">El mapa y su dibujo</text></g><g class="esq-nodo"><rect x="680" y="190" width="204" height="56" rx="11"/><text class="esq-nombre" x="694" y="214">terreno.py</text><text class="esq-detalle" x="694" y="232">Por dónde se pisa</text></g><g class="esq-nodo"><rect x="680" y="258" width="204" height="56" rx="11"/><text class="esq-nombre" x="694" y="282">partida.py</text><text class="esq-detalle" x="694" y="300">No atascarse y guardar</text></g><g class="esq-nodo"><rect x="680" y="386" width="204" height="56" rx="11"/><text class="esq-nombre" x="694" y="410">guias.py · lugares.py</text><text class="esq-detalle" x="694" y="428">Bajan las guías y las casan</text></g><g class="esq-nodo"><rect x="680" y="454" width="204" height="56" rx="11"/><text class="esq-nombre" x="694" y="478">ia.py</text><text class="esq-detalle" x="694" y="496">Pregunta a la IA</text></g><g class="esq-nodo"><rect x="1004" y="88" width="204" height="56" rx="11"/><text class="esq-nombre" x="1018" y="112">enlace.py</text><text class="esq-detalle" x="1018" y="130">Habla con ScummVM</text></g><g class="esq-nodo"><rect x="1004" y="156" width="204" height="56" rx="11"/><text class="esq-nombre" x="1018" y="180">sci.py</text><text class="esq-detalle" x="1018" y="198">El motor de Sierra</text></g><g class="esq-nodo"><rect x="1004" y="224" width="204" height="56" rx="11"/><text class="esq-nombre" x="1018" y="248">memoria.py</text><text class="esq-detalle" x="1018" y="266">Lee la memoria del juego</text></g><g class="esq-nodo"><rect x="1004" y="352" width="204" height="56" rx="11"/><text class="esq-nombre" x="1018" y="376">Guías en Internet</text><text class="esq-detalle" x="1018" y="394">Soluciones del juego</text></g><g class="esq-nodo"><rect x="1004" y="420" width="204" height="56" rx="11"/><text class="esq-nombre" x="1018" y="444">Gemini</text><text class="esq-detalle" x="1018" y="462">U OpenAI u Ollama, si los hay</text></g><g class="esq-nodo destacado"><rect x="1328" y="254" width="204" height="56" rx="11"/><text class="esq-nombre" x="1342" y="278">ScummVM</text><text class="esq-detalle" x="1342" y="296">La aventura en marcha</text></g><text class="esq-rotulo fuerte" x="620" y="124" text-anchor="middle">ir a la sala</text><text class="esq-rotulo" x="620" y="426" text-anchor="middle">emergencia</text><text class="esq-rotulo fuerte" x="1268" y="226" text-anchor="middle">depurador</text><text class="esq-rotulo" x="1268" y="260" text-anchor="middle">solo lee</text></svg></div><details class="plegable"><summary>Leer el esquema como texto</summary><h3>Elementos</h3><ul><li><strong>Tú.</strong> interfaz.py: Ventana con el juego dentro; aventura.py: Las órdenes.</li><li><strong>El jugador.</strong> jugar.py: Sigue la guía paso a paso; plan.py: La guía, convertida en pasos; mecanica.py: Aprende mecánicas nuevas; rumbo.py: Revisa el rumbo y repesca.</li><li><strong>Moverse por el juego.</strong> viaje.py: Andar, cruzar y explorar; mapa.py: El mapa y su dibujo; terreno.py: Por dónde se pisa; partida.py: No atascarse y guardar.</li><li><strong>Saber.</strong> guias.py · lugares.py: Bajan las guías y las casan; ia.py: Pregunta a la IA.</li><li><strong>Enlace con el motor.</strong> enlace.py: Habla con ScummVM; sci.py: El motor de Sierra; memoria.py: Lee la memoria del juego.</li><li><strong>Fuera.</strong> Guías en Internet: Soluciones del juego; Gemini: U OpenAI u Ollama, si los hay.</li><li><strong>El juego.</strong> ScummVM: La aventura en marcha.</li></ul><h3>Conexiones</h3><ul><li>interfaz.py → jugar.py</li><li>aventura.py → jugar.py</li><li>jugar.py → plan.py</li><li>jugar.py → viaje.py: ir a la sala</li><li>jugar.py → partida.py</li><li>viaje.py → mapa.py</li><li>plan.py → guias.py · lugares.py</li><li>plan.py → ia.py</li><li>rumbo.py → ia.py: emergencia</li><li>viaje.py → enlace.py</li><li>partida.py → enlace.py</li><li>enlace.py → sci.py</li><li>sci.py → ScummVM: depurador</li><li>memoria.py → ScummVM: solo lee</li><li>guias.py · lugares.py → Guías en Internet</li><li>ia.py → Gemini</li></ul></details>
+</section>
+<section id="siguiente" aria-labelledby="t-siguiente" class="texto">
 <h2 id="t-siguiente">Siguiente paso</h2>
 <p class="destacado">Sacar adelante la parte de Patti (pasos 86 en adelante) y cerrar los pasos que quedaron pendientes en el hotel: el 79 y los del estudio de aeróbic (66 a 68).</p>
 </section>
@@ -48,17 +66,25 @@
 <h2 id="t-etapas">Etapas</h2>
 <ol class="etapas"><li class="etapa etapa-hecha"><span class="etapa-estado">Hecha</span><div><strong>Etapa 1: mapa, movimiento y no atascarse</strong><p>Explora andando, dibuja el mapa con miniaturas, guarda puntos seguros y no se queda parado ante carteles ni protecciones de copia.</p></div></li><li class="etapa etapa-en-curso"><span class="etapa-estado">En curso</span><div><strong>Etapa 2: seguir la guía y avanzar</strong><p>Paso 86 de 132. 1587 puntos. Aprende mecánicas, revisa el rumbo cada diez minutos y pide ayuda a una IA más potente si lleva mucho rato sin avanzar.</p></div></li><li class="etapa etapa-pendiente"><span class="etapa-estado">Pendiente</span><div><strong>Etapa 3: terminar el juego de prueba</strong><p>Llegar al final de Larry 3 sin ayuda.</p></div></li><li class="etapa etapa-pendiente"><span class="etapa-estado">Pendiente</span><div><strong>Etapa 4: probarlo con otro juego</strong><p>Comprobar que de verdad es genérico con una aventura distinta, y después con juegos de otros motores de ScummVM.</p></div></li></ol>
 </section>
-<section id="pendiente" aria-labelledby="t-pendiente">
-<h2 id="t-pendiente">Qué falta</h2>
-<ul><li>Parte de Patti: pasos 86 a 132.</li><li>Paso 79 (salir del hotel) y pasos 66 a 68 (estudio de aeróbic, 99 puntos): no aparece el personaje que la guía espera.</li><li>Las órdenes del ascensor y de la cerradura dan por bueno lo que no lo es.</li><li>Tras lograr un paso sentado, el siguiente se teclea sin levantarse.</li><li>La sala a la que se entra tecleando una orden aún gasta cinco minutos buscando puertas.</li><li>El aviso de «llevas cinco minutos sin guardar» estorba cada poco.</li><li>El juego se cerró una vez sin causa conocida.</li><li>Los modelos potentes gratuitos de Gemini suelen estar sin cupo: valorar uno de pago o uno local con Ollama.</li></ul>
-</section>
 <section id="hecho" aria-labelledby="t-hecho">
 <h2 id="t-hecho">Qué hay hecho</h2>
-<ul><li>Enlace con ScummVM por su depurador y lectura directa de la memoria del juego.</li><li>Exploración del mapa solo andando, con mapa dibujado y leyenda.</li><li>Puntos seguros: solo se guarda partida donde consta que se llegó andando.</li><li>Plan sacado de la guía por la IA: 132 pasos con sala, orden y puntos.</li><li>Aprendizaje genérico de mecánicas: minijuegos de teclas, estados como estar sentado, puertas, carteles que piden escribir.</li><li>Modo rápido, atajos dentro de la sala y saltos entre salas ya andadas.</li><li>Revisión periódica del rumbo e IA de emergencia.</li><li>Ventana con pestañas: guía, mapa, registro y ajustes.</li><li>Vídeos cómicos de las muertes del personaje.</li><li>Diario escrito de todo lo que hace el programa, para depurar después.</li></ul>
+<ul class="marcas hechas"><li>Enlace con ScummVM por su depurador y lectura directa de la memoria del juego.</li><li>Exploración del mapa solo andando, con mapa dibujado y leyenda.</li><li>Puntos seguros: solo se guarda partida donde consta que se llegó andando.</li><li>Plan sacado de la guía por la IA: 132 pasos con sala, orden y puntos.</li><li>Aprendizaje genérico de mecánicas: minijuegos de teclas, estados como estar sentado, puertas, carteles que piden escribir.</li><li>Modo rápido, atajos dentro de la sala y saltos entre salas ya andadas.</li><li>Revisión periódica del rumbo e IA de emergencia.</li><li>Ventana con pestañas: guía, mapa, registro y ajustes.</li><li>Vídeos cómicos de las muertes del personaje.</li><li>Diario escrito de todo lo que hace el programa, para depurar después.</li></ul>
 </section>
-<section id="retomar" aria-labelledby="t-retomar">
+<section id="pendiente" aria-labelledby="t-pendiente">
+<h2 id="t-pendiente">Qué falta</h2>
+<ul class="marcas faltan"><li>Parte de Patti: pasos 86 a 132.</li><li>Paso 79 (salir del hotel) y pasos 66 a 68 (estudio de aeróbic, 99 puntos): no aparece el personaje que la guía espera.</li><li>Las órdenes del ascensor y de la cerradura dan por bueno lo que no lo es.</li><li>Tras lograr un paso sentado, el siguiente se teclea sin levantarse.</li><li>La sala a la que se entra tecleando una orden aún gasta cinco minutos buscando puertas.</li><li>El aviso de «llevas cinco minutos sin guardar» estorba cada poco.</li><li>El juego se cerró una vez sin causa conocida.</li><li>Los modelos potentes gratuitos de Gemini suelen estar sin cupo: valorar uno de pago o uno local con Ollama.</li></ul>
+</section>
+<section id="lecciones" aria-labelledby="t-lecciones">
+<h2 id="t-lecciones">Lecciones aprendidas</h2>
+<ul class="lecciones"><li>Intentar resolver el juego entero de golpe no funciona. Dos intentos anteriores se estancaron así. Funciona ir por etapas y no abrir la siguiente hasta que la anterior convence.</li><li>Los puntos son la única señal fiable de avance. Si la guía dice que un paso da puntos y no suben, no está hecho, diga lo que diga la IA.</li><li>Una IA ligera da pasos por hechos sin estarlo. Solo propone; las reglas del programa deciden.</li><li>Todo fallo tiene que contar como intento, o se repite sin fin. Llegó a probar 125 veces la misma salida.</li><li>Con el juego acelerado sus relojes también corren y las cosas caducan. Las escenas con prisa se juegan a velocidad real.</li><li>A veces el juego niega un paso y la razón que da no es la causa. Pasar por otras salas lo endereza.</li><li>Ante un atasco, ordenar las acciones de lo barato a lo caro antes de añadir reglas nuevas.</li><li>Las pruebas largas cansan y enseñan poco. Mejor pruebas de pocos minutos y pocos pasos, sobre una copia de la partida.</li></ul>
+</section>
+<section id="diario" aria-labelledby="t-diario">
+<h2 id="t-diario">Diario</h2>
+<ol class="diario"><li><time datetime="2026-11-24">24 de noviembre de 2026</time><p>IA de emergencia. Se resuelve el atasco del bar, que tenía cuatro causas generales. 1587 puntos. El programa deja de repetir pasos sin sentido: memoria de intentos, salas cerradas y rehacer el tramo más antiguo. Paso 86 de 132.</p></li><li><time datetime="2026-11-23">23 de noviembre de 2026</time><p>1382 puntos y paso 72. Aprendizaje genérico de mecánicas, que resuelve los aparatos del gimnasio. Modo rápido, atajos y saltos legales entre salas. Ventana rehecha con pestañas. Revisión de rumbo cada diez minutos.</p></li><li><time datetime="2026-11-22">22 de noviembre de 2026</time><p>Se descubre que parte del mapa se había explorado cargando una partida y no andando. Regla firme desde entonces: una partida guardada nunca se usa para viajar. Mapa limpio de 22 salas. Leer la memoria del juego hace los cruces cuatro veces más rápidos. Primeros vídeos de muertes. Se abre la etapa 2: 24 puntos en los ocho primeros pasos.</p></li><li><time datetime="2026-11-20">20 de noviembre de 2026</time><p>Arranca el proyecto desde cero, con la idea de ir en pasos cortos y firmes. Primera exploración: ocho salas andando. Primera ventana. El juego se acelera desde el depurador y un cruce de sala baja de veinte segundos a dos.</p></li></ol>
+</section>
+<section id="retomar" aria-labelledby="t-retomar" class="texto">
 <h2 id="t-retomar">Memoria para retomar</h2>
-<h3 id="r-qu-es-y-qu-se-busca">Qué es y qué se busca</h3>
+<p class="nota">El cuaderno técnico del proyecto: lo necesario para ponerse al día y seguir.</p><details class="plegable cuaderno"><summary>Abrir la memoria para retomar</summary><h3 id="r-qu-es-y-qu-se-busca">Qué es y qué se busca</h3>
 <p>Un programa que resuelve solo aventuras gráficas clásicas dentro de ScummVM. La meta no es acabar un juego concreto ni los de una sola casa, sino tener un jugador que sirva para cualquier aventura de ese estilo que ScummVM pueda abrir, con tal de tener las guías del juego: explora, lee las guías, las sigue y aprende las mecánicas por su cuenta.</p>
 <p>Hoy se prueba con un juego de Sierra, y la única pieza de enlace con un motor que hay escrita es la de ese motor (<code>nucleo/sci.py</code>). Para juegos de otros motores hará falta una pieza equivalente; el resto del programa no debe cambiar.</p>
 <p>Se resuelve de forma orgánica: explorar el mapa, avanzar en el juego, volver a explorar cuando haga falta, y así hasta el final.</p>
@@ -128,27 +154,22 @@
 <li>Dentro de una misma sala el juego puede cambiar qué colores del suelo están prohibidos. Hay un terreno por cada caso.</li>
 <li>Minimizar la ventana dejaba ciego al programa, que mira la imagen. Ahora el juego se suelta y queda debajo.</li>
 <li>La clave gratuita de Gemini da unas veinte consultas al día por modelo en los grandes. Se reparte entre varios.</li>
-</ul>
+</ul></details>
 </section>
-<section id="lecciones" aria-labelledby="t-lecciones">
-<h2 id="t-lecciones">Lecciones aprendidas</h2>
-<ul><li>Intentar resolver el juego entero de golpe no funciona. Dos intentos anteriores se estancaron así. Funciona ir por etapas y no abrir la siguiente hasta que la anterior convence.</li><li>Los puntos son la única señal fiable de avance. Si la guía dice que un paso da puntos y no suben, no está hecho, diga lo que diga la IA.</li><li>Una IA ligera da pasos por hechos sin estarlo. Solo propone; las reglas del programa deciden.</li><li>Todo fallo tiene que contar como intento, o se repite sin fin. Llegó a probar 125 veces la misma salida.</li><li>Con el juego acelerado sus relojes también corren y las cosas caducan. Las escenas con prisa se juegan a velocidad real.</li><li>A veces el juego niega un paso y la razón que da no es la causa. Pasar por otras salas lo endereza.</li><li>Ante un atasco, ordenar las acciones de lo barato a lo caro antes de añadir reglas nuevas.</li><li>Las pruebas largas cansan y enseñan poco. Mejor pruebas de pocos minutos y pocos pasos, sobre una copia de la partida.</li></ul>
-</section>
-<section id="diario" aria-labelledby="t-diario">
-<h2 id="t-diario">Diario</h2>
-<ol class="diario"><li><time datetime="2026-11-24">24 de noviembre de 2026</time><p>IA de emergencia. Se resuelve el atasco del bar, que tenía cuatro causas generales. 1587 puntos. El programa deja de repetir pasos sin sentido: memoria de intentos, salas cerradas y rehacer el tramo más antiguo. Paso 86 de 132.</p></li><li><time datetime="2026-11-23">23 de noviembre de 2026</time><p>1382 puntos y paso 72. Aprendizaje genérico de mecánicas, que resuelve los aparatos del gimnasio. Modo rápido, atajos y saltos legales entre salas. Ventana rehecha con pestañas. Revisión de rumbo cada diez minutos.</p></li><li><time datetime="2026-11-22">22 de noviembre de 2026</time><p>Se descubre que parte del mapa se había explorado cargando una partida y no andando. Regla firme desde entonces: una partida guardada nunca se usa para viajar. Mapa limpio de 22 salas. Leer la memoria del juego hace los cruces cuatro veces más rápidos. Primeros vídeos de muertes. Se abre la etapa 2: 24 puntos en los ocho primeros pasos.</p></li><li><time datetime="2026-11-20">20 de noviembre de 2026</time><p>Arranca el proyecto desde cero, con la idea de ir en pasos cortos y firmes. Primera exploración: ocho salas andando. Primera ventana. El juego se acelera desde el depurador y un cruce de sala baja de veinte segundos a dos.</p></li></ol>
-</section>
-<section id="relacionados" aria-labelledby="t-relacionados">
+<section id="relacionados" aria-labelledby="t-relacionados" class="texto">
 <h2 id="t-relacionados">Proyectos relacionados</h2>
 <ul><li><strong>Dos intentos anteriores, abandonados.</strong> Este proyecto los sustituye. No se reutilizó su código, solo el aspecto de la ventana.</li></ul>
 </section>
-<section id="claude" aria-labelledby="t-claude">
+<section id="claude" aria-labelledby="t-claude" class="texto">
 <h2 id="t-claude">Texto para retomarlo con Claude</h2>
 <p>Pega este texto al empezar una sesión y Claude se pone al día.</p><pre id="texto-claude" tabindex="0">Vamos a retomar el proyecto aventura-pasos. Antes de tocar nada, lee el README del proyecto y la memoria para retomar de su ficha en la web de proyectos. Después lee el final de datos\diario.txt para ver qué hizo el programa la última vez. Dime en pocas líneas en qué punto estamos y cuál es el siguiente paso, y espera mi visto bueno. Recuerda las normas: todo genérico, nada propio de un juego concreto; pasos cortos y comprobados; las pruebas, sobre una copia de la partida y de pocos minutos.</pre><button type="button" class="boton" data-copiar="texto-claude">Copiar el texto</button><span class="nota" role="status" aria-live="polite" id="copiado"></span>
 </section>
+</div>
 </main>
 <footer class="pie">
-<p>Proyectos. Página actualizada el 25 de noviembre de 2026.</p>
+<div class="ancho">
+<p>em3ge · Proyectos. Página actualizada el 25 de noviembre de 2026.</p>
+</div>
 </footer>
 <script src="../app.js"></script>
 </body>

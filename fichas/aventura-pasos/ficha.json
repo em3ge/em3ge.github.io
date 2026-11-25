@@ -60,6 +60,63 @@
   "Ante un atasco, ordenar las acciones de lo barato a lo caro antes de añadir reglas nuevas.",
   "Las pruebas largas cansan y enseñan poco. Mejor pruebas de pocos minutos y pocos pasos, sobre una copia de la partida."
  ],
+ "color": "#fbbf24",
+ "esquema": {
+  "titulo": "Estructura de Aventura paso a paso: del jugador al motor del juego",
+  "texto": "El jugador sigue el plan sacado de la guía. Para cada paso pide moverse por el juego, y todo lo que toca al juego pasa por una sola pieza de enlace con ScummVM. La línea de trazos es el camino de una orden hasta el juego.",
+  "grupos": [
+   {"nombre": "Tú", "columna": 1, "elementos": [
+    {"id": "ventana", "nombre": "interfaz.py", "detalle": "Ventana con el juego dentro"},
+    {"id": "ordenes", "nombre": "aventura.py", "detalle": "Las órdenes"}
+   ]},
+   {"nombre": "El jugador", "columna": 2, "elementos": [
+    {"id": "jugar", "nombre": "jugar.py", "detalle": "Sigue la guía paso a paso", "destacado": true},
+    {"id": "plan", "nombre": "plan.py", "detalle": "La guía, convertida en pasos"},
+    {"id": "mecanica", "nombre": "mecanica.py", "detalle": "Aprende mecánicas nuevas"},
+    {"id": "rumbo", "nombre": "rumbo.py", "detalle": "Revisa el rumbo y repesca"}
+   ]},
+   {"nombre": "Moverse por el juego", "columna": 3, "elementos": [
+    {"id": "viaje", "nombre": "viaje.py", "detalle": "Andar, cruzar y explorar"},
+    {"id": "mapa", "nombre": "mapa.py", "detalle": "El mapa y su dibujo"},
+    {"id": "terreno", "nombre": "terreno.py", "detalle": "Por dónde se pisa"},
+    {"id": "partida", "nombre": "partida.py", "detalle": "No atascarse y guardar"}
+   ]},
+   {"nombre": "Saber", "columna": 3, "elementos": [
+    {"id": "guias", "nombre": "guias.py · lugares.py", "detalle": "Bajan las guías y las casan"},
+    {"id": "ia", "nombre": "ia.py", "detalle": "Pregunta a la IA"}
+   ]},
+   {"nombre": "Enlace con el motor", "columna": 4, "elementos": [
+    {"id": "enlace", "nombre": "enlace.py", "detalle": "Habla con ScummVM"},
+    {"id": "sci", "nombre": "sci.py", "detalle": "El motor de Sierra"},
+    {"id": "memoria", "nombre": "memoria.py", "detalle": "Lee la memoria del juego"}
+   ]},
+   {"nombre": "Fuera", "columna": 4, "elementos": [
+    {"id": "web", "nombre": "Guías en Internet", "detalle": "Soluciones del juego"},
+    {"id": "gemini", "nombre": "Gemini", "detalle": "U OpenAI u Ollama, si los hay"}
+   ]},
+   {"nombre": "El juego", "columna": 5, "elementos": [
+    {"id": "scummvm", "nombre": "ScummVM", "detalle": "La aventura en marcha", "destacado": true}
+   ]}
+  ],
+  "conexiones": [
+   {"de": "ventana", "a": "jugar"},
+   {"de": "ordenes", "a": "jugar"},
+   {"de": "jugar", "a": "plan"},
+   {"de": "jugar", "a": "viaje", "texto": "ir a la sala", "fuerte": true},
+   {"de": "jugar", "a": "partida"},
+   {"de": "viaje", "a": "mapa"},
+   {"de": "plan", "a": "guias"},
+   {"de": "plan", "a": "ia"},
+   {"de": "rumbo", "a": "ia", "texto": "emergencia"},
+   {"de": "viaje", "a": "enlace", "fuerte": true},
+   {"de": "partida", "a": "enlace"},
+   {"de": "enlace", "a": "sci", "fuerte": true},
+   {"de": "sci", "a": "scummvm", "texto": "depurador", "fuerte": true},
+   {"de": "memoria", "a": "scummvm", "texto": "solo lee"},
+   {"de": "guias", "a": "web"},
+   {"de": "ia", "a": "gemini"}
+  ]
+ },
  "relacionados": [
   {"nombre": "Dos intentos anteriores, abandonados", "relacion": "Este proyecto los sustituye. No se reutilizó su código, solo el aspecto de la ventana."}
  ],

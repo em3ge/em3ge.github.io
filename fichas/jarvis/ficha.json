@@ -81,6 +81,77 @@
   "Para un tema nuevo funciona añadir una fuente de datos ordenados, no afinar la búsqueda en la web.",
   "Al texto de los mensajes ajenos no se le deja llegar a la IA que da las órdenes, para que un mensaje no pueda mandar."
  ],
+ "color": "#5eead4",
+ "esquema": {
+  "titulo": "Estructura de Jarvis: del móvil al servidor y de ahí a las IA y a los servicios",
+  "texto": "La orden sale de la voz, pasa por el móvil y llega al servidor por un canal en directo. El servidor la entiende, elige una IA, ejecuta lo que haga falta y devuelve la respuesta hablada. La línea de trazos es el camino de la voz.",
+  "grupos": [
+   {"nombre": "Tú", "columna": 1, "elementos": [
+    {"id": "voz", "nombre": "Tu voz", "detalle": "«Hey Jarvis» y la orden"},
+    {"id": "auricular", "nombre": "Tu auricular", "detalle": "La respuesta hablada"}
+   ]},
+   {"nombre": "Móvil Android · Termux", "columna": 2, "elementos": [
+    {"id": "detector", "nombre": "palabra_clave.py", "detalle": "Detecta «hey Jarvis»"},
+    {"id": "cliente", "nombre": "cliente.py", "detalle": "Graba, envía y reproduce", "destacado": true},
+    {"id": "manos", "nombre": "manos.py", "detalle": "Maneja el móvil"},
+    {"id": "pantalla", "nombre": "app_movil.py", "detalle": "Pantalla y botón de llamar"}
+   ]},
+   {"nombre": "Servidor · FastAPI", "columna": 3, "elementos": [
+    {"id": "servidor", "nombre": "servidor.py", "detalle": "Atiende la orden entera", "destacado": true},
+    {"id": "memoria", "nombre": "memoria.py", "detalle": "Lo que sabe de su dueño"},
+    {"id": "conciencia", "nombre": "conciencia.py", "detalle": "Lo que sabe de sí mismo"},
+    {"id": "panel", "nombre": "panel.html", "detalle": "Panel de control"}
+   ]},
+   {"nombre": "Entender y hablar", "columna": 4, "elementos": [
+    {"id": "oido", "nombre": "El oído", "detalle": "Whisper: de voz a texto"},
+    {"id": "cerebro", "nombre": "cerebro.py · selector.py", "detalle": "Elige la IA y la releva"},
+    {"id": "habla", "nombre": "La voz", "detalle": "De texto a voz, por frases"}
+   ]},
+   {"nombre": "Lo que sabe hacer", "columna": 4, "elementos": [
+    {"id": "whatsapp", "nombre": "whatsapp.py", "detalle": "Mensajes y notas de voz"},
+    {"id": "correo", "nombre": "correo.py", "detalle": "Enviar y leer correos"},
+    {"id": "internet", "nombre": "internet.py", "detalle": "Tiempo, noticias y datos"},
+    {"id": "archivos", "nombre": "explorador.py", "detalle": "Archivos del ordenador"},
+    {"id": "alarmas", "nombre": "alarmas.py", "detalle": "Avisos y recordatorios"},
+    {"id": "mandos", "nombre": "movil.py · pc.py", "detalle": "Órdenes al móvil y al PC"}
+   ]},
+   {"nombre": "IA y voces", "columna": 5, "elementos": [
+    {"id": "nube", "nombre": "IA gratuitas", "detalle": "Groq, Gemini y otras"},
+    {"id": "local", "nombre": "Reserva local", "detalle": "Ollama, Whisper y Piper"}
+   ]},
+   {"nombre": "El mundo de fuera", "columna": 5, "elementos": [
+    {"id": "wa", "nombre": "WhatsApp", "detalle": "La cuenta enlazada"},
+    {"id": "buzon", "nombre": "Correo", "detalle": "La cuenta propia de Jarvis"},
+    {"id": "red", "nombre": "Internet", "detalle": "Fuentes públicas de datos"},
+    {"id": "equipo", "nombre": "El ordenador", "detalle": "Carpetas y programas"}
+   ]}
+  ],
+  "conexiones": [
+   {"de": "voz", "a": "detector", "texto": "voz", "fuerte": true},
+   {"de": "detector", "a": "cliente", "fuerte": true},
+   {"de": "cliente", "a": "auricular", "texto": "respuesta"},
+   {"de": "cliente", "a": "manos"},
+   {"de": "cliente", "a": "servidor", "texto": "canal en directo", "fuerte": true, "doble": true},
+   {"de": "servidor", "a": "oido", "fuerte": true},
+   {"de": "servidor", "a": "cerebro", "fuerte": true},
+   {"de": "servidor", "a": "habla", "fuerte": true},
+   {"de": "servidor", "a": "whatsapp"},
+   {"de": "servidor", "a": "correo"},
+   {"de": "servidor", "a": "internet"},
+   {"de": "servidor", "a": "archivos"},
+   {"de": "servidor", "a": "alarmas"},
+   {"de": "servidor", "a": "mandos"},
+   {"de": "oido", "a": "nube"},
+   {"de": "cerebro", "a": "nube", "texto": "con relevo"},
+   {"de": "cerebro", "a": "local", "texto": "reserva"},
+   {"de": "habla", "a": "local"},
+   {"de": "whatsapp", "a": "wa"},
+   {"de": "correo", "a": "buzon"},
+   {"de": "internet", "a": "red"},
+   {"de": "archivos", "a": "equipo"},
+   {"de": "mandos", "a": "equipo"}
+  ]
+ },
  "relacionados": [],
  "texto_para_claude": "Vamos a retomar el proyecto jarvis, un asistente de voz con el cliente en un móvil Android (Termux) y el servidor en el ordenador. Antes de tocar nada, lee LEEME.md del proyecto y la memoria para retomar de su ficha en la web de proyectos. Después mira el final de modelos\\jarvis.log y de modelos\\diagnostico\\registro.txt para ver qué pasó la última vez. Dime en pocas líneas en qué punto estamos y cuál es el siguiente paso, y espera mi visto bueno. Normas: Jarvis no inventa; todo gratuito; lo delicado se confirma de viva voz; las pruebas, con servicios de mentira y en otro puerto, sin tocar mi sesión real de WhatsApp, mi buzón, mis carpetas ni mi ordenador; y gastar pocos tokens de las IA."
 }

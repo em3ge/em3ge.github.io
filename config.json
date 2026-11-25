@@ -1,5 +1,19 @@
 {
  "titulo": "Proyectos",
- "presentacion": "Los proyectos que voy desarrollando: qué son, en qué punto están, qué falta y cómo retomarlos.",
- "usuario_github": "em3ge"
+ "autor": "em3ge",
+ "usuario_github": "em3ge",
+ "antetitulo": "Portfolio de desarrollo",
+ "titular": "Programas que escuchan, deciden y actúan solos.",
+ "presentacion": "Desarrollo en Python asistentes y agentes con inteligencia artificial, de la idea al programa funcionando. Cada proyecto está documentado paso a paso: cómo está hecho, en qué punto va y qué se aprendió por el camino.",
+ "sobre_mi": [
+  "Me gustan los programas que hacen el trabajo solos y que dicen la verdad sobre lo que han hecho. Trabajo con modelos de lenguaje gratuitos y locales, y pongo alrededor el programa que los sujeta: reglas, comprobaciones y registro de todo lo que pasa."
+ ],
+ "principios": [
+  {"titulo": "Pasos cortos y comprobados", "texto": "No se abre una etapa nueva hasta dar por buena la anterior. Cada cambio se prueba antes de seguir."},
+  {"titulo": "La IA propone, el programa decide", "texto": "El modelo sugiere y las reglas del programa comprueban. Lo delicado se confirma siempre con la persona."},
+  {"titulo": "Medir antes de cambiar", "texto": "Antes de tocar un ajuste se miran los registros reales. Las cuentas se hacen en código, no se le piden a la IA."},
+  {"titulo": "Todo queda escrito", "texto": "Cada proyecto lleva su diario, sus lecciones y una memoria para retomarlo cualquier día sin perder el hilo."}
+ ],
+ "contacto_titulo": "El código está en GitHub",
+ "contacto_texto": "Los repositorios de los proyectos y el historial de cambios se pueden pedir desde mi perfil."
 }
