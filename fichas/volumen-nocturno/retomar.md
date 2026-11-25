@@ -31,7 +31,8 @@ Cuatro archivos Java en `src`, sin dependencias, para Android 9 o posterior (el 
   - Los dos aprenden el nivel de la «voz normal» (función `aprender`): el nivel medio del último minuto. El umbral va unos decibelios por encima, según la fuerza elegida (tabla `NIVELES`). El anticipado mide sin los graves y decide con el nivel sostenido de las últimas tres décimas, para que una sílaba fuerte no cuente como pico.
   - Los dos apuntan en una «historia» lo que suena y lo que recortan; de ahí sale la gráfica.
 - `MainActivity.java`: la pantalla, hecha por código, sin archivos de diseño.
-- `Grafica.java`: la gráfica.
+- `Grafica.java`: la gráfica. `Tema.java`: los cinco temas de colores.
+- `web/index.html`: la versión para el ordenador. Las cuentas del motor están ahora en tres sitios (Java, JavaScript y `pruebas/simular.py`): si se cambian en uno, hay que cambiarlas en los tres.
 
 El volumen en el modo anticipado tiene dos maneras:
 
@@ -40,7 +41,11 @@ El volumen en el modo anticipado tiene dos maneras:
 
 ## Dónde está ahora
 
-Versión 2.0, instalada en el móvil del dueño (Android 16), con el permiso DUMP ya concedido.
+Versión 2.1, instalada en el móvil del dueño (Android 16), con el permiso DUMP ya concedido. La 2.1 pasó los ajustes a un engranaje con menú desplegable, añadió cinco temas de colores (`Tema.java`) y quitó el botón de comparar.
+
+Hay además una versión para el ordenador: `web/index.html`, una página sola para Chrome o Edge de escritorio. Captura el sonido de una pestaña (la calla con `suppressLocalAudioPlayback`), lo pasa por el mismo motor, escrito en JavaScript dentro de un AudioWorklet, y lo emite. Se abre con `abrir_web.ps1` o con doble clic. Comprobado: carga sin errores y su prueba interna (`#prueba` al final de la dirección) da lo mismo que `pruebas/simular.py`. Sin probar: la captura real con un vídeo, que pide elegir la pestaña a mano.
+
+El móvil avisa de «Riesgos detectados con Chitón» (es el gestor de seguridad de Realme, por los permisos de captura). Si se pulsa «Corregir ahora» puede quitar permisos o la aplicación.
 
 La 1.9 añadió, porque quedaban picos, un tope para los golpes secos (ningún instante pasa de la voz normal más 12, 9 o 7 decibelios según la fuerza) y cambió la voz normal al nivel medio del último minuto, para que un público ruidoso no cuente como voz. Solo está comprobado con `pruebas/simular.py`; con un programa real, sin medir. La 2.0 rehízo la pantalla: sencilla, sin pitido de prueba, con los ajustes plegados.
 
