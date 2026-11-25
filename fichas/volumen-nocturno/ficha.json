@@ -3,7 +3,7 @@
  "lema": "Una aplicación de Android que suaviza los picos de volumen de lo que suena en el móvil, para dormirse con un programa puesto sin que los aplausos te despierten.",
  "estado": "activo",
  "inicio": "2026-11-25",
- "ultima_actividad": "2026-11-25",
+ "ultima_actividad": "2026-11-26",
  "avance": 55,
  "avance_nota": "Estimación. Los dos modos están escritos y el anticipado se ha visto funcionar en el móvil real (captura, gráfica y teclas de volumen); pero en la primera prueba de oído el dueño no notó la bajada. Se encontró la causa con una simulación, se rehízo el cálculo y se midió en el móvil con una charla real; falta que el dueño lo confirme de oído con sus programas.",
  "etapa_actual": "Etapa 4: probar de oído y afinar",
@@ -27,7 +27,7 @@
  ],
  "hecho": [
   "Modo directo: compresor y limitador de Android sobre la salida general del móvil, mantenidos por un servicio en primer plano.",
-  "Nivel de la voz aprendido: mide el sonido sin los graves, mira el nivel sostenido de las últimas tres décimas y toma como voz normal el que solo se ha superado una cuarta parte del tiempo en el último minuto. Lo que pasa de ahí se baja.",
+  "Nivel de la voz aprendido: mide el sonido sin los graves, mira el nivel sostenido de las últimas tres décimas y toma como voz normal el nivel medio del último minuto. Lo que pasa de ahí se baja, y ningún instante suelto (una palmada, un grito) puede pasar de un tope.",
   "Botón de comparar: diez segundos sin corregir, para oír la diferencia.",
   "Simulación en el ordenador con una señal fabricada de voz y aplausos, que dice cuánto baja cada cosa.",
   "Modo anticipado: captura el sonido de las otras aplicaciones, lo retiene y lo emite corregido, bajando el volumen antes de que llegue el pico.",
@@ -37,7 +37,7 @@
   "Volumen natural en el modo anticipado: Chitón calla una a una las aplicaciones que suenan y emite por el canal de música, así que las teclas y la barra de volumen del móvil funcionan como siempre. Pide un permiso que se da una vez por cable.",
   "Sin ese permiso, método de reserva: silencia el canal de música, emite por el de alarma y sigue las teclas a mano.",
   "En el método de reserva, devuelve el volumen de música y el de alarma al apagar, y también tras un cierre brusco.",
-  "Nombre, logotipo (una luna que acuna tres barras de sonido) e interfaz de noche con botón grande de encendido.",
+  "Nombre, logotipo (una luna que acuna tres barras de sonido) y una pantalla sencilla: la luna para encender, la gráfica con el botón de comparar y la fuerza; lo demás queda plegado en «Más ajustes».",
   "Guion que fabrica el paquete paso a paso con las herramientas de Android, sin Gradle, y otro que descarga esas herramientas."
  ],
  "pendiente": [
@@ -47,12 +47,15 @@
   "Confirmar de oído que el modo directo recorta de verdad en este móvil.",
   "Afinar los tres niveles de fuerza con programas reales.",
   "Medir el retraso propio de capturar y volver a emitir, que se suma a la ventaja elegida.",
+  "Medir con programas reales si con la versión 1.9 siguen quedando picos.",
+  "Si quedan: añadir un clasificador de sonidos (voz, aplausos, risas, música) para bajar por lo que es y no solo por lo fuerte que suena.",
   "Botón en los ajustes rápidos para encender y apagar sin abrir la aplicación.",
   "Confirmar de oído que con el volumen natural no se oye doble ni se cuela el original al empezar un vídeo.",
   "Probar con auriculares."
  ],
  "diario": [
-  {"fecha": "2026-11-25", "texto": "Nace el proyecto y en una tarde pasa por nueve versiones. Primero el modo directo, con un guion propio para fabricar el paquete sin Gradle. Después el indicador de bajadas y el umbral que aprende el nivel habitual. Nombre, logotipo e interfaz. Luego el modo anticipado, que captura y retrasa el sonido para bajar antes del pico, y la gráfica que enseña lo que viene; se ve funcionar en el móvil real. Se arregla un aviso falso de «no deja capturar», se hace ajustable la ventaja para reducir el desfase con la imagen y se rehace el manejo del volumen tras medir en el teléfono adónde van las teclas. Al final del día el dueño lo prueba de oído y no nota que baje. Una simulación en el ordenador enseña por qué: se estaba bajando la voz, sílaba a sílaba, tanto como los aplausos. Se rehace el cálculo (versión 1.7); en la simulación los aplausos pasan de sonar 4 decibelios por encima de la voz a quedar 2 y medio por debajo con la fuerza media, sin tocar la voz. Al medirlo en el móvil con una charla real sale otro fallo: si el vídeo empieza flojo, se toma por voz normal un nivel demasiado bajo y se le quitan unos 20 decibelios a la propia voz. Se cambia a tomar la voz normal del último minuto de sonido; medido de nuevo, se asienta en unos diez segundos, deja la voz sin tocar y baja las risas del público entre 4 y 7 decibelios. Queda una queja: las teclas de volumen hacían cosas raras, porque Chitón silenciaba el canal de música y emitía por el de alarma. Versión 1.8: con un permiso dado por cable, calla solo a las aplicaciones que suenan y emite por el canal de música. Probado en el móvil: las teclas mueven el volumen normal, la alarma no se toca y a Chitón le sigue llegando el sonido."}
+  {"fecha": "2026-11-25", "texto": "Nace el proyecto y en una tarde y una noche pasa por once versiones. Primero el modo directo, con un guion propio para fabricar el paquete sin Gradle. Después el indicador de bajadas y el umbral que aprende el nivel habitual. Nombre, logotipo e interfaz. Luego el modo anticipado, que captura y retrasa el sonido para bajar antes del pico, y la gráfica que enseña lo que viene; se ve funcionar en el móvil real. Se arregla un aviso falso de «no deja capturar», se hace ajustable la ventaja para reducir el desfase con la imagen y se rehace el manejo del volumen tras medir en el teléfono adónde van las teclas. Al final del día el dueño lo prueba de oído y no nota que baje. Una simulación en el ordenador enseña por qué: se estaba bajando la voz, sílaba a sílaba, tanto como los aplausos. Se rehace el cálculo (versión 1.7); en la simulación los aplausos pasan de sonar 4 decibelios por encima de la voz a quedar 2 y medio por debajo con la fuerza media, sin tocar la voz. Al medirlo en el móvil con una charla real sale otro fallo: si el vídeo empieza flojo, se toma por voz normal un nivel demasiado bajo y se le quitan unos 20 decibelios a la propia voz. Se cambia a tomar la voz normal del último minuto de sonido; medido de nuevo, se asienta en unos diez segundos, deja la voz sin tocar y baja las risas del público entre 4 y 7 decibelios. Queda una queja: las teclas de volumen hacían cosas raras, porque Chitón silenciaba el canal de música y emitía por el de alarma. Versión 1.8: con un permiso dado por cable, calla solo a las aplicaciones que suenan y emite por el canal de música. Probado en el móvil: las teclas mueven el volumen normal, la alarma no se toca y a Chitón le sigue llegando el sonido. Ya de madrugada, el dueño dice que va mejor pero quedan picos: versión 1.9, con tope para los golpes secos y una voz normal que aguanta un público ruidoso. Y versión 2.0, con la pantalla rehecha para que sea sencilla y sin el pitido de prueba."},
+  {"fecha": "2026-11-26", "texto": "Se investiga si hay algo para separar la voz y la música de los ruidos. Lo que encaja es un clasificador de sonidos que distingue voz, aplausos, risas y música; queda propuesto como paso siguiente, sin hacer."}
  ],
  "lecciones": [
   "Que la gráfica enseñe recortes no quiere decir que se oiga la diferencia. Se bajaba la voz tanto como los aplausos y el oído no notaba nada; hasta que no se midió la diferencia entre una cosa y otra con una señal de prueba no se vio.",

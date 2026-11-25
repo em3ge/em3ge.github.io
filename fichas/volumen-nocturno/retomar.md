@@ -28,10 +28,10 @@ Cuatro archivos Java en `src`, sin dependencias, para Android 9 o posterior (el 
 - `ServicioCalma.java`: el motor. Un servicio en primer plano con los dos modos.
   - Directo: un efecto `DynamicsProcessing` (compresor de una banda y limitador) sobre la sesión de audio 0, que es la salida general. Un `Visualizer` mide el nivel diez veces por segundo.
   - Anticipado: pide permiso de captura (`MediaProjection`), graba el sonido de las otras aplicaciones con `AudioRecord`, lo guarda en una cola de tramos de 20 milisegundos y lo emite con retraso por un `AudioTrack` del canal de alarma. Para cada tramo que sale mira los siguientes (hasta tres décimas) y va bajando la ganancia antes de que llegue el pico.
-  - Los dos aprenden el nivel de la «voz normal» (función `aprender`): el nivel que el sonido solo ha superado una cuarta parte del tiempo en el último minuto. El umbral va unos decibelios por encima, según la fuerza elegida (tabla `NIVELES`). El anticipado mide sin los graves y decide con el nivel sostenido de las últimas tres décimas, para que una sílaba fuerte no cuente como pico.
+  - Los dos aprenden el nivel de la «voz normal» (función `aprender`): el nivel medio del último minuto. El umbral va unos decibelios por encima, según la fuerza elegida (tabla `NIVELES`). El anticipado mide sin los graves y decide con el nivel sostenido de las últimas tres décimas, para que una sílaba fuerte no cuente como pico.
   - Los dos apuntan en una «historia» lo que suena y lo que recortan; de ahí sale la gráfica.
 - `MainActivity.java`: la pantalla, hecha por código, sin archivos de diseño.
-- `Grafica.java` y `Medidor.java`: la gráfica y la barra de bajada.
+- `Grafica.java`: la gráfica.
 
 El volumen en el modo anticipado tiene dos maneras:
 
@@ -40,7 +40,9 @@ El volumen en el modo anticipado tiene dos maneras:
 
 ## Dónde está ahora
 
-Versión 1.8, instalada en el móvil del dueño (Android 16), con el permiso DUMP ya concedido.
+Versión 2.0, instalada en el móvil del dueño (Android 16), con el permiso DUMP ya concedido.
+
+La 1.9 añadió, porque quedaban picos, un tope para los golpes secos (ningún instante pasa de la voz normal más 12, 9 o 7 decibelios según la fuerza) y cambió la voz normal al nivel medio del último minuto, para que un público ruidoso no cuente como voz. Solo está comprobado con `pruebas/simular.py`; con un programa real, sin medir. La 2.0 rehízo la pantalla: sencilla, sin pitido de prueba, con los ajustes plegados.
 
 La 1.8 trae el «volumen natural» (ver «Cómo está hecho»). Probado en el móvil por cable: las teclas mueven el volumen normal de multimedia, la alarma no se toca, el efecto mudo queda puesto sobre la sesión de YouTube y a Chitón le sigue llegando el sonido (la gráfica y el registro lo muestran). Falta que el dueño confirme de oído que no se oye doble.
 
@@ -73,6 +75,10 @@ Sin comprobar:
 3. Botón en los ajustes rápidos.
 4. Decidir qué hacer con auriculares: el canal de alarma suena también por el altavoz.
 5. Apagado automático a una hora.
+
+## Idea pendiente: bajar por lo que es
+
+Investigado el 26 de noviembre de 2026. Para distinguir voz y música de aplausos, risas y ruidos, lo que encaja es YAMNet, un clasificador de 521 clases de sonido que corre en el móvil: mira trozos de casi un segundo a 16 kHz y tarda unos 12 milisegundos por trozo en un móvil reciente. Con la ventaja de un segundo, Chitón sabría qué viene antes de que suene. Obliga a meter una biblioteca con código nativo (el paquete pasaría de decenas de KB a varios MB) y a cambiar el guion de construcción. RNNoise aísla solo la voz y trataría la música como ruido. Separar de verdad las fuentes en directo sigue siendo cosa de laboratorio. Sin hacer; antes hay que medir si la 1.9 basta.
 
 ## Cómo se depura
 
