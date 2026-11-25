@@ -114,7 +114,7 @@ class Motor {
     this.TOPE = 18;
     this.nivel = 1;
     this.ventaja = 15;                              // tramos de ventaja
-    this.LARGO = 52 * this.B;                       // la cola: algo más de un segundo
+    this.LARGO = 104 * this.B;                      // la cola: algo más de dos segundos
     this.colaI = new Float32Array(this.LARGO);
     this.colaD = new Float32Array(this.LARGO);
     this.deseada = new Float32Array(4096);          // bajada que pide cada tramo capturado
@@ -171,11 +171,11 @@ class Motor {
 
   /** Empieza a sonar el tramo p: se mira lo que viene y se decide la ganancia. */
   tramoQueSale(p) {
-    const mira = Math.min(15, this.ventaja);
+    const mira = Math.min(25, this.ventaja);          // más de medio segundo no mejora nada
     let objetivo = 0;
     for (let k = 0; k <= mira; k++) objetivo = Math.max(objetivo, this.deseada[(p + k) % this.deseada.length]);
     const antes = this.g;
-    const prisa = 1 - Math.pow(0.05, 1 / mira);
+    const prisa = 1 - Math.pow(0.05, 1 / Math.max(4, mira - 10));
     this.g += (objetivo - this.g) * (objetivo > this.g ? prisa : 0.04);
     this.desde = Math.pow(10, -antes / 20);
     this.hasta = Math.pow(10, -this.g / 20);
@@ -219,7 +219,7 @@ const TEMAS = [
 ];
 const VARIABLES = ["fondo1", "fondo2", "tarjeta", "texto", "tenue", "acento", "sobre", "barras", "futuro", "recorte"];
 const FUERZAS = [["Suave", "Recorta solo lo que destaca mucho."], ["Media", "Lo ruidoso queda a la altura de la voz."], ["Fuerte", "Lo ruidoso queda por debajo de la voz."]];
-const VENTAJAS = [["0,1 s: casi sin desfase", 5], ["0,3 s: recomendada", 15], ["1 s: más margen, más desfase", 50]];
+const VENTAJAS = [["0,1 s: casi sin desfase", 5], ["0,3 s: recomendada", 15], ["1 s: más desfase con la imagen", 50], ["2 s: para probar; mucho desfase", 100]];
 
 const $ = id => document.getElementById(id);
 const guardado = (clave, porDefecto) => { try { const v = localStorage.getItem("chiton." + clave); return v === null ? porDefecto : Number(v); } catch (e) { return porDefecto; } };
@@ -228,7 +228,7 @@ const dentro = (v, n) => (Number.isInteger(v) && v >= 0 && v < n ? v : 0);
 
 let tema = dentro(guardado("tema", 0), TEMAS.length);
 let fuerza = dentro(guardado("fuerza", 1), 3);
-let ventaja = dentro(guardado("ventaja", 1), 3);
+let ventaja = dentro(guardado("ventaja", 1), VENTAJAS.length);
 let color = {};
 
 function ponerTema() {
