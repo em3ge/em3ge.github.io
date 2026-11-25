@@ -28,7 +28,7 @@ Cuatro archivos Java en `src`, sin dependencias, para Android 9 o posterior (el 
 - `ServicioCalma.java`: el motor. Un servicio en primer plano con los dos modos.
   - Directo: un efecto `DynamicsProcessing` (compresor de una banda y limitador) sobre la sesión de audio 0, que es la salida general. Un `Visualizer` mide el nivel diez veces por segundo.
   - Anticipado: pide permiso de captura (`MediaProjection`), graba el sonido de las otras aplicaciones con `AudioRecord`, lo guarda en una cola de tramos de 20 milisegundos y lo emite con retraso por un `AudioTrack` del canal de alarma. Para cada tramo que sale mira los siguientes (hasta tres décimas) y va bajando la ganancia antes de que llegue el pico.
-  - Los dos aprenden el «nivel habitual»: siguen despacio lo que suena (muy despacio hacia arriba, para que unos aplausos largos no pasen a ser lo normal) y ponen el umbral unos decibelios por encima, según la fuerza elegida. La tabla `NIVELES` tiene los tres niveles.
+  - Los dos aprenden el nivel de la «voz normal» (función `aprender`): el nivel que el sonido solo supera una cuarta parte del tiempo. El umbral va unos decibelios por encima, según la fuerza elegida (tabla `NIVELES`). El anticipado mide sin los graves y decide con el nivel sostenido de las últimas tres décimas, para que una sílaba fuerte no cuente como pico.
   - Los dos apuntan en una «historia» lo que suena y lo que recortan; de ahí sale la gráfica.
 - `MainActivity.java`: la pantalla, hecha por código, sin archivos de diseño.
 - `Grafica.java` y `Medidor.java`: la gráfica y la barra de bajada.
@@ -37,7 +37,11 @@ El volumen en el modo anticipado: se silencia el canal de música, para no oír 
 
 ## Dónde está ahora
 
-Versión 1.6, instalada en el móvil del dueño (Android 16).
+Versión 1.7, fabricada y subida a GitHub pero SIN instalar: el móvil del dueño (Android 16) tiene la 1.6.
+
+La 1.6 se probó de oído y el dueño no notó que bajara los aplausos ni la música alta. La causa se vio con `pruebas/simular.py`: se bajaba la voz, sílaba a sílaba, tanto como los picos. La 1.7 rehace el cálculo; en la simulación, con la fuerza media, los aplausos pasan de 4 decibelios por encima de la voz a 2 y medio por debajo, y la voz no se toca. Es una señal fabricada, no un programa real: falta la prueba en el móvil.
+
+Lo que sigue se comprobó con la 1.6.
 
 Comprobado en el móvil real, con capturas de pantalla, el registro del teléfono y pulsaciones simuladas por cable:
 
@@ -48,12 +52,13 @@ Comprobado en el móvil real, con capturas de pantalla, el registro del teléfon
 
 Sin comprobar:
 
-- Cómo suena. Nadie ha confirmado de oído que el modo anticipado suene limpio ni que el directo recorte en este móvil.
+- Que la 1.7 baje de verdad lo que tiene que bajar, de oído y con programas reales.
+- Que el modo anticipado suene limpio, sin doble sonido ni cortes, y que el directo recorte en este móvil.
 - El retraso real del modo anticipado: a la ventaja elegida se suma lo que tarda el teléfono en capturar y emitir, y eso no está medido.
 
 ## Qué falta
 
-1. La prueba de oído del dueño, una noche real, y afinar con eso los tres niveles de fuerza.
+1. Instalar la 1.7, la prueba de oído del dueño con el botón «Comparar», y afinar con eso los tres niveles de fuerza.
 2. Medir el retraso propio del móvil y, si es grande, descontarlo de la ventaja.
 3. Botón en los ajustes rápidos.
 4. Decidir qué hacer con auriculares: el canal de alarma suena también por el altavoz.
@@ -63,7 +68,8 @@ Sin comprobar:
 
 Con el móvil enchufado:
 
-- `adb logcat -s Chiton:I`: el registro propio. Cada cinco segundos dice el nivel capturado, el habitual y lo que baja; y apunta cada tecla de volumen y el volumen resultante.
+- `adb logcat -s Chiton:I`: el registro propio. Cada cinco segundos dice el nivel capturado, el habitual, lo que baja y, de esos cinco segundos, lo más que se pasó del umbral y la mayor bajada; y apunta cada tecla de volumen y el volumen resultante.
+- `python pruebas/simular.py`, en el ordenador: repite las cuentas del motor con una señal fabricada de voz y aplausos. Las cuentas están copiadas a mano de `ServicioCalma.java`: si se cambian allí, hay que cambiarlas en el guion.
 - `adb shell dumpsys audio`: el estado de cada canal de volumen (silenciado o no, y su paso) y qué aplicaciones están sonando.
 - `adb shell input keyevent 24` y `25`: simulan subir y bajar volumen.
 - `adb shell screencap` y `adb pull`: una captura de la pantalla para ver la gráfica.
