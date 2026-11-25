@@ -414,8 +414,17 @@ def enlaces_codigo(p, cfg):
     rama = p.get("rama", "main")
     nota = ('<p class="nota">El código es privado: GitHub pedirá iniciar sesión con una cuenta que tenga permiso.</p>'
             if p.get("codigo_privado") else "")
-    return (f'<div class="botones"><a class="boton" href="{e(base)}">Ver el código</a>'
-            f'<a class="boton boton-claro" href="{e(base)}/archive/refs/heads/{e(rama)}.zip">Descargar en zip</a></div>{nota}')
+    # vscode://vscode.git/clone abre VS Code y trae el proyecto; vscode.dev lo abre en el navegador.
+    from urllib.parse import quote
+    clonar = "vscode://vscode.git/clone?url=" + quote(base + ".git", safe="")
+    ayuda = ('<p class="nota">«Abrir en VS Code» abre el programa, pregunta en qué carpeta guardarlo y lo trae '
+             'de GitHub. Si ya lo tienes en ese ordenador, ábrelo desde VS Code y pulsa sincronizar. '
+             '«Editar en el navegador» lo abre al día, sin instalar nada, pero no puede ejecutarlo.</p>')
+    return (f'<div class="botones"><a class="boton" href="{e(clonar)}">Abrir en VS Code</a>'
+            f'<a class="boton boton-claro" href="https://vscode.dev/github/{e(usuario)}/{e(repo)}">Editar en el navegador</a>'
+            f'<a class="boton boton-claro" href="{e(base)}">Ver el código</a>'
+            f'<a class="boton boton-claro" href="{e(base)}/archive/refs/heads/{e(rama)}.zip">Descargar en zip</a></div>'
+            f'{ayuda}{nota}')
 
 
 def lista(elementos, clase=""):
