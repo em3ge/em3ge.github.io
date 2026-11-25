@@ -33,11 +33,18 @@ Cuatro archivos Java en `src`, sin dependencias, para Android 9 o posterior (el 
 - `MainActivity.java`: la pantalla, hecha por código, sin archivos de diseño.
 - `Grafica.java` y `Medidor.java`: la gráfica y la barra de bajada.
 
-El volumen en el modo anticipado: se silencia el canal de música, para no oír el original, sin mover su paso. Chitón suena tan alto como sonaría la música en ese paso. Las teclas del móvil siguen funcionando porque Chitón escucha los cambios de volumen de dos canales: el de música (cuando hay un vídeo sonando) y el de alarma (cuando no lo hay, este móvil manda ahí las teclas). La alarma se sujeta un paso por debajo del máximo para notar subidas y bajadas.
+El volumen en el modo anticipado tiene dos maneras:
+
+- Volumen natural (la buena). Chitón lee con `dumpsys audio` qué sesiones de audio hay, pone un efecto mudo sobre la de cada aplicación que suena, se excluye a sí mismo de la captura y emite por el canal de música. El volumen del móvil funciona como siempre. Necesita el permiso DUMP, que solo se da por cable: `adb shell pm grant io.github.em3ge.volumennocturno android.permission.DUMP`. En los Realme hay que activar antes «Desactivar supervisión de permisos» en las opciones de desarrollador.
+- De reserva, si falta ese permiso. Se silencia el canal de música entero, sin mover su paso, y se emite por el de alarma. Chitón sigue las teclas escuchando los cambios de volumen de los dos canales (con un vídeo sonando van a música; sin él, este móvil las manda a la alarma) y sujeta la alarma un paso por debajo del máximo.
 
 ## Dónde está ahora
 
-Versión 1.7, instalada en el móvil del dueño (Android 16).
+Versión 1.8, instalada en el móvil del dueño (Android 16), con el permiso DUMP ya concedido.
+
+La 1.8 trae el «volumen natural» (ver «Cómo está hecho»). Probado en el móvil por cable: las teclas mueven el volumen normal de multimedia, la alarma no se toca, el efecto mudo queda puesto sobre la sesión de YouTube y a Chitón le sigue llegando el sonido (la gráfica y el registro lo muestran). Falta que el dueño confirme de oído que no se oye doble.
+
+Lo que sigue, sobre la bajada, viene de la 1.7 y no ha cambiado.
 
 La 1.6 se probó de oído y el dueño no notó que bajara los aplausos ni la música alta. Hubo dos causas. La primera se vio con `pruebas/simular.py`: se bajaba la voz, sílaba a sílaba, tanto como los picos. La segunda salió al medir en el móvil con una charla real: si el vídeo empezaba flojo, se tomaba por voz normal un nivel demasiado bajo y se le quitaban unos 20 decibelios a la propia voz.
 

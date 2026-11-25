@@ -34,8 +34,9 @@
   "Ventaja ajustable del modo anticipado: 0,1, 0,3 o 1 segundo, para elegir entre ver venir el pico con margen o ir casi sincronizado con la imagen.",
   "Gráfica en vivo: lo que suena, lo que se recorta, el umbral y, en anticipado, lo que está por sonar.",
   "Aviso en las notificaciones y rótulo sobre la pantalla: «Viene un pico» y los decibelios que se bajan.",
-  "Volumen con las teclas del móvil en el modo anticipado, tanto con el vídeo sonando como parado, y botones «Más bajo» y «Más alto».",
-  "Devuelve el volumen de música y el de alarma al apagar, y también tras un cierre brusco.",
+  "Volumen natural en el modo anticipado: Chitón calla una a una las aplicaciones que suenan y emite por el canal de música, así que las teclas y la barra de volumen del móvil funcionan como siempre. Pide un permiso que se da una vez por cable.",
+  "Sin ese permiso, método de reserva: silencia el canal de música, emite por el de alarma y sigue las teclas a mano.",
+  "En el método de reserva, devuelve el volumen de música y el de alarma al apagar, y también tras un cierre brusco.",
   "Nombre, logotipo (una luna que acuna tres barras de sonido) e interfaz de noche con botón grande de encendido.",
   "Guion que fabrica el paquete paso a paso con las herramientas de Android, sin Gradle, y otro que descarga esas herramientas."
  ],
@@ -47,16 +48,19 @@
   "Afinar los tres niveles de fuerza con programas reales.",
   "Medir el retraso propio de capturar y volver a emitir, que se suma a la ventaja elegida.",
   "Botón en los ajustes rápidos para encender y apagar sin abrir la aplicación.",
-  "Qué hacer con auriculares: el canal de alarma suena también por el altavoz."
+  "Confirmar de oído que con el volumen natural no se oye doble ni se cuela el original al empezar un vídeo.",
+  "Probar con auriculares."
  ],
  "diario": [
-  {"fecha": "2026-11-25", "texto": "Nace el proyecto y en una tarde pasa por ocho versiones. Primero el modo directo, con un guion propio para fabricar el paquete sin Gradle. Después el indicador de bajadas y el umbral que aprende el nivel habitual. Nombre, logotipo e interfaz. Luego el modo anticipado, que captura y retrasa el sonido para bajar antes del pico, y la gráfica que enseña lo que viene; se ve funcionar en el móvil real. Se arregla un aviso falso de «no deja capturar», se hace ajustable la ventaja para reducir el desfase con la imagen y se rehace el manejo del volumen tras medir en el teléfono adónde van las teclas. Al final del día el dueño lo prueba de oído y no nota que baje. Una simulación en el ordenador enseña por qué: se estaba bajando la voz, sílaba a sílaba, tanto como los aplausos. Se rehace el cálculo (versión 1.7); en la simulación los aplausos pasan de sonar 4 decibelios por encima de la voz a quedar 2 y medio por debajo con la fuerza media, sin tocar la voz. Al medirlo en el móvil con una charla real sale otro fallo: si el vídeo empieza flojo, se toma por voz normal un nivel demasiado bajo y se le quitan unos 20 decibelios a la propia voz. Se cambia a tomar la voz normal del último minuto de sonido; medido de nuevo, se asienta en unos diez segundos, deja la voz sin tocar y baja las risas del público entre 4 y 7 decibelios."}
+  {"fecha": "2026-11-25", "texto": "Nace el proyecto y en una tarde pasa por nueve versiones. Primero el modo directo, con un guion propio para fabricar el paquete sin Gradle. Después el indicador de bajadas y el umbral que aprende el nivel habitual. Nombre, logotipo e interfaz. Luego el modo anticipado, que captura y retrasa el sonido para bajar antes del pico, y la gráfica que enseña lo que viene; se ve funcionar en el móvil real. Se arregla un aviso falso de «no deja capturar», se hace ajustable la ventaja para reducir el desfase con la imagen y se rehace el manejo del volumen tras medir en el teléfono adónde van las teclas. Al final del día el dueño lo prueba de oído y no nota que baje. Una simulación en el ordenador enseña por qué: se estaba bajando la voz, sílaba a sílaba, tanto como los aplausos. Se rehace el cálculo (versión 1.7); en la simulación los aplausos pasan de sonar 4 decibelios por encima de la voz a quedar 2 y medio por debajo con la fuerza media, sin tocar la voz. Al medirlo en el móvil con una charla real sale otro fallo: si el vídeo empieza flojo, se toma por voz normal un nivel demasiado bajo y se le quitan unos 20 decibelios a la propia voz. Se cambia a tomar la voz normal del último minuto de sonido; medido de nuevo, se asienta en unos diez segundos, deja la voz sin tocar y baja las risas del público entre 4 y 7 decibelios. Queda una queja: las teclas de volumen hacían cosas raras, porque Chitón silenciaba el canal de música y emitía por el de alarma. Versión 1.8: con un permiso dado por cable, calla solo a las aplicaciones que suenan y emite por el canal de música. Probado en el móvil: las teclas mueven el volumen normal, la alarma no se toca y a Chitón le sigue llegando el sonido."}
  ],
  "lecciones": [
   "Que la gráfica enseñe recortes no quiere decir que se oiga la diferencia. Se bajaba la voz tanto como los aplausos y el oído no notaba nada; hasta que no se midió la diferencia entre una cosa y otra con una señal de prueba no se vio.",
   "Una señal fabricada no avisa de todo: la simulación empezaba con voz, y un vídeo real empieza con una cabecera floja. El segundo fallo solo salió al medir en el móvil con un vídeo de verdad.",
   "Una sílaba fuerte no es un pico. Hay que decidir con el nivel sostenido de unas décimas de segundo, no con cada instante.",
   "Con el efecto puesto sobre la salida general, la aplicación conoce el sonido en el mismo instante en que suena. Para adelantarse de verdad hay que capturarlo, retenerlo y volver a emitirlo.",
+  "Un efecto mudo puesto sobre la sesión de audio de otra aplicación la calla en el altavoz, pero la captura la sigue oyendo entera: la captura va antes que los efectos. Eso permite emitir por el canal de música y dejar el volumen del móvil en paz.",
+  "Los Realme no dejan conceder permisos por cable hasta que se activa «Desactivar supervisión de permisos» en las opciones de desarrollador.",
   "Silenciar el canal de música deja pasar entera la captura y conserva el paso de volumen; por eso es mejor que ponerlo a cero.",
   "En este móvil, si lo único que suena va por el canal de alarma, las teclas de volumen mueven la alarma, no la música. Se averiguó simulando pulsaciones por cable y leyendo el estado del sonido del teléfono.",
   "Dar por bloqueada la captura tras unos segundos de silencio fue un error: otra aplicación reproducía silencio y el aviso saltaba con el vídeo en pausa. Mejor avisar y no cambiar de modo solo.",
@@ -82,7 +86,7 @@
     {"id": "medidor", "nombre": "Medidor", "detalle": "Nivel, diez veces por s"}
    ]},
    {"nombre": "Salida y pantalla", "columna": 3, "elementos": [
-    {"id": "emite", "nombre": "Emisión", "detalle": "Por el canal de alarma"},
+    {"id": "emite", "nombre": "Emisión", "detalle": "Por el canal de música"},
     {"id": "grafica", "nombre": "Gráfica", "detalle": "Lo que suena y viene"},
     {"id": "aviso", "nombre": "Aviso y rótulo", "detalle": "«Viene un pico»"}
    ]},
