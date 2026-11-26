@@ -1,6 +1,6 @@
 ## Qué es y qué se busca
 
-Llavero es un gestor de contraseñas para Android que no pide ningún permiso, así que no puede conectarse a Internet. Nació al ordenar las llaves de firma de las aplicaciones que se van a publicar en Google Play: hacía falta un sitio seguro para esas llaves y, ya puestos, para las contraseñas corrientes. La idea de partida fue una página web sin conexión; se cambió a una aplicación aislada, «tipo cartera de bitcoin», con exportar e importar protegidos por la contraseña maestra.
+La aplicación se llama **LlaverOFF** (llavero + OFF); la carpeta, el repositorio y el paquete siguen siendo `llavero`. Es un gestor de contraseñas para Android que no pide ningún permiso, así que no puede conectarse a Internet. Nació al ordenar las llaves de firma de las aplicaciones que se van a publicar en Google Play: hacía falta un sitio seguro para esas llaves y, ya puestos, para las contraseñas corrientes. La idea de partida fue una página web sin conexión; se cambió a una aplicación aislada, «tipo cartera de bitcoin», con exportar e importar protegidos por la contraseña maestra.
 
 ## Normas del proyecto
 
@@ -31,7 +31,9 @@ La llave con la que se firma la aplicación está fuera del proyecto, en la carp
 
 ## Estado al acabar el 26 de noviembre de 2026
 
-Versión 1.1, instalada en el móvil del dueño y vacía, a la espera de que él cree su llavero.
+Versión 1.2, instalada en el móvil del dueño, que **ya ha creado su llavero**: no borrar los datos de la aplicación ni desinstalarla. Para probar, usar la copia de pruebas (`construir.ps1 -Capturas`), que se instala aparte como `io.github.em3ge.llavero.pruebas`.
+
+Publicación en Google Play: todo lo preparado está en la carpeta `play` del proyecto; empezar por `play\pasos.md`. Falta solo la parte de la cuenta de Google.
 
 - Probado en el ordenador: cifrado de Java, cifrado de la página, cruce en los dos sentidos y la herramienta de las llaves con datos de mentira.
 - Probado en el móvil real, pulsando por cable: animación y ayuda, crear, añadir cuenta con contraseña generada, copiar, cerrar y abrir, contraseña equivocada, importar un archivo del ordenador (la llave llega con su archivo, contraseña, alias, paquete y huella), exportar y abrir la copia en el ordenador con `Prueba comprobar`, botón de atrás, temas, cierre al salir y cierre solo a los dos minutos.
@@ -40,7 +42,7 @@ Versión 1.1, instalada en el móvil del dueño y vacía, a la espera de que él
 
 ## Cómo probar en el móvil
 
-La aplicación prohíbe las capturas. Para probar: `CAPTURAS = true` en `MainActivity.java` y `.\construir.ps1 -Capturas`. Al acabar, volver a `false`, construir sin el modificador, instalar y borrar los datos de prueba con `adb shell pm clear io.github.em3ge.llavero` (solo si el dueño no ha creado aún su llavero: eso borra todo). El selector de archivos del móvil no ve lo que se copia con `adb push` hasta que se repasa el almacenamiento: `adb shell content call --uri content://media --method scan_volume --arg external_primary`.
+La aplicación prohíbe las capturas. Para probar: `CAPTURAS = true` en `MainActivity.java` y `.\construir.ps1 -Capturas`. Sale `salida\llavero-pruebas.apk`, que se instala como otra aplicación. Al acabar, volver a `false`, desinstalar la de pruebas (`adb uninstall io.github.em3ge.llavero.pruebas`) y construir sin el modificador. Nunca `pm clear` sobre la de verdad. El selector de archivos del móvil no ve lo que se copia con `adb push` hasta que se repasa el almacenamiento: `adb shell content call --uri content://media --method scan_volume --arg external_primary`.
 
 ## Ideas para más adelante
 

@@ -1,12 +1,12 @@
 {
- "nombre": "Llavero",
+ "nombre": "LlaverOFF",
  "lema": "Un gestor de contraseñas para Android aislado de Internet, como una cartera fría: guarda las cuentas de siempre y las llaves con las que se firman las aplicaciones.",
  "estado": "activo",
  "inicio": "2026-11-26",
  "ultima_actividad": "2026-11-26",
- "avance": 75,
- "avance_nota": "Estimación. El cifrado está probado en el ordenador y la aplicación se ha recorrido en el móvil real: crear, añadir, copiar, abrir y cerrar, importar, exportar, temas y cierre automático. Falta probar en el móvil los archivos adjuntos y el cambio de contraseña maestra, y meter las llaves de verdad.",
- "etapa_actual": "Etapa 3: meter las llaves de firma reales y usarlo a diario",
+ "avance": 85,
+ "avance_nota": "Estimación. La aplicación funciona y está probada en el móvil real; está preparado todo lo que pide Google Play que no depende de la cuenta. Falta lo que solo puede hacer el dueño: la cuenta de desarrollador, la prueba cerrada con 12 personas durante 14 días y la revisión de Google.",
+ "etapa_actual": "Etapa 4: publicar en Google Play",
  "tecnologias": [
   "Android",
   "Java",
@@ -25,7 +25,7 @@
   "Todo va en un solo archivo cifrado con una contraseña maestra, que no se guarda en ningún sitio. Ese archivo se exporta y se importa en otro móvil, mezclando lo que haya, o se abre en el ordenador con una página web de un solo archivo que usa el mismo formato.",
   "Una herramienta del ordenador recoge las llaves de firma de su carpeta, con sus contraseñas y sus fichas, y las deja en un archivo cifrado listo para importar en el móvil."
  ],
- "siguiente_paso": "Que el dueño cree su llavero con su contraseña maestra e importe las llaves de firma reales empaquetadas en el ordenador.",
+ "siguiente_paso": "Abrir la aplicación en Play Console, pegar la ficha y los formularios ya escritos y empezar la prueba cerrada.",
  "etapas": [
   {
    "nombre": "Etapa 1: el cifrado y el formato",
@@ -39,11 +39,16 @@
   },
   {
    "nombre": "Etapa 3: las llaves de firma",
-   "estado": "en curso",
+   "estado": "hecha",
    "detalle": "Herramienta del ordenador que empaqueta las llaves en un archivo cifrado. Probada con llaves de mentira hasta verlas dentro de la aplicación en el móvil; falta hacerlo con las de verdad."
   },
   {
-   "nombre": "Etapa 4: comodidades",
+   "nombre": "Etapa 4: publicar en Google Play",
+   "estado": "en curso",
+   "detalle": "Preparado: paquete .aab firmado, nombre, textos en español e inglés, icono, gráfico, seis capturas, política de privacidad publicada, respuestas de los formularios y revisión de derechos. Falta la parte de la cuenta: crear la aplicación, la prueba cerrada y la revisión."
+  },
+  {
+   "nombre": "Etapa 5: comodidades",
    "estado": "pendiente",
    "detalle": "Abrir con la huella, rellenar contraseñas en otras aplicaciones y aviso de copias antiguas."
   }
@@ -62,11 +67,17 @@
   "Herramienta del ordenador que mete las llaves de firma, con sus fichas y contraseñas, en un archivo cifrado para importar.",
   "Página web de un solo archivo, sin conexión, que abre y guarda el mismo formato en el ordenador.",
   "Prueba cruzada automática: Java abre lo que cifra la página web y al revés.",
-  "Probada en el móvil real por cable, pulsando desde el ordenador: crear el llavero, añadir una cuenta, copiar, cerrar y abrir, rechazo de una contraseña equivocada, importar un archivo hecho en el ordenador, exportar y abrir esa copia en el ordenador, cierre al salir y cierre solo a los dos minutos."
+  "Probada en el móvil real por cable, pulsando desde el ordenador: crear el llavero, añadir una cuenta, copiar, cerrar y abrir, rechazo de una contraseña equivocada, importar un archivo hecho en el ordenador, exportar y abrir esa copia en el ordenador, cierre al salir y cierre solo a los dos minutos.",
+  "Nombre para la tienda: LlaverOFF, de llavero y OFF, porque funciona sin Internet; hace pareja con ChitON.",
+  "Preparada para Google Play: apunta a Android 16, entrega un paquete .aab firmado con su llave de subida, y lleva buzón de sugerencias, «Acerca de», licencias y enlace a la política de privacidad.",
+  "Ficha de la tienda escrita en español y en inglés, con icono, gráfico de cabecera y seis capturas hechas en el teléfono con datos inventados.",
+  "Respuestas para los formularios de Google y revisión de derechos y marcas: sin permisos que justificar, sin datos recogidos y sin marcas ajenas en los textos.",
+  "La versión de pruebas se instala como otra aplicación, al lado de la de verdad, para poder hacer capturas sin tocar el llavero real."
  ],
  "pendiente": [
+  "Para publicar: cuenta de desarrollador, crear la aplicación en Play Console, prueba cerrada de 12 personas durante 14 días y revisión de Google.",
+  "Buscar el nombre LlaverOFF en Google Play y en el registro de marcas.",
   "Probar en el móvil adjuntar y sacar archivos, y cambiar la contraseña maestra.",
-  "Importar en el móvil las llaves reales empaquetadas en el ordenador.",
   "Probar en otros móviles.",
   "Abrir con la huella dactilar, con la clave guardada en el almacén seguro del móvil.",
   "Rellenar contraseñas en otras aplicaciones.",
@@ -76,7 +87,7 @@
  "diario": [
   {
    "fecha": "2026-11-26",
-   "texto": "Nace al ordenar las llaves de firma de las aplicaciones. Primero se plantea como una página web sin conexión; el dueño prefiere una aplicación de Android aislada de Internet, al estilo de una cartera fría, con exportar e importar. Se escribe el cifrado en una clase de Java sin nada de Android para poder probarlo en el ordenador, y se monta una prueba cruzada con la página web: cada una abre lo que cifra la otra. Después, la aplicación entera, el guion que la fabrica y vigila que no pida permisos, y la herramienta del ordenador para las llaves. Al acabar el día se construye, pero no se ha probado en el móvil. Ya con el móvil enchufado, el dueño pide la misma pantalla que ChitON y que sea muy fácil de usar: se rehace con animación de inicio, ayuda en tres pasos, engranaje con temas, un solo botón de añadir y copiar desde la lista (versión 1.1). Se recorre entera en el teléfono, pulsando por cable; sale un fallo, que la tecla Intro abría dos veces y dejaba un aviso de error falso, y se corrige. Importar las llaves empaquetadas en el ordenador y exportar una copia que luego abre el ordenador funcionan."
+   "texto": "Nace al ordenar las llaves de firma de las aplicaciones. Primero se plantea como una página web sin conexión; el dueño prefiere una aplicación de Android aislada de Internet, al estilo de una cartera fría, con exportar e importar. Se escribe el cifrado en una clase de Java sin nada de Android para poder probarlo en el ordenador, y se monta una prueba cruzada con la página web: cada una abre lo que cifra la otra. Después, la aplicación entera, el guion que la fabrica y vigila que no pida permisos, y la herramienta del ordenador para las llaves. Al acabar el día se construye, pero no se ha probado en el móvil. Ya con el móvil enchufado, el dueño pide la misma pantalla que ChitON y que sea muy fácil de usar: se rehace con animación de inicio, ayuda en tres pasos, engranaje con temas, un solo botón de añadir y copiar desde la lista (versión 1.1). Se recorre entera en el teléfono, pulsando por cable; sale un fallo, que la tecla Intro abría dos veces y dejaba un aviso de error falso, y se corrige. Importar las llaves empaquetadas en el ordenador y exportar una copia que luego abre el ordenador funcionan. Por la tarde se prepara la publicación en Google Play: el dueño elige el nombre LlaverOFF entre cuatro propuestas, se añaden el buzón de sugerencias y «Acerca de», se fabrica el paquete .aab con su llave de subida y se escriben la ficha, la política de privacidad y las respuestas de los formularios. Las capturas se hacen en el teléfono con una copia de pruebas de la aplicación, instalada aparte para no tocar el llavero que el dueño ya había creado (versión 1.2)."
   }
  ],
  "lecciones": [
@@ -84,7 +95,8 @@
   "Separar el cifrado en una clase que no use nada de Android permite probarlo en el ordenador en segundos, sin móvil.",
   "Dos programas que cifran igual hay que probarlos cruzados: que cada uno pase sus propias pruebas no dice que se entiendan.",
   "Al desinstalar una aplicación se pierde lo que guardaba. En un gestor de contraseñas, cambiar de llave de firma obliga a desinstalar: antes hay que exportar una copia.",
-  "Para probar una aplicación que prohíbe las capturas de pantalla hace falta una versión de pruebas que las permita, y un seguro para que esa versión no salga por descuido: el guion de construcción la rechaza si no se le pide a propósito."
+  "Para probar una aplicación que prohíbe las capturas de pantalla hace falta una versión de pruebas que las permita, y un seguro para que esa versión no salga por descuido: el guion de construcción la rechaza si no se le pide a propósito.",
+  "Cuando la aplicación de verdad ya guarda datos del dueño, las pruebas van en una copia con otro nombre de paquete, instalada al lado: así no hay que borrar nada para probar."
  ],
  "relacionados": [
   {
@@ -92,7 +104,7 @@
    "relacion": "La primera aplicación cuyas llaves de firma hay que guardar; Llavero se fabrica con el mismo método, sin Gradle."
   }
  ],
- "texto_para_claude": "Vamos a retomar el proyecto llavero, un gestor de contraseñas y de llaves de firma para Android que no pide ningún permiso. Antes de tocar nada, lee LEEME.md del proyecto y la memoria para retomar de su ficha en la web de proyectos. El cifrado está en Cofre.java y la pantalla en MainActivity.java. Se fabrica con construir.ps1 y se prueba el cifrado con pruebas\\cruzada.ps1. Dime en pocas líneas en qué punto estamos y cuál es el siguiente paso, y espera mi visto bueno. Normas: no añadir ningún permiso ni biblioteca; no cambiar el formato del archivo sin subirle la versión; no dar por bueno lo que no se haya probado en el móvil; nunca pedirme ni escribir en ningún sitio la contraseña maestra.",
+ "texto_para_claude": "Vamos a retomar el proyecto llavero (la aplicación se llama LlaverOFF), un gestor de contraseñas y de llaves de firma para Android que no pide ningún permiso. Antes de tocar nada, lee LEEME.md del proyecto y la memoria para retomar de su ficha en la web de proyectos. El cifrado está en Cofre.java y la pantalla en MainActivity.java. Se fabrica con construir.ps1 y se prueba el cifrado con pruebas\\cruzada.ps1. Dime en pocas líneas en qué punto estamos y cuál es el siguiente paso, y espera mi visto bueno. Normas: no añadir ningún permiso ni biblioteca; no cambiar el formato del archivo sin subirle la versión; no dar por bueno lo que no se haya probado en el móvil; nunca pedirme ni escribir en ningún sitio la contraseña maestra.",
  "esquema": {
   "titulo": "Cómo está hecho",
   "texto": "La contraseña maestra abre un único archivo cifrado. La aplicación no tiene salida a Internet: lo único que sale es ese mismo archivo, cifrado, cuando se exporta.",
