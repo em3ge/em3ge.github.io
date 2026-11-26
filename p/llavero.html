@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Llavero · Proyectos</title>
+<meta name="description" content="Un gestor de contraseñas para Android aislado de Internet, como una cartera fría: guarda las cuentas de siempre y las llaves con las que se firman las aplicaciones.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap">
+<link rel="stylesheet" href="../estilo.css">
+</head>
+<body style="--color:#ffd86b">
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="barra">
+<div class="ancho barra-dentro">
+<a class="marca" href="../index.html">em3ge<span aria-hidden="true">_</span></a>
+<nav aria-label="Principal">
+<a href="../index.html#proyectos">Proyectos</a>
+<a href="../index.html#oficio">Cómo trabajo</a>
+<a href="../index.html#tecnologias">Tecnologías</a>
+<a class="barra-gh" href="https://github.com/em3ge">GitHub</a>
+</nav>
+</div>
+</header>
+<main id="contenido" class="proyecto" data-fecha="2026-11-26">
+<section class="heroe heroe-proyecto" aria-labelledby="t-proyecto">
+<div class="ancho heroe-dos">
+<div>
+<p class="miga"><a href="../index.html#proyectos">← Todos los proyectos</a></p>
+<div class="tarjeta-cabeza">
+<h1 id="t-proyecto">Llavero</h1>
+<span class="estado estado-activo">Activo</span>
+</div>
+<p class="presentacion">Un gestor de contraseñas para Android aislado de Internet, como una cartera fría: guarda las cuentas de siempre y las llaves con las que se firman las aplicaciones.</p>
+<div class="avance"><div class="avance-riel" role="img" aria-label="Avance: 55 por ciento"><div class="avance-lleno" style="width:55%"></div></div><span class="avance-num" aria-hidden="true">55 %</span></div>
+<p class="nota">Estimación. El cifrado está escrito y probado en el ordenador, en Java y en la página web, y los dos se entienden. La aplicación de Android está escrita y se construye, pero todavía no se ha probado en un móvil.</p>
+<ul class="tecnologias" aria-label="Tecnologías"><li>Android</li><li>Java</li><li>AES-GCM</li><li>PBKDF2</li><li>JavaScript</li><li>Web Crypto</li><li>PowerShell</li></ul>
+<div class="botones"><a class="boton" href="vscode://vscode.git/clone?url=https%3A%2F%2Fgithub.com%2Fem3ge%2Fllavero.git">Abrir en VS Code</a><a class="boton boton-claro" href="https://vscode.dev/github/em3ge/llavero">Editar en el navegador</a><a class="boton boton-claro" href="https://github.com/em3ge/llavero">Ver el código</a><a class="boton boton-claro" href="https://github.com/em3ge/llavero/archive/refs/heads/main.zip">Descargar en zip</a></div><p class="nota">«Abrir en VS Code» abre el programa, pregunta en qué carpeta guardarlo y lo trae de GitHub. Si ya lo tienes en ese ordenador, ábrelo desde VS Code y pulsa sincronizar. «Editar en el navegador» lo abre al día, sin instalar nada, pero no puede ejecutarlo.</p><p class="nota">El código es privado: GitHub pedirá iniciar sesión con una cuenta que tenga permiso.</p>
+</div>
+<figure class="foto"><img src="portadas/llavero.svg" alt="Ilustración del proyecto Llavero" width="1200" height="675"></figure>
+</div>
+</section>
+<div class="ancho">
+<dl class="datos datos-ficha">
+<div><dt>Etapa</dt><dd>Etapa 2: probar la aplicación en el móvil</dd></div>
+<div><dt>Empezó</dt><dd>26 de noviembre de 2026</dd></div>
+<div><dt>Último movimiento</dt><dd>26 de noviembre de 2026</dd></div>
+<div><dt>Tamaño</dt><dd>2.134 líneas en 8 archivos de código</dd></div>
+<div><dt>Cambios guardados en git</dt><dd>1</dd></div>
+</dl>
+<nav class="indice" aria-label="Apartados de esta página"><ul><li><a href="#corto">En corto</a></li><li><a href="#esquema">Cómo está hecho</a></li><li><a href="#muestra">Una muestra de ejecución</a></li><li><a href="#siguiente">Siguiente paso</a></li><li><a href="#etapas">Etapas</a></li><li><a href="#hecho">Qué hay hecho</a></li><li><a href="#pendiente">Qué falta</a></li><li><a href="#lecciones">Lecciones aprendidas</a></li><li><a href="#diario">Diario</a></li><li><a href="#retomar">Memoria para retomar</a></li><li><a href="#relacionados">Proyectos relacionados</a></li><li><a href="#claude">Texto para retomarlo con Claude</a></li></ul></nav>
+<section id="corto" aria-labelledby="t-corto" class="texto">
+<h2 id="t-corto">En corto</h2>
+<p>Quien publica aplicaciones tiene que guardar bien las llaves con las que las firma: si se pierden, no se puede volver a actualizar la aplicación. Llavero nace para eso y, de paso, para las contraseñas corrientes: el correo, el banco, otras aplicaciones.</p><p>La idea es la de una cartera fría. La aplicación no pide ningún permiso, y sin el permiso de Internet Android no le deja abrir ninguna conexión. Eso se puede comprobar desde fuera: en los ajustes del móvil y mirando el paquete con las herramientas de Android. El guion que la fabrica se niega a terminar si aparece un permiso.</p><p>Todo va en un solo archivo cifrado con una contraseña maestra, que no se guarda en ningún sitio. Ese archivo se exporta y se importa en otro móvil, mezclando lo que haya, o se abre en el ordenador con una página web de un solo archivo que usa el mismo formato.</p><p>Una herramienta del ordenador recoge las llaves de firma de su carpeta, con sus contraseñas y sus fichas, y las deja en un archivo cifrado listo para importar en el móvil.</p>
+</section>
+<section id="esquema" aria-labelledby="t-esquema">
+<h2 id="t-esquema">Cómo está hecho</h2>
+<p>La contraseña maestra abre un único archivo cifrado. La aplicación no tiene salida a Internet: lo único que sale es ese mismo archivo, cifrado, cuando se exporta.</p><div class="esq-marco" tabindex="0" role="group" aria-label="Esquema. Se puede desplazar a los lados."><svg class="esq" viewBox="0 0 1240 278" style="min-width:769px" role="img" aria-label="Cómo está hecho. Debajo está el mismo esquema en texto."><defs><marker id="punta-llavero" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="esq-punta" d="M0 1 L10 5 L0 9 z"/></marker><marker id="punta-llavero-f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="esq-punta fuerte" d="M0 1 L10 5 L0 9 z"/></marker></defs><g class="esq-grupo"><rect x="18" y="86" width="232" height="106" rx="16"/><text x="34" y="109">Tú</text></g><g class="esq-grupo"><rect x="342" y="18" width="232" height="242" rx="16"/><text x="358" y="41">Llavero en el móvil</text></g><g class="esq-grupo"><rect x="666" y="52" width="232" height="174" rx="16"/><text x="682" y="75">Fuera</text></g><g class="esq-grupo"><rect x="990" y="18" width="232" height="242" rx="16"/><text x="1006" y="41">Otros sitios</text></g><path class="esq-linea fuerte" d="M236 150 C296 150 296 82 356 82" marker-end="url(#punta-llavero-f)"/><path class="esq-linea fuerte" d="M560 218 C620 218 620 116 680 116" marker-end="url(#punta-llavero-f)"/><path class="esq-linea" d="M884 116 C944 116 944 82 1004 82" marker-end="url(#punta-llavero)"/><path class="esq-linea" d="M884 116 C944 116 944 150 1004 150" marker-end="url(#punta-llavero)" marker-start="url(#punta-llavero)"/><path class="esq-linea" d="M1004 218 C944 218 944 116 884 116" marker-end="url(#punta-llavero)"/><g class="esq-nodo"><rect x="32" y="122" width="204" height="56" rx="11"/><text class="esq-nombre" x="46" y="146">Contraseña maestra</text><text class="esq-detalle" x="46" y="164">No se guarda</text></g><g class="esq-nodo destacado"><rect x="356" y="54" width="204" height="56" rx="11"/><text class="esq-nombre" x="370" y="78">Cifrado</text><text class="esq-detalle" x="370" y="96">PBKDF2 y AES-256-GCM</text></g><g class="esq-nodo"><rect x="356" y="122" width="204" height="56" rx="11"/><text class="esq-nombre" x="370" y="146">Lista y fichas</text><text class="esq-detalle" x="370" y="164">Cuentas y llaves</text></g><g class="esq-nodo"><rect x="356" y="190" width="204" height="56" rx="11"/><text class="esq-nombre" x="370" y="214">Archivo cifrado</text><text class="esq-detalle" x="370" y="232">Dentro de la aplicación</text></g><g class="esq-nodo"><rect x="680" y="88" width="204" height="56" rx="11"/><text class="esq-nombre" x="694" y="112">Copia exportada</text><text class="esq-detalle" x="694" y="130">El mismo archivo cifrado</text></g><g class="esq-nodo"><rect x="680" y="156" width="204" height="56" rx="11"/><text class="esq-nombre" x="694" y="180">Internet</text><text class="esq-detalle" x="694" y="198">Sin permiso: cerrado</text></g><g class="esq-nodo"><rect x="1004" y="54" width="204" height="56" rx="11"/><text class="esq-nombre" x="1018" y="78">Otro móvil</text><text class="esq-detalle" x="1018" y="96">Importa y mezcla</text></g><g class="esq-nodo"><rect x="1004" y="122" width="204" height="56" rx="11"/><text class="esq-nombre" x="1018" y="146">Página web</text><text class="esq-detalle" x="1018" y="164">En el ordenador</text></g><g class="esq-nodo"><rect x="1004" y="190" width="204" height="56" rx="11"/><text class="esq-nombre" x="1018" y="214">Llaves de firma</text><text class="esq-detalle" x="1018" y="232">Empaquetadas en el PC</text></g><text class="esq-rotulo fuerte" x="296" y="109" text-anchor="middle">abre</text><text class="esq-rotulo fuerte" x="620" y="160" text-anchor="middle">exportar</text><text class="esq-rotulo" x="944" y="92" text-anchor="middle">importar</text><text class="esq-rotulo" x="944" y="160" text-anchor="middle">llaves</text></svg></div><details class="plegable"><summary>Leer el esquema como texto</summary><h3>Elementos</h3><ul><li><strong>Tú.</strong> Contraseña maestra: No se guarda.</li><li><strong>Llavero en el móvil.</strong> Cifrado: PBKDF2 y AES-256-GCM; Lista y fichas: Cuentas y llaves; Archivo cifrado: Dentro de la aplicación.</li><li><strong>Fuera.</strong> Copia exportada: El mismo archivo cifrado; Internet: Sin permiso: cerrado.</li><li><strong>Otros sitios.</strong> Otro móvil: Importa y mezcla; Página web: En el ordenador; Llaves de firma: Empaquetadas en el PC.</li></ul><h3>Conexiones</h3><ul><li>Contraseña maestra → Cifrado: abre</li><li>Archivo cifrado → Copia exportada: exportar</li><li>Copia exportada → Otro móvil: importar</li><li>Copia exportada ↔ Página web</li><li>Llaves de firma → Copia exportada: llaves</li></ul></details>
+</section>
+<section id="muestra" aria-labelledby="t-muestra">
+<h2 id="t-muestra">Una muestra de ejecución</h2>
+<p class="nota">Salida real de la prueba cruzada del cifrado, ejecutada en el ordenador el 26 de noviembre de 2026. No es una prueba de la aplicación en el móvil, que está por hacer.</p>
+<p class="muestra-mandos" hidden><button type="button" class="boton" data-muestra="reproducir">Reproducir paso a paso</button><button type="button" class="boton boton-claro" data-muestra="todo">Verla entera</button><span class="nota" role="status" aria-live="polite" data-muestra="estado"></span></p>
+<div class="muestra">
+<section class="escena">
+<h3>El cifrado de la aplicación</h3>
+<ol class="lineas">
+<li class="linea linea-tu"><span class="quien">Orden</span><p>pruebas\cruzada.ps1</p></li>
+<li class="linea linea-programa"><span class="quien">Prueba</span><p>BIEN  el archivo no enseña nada legible</p></li>
+<li class="linea linea-programa"><span class="quien">Prueba</span><p>BIEN  cada guardado sale distinto</p></li>
+<li class="linea linea-programa"><span class="quien">Prueba</span><p>BIEN  abre con la contraseña y devuelve lo mismo</p></li>
+<li class="linea linea-programa"><span class="quien">Prueba</span><p>BIEN  rechaza una contraseña equivocada</p></li>
+<li class="linea linea-programa"><span class="quien">Prueba</span><p>BIEN  nota que han tocado los datos</p></li>
+<li class="linea linea-programa"><span class="quien">Prueba</span><p>BIEN  nota que han tocado la cabecera</p></li>
+<li class="linea linea-programa"><span class="quien">Prueba</span><p>BIEN  rechaza un archivo que no es un llavero</p></li>
+<li class="linea linea-programa"><span class="quien">Prueba</span><p>BIEN  genera contraseñas de 24 letras distintas</p></li>
+</ol></section>
+<section class="escena">
+<h3>La aplicación y la página web se entienden</h3>
+<ol class="lineas">
+<li class="linea linea-nota"><span class="quien">Nota</span><p>Java cifra un llavero de muestra y lo abre la página web; luego al revés.</p></li>
+<li class="linea linea-programa"><span class="quien">Prueba</span><p>BIEN  la página no puede conectarse a Internet</p></li>
+<li class="linea linea-dentro"><span class="quien">Por dentro</span><p>iteraciones de la clave: 600000</p></li>
+<li class="linea linea-programa"><span class="quien">Prueba</span><p>BIEN  la página web abre lo que cifró Java</p></li>
+<li class="linea linea-programa"><span class="quien">Prueba</span><p>BIEN  Java abre lo que cifró la página web</p></li>
+<li class="linea linea-programa"><span class="quien">Prueba</span><p>Todo bien.</p></li>
+</ol></section>
+</div>
+</section>
+<section id="siguiente" aria-labelledby="t-siguiente" class="texto">
+<h2 id="t-siguiente">Siguiente paso</h2>
+<p class="destacado">Instalar la aplicación en el móvil y probar de verdad: crear el llavero, añadir una cuenta y una llave, exportar, importar y comprobar que se cierra sola.</p>
+</section>
+<section id="etapas" aria-labelledby="t-etapas">
+<h2 id="t-etapas">Etapas</h2>
+<ol class="etapas"><li class="etapa etapa-hecha"><span class="etapa-estado">Hecha</span><div><strong>Etapa 1: el cifrado y el formato</strong><p>Una clase de Java sin nada de Android y la misma cuenta en JavaScript. Probadas las dos, y cruzadas: cada una abre lo que cifra la otra.</p></div></li><li class="etapa etapa-en-curso"><span class="etapa-estado">En curso</span><div><strong>Etapa 2: la aplicación de Android</strong><p>Candado, lista, ficha, adjuntos, generador, exportar, importar y mezclar. Escrita y construida; sin probar en un móvil.</p></div></li><li class="etapa etapa-en-curso"><span class="etapa-estado">En curso</span><div><strong>Etapa 3: las llaves de firma</strong><p>Herramienta del ordenador que empaqueta las llaves en un archivo cifrado. Probada con llaves de mentira; falta importarlas en el móvil.</p></div></li><li class="etapa etapa-pendiente"><span class="etapa-estado">Pendiente</span><div><strong>Etapa 4: comodidades</strong><p>Abrir con la huella, rellenar contraseñas en otras aplicaciones y aviso de copias antiguas.</p></div></li></ol>
+</section>
+<section id="hecho" aria-labelledby="t-hecho">
+<h2 id="t-hecho">Qué hay hecho</h2>
+<ul class="marcas hechas"><li>Formato de archivo propio y documentado: la clave sale de la contraseña maestra con PBKDF2 de 600 000 vueltas y los datos van con AES de 256 bits en modo GCM, que además detecta cualquier cambio.</li><li>La cabecera del archivo va atada al cifrado: si alguien rebaja el número de vueltas o cambia la sal, el archivo no abre.</li><li>Aplicación de Android sin ningún permiso y sin bibliotecas añadidas, con tres pantallas: candado, lista con buscador y ficha.</li><li>Dos clases de entrada: cuentas (usuario, contraseña, dirección, notas) y llaves de aplicaciones (archivo de la llave adjunto, contraseña, alias, paquete y huella).</li><li>Exportar una copia cifrada e importarla en otro móvil. Si ya hay llavero, se mezclan: lo nuevo se añade y de lo repetido queda lo cambiado más tarde.</li><li>Protecciones: no deja hacer capturas de pantalla, se cierra al salir y a los dos minutos sin tocarla, vacía el portapapeles a los 30 segundos y no entra en las copias de seguridad del móvil.</li><li>Generador de contraseñas de 24 letras, sin sesgo y sin las letras que se confunden.</li><li>Guion que fabrica el paquete sin Gradle y se niega a terminar si el manifiesto pide un permiso o el código nombra clases de red.</li><li>Herramienta del ordenador que mete las llaves de firma, con sus fichas y contraseñas, en un archivo cifrado para importar.</li><li>Página web de un solo archivo, sin conexión, que abre y guarda el mismo formato en el ordenador.</li><li>Prueba cruzada automática: Java abre lo que cifra la página web y al revés.</li></ul>
+</section>
+<section id="pendiente" aria-labelledby="t-pendiente">
+<h2 id="t-pendiente">Qué falta</h2>
+<ul class="marcas faltan"><li>Probar la aplicación en un móvil de verdad: no se ha instalado todavía.</li><li>Importar en el móvil las llaves reales empaquetadas en el ordenador.</li><li>Abrir con la huella dactilar, con la clave guardada en el almacén seguro del móvil.</li><li>Rellenar contraseñas en otras aplicaciones.</li><li>Cambiar PBKDF2 por Argon2, que aguanta mejor los ataques con tarjetas gráficas; pide una biblioteca añadida.</li><li>Revisión del cifrado por alguien de fuera: ahora es un programa hecho en casa.</li></ul>
+</section>
+<section id="lecciones" aria-labelledby="t-lecciones">
+<h2 id="t-lecciones">Lecciones aprendidas</h2>
+<ul class="lecciones"><li>«No se conecta a Internet» vale poco si hay que creérselo. Sin el permiso de Internet lo impide el sistema, y cualquiera puede comprobarlo en los ajustes del móvil o mirando el paquete.</li><li>Separar el cifrado en una clase que no use nada de Android permite probarlo en el ordenador en segundos, sin móvil.</li><li>Dos programas que cifran igual hay que probarlos cruzados: que cada uno pase sus propias pruebas no dice que se entiendan.</li><li>Al desinstalar una aplicación se pierde lo que guardaba. En un gestor de contraseñas, cambiar de llave de firma obliga a desinstalar: antes hay que exportar una copia.</li></ul>
+</section>
+<section id="diario" aria-labelledby="t-diario">
+<h2 id="t-diario">Diario</h2>
+<ol class="diario"><li><time datetime="2026-11-26">26 de noviembre de 2026</time><p>Nace al ordenar las llaves de firma de las aplicaciones. Primero se plantea como una página web sin conexión; el dueño prefiere una aplicación de Android aislada de Internet, al estilo de una cartera fría, con exportar e importar. Se escribe el cifrado en una clase de Java sin nada de Android para poder probarlo en el ordenador, y se monta una prueba cruzada con la página web: cada una abre lo que cifra la otra. Después, la aplicación entera, el guion que la fabrica y vigila que no pida permisos, y la herramienta del ordenador para las llaves. Al acabar el día se construye, pero no se ha probado en el móvil.</p></li></ol>
+</section>
+<section id="retomar" aria-labelledby="t-retomar" class="texto">
+<h2 id="t-retomar">Memoria para retomar</h2>
+<p class="nota">El cuaderno técnico del proyecto: lo necesario para ponerse al día y seguir.</p><details class="plegable cuaderno"><summary>Abrir la memoria para retomar</summary><h3 id="r-qu-es-y-qu-se-busca">Qué es y qué se busca</h3>
+<p>Llavero es un gestor de contraseñas para Android que no pide ningún permiso, así que no puede conectarse a Internet. Nació al ordenar las llaves de firma de las aplicaciones que se van a publicar en Google Play: hacía falta un sitio seguro para esas llaves y, ya puestos, para las contraseñas corrientes. La idea de partida fue una página web sin conexión; se cambió a una aplicación aislada, «tipo cartera de bitcoin», con exportar e importar protegidos por la contraseña maestra.</p>
+<h3 id="r-normas-del-proyecto">Normas del proyecto</h3>
+<ul>
+<li><strong>Ni un permiso, ni una biblioteca.</strong> <code>construir.ps1</code> se para si el manifiesto pide un permiso o el código nombra clases de red.</li>
+<li><strong>El formato del archivo no se cambia sin subirle la versión</strong> (<code>llavero-1</code>). Lo leen tres programas: la aplicación, la página web y la herramienta del ordenador.</li>
+<li><strong>No dar por bueno lo que no se ha probado en el móvil.</strong></li>
+<li><strong>La contraseña maestra solo la teclea el dueño.</strong> No se pide, no se apunta y no se pasa por la línea de órdenes.</li>
+<li><strong>Antes de cambiar la llave de firma de la aplicación, exportar.</strong> Cambiarla obliga a desinstalar y al desinstalar se pierde el llavero del móvil.</li>
+</ul>
+<h3 id="r-c-mo-ponerlo-en-marcha">Cómo ponerlo en marcha</h3>
+<p>En PowerShell, en la carpeta del proyecto:</p>
+<ol>
+<li><code>.\construir.ps1</code> fabrica <code>salida\llavero.apk</code> con el JDK y el SDK de la carpeta de datos locales, los mismos de volumen-nocturno.</li>
+<li><code>adb install -r salida\llavero.apk</code> con el móvil enchufado.</li>
+<li><code>.\pruebas\cruzada.ps1</code> pasa las pruebas del cifrado (necesita Edge).</li>
+<li><code>.\meter_llaves.ps1</code> empaqueta las llaves de firma de la carpeta <code>llaves</code> de Documentos en un archivo cifrado para importar en el móvil.</li>
+</ol>
+<p>La llave con la que se firma la aplicación está fuera del proyecto, en la carpeta central de llaves, subcarpeta <code>llavero</code>.</p>
+<h3 id="r-c-mo-est-hecho">Cómo está hecho</h3>
+<ul>
+<li><code>Cofre.java</code>: el cifrado, sin nada de Android. PBKDF2-HMAC-SHA-256 con 600 000 vueltas y sal de 16 bytes; AES-256-GCM con iv de 12 bytes nuevo en cada guardado; la cabecera (formato, vueltas y sal) va como dato autenticado. Lee la cabecera con expresiones regulares para no depender de ninguna biblioteca de JSON.</li>
+<li><code>MainActivity.java</code>: una sola actividad con tres pantallas hechas por código. El llavero abierto vive en memoria (<code>boveda</code>, <code>clave</code>, <code>sal</code>, <code>iteraciones</code>) y se pone a <code>null</code> al cerrar. Guardar escribe a un archivo aparte y lo renombra. <code>onStop</code> cierra el llavero salvo que haya un selector de archivos abierto (<code>eligiendo</code>).</li>
+<li>Importar: sin llavero en el móvil, la copia pasa a ser el llavero con su misma contraseña. Con llavero abierto, se mezclan por <code>id</code> y gana lo de <code>cambiado</code> más reciente.</li>
+<li><code>pc\Empaquetar.java</code>: una entrada de tipo <code>llave</code> por cada subcarpeta con archivos <code>.jks</code>; el <code>id</code> es <code>llave-</code> más el nombre de la carpeta, para que repetir la importación ponga al día y no duplique.</li>
+<li><code>web\index.html</code>: el mismo formato con Web Crypto, con política de contenido que impide cualquier conexión.</li>
+</ul>
+<h3 id="r-estado-al-acabar-el-26-de-noviembre-de-2026">Estado al acabar el 26 de noviembre de 2026</h3>
+<ul>
+<li>Probado en el ordenador: cifrado de Java, cifrado de la página, cruce en los dos sentidos y la herramienta de las llaves con datos de mentira.</li>
+<li>Sin probar: toda la aplicación en un móvil. Lo primero al retomar es instalarla y recorrerla entera: crear, añadir, adjuntar, exportar, importar, mezclar, cambiar la contraseña maestra, el cierre solo y el botón de atrás.</li>
+<li>Dudas que mirar en el móvil: que el teclado no tape los campos, que los cuadros de diálogo se lean bien y que el selector de archivos no cierre el llavero.</li>
+</ul>
+<h3 id="r-ideas-para-m-s-adelante">Ideas para más adelante</h3>
+<ul>
+<li>Abrir con la huella, guardando la clave en el almacén seguro del móvil.</li>
+<li>Servicio de autorrelleno para otras aplicaciones.</li>
+<li>Argon2 en lugar de PBKDF2.</li>
+</ul></details>
+</section>
+<section id="relacionados" aria-labelledby="t-relacionados" class="texto">
+<h2 id="t-relacionados">Proyectos relacionados</h2>
+<ul><li><strong>ChitON.</strong> La primera aplicación cuyas llaves de firma hay que guardar; Llavero se fabrica con el mismo método, sin Gradle.</li></ul>
+</section>
+<section id="claude" aria-labelledby="t-claude" class="texto">
+<h2 id="t-claude">Texto para retomarlo con Claude</h2>
+<p>Pega este texto al empezar una sesión y Claude se pone al día.</p><pre id="texto-claude" tabindex="0">Vamos a retomar el proyecto llavero, un gestor de contraseñas y de llaves de firma para Android que no pide ningún permiso. Antes de tocar nada, lee LEEME.md del proyecto y la memoria para retomar de su ficha en la web de proyectos. El cifrado está en Cofre.java y la pantalla en MainActivity.java. Se fabrica con construir.ps1 y se prueba el cifrado con pruebas\cruzada.ps1. Dime en pocas líneas en qué punto estamos y cuál es el siguiente paso, y espera mi visto bueno. Normas: no añadir ningún permiso ni biblioteca; no cambiar el formato del archivo sin subirle la versión; no dar por bueno lo que no se haya probado en el móvil; nunca pedirme ni escribir en ningún sitio la contraseña maestra.</pre><button type="button" class="boton" data-copiar="texto-claude">Copiar el texto</button><span class="nota" role="status" aria-live="polite" id="copiado"></span>
+</section>
+</div>
+</main>
+<footer class="pie">
+<div class="ancho">
+<p>em3ge · Proyectos. Página actualizada el 26 de noviembre de 2026.</p>
+</div>
+</footer>
+<script src="../app.js"></script>
+</body>
+</html>

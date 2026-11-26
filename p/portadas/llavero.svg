@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+<defs>
+<linearGradient id="fondo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1026"/><stop offset=".6" stop-color="#141a44"/><stop offset="1" stop-color="#262a6e"/></linearGradient>
+<radialGradient id="luz" cx="26%" cy="50%" r="42%"><stop offset="0" stop-color="#ffd86b" stop-opacity=".26"/><stop offset="1" stop-color="#ffd86b" stop-opacity="0"/></radialGradient>
+<pattern id="puntos" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.2" fill="#c7cbf5" fill-opacity=".10"/></pattern>
+</defs>
+<rect width="1200" height="675" fill="url(#fondo)"/>
+<rect width="1200" height="675" fill="url(#puntos)"/>
+<rect width="1200" height="675" fill="url(#luz)"/>
+
+<!-- la llave -->
+<g transform="translate(312 338) rotate(-35) scale(17) translate(-12 -12)">
+<path fill="#ffd86b" d="M12.65,10C11.83,7.67 9.61,6 7,6c-3.31,0 -6,2.69 -6,6s2.69,6 6,6c2.61,0 4.83,-1.67 5.65,-4H17v4h4v-4h2v-4H12.65zM7,14c-1.1,0 -2,-0.9 -2,-2s0.9,-2 2,-2 2,0.9 2,2 -0.9,2 -2,2z"/>
+</g>
+
+<!-- la lista de entradas, con las contraseñas tapadas -->
+<rect x="640" y="130" width="470" height="415" rx="26" fill="#ffffff" fill-opacity=".07"/>
+<g font-family="ui-sans-serif,Segoe UI,sans-serif">
+<text x="672" y="180" font-size="20" fill="#b8bde8">Llaves de aplicaciones</text>
+<rect x="664" y="198" width="422" height="74" rx="16" fill="#ffffff" fill-opacity=".09"/>
+<circle cx="706" cy="235" r="22" fill="#ffd86b"/><text x="706" y="243" text-anchor="middle" font-size="24" font-weight="600" fill="#0b1026">C</text>
+<rect x="744" y="218" width="150" height="14" rx="7" fill="#ffffff"/><rect x="744" y="242" width="230" height="10" rx="5" fill="#b8bde8" fill-opacity=".7"/>
+<text x="672" y="318" font-size="20" fill="#b8bde8">Cuentas</text>
+<rect x="664" y="336" width="422" height="74" rx="16" fill="#ffffff" fill-opacity=".09"/>
+<circle cx="706" cy="373" r="22" fill="#ffd86b"/><text x="706" y="381" text-anchor="middle" font-size="24" font-weight="600" fill="#0b1026">B</text>
+<rect x="744" y="356" width="110" height="14" rx="7" fill="#ffffff"/>
+<g fill="#b8bde8"><circle cx="750" cy="388" r="5"/><circle cx="768" cy="388" r="5"/><circle cx="786" cy="388" r="5"/><circle cx="804" cy="388" r="5"/><circle cx="822" cy="388" r="5"/><circle cx="840" cy="388" r="5"/><circle cx="858" cy="388" r="5"/><circle cx="876" cy="388" r="5"/></g>
+<rect x="664" y="424" width="422" height="74" rx="16" fill="#ffffff" fill-opacity=".09"/>
+<circle cx="706" cy="461" r="22" fill="#ffd86b"/><text x="706" y="469" text-anchor="middle" font-size="24" font-weight="600" fill="#0b1026">G</text>
+<rect x="744" y="444" width="130" height="14" rx="7" fill="#ffffff"/>
+<g fill="#b8bde8"><circle cx="750" cy="476" r="5"/><circle cx="768" cy="476" r="5"/><circle cx="786" cy="476" r="5"/><circle cx="804" cy="476" r="5"/><circle cx="822" cy="476" r="5"/><circle cx="840" cy="476" r="5"/></g>
+</g>
+
+<!-- sin salida a Internet -->
+<g transform="translate(1040 76)" stroke="#ff8f8f" stroke-width="5" fill="none" stroke-linecap="round">
+<circle cx="0" cy="0" r="28"/><path d="M-28 0 H28"/><path d="M0 -28 C-16 -12 -16 12 0 28 C16 12 16 -12 0 -28"/><path d="M-30 30 L30 -30" stroke-width="7"/>
+</g>
+</svg>
