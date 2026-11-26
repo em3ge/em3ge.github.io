@@ -4,10 +4,18 @@
  "estado": "activo",
  "inicio": "2026-11-26",
  "ultima_actividad": "2026-11-26",
- "avance": 55,
- "avance_nota": "Estimación. El cifrado está escrito y probado en el ordenador, en Java y en la página web, y los dos se entienden. La aplicación de Android está escrita y se construye, pero todavía no se ha probado en un móvil.",
- "etapa_actual": "Etapa 2: probar la aplicación en el móvil",
- "tecnologias": ["Android", "Java", "AES-GCM", "PBKDF2", "JavaScript", "Web Crypto", "PowerShell"],
+ "avance": 75,
+ "avance_nota": "Estimación. El cifrado está probado en el ordenador y la aplicación se ha recorrido en el móvil real: crear, añadir, copiar, abrir y cerrar, importar, exportar, temas y cierre automático. Falta probar en el móvil los archivos adjuntos y el cambio de contraseña maestra, y meter las llaves de verdad.",
+ "etapa_actual": "Etapa 3: meter las llaves de firma reales y usarlo a diario",
+ "tecnologias": [
+  "Android",
+  "Java",
+  "AES-GCM",
+  "PBKDF2",
+  "JavaScript",
+  "Web Crypto",
+  "PowerShell"
+ ],
  "color": "#ffd86b",
  "repositorio": "llavero",
  "codigo_privado": true,
@@ -17,17 +25,35 @@
   "Todo va en un solo archivo cifrado con una contraseña maestra, que no se guarda en ningún sitio. Ese archivo se exporta y se importa en otro móvil, mezclando lo que haya, o se abre en el ordenador con una página web de un solo archivo que usa el mismo formato.",
   "Una herramienta del ordenador recoge las llaves de firma de su carpeta, con sus contraseñas y sus fichas, y las deja en un archivo cifrado listo para importar en el móvil."
  ],
- "siguiente_paso": "Instalar la aplicación en el móvil y probar de verdad: crear el llavero, añadir una cuenta y una llave, exportar, importar y comprobar que se cierra sola.",
+ "siguiente_paso": "Que el dueño cree su llavero con su contraseña maestra e importe las llaves de firma reales empaquetadas en el ordenador.",
  "etapas": [
-  {"nombre": "Etapa 1: el cifrado y el formato", "estado": "hecha", "detalle": "Una clase de Java sin nada de Android y la misma cuenta en JavaScript. Probadas las dos, y cruzadas: cada una abre lo que cifra la otra."},
-  {"nombre": "Etapa 2: la aplicación de Android", "estado": "en curso", "detalle": "Candado, lista, ficha, adjuntos, generador, exportar, importar y mezclar. Escrita y construida; sin probar en un móvil."},
-  {"nombre": "Etapa 3: las llaves de firma", "estado": "en curso", "detalle": "Herramienta del ordenador que empaqueta las llaves en un archivo cifrado. Probada con llaves de mentira; falta importarlas en el móvil."},
-  {"nombre": "Etapa 4: comodidades", "estado": "pendiente", "detalle": "Abrir con la huella, rellenar contraseñas en otras aplicaciones y aviso de copias antiguas."}
+  {
+   "nombre": "Etapa 1: el cifrado y el formato",
+   "estado": "hecha",
+   "detalle": "Una clase de Java sin nada de Android y la misma cuenta en JavaScript. Probadas las dos, y cruzadas: cada una abre lo que cifra la otra."
+  },
+  {
+   "nombre": "Etapa 2: la aplicación de Android",
+   "estado": "hecha",
+   "detalle": "Candado, lista, ficha, generador, exportar, importar y mezclar, con la misma pantalla que ChitON. Recorrida en el móvil real por cable; faltan por probar ahí los adjuntos y el cambio de contraseña maestra."
+  },
+  {
+   "nombre": "Etapa 3: las llaves de firma",
+   "estado": "en curso",
+   "detalle": "Herramienta del ordenador que empaqueta las llaves en un archivo cifrado. Probada con llaves de mentira hasta verlas dentro de la aplicación en el móvil; falta hacerlo con las de verdad."
+  },
+  {
+   "nombre": "Etapa 4: comodidades",
+   "estado": "pendiente",
+   "detalle": "Abrir con la huella, rellenar contraseñas en otras aplicaciones y aviso de copias antiguas."
+  }
  ],
  "hecho": [
   "Formato de archivo propio y documentado: la clave sale de la contraseña maestra con PBKDF2 de 600 000 vueltas y los datos van con AES de 256 bits en modo GCM, que además detecta cualquier cambio.",
   "La cabecera del archivo va atada al cifrado: si alguien rebaja el número de vueltas o cambia la sal, el archivo no abre.",
   "Aplicación de Android sin ningún permiso y sin bibliotecas añadidas, con tres pantallas: candado, lista con buscador y ficha.",
+  "Pantalla al estilo de ChitON: animación de la llave al arrancar, ayuda en tres pasos con dibujos y casilla de no volver a mostrar, y un engranaje con cinco temas de colores.",
+  "Pensada para que sea muy fácil: un solo botón grande de «Añadir», un botón «Copiar» en cada entrada y, en la ficha, solo lo imprescindible; lo demás se despliega con «Más datos».",
   "Dos clases de entrada: cuentas (usuario, contraseña, dirección, notas) y llaves de aplicaciones (archivo de la llave adjunto, contraseña, alias, paquete y huella).",
   "Exportar una copia cifrada e importarla en otro móvil. Si ya hay llavero, se mezclan: lo nuevo se añade y de lo repetido queda lo cambiado más tarde.",
   "Protecciones: no deja hacer capturas de pantalla, se cierra al salir y a los dos minutos sin tocarla, vacía el portapapeles a los 30 segundos y no entra en las copias de seguridad del móvil.",
@@ -35,80 +61,221 @@
   "Guion que fabrica el paquete sin Gradle y se niega a terminar si el manifiesto pide un permiso o el código nombra clases de red.",
   "Herramienta del ordenador que mete las llaves de firma, con sus fichas y contraseñas, en un archivo cifrado para importar.",
   "Página web de un solo archivo, sin conexión, que abre y guarda el mismo formato en el ordenador.",
-  "Prueba cruzada automática: Java abre lo que cifra la página web y al revés."
+  "Prueba cruzada automática: Java abre lo que cifra la página web y al revés.",
+  "Probada en el móvil real por cable, pulsando desde el ordenador: crear el llavero, añadir una cuenta, copiar, cerrar y abrir, rechazo de una contraseña equivocada, importar un archivo hecho en el ordenador, exportar y abrir esa copia en el ordenador, cierre al salir y cierre solo a los dos minutos."
  ],
  "pendiente": [
-  "Probar la aplicación en un móvil de verdad: no se ha instalado todavía.",
+  "Probar en el móvil adjuntar y sacar archivos, y cambiar la contraseña maestra.",
   "Importar en el móvil las llaves reales empaquetadas en el ordenador.",
+  "Probar en otros móviles.",
   "Abrir con la huella dactilar, con la clave guardada en el almacén seguro del móvil.",
   "Rellenar contraseñas en otras aplicaciones.",
   "Cambiar PBKDF2 por Argon2, que aguanta mejor los ataques con tarjetas gráficas; pide una biblioteca añadida.",
   "Revisión del cifrado por alguien de fuera: ahora es un programa hecho en casa."
  ],
  "diario": [
-  {"fecha": "2026-11-26", "texto": "Nace al ordenar las llaves de firma de las aplicaciones. Primero se plantea como una página web sin conexión; el dueño prefiere una aplicación de Android aislada de Internet, al estilo de una cartera fría, con exportar e importar. Se escribe el cifrado en una clase de Java sin nada de Android para poder probarlo en el ordenador, y se monta una prueba cruzada con la página web: cada una abre lo que cifra la otra. Después, la aplicación entera, el guion que la fabrica y vigila que no pida permisos, y la herramienta del ordenador para las llaves. Al acabar el día se construye, pero no se ha probado en el móvil."}
+  {
+   "fecha": "2026-11-26",
+   "texto": "Nace al ordenar las llaves de firma de las aplicaciones. Primero se plantea como una página web sin conexión; el dueño prefiere una aplicación de Android aislada de Internet, al estilo de una cartera fría, con exportar e importar. Se escribe el cifrado en una clase de Java sin nada de Android para poder probarlo en el ordenador, y se monta una prueba cruzada con la página web: cada una abre lo que cifra la otra. Después, la aplicación entera, el guion que la fabrica y vigila que no pida permisos, y la herramienta del ordenador para las llaves. Al acabar el día se construye, pero no se ha probado en el móvil. Ya con el móvil enchufado, el dueño pide la misma pantalla que ChitON y que sea muy fácil de usar: se rehace con animación de inicio, ayuda en tres pasos, engranaje con temas, un solo botón de añadir y copiar desde la lista (versión 1.1). Se recorre entera en el teléfono, pulsando por cable; sale un fallo, que la tecla Intro abría dos veces y dejaba un aviso de error falso, y se corrige. Importar las llaves empaquetadas en el ordenador y exportar una copia que luego abre el ordenador funcionan."
+  }
  ],
  "lecciones": [
   "«No se conecta a Internet» vale poco si hay que creérselo. Sin el permiso de Internet lo impide el sistema, y cualquiera puede comprobarlo en los ajustes del móvil o mirando el paquete.",
   "Separar el cifrado en una clase que no use nada de Android permite probarlo en el ordenador en segundos, sin móvil.",
   "Dos programas que cifran igual hay que probarlos cruzados: que cada uno pase sus propias pruebas no dice que se entiendan.",
-  "Al desinstalar una aplicación se pierde lo que guardaba. En un gestor de contraseñas, cambiar de llave de firma obliga a desinstalar: antes hay que exportar una copia."
+  "Al desinstalar una aplicación se pierde lo que guardaba. En un gestor de contraseñas, cambiar de llave de firma obliga a desinstalar: antes hay que exportar una copia.",
+  "Para probar una aplicación que prohíbe las capturas de pantalla hace falta una versión de pruebas que las permita, y un seguro para que esa versión no salga por descuido: el guion de construcción la rechaza si no se le pide a propósito."
  ],
- "relacionados": [{"nombre": "ChitON", "relacion": "La primera aplicación cuyas llaves de firma hay que guardar; Llavero se fabrica con el mismo método, sin Gradle."}],
+ "relacionados": [
+  {
+   "nombre": "ChitON",
+   "relacion": "La primera aplicación cuyas llaves de firma hay que guardar; Llavero se fabrica con el mismo método, sin Gradle."
+  }
+ ],
  "texto_para_claude": "Vamos a retomar el proyecto llavero, un gestor de contraseñas y de llaves de firma para Android que no pide ningún permiso. Antes de tocar nada, lee LEEME.md del proyecto y la memoria para retomar de su ficha en la web de proyectos. El cifrado está en Cofre.java y la pantalla en MainActivity.java. Se fabrica con construir.ps1 y se prueba el cifrado con pruebas\\cruzada.ps1. Dime en pocas líneas en qué punto estamos y cuál es el siguiente paso, y espera mi visto bueno. Normas: no añadir ningún permiso ni biblioteca; no cambiar el formato del archivo sin subirle la versión; no dar por bueno lo que no se haya probado en el móvil; nunca pedirme ni escribir en ningún sitio la contraseña maestra.",
  "esquema": {
   "titulo": "Cómo está hecho",
   "texto": "La contraseña maestra abre un único archivo cifrado. La aplicación no tiene salida a Internet: lo único que sale es ese mismo archivo, cifrado, cuando se exporta.",
   "grupos": [
-   {"nombre": "Tú", "columna": 1, "elementos": [
-    {"id": "maestra", "nombre": "Contraseña maestra", "detalle": "No se guarda"}
-   ]},
-   {"nombre": "Llavero en el móvil", "columna": 2, "elementos": [
-    {"id": "cofre", "nombre": "Cifrado", "detalle": "PBKDF2 y AES-256-GCM", "destacado": true},
-    {"id": "pantalla", "nombre": "Lista y fichas", "detalle": "Cuentas y llaves"},
-    {"id": "archivo", "nombre": "Archivo cifrado", "detalle": "Dentro de la aplicación"}
-   ]},
-   {"nombre": "Fuera", "columna": 3, "elementos": [
-    {"id": "copia", "nombre": "Copia exportada", "detalle": "El mismo archivo cifrado"},
-    {"id": "internet", "nombre": "Internet", "detalle": "Sin permiso: cerrado"}
-   ]},
-   {"nombre": "Otros sitios", "columna": 4, "elementos": [
-    {"id": "otro", "nombre": "Otro móvil", "detalle": "Importa y mezcla"},
-    {"id": "web", "nombre": "Página web", "detalle": "En el ordenador"},
-    {"id": "pc", "nombre": "Llaves de firma", "detalle": "Empaquetadas en el PC"}
-   ]}
+   {
+    "nombre": "Tú",
+    "columna": 1,
+    "elementos": [
+     {
+      "id": "maestra",
+      "nombre": "Contraseña maestra",
+      "detalle": "No se guarda"
+     }
+    ]
+   },
+   {
+    "nombre": "Llavero en el móvil",
+    "columna": 2,
+    "elementos": [
+     {
+      "id": "cofre",
+      "nombre": "Cifrado",
+      "detalle": "PBKDF2 y AES-256-GCM",
+      "destacado": true
+     },
+     {
+      "id": "pantalla",
+      "nombre": "Lista y fichas",
+      "detalle": "Cuentas y llaves"
+     },
+     {
+      "id": "archivo",
+      "nombre": "Archivo cifrado",
+      "detalle": "Dentro de la aplicación"
+     }
+    ]
+   },
+   {
+    "nombre": "Fuera",
+    "columna": 3,
+    "elementos": [
+     {
+      "id": "copia",
+      "nombre": "Copia exportada",
+      "detalle": "El mismo archivo cifrado"
+     },
+     {
+      "id": "internet",
+      "nombre": "Internet",
+      "detalle": "Sin permiso: cerrado"
+     }
+    ]
+   },
+   {
+    "nombre": "Otros sitios",
+    "columna": 4,
+    "elementos": [
+     {
+      "id": "otro",
+      "nombre": "Otro móvil",
+      "detalle": "Importa y mezcla"
+     },
+     {
+      "id": "web",
+      "nombre": "Página web",
+      "detalle": "En el ordenador"
+     },
+     {
+      "id": "pc",
+      "nombre": "Llaves de firma",
+      "detalle": "Empaquetadas en el PC"
+     }
+    ]
+   }
   ],
   "conexiones": [
-   {"de": "maestra", "a": "cofre", "texto": "abre", "fuerte": true},
-   {"de": "archivo", "a": "copia", "texto": "exportar", "fuerte": true},
-   {"de": "copia", "a": "otro", "texto": "importar"},
-   {"de": "copia", "a": "web", "doble": true},
-   {"de": "pc", "a": "copia", "texto": "llaves"}
+   {
+    "de": "maestra",
+    "a": "cofre",
+    "texto": "abre",
+    "fuerte": true
+   },
+   {
+    "de": "archivo",
+    "a": "copia",
+    "texto": "exportar",
+    "fuerte": true
+   },
+   {
+    "de": "copia",
+    "a": "otro",
+    "texto": "importar"
+   },
+   {
+    "de": "copia",
+    "a": "web",
+    "doble": true
+   },
+   {
+    "de": "pc",
+    "a": "copia",
+    "texto": "llaves"
+   }
   ]
  },
  "muestra": {
-  "nota": "Salida real de la prueba cruzada del cifrado, ejecutada en el ordenador el 26 de noviembre de 2026. No es una prueba de la aplicación en el móvil, que está por hacer.",
-  "papeles": {"tu": "Orden", "programa": "Prueba", "dentro": "Por dentro"},
+  "nota": "Salida real de la prueba cruzada del cifrado, ejecutada en el ordenador el 26 de noviembre de 2026.",
+  "papeles": {
+   "tu": "Orden",
+   "programa": "Prueba",
+   "dentro": "Por dentro"
+  },
   "escenas": [
-   {"titulo": "El cifrado de la aplicación", "lineas": [
-    {"de": "tu", "texto": "pruebas\\cruzada.ps1"},
-    {"de": "programa", "texto": "BIEN  el archivo no enseña nada legible"},
-    {"de": "programa", "texto": "BIEN  cada guardado sale distinto"},
-    {"de": "programa", "texto": "BIEN  abre con la contraseña y devuelve lo mismo"},
-    {"de": "programa", "texto": "BIEN  rechaza una contraseña equivocada"},
-    {"de": "programa", "texto": "BIEN  nota que han tocado los datos"},
-    {"de": "programa", "texto": "BIEN  nota que han tocado la cabecera"},
-    {"de": "programa", "texto": "BIEN  rechaza un archivo que no es un llavero"},
-    {"de": "programa", "texto": "BIEN  genera contraseñas de 24 letras distintas"}
-   ]},
-   {"titulo": "La aplicación y la página web se entienden", "lineas": [
-    {"de": "nota", "texto": "Java cifra un llavero de muestra y lo abre la página web; luego al revés."},
-    {"de": "programa", "texto": "BIEN  la página no puede conectarse a Internet"},
-    {"de": "dentro", "texto": "iteraciones de la clave: 600000"},
-    {"de": "programa", "texto": "BIEN  la página web abre lo que cifró Java"},
-    {"de": "programa", "texto": "BIEN  Java abre lo que cifró la página web"},
-    {"de": "programa", "texto": "Todo bien."}
-   ]}
+   {
+    "titulo": "El cifrado de la aplicación",
+    "lineas": [
+     {
+      "de": "tu",
+      "texto": "pruebas\\cruzada.ps1"
+     },
+     {
+      "de": "programa",
+      "texto": "BIEN  el archivo no enseña nada legible"
+     },
+     {
+      "de": "programa",
+      "texto": "BIEN  cada guardado sale distinto"
+     },
+     {
+      "de": "programa",
+      "texto": "BIEN  abre con la contraseña y devuelve lo mismo"
+     },
+     {
+      "de": "programa",
+      "texto": "BIEN  rechaza una contraseña equivocada"
+     },
+     {
+      "de": "programa",
+      "texto": "BIEN  nota que han tocado los datos"
+     },
+     {
+      "de": "programa",
+      "texto": "BIEN  nota que han tocado la cabecera"
+     },
+     {
+      "de": "programa",
+      "texto": "BIEN  rechaza un archivo que no es un llavero"
+     },
+     {
+      "de": "programa",
+      "texto": "BIEN  genera contraseñas de 24 letras distintas"
+     }
+    ]
+   },
+   {
+    "titulo": "La aplicación y la página web se entienden",
+    "lineas": [
+     {
+      "de": "nota",
+      "texto": "Java cifra un llavero de muestra y lo abre la página web; luego al revés."
+     },
+     {
+      "de": "programa",
+      "texto": "BIEN  la página no puede conectarse a Internet"
+     },
+     {
+      "de": "dentro",
+      "texto": "iteraciones de la clave: 600000"
+     },
+     {
+      "de": "programa",
+      "texto": "BIEN  la página web abre lo que cifró Java"
+     },
+     {
+      "de": "programa",
+      "texto": "BIEN  Java abre lo que cifró la página web"
+     },
+     {
+      "de": "programa",
+      "texto": "Todo bien."
+     }
+    ]
+   }
   ]
  }
 }

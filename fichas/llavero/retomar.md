@@ -31,9 +31,16 @@ La llave con la que se firma la aplicación está fuera del proyecto, en la carp
 
 ## Estado al acabar el 26 de noviembre de 2026
 
+Versión 1.1, instalada en el móvil del dueño y vacía, a la espera de que él cree su llavero.
+
 - Probado en el ordenador: cifrado de Java, cifrado de la página, cruce en los dos sentidos y la herramienta de las llaves con datos de mentira.
-- Sin probar: toda la aplicación en un móvil. Lo primero al retomar es instalarla y recorrerla entera: crear, añadir, adjuntar, exportar, importar, mezclar, cambiar la contraseña maestra, el cierre solo y el botón de atrás.
-- Dudas que mirar en el móvil: que el teclado no tape los campos, que los cuadros de diálogo se lean bien y que el selector de archivos no cierre el llavero.
+- Probado en el móvil real, pulsando por cable: animación y ayuda, crear, añadir cuenta con contraseña generada, copiar, cerrar y abrir, contraseña equivocada, importar un archivo del ordenador (la llave llega con su archivo, contraseña, alias, paquete y huella), exportar y abrir la copia en el ordenador con `Prueba comprobar`, botón de atrás, temas, cierre al salir y cierre solo a los dos minutos.
+- Sin probar en el móvil: adjuntar y sacar archivos, cambiar la contraseña maestra, borrar una entrada, importar en un móvil sin llavero.
+- Los cuadros de importar, cambiar contraseña, tema y privacidad usan todavía el aspecto del sistema, no el de la aplicación.
+
+## Cómo probar en el móvil
+
+La aplicación prohíbe las capturas. Para probar: `CAPTURAS = true` en `MainActivity.java` y `.\construir.ps1 -Capturas`. Al acabar, volver a `false`, construir sin el modificador, instalar y borrar los datos de prueba con `adb shell pm clear io.github.em3ge.llavero` (solo si el dueño no ha creado aún su llavero: eso borra todo). El selector de archivos del móvil no ve lo que se copia con `adb push` hasta que se repasa el almacenamiento: `adb shell content call --uri content://media --method scan_volume --arg external_primary`.
 
 ## Ideas para más adelante
 
