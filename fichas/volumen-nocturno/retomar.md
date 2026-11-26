@@ -1,8 +1,8 @@
 ## Qué es y qué se busca
 
-Chitón es una aplicación de Android que suaviza los picos de volumen de lo que suena en el móvil. Nació de un caso concreto: dormirse con un programa de humor puesto y que los aplausos, mucho más altos que la voz, no despierten. La idea de partida era que la aplicación «viera el futuro» y bajara el volumen antes del pico.
+ChitON es una aplicación de Android que suaviza los picos de volumen de lo que suena en el móvil. Nació de un caso concreto: dormirse con un programa de humor puesto y que los aplausos, mucho más altos que la voz, no despierten. La idea de partida era que la aplicación «viera el futuro» y bajara el volumen antes del pico.
 
-La carpeta y el repositorio se llaman `volumen-nocturno`; «Chitón» es el nombre de la aplicación.
+La carpeta y el repositorio se llaman `volumen-nocturno`; «ChitON» es el nombre de la aplicación.
 
 ## Normas del proyecto
 
@@ -36,22 +36,24 @@ Cuatro archivos Java en `src`, sin dependencias, para Android 9 o posterior (el 
 
 El volumen en el modo anticipado tiene dos maneras:
 
-- Volumen natural (la buena). Chitón lee con `dumpsys audio` qué sesiones de audio hay, pone un efecto mudo sobre la de cada aplicación que suena, se excluye a sí mismo de la captura y emite por el canal de música. El volumen del móvil funciona como siempre. Necesita el permiso DUMP, que solo se da por cable: `adb shell pm grant io.github.em3ge.volumennocturno android.permission.DUMP`. En los Realme hay que activar antes «Desactivar supervisión de permisos» en las opciones de desarrollador.
-- De reserva, si falta ese permiso. Se silencia el canal de música entero, sin mover su paso, y se emite por el de alarma. Chitón sigue las teclas escuchando los cambios de volumen de los dos canales (con un vídeo sonando van a música; sin él, este móvil las manda a la alarma) y sujeta la alarma un paso por debajo del máximo.
+- Volumen natural (la buena). ChitON lee con `dumpsys audio` qué sesiones de audio hay, pone un efecto mudo sobre la de cada aplicación que suena, se excluye a sí mismo de la captura y emite por el canal de música. El volumen del móvil funciona como siempre. Necesita el permiso DUMP, que solo se da por cable: `adb shell pm grant io.github.em3ge.volumennocturno android.permission.DUMP`. En los Realme hay que activar antes «Desactivar supervisión de permisos» en las opciones de desarrollador.
+- De reserva, si falta ese permiso. Se silencia el canal de música entero, sin mover su paso, y se emite por el de alarma. ChitON sigue las teclas escuchando los cambios de volumen de los dos canales (con un vídeo sonando van a música; sin él, este móvil las manda a la alarma) y sujeta la alarma un paso por debajo del máximo.
 
 ## Dónde está ahora
 
-OJO: en el ordenador está la versión 3.1, compilada el 26 de noviembre de 2026, pero en el móvil del dueño sigue la 2.4. La 3.0 añadió el clasificador de sonidos (`Clasificador.java`, YAMNet con LiteRT) y la 3.1 todo lo de Google Play (apunta a Android 16, paquete .aab, pantalla de borde a borde) más la animación de inicio, la ayuda «Cómo funciona», el buzón de sugerencias y «Acerca de». Ninguna de las dos se ha probado en un teléfono: lo primero al retomar es instalar, mirar en el registro si el modelo carga («clasificador listo» o «sin clasificador») y ver la pantalla. Lo de la tienda está en la carpeta `play` del proyecto: `pasos.md` dice qué falta.
+Versión 3.2, instalada en el móvil del dueño (Android 16) y probada por cable el 26 de noviembre de 2026. La aplicación se llama ahora ChitON (la carpeta, el paquete y el archivo .aab conservan sus nombres).
+
+La 3.0 añadió el clasificador de sonidos (`Clasificador.java`, YAMNet con LiteRT): en el móvil carga y reconoció los aplausos de un programa real; los umbrales están puestos a ojo. La 3.1, lo de Google Play (apunta a Android 16, paquete .aab, pantalla de borde a borde), la animación de inicio, la ayuda «Cómo funciona», el buzón de sugerencias y «Acerca de». La 3.2, el volumen para quien no tenga el permiso DUMP: una sesión de medios con volumen remoto (`abrirSesion`) recibe las teclas; probado retirando el permiso con `adb shell pm revoke` y devolviéndolo después. Lo de la tienda está en la carpeta `play` del proyecto: `pasos.md` dice qué falta.
 
 Versión 2.2, instalada en el móvil del dueño (Android 16), con el permiso DUMP ya concedido. La 2.2 añadió la pantalla de «Permisos y privacidad» (sale la primera vez y está en el engranaje). Medido el 26 de noviembre con un programa de humor real y fuerza «Fuerte»: en 45 segundos, ningún instante salió más de 7 decibelios por encima de la voz normal, que es el tope de ese nivel. La 2.1 pasó los ajustes a un engranaje con menú desplegable, añadió cinco temas de colores (`Tema.java`) y quitó el botón de comparar.
 
 Hay además una versión para el ordenador: `web/index.html`, una página sola para Chrome o Edge de escritorio. Captura el sonido de una pestaña (la calla con `suppressLocalAudioPlayback`), lo pasa por el mismo motor, escrito en JavaScript dentro de un AudioWorklet, y lo emite. Se abre con `abrir_web.ps1` o con doble clic. Comprobado: carga sin errores y su prueba interna (`#prueba` al final de la dirección) da lo mismo que `pruebas/simular.py`. Sin probar: la captura real con un vídeo, que pide elegir la pestaña a mano.
 
-El móvil avisa de «Riesgos detectados con Chitón» (es el gestor de seguridad de Realme, por los permisos de captura). Si se pulsa «Corregir ahora» puede quitar permisos o la aplicación.
+El móvil avisa de «Riesgos detectados con ChitON» (es el gestor de seguridad de Realme, por los permisos de captura). Si se pulsa «Corregir ahora» puede quitar permisos o la aplicación.
 
 La 1.9 añadió, porque quedaban picos, un tope para los golpes secos (ningún instante pasa de la voz normal más 12, 9 o 7 decibelios según la fuerza) y cambió la voz normal al nivel medio del último minuto, para que un público ruidoso no cuente como voz. Solo está comprobado con `pruebas/simular.py`; con un programa real, sin medir. La 2.0 rehízo la pantalla: sencilla, sin pitido de prueba, con los ajustes plegados.
 
-La 1.8 trae el «volumen natural» (ver «Cómo está hecho»). Probado en el móvil por cable: las teclas mueven el volumen normal de multimedia, la alarma no se toca, el efecto mudo queda puesto sobre la sesión de YouTube y a Chitón le sigue llegando el sonido (la gráfica y el registro lo muestran). Falta que el dueño confirme de oído que no se oye doble.
+La 1.8 trae el «volumen natural» (ver «Cómo está hecho»). Probado en el móvil por cable: las teclas mueven el volumen normal de multimedia, la alarma no se toca, el efecto mudo queda puesto sobre la sesión de YouTube y a ChitON le sigue llegando el sonido (la gráfica y el registro lo muestran). Falta que el dueño confirme de oído que no se oye doble.
 
 Lo que sigue, sobre la bajada, viene de la 1.7 y no ha cambiado.
 
@@ -65,7 +67,7 @@ Comprobado en el móvil real, con capturas de pantalla, el registro del teléfon
 
 - El modo anticipado captura el sonido de su YouTube con la música silenciada.
 - La gráfica enseña el pico por venir y el recorte.
-- Las teclas de volumen suben y bajan el volumen de Chitón, con vídeo y sin él.
+- Las teclas de volumen suben y bajan el volumen de ChitON, con vídeo y sin él.
 - Al cerrar de golpe y volver a abrir, la música y la alarma vuelven a como estaban.
 
 Sin comprobar:
@@ -85,7 +87,7 @@ Sin comprobar:
 
 ## Idea pendiente: bajar por lo que es
 
-Investigado el 26 de noviembre de 2026. Para distinguir voz y música de aplausos, risas y ruidos, lo que encaja es YAMNet, un clasificador de 521 clases de sonido que corre en el móvil: mira trozos de casi un segundo a 16 kHz y tarda unos 12 milisegundos por trozo en un móvil reciente. Con la ventaja de un segundo, Chitón sabría qué viene antes de que suene. Obliga a meter una biblioteca con código nativo (el paquete pasaría de decenas de KB a varios MB) y a cambiar el guion de construcción. RNNoise aísla solo la voz y trataría la música como ruido. Separar de verdad las fuentes en directo sigue siendo cosa de laboratorio. Sin hacer; antes hay que medir si la 1.9 basta.
+Investigado el 26 de noviembre de 2026. Para distinguir voz y música de aplausos, risas y ruidos, lo que encaja es YAMNet, un clasificador de 521 clases de sonido que corre en el móvil: mira trozos de casi un segundo a 16 kHz y tarda unos 12 milisegundos por trozo en un móvil reciente. Con la ventaja de un segundo, ChitON sabría qué viene antes de que suene. Obliga a meter una biblioteca con código nativo (el paquete pasaría de decenas de KB a varios MB) y a cambiar el guion de construcción. RNNoise aísla solo la voz y trataría la música como ruido. Separar de verdad las fuentes en directo sigue siendo cosa de laboratorio. Sin hacer; antes hay que medir si la 1.9 basta.
 
 ## Cómo se depura
 
@@ -104,5 +106,5 @@ Con el móvil enchufado:
 - Con el canal de música silenciado, la tecla de bajar cambia el paso sin quitar el silencio, y la de subir lo quita. El paso real solo se conoce por el aviso de cambio de volumen que difunde Android, porque la consulta normal devuelve cero mientras está silenciado.
 - Android pide de nuevo el permiso de captura cada vez que se enciende el modo anticipado; no se puede guardar.
 - El servicio tiene que declararse de tipo «proyección» además de «reproducción», y ponerse en primer plano antes de pedir la captura.
-- Las aplicaciones que prohíben la captura (suelen ser las de música y vídeo de pago) llegan como silencio. No hay forma de distinguirlo de una pausa: Chitón avisa y no cambia de modo solo.
+- Las aplicaciones que prohíben la captura (suelen ser las de música y vídeo de pago) llegan como silencio. No hay forma de distinguirlo de una pausa: ChitON avisa y no cambia de modo solo.
 - Los guiones de PowerShell van sin acentos a propósito: PowerShell 5 los estropea en archivos sin marca de codificación.
