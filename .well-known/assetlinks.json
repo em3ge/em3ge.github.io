@@ -7,7 +7,9 @@
                        "namespace":  "android_app",
                        "package_name":  "io.github.em3ge.amigoinvisible",
                        "sha256_cert_fingerprints":  [
-
+                                                        "81:8F:51:36:2D:12:5B:14:C1:E2:16:DA:AA:E6:BE:7D:59:3D:DC:6E:9E:8F:19:14:CC:C3:55:71:5F:96:E5:F0",
+                                                        "5B:A1:56:F0:A3:B7:D0:17:A7:9C:59:7C:F1:D6:3F:6E:2E:3B:90:71:85:B9:4D:F5:0C:EE:87:D0:38:2A:37:97",
+                                                        "27:94:67:E0:61:76:40:3B:89:80:EA:A8:C1:51:D4:6A:D6:28:5D:4D:93:81:9D:7A:70:35:10:3A:10:39:D6:6E"
                                                     ]
                    }
     }
