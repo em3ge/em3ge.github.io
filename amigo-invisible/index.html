@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src https://script.google.com https://script.googleusercontent.com">
+<title>MisteryFriend · Amigo invisible</title>
+<meta name="description" content="El amigo invisible sin papelitos: apúntate con tu nombre y tu correo y te llegará a quién le regalas.">
+<link rel="icon" href="icono.svg" type="image/svg+xml">
+<style>
+  :root {
+    --fondo: #1a0d14; --fondo2: #3a1426; --tarjeta: rgba(255,255,255,.07); --borde: rgba(255,255,255,.14);
+    --texto: #fff6ef; --tenue: #e0c6c9; --acento: #ffc857; --sobre-acento: #2a0f1c; --mal: #ff9a9a; --bien: #9be59b;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--fondo); }
+  body {
+    margin: 0; min-height: 100vh; color: var(--texto);
+    font: 17px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(180deg, var(--fondo2), var(--fondo) 70%);
+  }
+  main { max-width: 520px; margin: 0 auto; padding: 18px 16px 48px; }
+  header { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+  header img { width: 36px; height: 36px; }
+  header b { font-size: 24px; }
+  h1 { font-size: 26px; line-height: 1.2; margin: 6px 0 8px; }
+  h2 { font-size: 19px; margin: 0 0 10px; }
+  p { margin: 8px 0; }
+  .tenue { color: var(--tenue); }
+  .tarjeta { background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 20px; padding: 18px; margin: 14px 0; }
+  label { display: block; font-size: 15px; color: var(--tenue); margin: 12px 0 4px; }
+  input, textarea {
+    width: 100%; font: inherit; color: var(--texto); background: rgba(0,0,0,.28);
+    border: 1px solid var(--borde); border-radius: 12px; padding: 12px 14px;
+  }
+  textarea { min-height: 76px; resize: vertical; }
+  input:focus, textarea:focus, button:focus-visible, a.boton:focus-visible { outline: 3px solid var(--acento); outline-offset: 2px; }
+  button, a.boton {
+    display: block; width: 100%; text-align: center; text-decoration: none; cursor: pointer;
+    font-family: inherit; font-size: 17px; font-weight: 600; line-height: 1.2; padding: 14px 16px; margin-top: 12px; min-height: 48px;
+    border-radius: 16px; border: 1px solid var(--borde); background: var(--tarjeta); color: var(--texto);
+  }
+  button.principal, a.boton.principal { background: var(--acento); color: var(--sobre-acento); border-color: transparent; }
+  button:disabled { opacity: .55; cursor: wait; }
+  .aviso { min-height: 1.5em; margin-top: 10px; }
+  .aviso.mal { color: var(--mal); }
+  .aviso.bien { color: var(--bien); }
+  .datos { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 10px 0 0; }
+  .datos dt { color: var(--tenue); }
+  .datos dd { margin: 0; }
+  .nota { border-left: 3px solid var(--acento); padding-left: 12px; white-space: pre-wrap; }
+  .regalo { text-align: center; padding: 26px 18px; }
+  .regalo .caja { font-size: 76px; line-height: 1; display: inline-block; transition: transform .5s; }
+  .regalo .nombre { font-size: 34px; font-weight: 700; color: var(--acento); margin: 12px 0 4px; word-break: break-word; }
+  .oculto { display: none !important; }
+  .pequeno { font-size: 14px; }
+  footer { margin-top: 30px; text-align: center; font-size: 14px; color: var(--tenue); }
+  footer a { color: var(--tenue); }
+  @media (prefers-reduced-motion: reduce) { .regalo .caja { transition: none; } }
+</style>
+</head>
+<body>
+<main>
+  <header><img src="icono.svg" alt=""><b>MisteryFriend</b></header>
+  <div id="vista" aria-live="polite"></div>
+  <footer>
+    <p>MisteryFriend, el amigo invisible sin papelitos.</p>
+    <p><a href="privacidad.html">Privacidad</a> · <a href="misteryfriend.apk">Aplicación para Android</a></p>
+  </footer>
+</main>
+
+<script>
+'use strict';
+// Dirección del servidor (Google Apps Script). La pone servidor/PUBLICAR.md al publicarlo.
+var SERVIDOR = 'https://script.google.com/macros/s/AKfycbz6ClrdF3CnW03j3M8hYJgRzJurqmBmgGCw4onFpUObUBk0SxZgo8y5NvKE9HWtLH8CpA/exec';
+var APK = 'https://em3ge.github.io/amigo-invisible/misteryfriend.apk';
+var PAQUETE = 'io.github.em3ge.amigoinvisible';
+
+var vista = document.getElementById('vista');
+var buscar = new URLSearchParams(location.search);
+var simulado = buscar.get('api') === 'simulado';
+// El código de una sesión es una palabra graciosa con dos números («Zascandil27»).
+// Se compara sin mayúsculas, tildes ni eñes, igual que en el servidor.
+function clave(texto) {
+  var c = String(texto || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
+  return /^[a-z]{3,20}[0-9]{2}$/.test(c) ? c : '';
+}
+var codigo = clave(buscar.get('s'));
+
+function el(etiqueta, attrs, hijos) {
+  var e = document.createElement(etiqueta);
+  Object.keys(attrs || {}).forEach(function (k) {
+    if (k === 'texto') { e.textContent = attrs[k]; }
+    else if (k.slice(0, 2) === 'on') { e.addEventListener(k.slice(2), attrs[k]); }
+    else { e.setAttribute(k, attrs[k]); }
+  });
+  (hijos || []).forEach(function (h) { if (h) { e.appendChild(h); } });
+  return e;
+}
+
+function pide(datos) {
+  if (simulado) {
+    var r = JSON.parse(JSON.stringify(atender(datos)));
+    localStorage.setItem('simulado', JSON.stringify({archivos: ARCHIVOS, correos: CORREOS}));
+    return Promise.resolve(r);
+  }
+  if (!SERVIDOR) {
+    return Promise.resolve({ok: false, error: 'MisteryFriend aún no está en marcha: falta conectar el servidor.'});
+  }
+  return fetch(SERVIDOR, {method: 'POST', body: JSON.stringify(datos), redirect: 'follow'})
+    .then(function (r) { return r.json(); })
+    .catch(function () { return {ok: false, error: 'No hay conexión con MisteryFriend. Revisa Internet y prueba otra vez.'}; });
+}
+
+// Lo mío, por sesión, solo en este navegador: {codigo: {id, token}}.
+function mias() {
+  try { return JSON.parse(localStorage.getItem('misteryfriend') || '{}'); } catch (e) { return {}; }
+}
+function guardarMia(c, id, token) {
+  var m = mias();
+  if (id) { m[c] = {id: id, token: token}; } else { delete m[c]; }
+  try { localStorage.setItem('misteryfriend', JSON.stringify(m)); } catch (e) { /* modo privado: se pierde al cerrar */ }
+}
+
+function aviso(caja, texto, clase) {
+  caja.textContent = texto || '';
+  caja.className = 'aviso' + (clase ? ' ' + clase : '');
+}
+
+function ocupado(boton, si) {
+  boton.disabled = si;
+  if (si) { boton.dataset.antes = boton.textContent; boton.textContent = 'Un momento…'; }
+  else if (boton.dataset.antes) { boton.textContent = boton.dataset.antes; }
+}
+
+function datosDe(s) {
+  var dl = el('dl', {class: 'datos'});
+  [['Presupuesto', s.presupuesto], ['Fecha', s.fecha], ['Organiza', s.organiza], ['Apuntados', s.confirmados ? String(s.confirmados) : '']]
+    .forEach(function (par) {
+      if (par[1]) { dl.appendChild(el('dt', {texto: par[0]})); dl.appendChild(el('dd', {texto: par[1]})); }
+    });
+  return dl;
+}
+
+function cabecera(s) {
+  var t = el('div', {class: 'tarjeta'}, [
+    el('p', {class: 'tenue pequeno', texto: 'Amigo invisible · código ' + s.codigo}),
+    el('h1', {texto: s.nombre}), datosDe(s)
+  ]);
+  if (s.mensaje) { t.appendChild(el('p', {class: 'nota', texto: s.mensaje})); }
+  return t;
+}
+
+function esAndroid() { return /Android/i.test(navigator.userAgent); }
+
+function botonesApp(c) {
+  var caja = el('div', {});
+  if (esAndroid()) {
+    var destino = 'intent://em3ge.github.io/amigo-invisible/?s=' + c + '#Intent;scheme=https;package=' + PAQUETE
+        + ';S.browser_fallback_url=' + encodeURIComponent(APK) + ';end';
+    caja.appendChild(el('a', {class: 'boton', href: destino, texto: 'Abrir en la aplicación'}));
+  }
+  caja.appendChild(el('a', {class: 'boton', href: APK, texto: 'Descargar la aplicación para Android'}));
+  return caja;
+}
+
+// ------------------------------------------------------------------ portada
+
+function portada() {
+  var campo = el('input', {id: 'codigo', autocomplete: 'off', autocapitalize: 'words', spellcheck: 'false', maxlength: '30', placeholder: 'Por ejemplo: Zascandil27'});
+  var a = el('p', {class: 'aviso'});
+  vista.replaceChildren(
+    el('h1', {texto: 'El amigo invisible sin papelitos'}),
+    el('p', {class: 'tenue', texto: 'Quien organiza crea la sesión y comparte un código QR. Cada uno se apunta con su nombre y su correo, deja una idea de lo que le gustaría y, el día del sorteo, le llega un correo con su amigo invisible. Nadie más lo sabe, ni siquiera quien organiza.'}),
+    el('div', {class: 'tarjeta'}, [
+      el('h2', {texto: '¿Tienes un código?'}),
+      el('label', {for: 'codigo', texto: 'Código de la sesión'}), campo,
+      el('button', {class: 'principal', texto: 'Entrar', onclick: function () {
+        var c = clave(campo.value);
+        if (!c) { aviso(a, 'El código es una palabra con dos números, por ejemplo Zascandil27.', 'mal'); return; }
+        location.search = '?s=' + c;
+      }}), a
+    ]),
+    el('div', {class: 'tarjeta'}, [
+      el('h2', {texto: '¿Quieres organizar uno?'}),
+      el('p', {class: 'tenue', texto: 'Se organiza desde la aplicación de Android: ahí ves quién se ha apuntado, decides quién no puede tocarle a quién (parejas, hermanos) y lanzas el sorteo.'}),
+      el('a', {class: 'boton principal', href: APK, texto: 'Descargar MisteryFriend para Android'})
+    ])
+  );
+}
+
+// ------------------------------------------------------------------ sesión
+
+function sesion() {
+  vista.replaceChildren(el('p', {class: 'tenue', texto: 'Buscando la sesión…'}));
+  // El enlace del correo trae #p=id.token: se guarda y se quita de la barra.
+  var m = /#p=([\w-]+)\.([0-9a-f]+)/.exec(location.hash);
+  if (m) {
+    guardarMia(codigo, m[1], m[2]);
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+  var mia = mias()[codigo];
+  if (mia) {
+    pide({accion: 'mio', codigo: codigo, id: mia.id, token: mia.token}).then(function (r) {
+      if (r.ok) { mioVista(r, mia); }
+      else { guardarMia(codigo, null); sesion(); }
+    });
+    return;
+  }
+  pide({accion: 'ver', codigo: codigo}).then(function (r) {
+    if (!r.ok) {
+      vista.replaceChildren(el('p', {class: 'aviso mal', texto: r.error}), el('button', {texto: 'Volver', onclick: function () { location.search = ''; }}));
+      return;
+    }
+    apuntarVista(r.sesion);
+  });
+}
+
+function apuntarVista(s) {
+  var nombre = el('input', {id: 'nombre', autocomplete: 'given-name', maxlength: '40'});
+  var correo = el('input', {id: 'correo', type: 'email', autocomplete: 'email', maxlength: '120', inputmode: 'email'});
+  var deseo = el('textarea', {id: 'deseo', maxlength: '300', placeholder: 'Por ejemplo: un libro de cocina, algo para el huerto…'});
+  var comentario = el('textarea', {id: 'comentario', maxlength: '300', placeholder: 'Tallas, gustos, lo que no te gusta…'});
+  var a = el('p', {class: 'aviso'});
+  var boton = el('button', {class: 'principal', texto: 'Apuntarme'});
+  boton.onclick = function () {
+    if (!nombre.value.trim()) { aviso(a, 'Escribe tu nombre.', 'mal'); nombre.focus(); return; }
+    if (!/^\S+@\S+\.\S+$/.test(correo.value.trim())) { aviso(a, 'Escribe bien tu correo: ahí te llegará el resultado.', 'mal'); correo.focus(); return; }
+    ocupado(boton, true);
+    pide({accion: 'apuntar', codigo: s.codigo, nombre: nombre.value, correo: correo.value, deseo: deseo.value, comentario: comentario.value})
+      .then(function (r) {
+        ocupado(boton, false);
+        if (!r.ok) { aviso(a, r.error, 'mal'); return; }
+        confirmarVista(s, r);
+      });
+  };
+  var cerrada = s.estado === 'sorteada' || !s.abierta;
+  vista.replaceChildren(
+    cabecera(s),
+    el('div', {class: 'tarjeta'}, [
+      el('h2', {texto: cerrada ? 'Volver a entrar' : 'Apúntate'}),
+      el('p', {class: 'tenue pequeno', texto: cerrada
+          ? (s.estado === 'sorteada' ? 'El sorteo ya está hecho.' : 'Las inscripciones están cerradas.') + ' Si ya estabas apuntado, escribe el mismo correo y te mandaremos un código para ver tu resultado aquí.'
+          : 'Te mandaremos un correo con un código de 4 números para comprobar que es tuyo. Quien organiza no verá tu correo.'}),
+      el('label', {for: 'nombre', texto: 'Tu nombre'}), nombre,
+      el('label', {for: 'correo', texto: 'Tu correo'}), correo,
+      cerrada ? null : el('label', {for: 'deseo', texto: 'Qué te gustaría que te regalaran (opcional)'}), cerrada ? null : deseo,
+      cerrada ? null : el('label', {for: 'comentario', texto: 'Algún comentario para quien te regale (opcional)'}), cerrada ? null : comentario,
+      boton, a
+    ]),
+    el('div', {class: 'tarjeta'}, [
+      el('p', {class: 'tenue pequeno', texto: '¿Prefieres la aplicación? Te avisa y guarda tu resultado.'}),
+      botonesApp(s.codigo)
+    ])
+  );
+  nombre.focus();
+}
+
+function confirmarVista(s, r) {
+  var palabra = el('input', {id: 'palabra', autocomplete: 'one-time-code', inputmode: 'numeric', maxlength: '6'});
+  var a = el('p', {class: 'aviso'});
+  if (r.aviso) { aviso(a, r.aviso); }
+  var boton = el('button', {class: 'principal', texto: 'Confirmar'});
+  boton.onclick = function () {
+    if (!palabra.value.trim()) { aviso(a, 'Escribe el código de 4 números del correo.', 'mal'); palabra.focus(); return; }
+    ocupado(boton, true);
+    pide({accion: 'confirmar', codigo: s.codigo, id: r.id, palabra: palabra.value}).then(function (c) {
+      ocupado(boton, false);
+      if (!c.ok) { aviso(a, c.error, 'mal'); palabra.select(); return; }
+      guardarMia(s.clave, r.id, c.token);
+      sesion();
+    });
+  };
+  var otro = el('button', {texto: 'No me ha llegado: mandar otro'});
+  otro.onclick = function () {
+    ocupado(otro, true);
+    pide({accion: 'otroCodigo', codigo: s.codigo, id: r.id}).then(function (o) {
+      ocupado(otro, false);
+      aviso(a, o.ok ? 'Te hemos mandado otro código. Vale solo el último.' : o.error, o.ok ? 'bien' : 'mal');
+    });
+  };
+  palabra.addEventListener('keydown', function (e) { if (e.key === 'Enter') { boton.click(); } });
+  vista.replaceChildren(
+    cabecera(s),
+    el('div', {class: 'tarjeta'}, [
+      el('h2', {texto: 'Mira tu correo'}),
+      el('p', {texto: 'Te hemos mandado un código de 4 números a ' + r.correo + '. Escríbelo aquí. Si no lo ves, busca en la carpeta de spam.'}),
+      el('label', {for: 'palabra', texto: 'El código del correo'}), palabra, boton, otro, a
+    ])
+  );
+  palabra.focus();
+}
+
+function mioVista(r, mia) {
+  var s = r.sesion, partes = [cabecera(s)];
+  if (s.estado === 'sorteada' && r.toca) {
+    var caja = el('div', {class: 'caja', 'aria-hidden': 'true', texto: '🎁'});
+    var nombre = el('p', {class: 'nombre oculto', texto: r.toca.nombre});
+    var suyo = el('div', {class: 'oculto'}, [
+      r.toca.deseo ? el('p', {}, [el('b', {texto: 'Le gustaría: '}), document.createTextNode(r.toca.deseo)]) : null,
+      r.toca.comentario ? el('p', {}, [el('b', {texto: 'Comenta: '}), document.createTextNode(r.toca.comentario)]) : null,
+      !r.toca.deseo && !r.toca.comentario ? el('p', {class: 'tenue', texto: 'No ha dejado ninguna sugerencia todavía.'}) : null
+    ]);
+    var abrir = el('button', {class: 'principal', texto: 'Ver a quién le regalo'});
+    abrir.onclick = function () {
+      caja.style.transform = 'scale(1.25) rotate(-8deg)';
+      setTimeout(function () {
+        caja.textContent = '🎉';
+        caja.style.transform = '';
+        nombre.classList.remove('oculto');
+        suyo.classList.remove('oculto');
+        abrir.classList.add('oculto');
+        tapar.classList.remove('oculto');
+        nombre.setAttribute('tabindex', '-1');
+        nombre.focus();
+      }, 450);
+    };
+    var tapar = el('button', {class: 'oculto', texto: 'Taparlo otra vez'});
+    tapar.onclick = function () { mioVista(r, mia); };
+    partes.push(el('div', {class: 'tarjeta regalo'}, [
+      el('h2', {texto: 'Tu amigo invisible'}), caja, nombre, suyo, abrir, tapar,
+      el('p', {class: 'tenue pequeno', texto: 'Asegúrate de que nadie mira la pantalla.'})
+    ]));
+  } else if (s.estado === 'sorteada') {
+    partes.push(el('div', {class: 'tarjeta'}, [el('p', {texto: 'El sorteo ya se hizo y no entraste en él (te apuntaste o confirmaste tarde). Habla con quien organiza.'})]));
+  } else {
+    partes.push(el('div', {class: 'tarjeta'}, [
+      el('h2', {texto: '¡Ya estás dentro, ' + r.yo.nombre + '!'}),
+      el('p', {class: 'tenue', texto: 'Cuando quien organiza haga el sorteo te llegará un correo. También podrás verlo en esta página, en este mismo navegador.'})
+    ]));
+  }
+  // Mis ideas: se pueden cambiar siempre; quien me regala ve la última versión.
+  var deseo = el('textarea', {id: 'deseo', maxlength: '300'});
+  deseo.value = r.yo.deseo;
+  var comentario = el('textarea', {id: 'comentario', maxlength: '300'});
+  comentario.value = r.yo.comentario;
+  var a = el('p', {class: 'aviso'});
+  var guardar = el('button', {texto: 'Guardar cambios'});
+  guardar.onclick = function () {
+    ocupado(guardar, true);
+    pide({accion: 'cambiar', codigo: s.codigo, id: mia.id, token: mia.token, deseo: deseo.value, comentario: comentario.value}).then(function (c) {
+      ocupado(guardar, false);
+      aviso(a, c.ok ? 'Guardado. Quien te regale verá lo nuevo.' : c.error, c.ok ? 'bien' : 'mal');
+    });
+  };
+  var salir = el('button', {texto: 'Borrarme de esta sesión'});
+  salir.onclick = function () {
+    if (!confirm('¿Seguro? Se borran tu nombre, tu correo y tus ideas de esta sesión.')) { return; }
+    pide({accion: 'salir', codigo: s.codigo, id: mia.id, token: mia.token}).then(function (c) {
+      if (!c.ok) { aviso(a, c.error, 'mal'); return; }
+      guardarMia(s.clave, null);
+      sesion();
+    });
+  };
+  partes.push(el('div', {class: 'tarjeta'}, [
+    el('h2', {texto: 'Tus ideas para quien te regale'}),
+    el('label', {for: 'deseo', texto: 'Qué te gustaría'}), deseo,
+    el('label', {for: 'comentario', texto: 'Comentario'}), comentario,
+    guardar, s.estado === 'sorteada' ? null : salir, a,
+    el('p', {class: 'tenue pequeno', texto: 'Apuntado como ' + r.yo.nombre + ' (' + r.yo.correo + ').'})
+  ]));
+  vista.replaceChildren.apply(vista, partes);
+}
+
+function arrancar() {
+  if (codigo) { sesion(); } else { portada(); }
+}
+
+if (simulado) {
+  // Pruebas en el ordenador: el servidor de verdad corre aquí con Google de mentira.
+  var cargar = function (src, luego) { var s = document.createElement('script'); s.src = src; s.onload = luego; document.head.appendChild(s); };
+  cargar('../pruebas/imitaciones.js', function () {
+    var antes = JSON.parse(localStorage.getItem('simulado') || '{}');
+    Object.assign(ARCHIVOS, antes.archivos || {});
+    (antes.correos || []).forEach(function (c) { CORREOS.push(c); });
+    cargar('../servidor/Codigo.gs', arrancar);
+  });
+} else {
+  arrancar();
+}
+</script>
+</body>
+</html>
