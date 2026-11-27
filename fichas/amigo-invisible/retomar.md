@@ -2,7 +2,7 @@
 
 La aplicación se llama **MisteryFriend** (así lo escribió el dueño; en inglés correcto sería «Mystery»). La carpeta, el repositorio (`em3ge/amigo-invisible`, privado), el paquete (`io.github.em3ge.amigoinvisible`) y la dirección web (`/amigo-invisible/`) llevan un nombre neutro para poder cambiar el nombre sin romper nada. Antes se llamó RegalON durante unas horas.
 
-Es un amigo invisible: quien organiza crea la sesión en la aplicación y enseña un QR; cada participante se apunta con nombre, correo, idea de regalo y comentario, y confirma el correo con la palabra graciosa del diccionario que le llega (al principio era un Pokémon; el dueño lo cambió); quien organiza pone exclusiones y sortea; a cada uno le llega su resultado por correo.
+Es un amigo invisible: quien organiza crea la sesión en la aplicación; su código es una palabra graciosa del diccionario con dos números (Zascandil27) y va en un QR; cada participante se apunta con nombre, correo, idea de regalo y comentario, y confirma el correo con un código de 4 números (al principio iba a ser un Pokémon; el dueño lo cambió); quien organiza pone exclusiones y sortea; a cada uno le llega su resultado por correo.
 
 ## Normas del proyecto
 

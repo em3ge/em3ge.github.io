@@ -19,8 +19,8 @@
  "repositorio": "amigo-invisible",
  "codigo_privado": true,
  "resumen": [
-  "Organizar un amigo invisible suele acabar con papelitos en un sombrero, alguien a quien le toca su pareja y un grupo de mensajería lleno de pistas. MisteryFriend lo resuelve con el móvil: quien organiza crea la sesión, pone presupuesto, fecha y normas, y enseña un código QR.",
-  "Cada participante se apunta con su nombre y su correo, y deja una idea de lo que le gustaría y un comentario para quien le regale. Para comprobar que el correo es suyo, le llega una palabra graciosa del diccionario (zascandil, cachivache, tiquismiquis…) que tiene que escribir.",
+  "Organizar un amigo invisible suele acabar con papelitos en un sombrero, alguien a quien le toca su pareja y un grupo de mensajería lleno de pistas. MisteryFriend lo resuelve con el móvil: quien organiza crea la sesión, pone presupuesto, fecha y normas, y le toca un código gracioso, una palabra del diccionario con dos números, como Zascandil27, que también va dentro de un código QR.",
+  "Cada participante se apunta con su nombre y su correo, y deja una idea de lo que le gustaría y un comentario para quien le regale. Para comprobar que el correo es suyo, le llega un código de 4 números que tiene que escribir.",
   "Quien organiza decide a quién no le puede tocar cada uno (parejas, hermanos) y lanza el sorteo. A cada uno le llega un correo con su amigo invisible y su idea de regalo. Nadie más lo sabe, tampoco quien organiza, que además puede participar como uno más.",
   "La privacidad manda: quien organiza ve los nombres pero nunca los correos, nadie puede averiguar si una dirección está apuntada y todo se borra solo a los 90 días. Quien no tiene Android se apunta desde la página web que abre el QR."
  ],
@@ -49,16 +49,16 @@
  ],
  "hecho": [
   "Servidor en Google Apps Script: crear, apuntarse, confirmar el correo, cambiar la idea de regalo, borrarse, y para quien organiza el panel, las exclusiones, el sorteo, repetirlo, deshacerlo, reenviar un correo y borrarlo todo.",
-  "Código de confirmación con una palabra graciosa del diccionario, entre 144: sin mirar mayúsculas, tildes ni eñes, cinco intentos por código, cuatro códigos por persona y caducidad a las 48 horas.",
+  "Códigos de sesión graciosos: una palabra del diccionario entre 144 (zascandil, cachivache, patidifuso…) con dos números, que se escribe sin mirar mayúsculas, tildes ni eñes. Confirmación del correo con un código de 4 números: cinco intentos por código, cuatro códigos por persona y caducidad a las 48 horas.",
   "Sorteo que primero prueba al azar puro, para que cada reparto válido salga con la misma probabilidad, y si las exclusiones lo complican, busca con vuelta atrás. Avisa con el nombre de la persona cuando no hay reparto posible.",
   "Exclusiones en los dos sentidos de un toque (lo normal en parejas y hermanos) y opción de evitar regalos cruzados.",
   "Privacidad: quien organiza ve los correos tapados, nadie ve el reparto, apuntar un correo ya apuntado responde igual que uno nuevo, de las llaves solo se guarda su huella y todo se borra a los 90 días sin cambios.",
-  "Quien cambia de móvil vuelve a entrar con su correo y otra palabra; la llave del móvil viejo deja de valer.",
+  "Quien cambia de móvil vuelve a entrar con su correo y otro código; la llave del móvil viejo deja de valer.",
   "Aplicación de Android sin bibliotecas y con un solo permiso, Internet: inicio con mis amigos invisibles, crear, panel con QR a pantalla completa y brillo al máximo, apuntarse, y ver a quién le regalas destapando un regalo.",
   "Generador de códigos QR propio, comparado módulo a módulo con la biblioteca qrcode de Python en 56 casos: todos iguales.",
   "Página web para apuntarse desde el QR sin la aplicación, también en iPhone, con botón para abrir la aplicación si está instalada.",
   "El QR abre la aplicación si está instalada (enlaces de Android verificados con assetlinks.json) y si no, la página.",
-  "Correos con diseño propio: el de la palabra y el del resultado, con la idea de regalo, el presupuesto, la fecha y las normas.",
+  "Correos con diseño propio: el del código y el del resultado, con la idea de regalo, el presupuesto, la fecha y las normas.",
   "Pruebas en el ordenador: el servidor se ejecuta en Edge con Google de mentira (45 comprobaciones) y la página se recorre sola como lo haría un participante, con capturas.",
   "Preparado para Google Play: paquete firmado, icono, gráfico, ficha en dos idiomas, política de privacidad y declaración de datos."
  ],
@@ -73,7 +73,7 @@
  "diario": [
   {
    "fecha": "2026-11-27",
-   "texto": "Nace con una idea clara del dueño: un administrador que crea la sesión y la comparte con un QR, participantes que confirman su correo con un código, exclusiones para parejas y hermanos, y el resultado por correo. Por el camino pide que cada uno, también quien organiza si participa, pueda dejar una idea de regalo y un comentario, y que se cuide la privacidad: quien organiza no debe poder ver los correos. Se elige un servidor gratuito en Google Apps Script, que guarda en Drive y manda con Gmail, y se escribe con sus pruebas en el navegador. Después, la página web para quien no tiene la aplicación y la aplicación de Android, con su propio generador de QR. Primero el código era el nombre de un Pokémon de la primera generación; el dueño lo cambia por palabras graciosas del diccionario, lo que además quita el riesgo de marca. El nombre provisional era RegalON; el dueño lo cambia a MisteryFriend, y la carpeta, el paquete y la dirección web se quedan con un nombre neutro para poder cambiarlo sin romper nada. Al acabar el día todo está probado en el ordenador, pero falta ponerlo en marcha con una cuenta de Google y abrirlo en un móvil."
+   "texto": "Nace con una idea clara del dueño: un administrador que crea la sesión y la comparte con un QR, participantes que confirman su correo con un código, exclusiones para parejas y hermanos, y el resultado por correo. Por el camino pide que cada uno, también quien organiza si participa, pueda dejar una idea de regalo y un comentario, y que se cuide la privacidad: quien organiza no debe poder ver los correos. Se elige un servidor gratuito en Google Apps Script, que guarda en Drive y manda con Gmail, y se escribe con sus pruebas en el navegador. Después, la página web para quien no tiene la aplicación y la aplicación de Android, con su propio generador de QR. Primero el código del correo era el nombre de un Pokémon de la primera generación; el dueño lo cambia: las palabras graciosas del diccionario pasan a ser el código de cada sesión (Zascandil27) y el correo se confirma con 4 números, lo que además quita el riesgo de marca. El nombre provisional era RegalON; el dueño lo cambia a MisteryFriend, y la carpeta, el paquete y la dirección web se quedan con un nombre neutro para poder cambiarlo sin romper nada. Al acabar el día todo está probado en el ordenador, pero falta ponerlo en marcha con una cuenta de Google y abrirlo en un móvil."
   }
  ],
  "lecciones": [
@@ -125,7 +125,7 @@
     "nombre": "Buzones",
     "columna": 4,
     "elementos": [
-     {"id": "correo", "nombre": "Correo de cada uno", "detalle": "Palabra y resultado"}
+     {"id": "correo", "nombre": "Correo de cada uno", "detalle": "Código y resultado"}
     ]
    }
   ],
@@ -150,10 +150,11 @@
     "titulo": "Apuntarse y confirmar el correo",
     "lineas": [
      {"de": "tu", "texto": "pruebas\\servidor.ps1"},
+     {"de": "programa", "texto": "BIEN  crea la sesión con una palabra graciosa de código (Galimatías04) y llave de organizar"},
      {"de": "programa", "texto": "BIEN  apuntarse manda un correo con el código"},
-     {"de": "programa", "texto": "BIEN  el código es una palabra graciosa (Pitiminí)"},
-     {"de": "programa", "texto": "BIEN  rechaza una palabra equivocada y cuenta los intentos"},
-     {"de": "programa", "texto": "BIEN  acepta la palabra sin mirar mayúsculas ni espacios"},
+     {"de": "programa", "texto": "BIEN  el código del correo son 4 números (6563)"},
+     {"de": "programa", "texto": "BIEN  rechaza un código equivocado y cuenta los intentos"},
+     {"de": "programa", "texto": "BIEN  acepta el código aunque lleve espacios"},
      {"de": "programa", "texto": "BIEN  guarda la sugerencia de regalo y el comentario"}
     ]
    },
