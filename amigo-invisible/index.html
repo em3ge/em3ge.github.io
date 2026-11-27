@@ -143,6 +143,8 @@ function textosFijos() {
 var SERVIDOR = 'https://script.google.com/macros/s/AKfycbz6ClrdF3CnW03j3M8hYJgRzJurqmBmgGCw4onFpUObUBk0SxZgo8y5NvKE9HWtLH8CpA/exec';
 var APK = 'https://em3ge.github.io/amigo-invisible/misteryfriend.apk';
 var PAQUETE = 'io.github.em3ge.amigoinvisible';
+// Donaciones: fuera de la app de Google Play (sus normas no dejan enlazar pagos de fuera).
+var DONAR = 'https://ko-fi.com/em3ge';
 
 var vista = document.getElementById('vista');
 // Los mismos colores de monigote que en el panel de quien organiza (por orden de llegada).
@@ -467,6 +469,13 @@ function mioVista(r, mia) {
       el('h2', {texto: tr('Tu amigo invisible')}), caja, nombre, suyo, abrir, tapar,
       el('p', {class: 'tenue pequeno', texto: tr('Asegúrate de que nadie mira la pantalla.')})
     ]));
+    if (DONAR) {
+      partes.push(el('div', {class: 'tarjeta donar'}, [
+        el('h2', {texto: tr('¿Te ha gustado MisteryFriend?')}),
+        el('p', {class: 'tenue', texto: tr('Es gratis y sin anuncios. Si quieres, puedes invitarme a un café.')}),
+        el('a', {class: 'boton', href: DONAR, target: '_blank', rel: 'noopener', texto: tr('☕ Invitar a un café')})
+      ]));
+    }
   } else if (s.estado === 'sorteada') {
     partes.push(el('div', {class: 'tarjeta'}, [el('p', {texto: tr('El sorteo ya se hizo y no entraste en él (te apuntaste o confirmaste tarde). Habla con quien organiza.')})]));
   } else {
