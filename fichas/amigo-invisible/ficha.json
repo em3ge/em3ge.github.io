@@ -1,0 +1,182 @@
+{
+ "nombre": "MisteryFriend",
+ "lema": "El amigo invisible sin papelitos: quien organiza enseña un QR, cada uno se apunta con su correo y el sorteo le llega a cada uno en secreto.",
+ "estado": "activo",
+ "inicio": "2026-11-27",
+ "ultima_actividad": "2026-11-27",
+ "avance": 55,
+ "avance_nota": "Estimación. Están escritos el servidor, la aplicación de Android y la página web, y probados en el ordenador con Google de mentira. Falta ponerlo en marcha con una cuenta de Google de verdad, probar la aplicación en el móvil y publicarla.",
+ "etapa_actual": "Etapa 3: ponerlo en marcha y probarlo de verdad",
+ "tecnologias": [
+  "Android",
+  "Java",
+  "Google Apps Script",
+  "JavaScript",
+  "Códigos QR",
+  "PowerShell"
+ ],
+ "color": "#ffc857",
+ "repositorio": "amigo-invisible",
+ "codigo_privado": true,
+ "resumen": [
+  "Organizar un amigo invisible suele acabar con papelitos en un sombrero, alguien a quien le toca su pareja y un grupo de mensajería lleno de pistas. MisteryFriend lo resuelve con el móvil: quien organiza crea la sesión, pone presupuesto, fecha y normas, y enseña un código QR.",
+  "Cada participante se apunta con su nombre y su correo, y deja una idea de lo que le gustaría y un comentario para quien le regale. Para comprobar que el correo es suyo, le llega el nombre de un Pokémon de la primera generación que tiene que escribir.",
+  "Quien organiza decide a quién no le puede tocar cada uno (parejas, hermanos) y lanza el sorteo. A cada uno le llega un correo con su amigo invisible y su idea de regalo. Nadie más lo sabe, tampoco quien organiza, que además puede participar como uno más.",
+  "La privacidad manda: quien organiza ve los nombres pero nunca los correos, nadie puede averiguar si una dirección está apuntada y todo se borra solo a los 90 días. Quien no tiene Android se apunta desde la página web que abre el QR."
+ ],
+ "siguiente_paso": "Poner en marcha el servidor con una cuenta de Google, fabricar la aplicación con su dirección y probar un amigo invisible de verdad con tres o cuatro personas.",
+ "etapas": [
+  {
+   "nombre": "Etapa 1: el servidor",
+   "estado": "hecha",
+   "detalle": "Un guion de Google Apps Script, gratis y sin máquina propia: guarda cada sesión en Google Drive, hace el sorteo y manda los correos. Probado en el ordenador con 45 comprobaciones, con Google de mentira."
+  },
+  {
+   "nombre": "Etapa 2: la aplicación y la página web",
+   "estado": "hecha",
+   "detalle": "Aplicación de Android con el mismo estilo que ChitON y LlaverOFF, con su propio generador de QR, y página web para apuntarse sin la aplicación. La página está recorrida en el ordenador; la aplicación compila, pero no se ha abierto en un móvil."
+  },
+  {
+   "nombre": "Etapa 3: ponerlo en marcha y probarlo de verdad",
+   "estado": "en curso",
+   "detalle": "Publicar el servidor en una cuenta de Google, subir la página y probar en el móvil un sorteo con personas y correos reales."
+  },
+  {
+   "nombre": "Etapa 4: publicar en Google Play",
+   "estado": "pendiente",
+   "detalle": "Preparados el paquete firmado, el icono, el gráfico, la ficha en español e inglés, la política de privacidad y las respuestas de los formularios, con la declaración de los datos que recoge. Faltan las capturas y la parte de la cuenta."
+  }
+ ],
+ "hecho": [
+  "Servidor en Google Apps Script: crear, apuntarse, confirmar el correo, cambiar la idea de regalo, borrarse, y para quien organiza el panel, las exclusiones, el sorteo, repetirlo, deshacerlo, reenviar un correo y borrarlo todo.",
+  "Código de confirmación con el nombre de un Pokémon de la primera generación: sin mirar mayúsculas ni espacios, cinco intentos por código, cuatro códigos por persona y caducidad a las 48 horas.",
+  "Sorteo que primero prueba al azar puro, para que cada reparto válido salga con la misma probabilidad, y si las exclusiones lo complican, busca con vuelta atrás. Avisa con el nombre de la persona cuando no hay reparto posible.",
+  "Exclusiones en los dos sentidos de un toque (lo normal en parejas y hermanos) y opción de evitar regalos cruzados.",
+  "Privacidad: quien organiza ve los correos tapados, nadie ve el reparto, apuntar un correo ya apuntado responde igual que uno nuevo, de las llaves solo se guarda su huella y todo se borra a los 90 días sin cambios.",
+  "Quien cambia de móvil vuelve a entrar con su correo y otro Pokémon; la llave del móvil viejo deja de valer.",
+  "Aplicación de Android sin bibliotecas y con un solo permiso, Internet: inicio con mis amigos invisibles, crear, panel con QR a pantalla completa y brillo al máximo, apuntarse, y ver a quién le regalas destapando un regalo.",
+  "Generador de códigos QR propio, comparado módulo a módulo con la biblioteca qrcode de Python en 56 casos: todos iguales.",
+  "Página web para apuntarse desde el QR sin la aplicación, también en iPhone, con botón para abrir la aplicación si está instalada.",
+  "El QR abre la aplicación si está instalada (enlaces de Android verificados con assetlinks.json) y si no, la página.",
+  "Correos con diseño propio: el del Pokémon y el del resultado, con la idea de regalo, el presupuesto, la fecha y las normas.",
+  "Pruebas en el ordenador: el servidor se ejecuta en Edge con Google de mentira (45 comprobaciones) y la página se recorre sola como lo haría un participante, con capturas.",
+  "Preparado para Google Play: paquete firmado, icono, gráfico, ficha en dos idiomas, política de privacidad y declaración de datos."
+ ],
+ "pendiente": [
+  "Publicar el servidor con una cuenta de Google y subir la página web.",
+  "Abrir la aplicación en un móvil por primera vez y probar un sorteo con correos reales.",
+  "Capturas para la tienda.",
+  "Comprobar el nombre en Google Play y en registros de marcas.",
+  "Prueba cerrada de 12 personas durante 14 días y revisión de Google.",
+  "Ideas para después: aviso cuando alguien se apunta, recordatorio antes de la fecha, repetir el del año pasado sin que toquen las mismas parejas, y preguntas anónimas al amigo invisible."
+ ],
+ "diario": [
+  {
+   "fecha": "2026-11-27",
+   "texto": "Nace con una idea clara del dueño: un administrador que crea la sesión y la comparte con un QR, participantes que confirman su correo con el nombre de un Pokémon de la primera generación, exclusiones para parejas y hermanos, y el resultado por correo. Por el camino pide que cada uno, también quien organiza si participa, pueda dejar una idea de regalo y un comentario, y que se cuide la privacidad: quien organiza no debe poder ver los correos. Se elige un servidor gratuito en Google Apps Script, que guarda en Drive y manda con Gmail, y se escribe con sus pruebas en el navegador. Después, la página web para quien no tiene la aplicación y la aplicación de Android, con su propio generador de QR. El nombre provisional era RegalON; el dueño lo cambia a MisteryFriend, y la carpeta, el paquete y la dirección web se quedan con un nombre neutro para poder cambiarlo sin romper nada. Al acabar el día todo está probado en el ordenador, pero falta ponerlo en marcha con una cuenta de Google y abrirlo en un móvil."
+  }
+ ],
+ "lecciones": [
+  "Un servidor no tiene por qué ser una máquina: un guion de Google Apps Script guarda datos, manda correos y contesta a la aplicación, gratis.",
+  "Para probar un servidor de Google sin Google basta con imitar los cuatro servicios que usa y ejecutarlo en el navegador.",
+  "Comparar con otra biblioteca no siempre sirve de juez: una de las dos usadas para el QR rellenaba distinto al final, de forma válida, y daba diferencias que no eran fallos. Hizo falta una segunda referencia.",
+  "La privacidad también está en los mensajes de error: decir «ese correo ya está apuntado» ya desvela algo. La respuesta tiene que ser igual en los dos casos.",
+  "Si el nombre de una aplicación puede cambiar, mejor que no vaya en el paquete ni en la dirección web."
+ ],
+ "relacionados": [
+  {
+   "nombre": "ChitON",
+   "relacion": "Misma forma de fabricar la aplicación, sin Gradle, y mismo estilo de pantalla."
+  },
+  {
+   "nombre": "LlaverOFF",
+   "relacion": "Guarda las llaves con las que se firma MisteryFriend."
+  }
+ ],
+ "texto_para_claude": "Vamos a retomar el proyecto amigo-invisible (la aplicación se llama MisteryFriend): un amigo invisible con servidor en Google Apps Script, aplicación de Android y página web. Antes de tocar nada, lee LEEME.md del proyecto y la memoria para retomar de su ficha en la web de proyectos. El servidor está en servidor/Codigo.gs (se prueba con pruebas/servidor.ps1), la pantalla en MainActivity.java y la página en web/index.html (pruebas/web.ps1). Dime en pocas líneas en qué punto estamos y cuál es el siguiente paso, y espera mi visto bueno. Normas: quien organiza nunca ve correos ni el reparto; un solo permiso, Internet, y ninguna biblioteca; las reglas nuevas van en el servidor con su prueba; no dar por bueno lo que no se haya probado en el móvil y contra el servidor de verdad.",
+ "esquema": {
+  "titulo": "Cómo está hecho",
+  "texto": "La aplicación y la página no deciden nada: piden al servidor, que guarda las sesiones, hace el sorteo y manda los correos.",
+  "grupos": [
+   {
+    "nombre": "Quien organiza",
+    "columna": 1,
+    "elementos": [
+     {"id": "app", "nombre": "Aplicación Android", "detalle": "Panel, QR y sorteo"}
+    ]
+   },
+   {
+    "nombre": "Participantes",
+    "columna": 2,
+    "elementos": [
+     {"id": "qr", "nombre": "Código QR", "detalle": "Abre la app o la web"},
+     {"id": "web", "nombre": "Página web", "detalle": "Apuntarse sin la app"}
+    ]
+   },
+   {
+    "nombre": "Servidor de Google",
+    "columna": 3,
+    "elementos": [
+     {"id": "script", "nombre": "Apps Script", "detalle": "Reglas y sorteo", "destacado": true},
+     {"id": "drive", "nombre": "Google Drive", "detalle": "Una sesión por archivo"}
+    ]
+   },
+   {
+    "nombre": "Buzones",
+    "columna": 4,
+    "elementos": [
+     {"id": "correo", "nombre": "Correo de cada uno", "detalle": "Pokémon y resultado"}
+    ]
+   }
+  ],
+  "conexiones": [
+   {"de": "app", "a": "qr", "texto": "enseña"},
+   {"de": "qr", "a": "web", "texto": "abre"},
+   {"de": "app", "a": "script", "fuerte": true, "doble": true},
+   {"de": "web", "a": "script", "doble": true},
+   {"de": "script", "a": "drive", "texto": "guarda", "doble": true},
+   {"de": "script", "a": "correo", "texto": "manda", "fuerte": true}
+  ]
+ },
+ "muestra": {
+  "nota": "Salida real de las pruebas del servidor, ejecutadas en el ordenador el 27 de noviembre de 2026 con los servicios de Google imitados (ningún correo salió de verdad). Recortada.",
+  "papeles": {
+   "tu": "Orden",
+   "programa": "Prueba",
+   "dentro": "Por dentro"
+  },
+  "escenas": [
+   {
+    "titulo": "Apuntarse y confirmar el correo",
+    "lineas": [
+     {"de": "tu", "texto": "pruebas\\servidor.ps1"},
+     {"de": "programa", "texto": "BIEN  apuntarse manda un correo con el código"},
+     {"de": "programa", "texto": "BIEN  el código es un Pokémon de la primera generación (Weedle)"},
+     {"de": "programa", "texto": "BIEN  rechaza un Pokémon equivocado y cuenta los intentos"},
+     {"de": "programa", "texto": "BIEN  acepta el Pokémon sin mirar mayúsculas ni espacios"},
+     {"de": "programa", "texto": "BIEN  guarda la sugerencia de regalo y el comentario"}
+    ]
+   },
+   {
+    "titulo": "Privacidad",
+    "lineas": [
+     {"de": "programa", "texto": "BIEN  apuntar un correo ya apuntado responde igual que uno nuevo (no se puede averiguar quién está)"},
+     {"de": "programa", "texto": "BIEN  pero no ve ningún correo entero (a•••@c•••.es)"},
+     {"de": "programa", "texto": "BIEN  ni las sugerencias, ni los códigos, ni las contraseñas"}
+    ]
+   },
+   {
+    "titulo": "El sorteo",
+    "lineas": [
+     {"de": "programa", "texto": "BIEN  una exclusión queda en los dos sentidos (pareja)"},
+     {"de": "programa", "texto": "BIEN  nadie se regala a sí mismo ni a un excluido"},
+     {"de": "programa", "texto": "BIEN  sin regalos cruzados, como se pidió"},
+     {"de": "programa", "texto": "BIEN  quien organiza no puede ver quién le toca a quién"},
+     {"de": "programa", "texto": "BIEN  resuelve un reparto difícil de 40 personas (20 parejas y uno casi aislado)"},
+     {"de": "dentro", "texto": "a A le toca b, c, d: 998, 990, 1012 veces de 3000"},
+     {"de": "programa", "texto": "Todo bien."}
+    ]
+   }
+  ]
+ }
+}
