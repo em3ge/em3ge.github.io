@@ -80,6 +80,8 @@ Sin comprobar:
 - Que el modo anticipado suene limpio, sin doble sonido ni cortes, y que el directo recorte en este móvil.
 - El retraso real del modo anticipado: a la ventaja elegida se suma lo que tarda el teléfono en capturar y emitir, y eso no está medido.
 
+Versión 3.7 (27 de noviembre de 2026), compilada y SIN probar en el móvil: arregla los auriculares. Sin el permiso DUMP, lo corregido salía con uso «alarma»; con auriculares Android suena las alarmas también por el altavoz y, si hay música activa (aunque esté silenciada), las limita en los auriculares a unos −36 dB. Ahora, con auriculares, `crearPista()` sale con uso «voz» (`USAGE_VOICE_COMMUNICATION`) y `setPreferredDevice` a los auriculares; `ponerVoz()` pone el canal de voz en el paso más bajo que llega al nivel de la música y el resto se ajusta en la señal; `reponerVoz()` lo devuelve al apagar si siguen los mismos auriculares. Un `AudioDeviceCallback` cambia la salida en marcha (el bucle crea la pista nueva) y, al quitarlos, calla lo que quedaba en cola. Dudas que solo resuelve el móvil: si con auriculares Bluetooth de volumen absoluto el silencio de la música baja también el volumen del propio auricular, y si la capa del fabricante manda las teclas al canal de voz.
+
 ## Qué falta
 
 1. La prueba de oído del dueño con el botón «Comparar», y afinar con eso los tres niveles de fuerza.
