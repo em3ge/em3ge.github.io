@@ -54,15 +54,15 @@
   /* El regalo que se abre: mismas medidas que en la aplicación (marco de 230, regalo de 150 abajo). */
   .escena { position: relative; height: 260px; margin: 4px auto 0; max-width: 300px; }
   .escena svg { position: absolute; left: 50%; display: block; overflow: visible; }
-  .escena .grupo { width: 150px; height: 150px; bottom: 4px; margin-left: -75px; transform-origin: 75px 135px;
+  .escena .grupo { width: 150px; height: 150px; bottom: 4px; margin-left: -75px; transform-origin: 75px 140px;
                    animation: vaiven 1.8s ease-in-out infinite; }
   .escena .tapa { transform-box: fill-box; transform-origin: center; transition: transform .7s cubic-bezier(.2,.7,.3,1), opacity .7s; }
-  .escena .muneco { width: 90px; height: 90px; top: 108px; margin-left: -45px; transform: translateY(67px) scale(.3);
-                    transition: transform .65s cubic-bezier(.3,1.8,.5,1) .12s; }
+  .escena .muneco { width: 90px; height: 90px; top: 108px; margin-left: -45px; transform: translateY(67px) scale(.3); opacity: 0;
+                    transition: transform .65s cubic-bezier(.3,1.8,.5,1) .12s, opacity .2s .12s; }
   .escena.sacude .grupo { animation: sacude .85s ease-in-out; }
   .escena.abierta .grupo { animation: none; }
   .escena.abierta .tapa { transform: translate(70px, -150px) rotate(40deg); opacity: 0; }
-  .escena.abierta .muneco { transform: none; }
+  .escena.abierta .muneco { transform: none; opacity: 1; }
   .escena.salta .muneco { animation: salta .75s ease-out; }
   .confeti { position: absolute; left: 50%; top: 190px; width: 8px; height: 12px; border-radius: 2px;
              animation: confeti var(--dura) cubic-bezier(.2,.6,.4,1) forwards; }
@@ -140,15 +140,13 @@ function escenaRegalo(color) {
     {fill: '#ff5a7a', 'fill-opacity': '.4', d: 'M7.6,9.2 a0.9,0.6 0 1 0 1.8,0 a0.9,0.6 0 1 0 -1.8,0Z M14.6,9.2 a0.9,0.6 0 1 0 1.8,0 a0.9,0.6 0 1 0 -1.8,0Z'},
     {fill: 'none', stroke: '#2a0f1c', 'stroke-width': '.75', 'stroke-linecap': 'round', d: 'M10.6,9.4 Q12,10.6 13.4,9.4'},
     {fill: '#000000', 'fill-opacity': '.35', d: 'M11.4,16 a0.6,0.6 0 1 0 1.2,0 a0.6,0.6 0 1 0 -1.2,0Z M11.4,18.6 a0.6,0.6 0 1 0 1.2,0 a0.6,0.6 0 1 0 -1.2,0Z'}]);
-  var grupo = dibujo('grupo', '21 21 66 66', [
-    {fill: '#e0a93a', d: 'M33,58 h42 v3 h-42Z'},
-    {fill: '#ffc857', d: 'M33,61 h42 v19 a4,4 0 0 1 -4,4 h-34 a4,4 0 0 1 -4,-4Z'},
-    {fill: '#c2334d', d: 'M50.5,58 h7 v26 h-7Z'}]);
+  // El regalo del icono: cuatro bloques (la cinta es el hueco) y lazo de dos triángulos.
+  var grupo = dibujo('grupo', '18 18 72 72', [
+    {fill: '#ffc857', d: 'M27,58 h24 v28 h-24Z M57,58 h24 v28 h-24Z'}]);
   var tapa = document.createElementNS(NS, 'g');
   tapa.setAttribute('class', 'tapa');
-  [['#ffc857', 'M54,45 C47,30 33,32 38,41 C40,44.5 47,45 54,45Z M54,45 C61,30 75,32 70,41 C68,44.5 61,45 54,45Z'],
-   ['#ffc857', 'M32,45 h44 a3,3 0 0 1 3,3 v8 h-50 v-8 a3,3 0 0 1 3,-3Z'],
-   ['#c2334d', 'M50.5,45 h7 v11 h-7Z'], ['#c2334d', 'M50,45 a4,4 0 1 0 8,0 a4,4 0 1 0 -8,0Z']].forEach(function (t) {
+  [['#ffc857', 'M24,40 h27 v14 h-27Z M57,40 h27 v14 h-27Z'],
+   ['#ffc857', 'M54,37 L36,22 L36,37Z M54,37 L72,22 L72,37Z']].forEach(function (t) {
     var p = document.createElementNS(NS, 'path');
     p.setAttribute('fill', t[0]);
     p.setAttribute('d', t[1]);
