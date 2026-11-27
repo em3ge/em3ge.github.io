@@ -51,13 +51,41 @@
   .datos dd { margin: 0; }
   .nota { border-left: 3px solid var(--acento); padding-left: 12px; white-space: pre-wrap; }
   .regalo { text-align: center; padding: 26px 18px; }
-  .regalo .caja { font-size: 76px; line-height: 1; display: inline-block; transition: transform .5s; }
+  /* El regalo que se abre: mismas medidas que en la aplicación (marco de 230, regalo de 150 abajo). */
+  .escena { position: relative; height: 260px; margin: 4px auto 0; max-width: 300px; }
+  .escena svg { position: absolute; left: 50%; display: block; overflow: visible; }
+  .escena .grupo { width: 150px; height: 150px; bottom: 4px; margin-left: -75px; transform-origin: 75px 135px;
+                   animation: vaiven 1.8s ease-in-out infinite; }
+  .escena .tapa { transform-box: fill-box; transform-origin: center; transition: transform .7s cubic-bezier(.2,.7,.3,1), opacity .7s; }
+  .escena .muneco { width: 90px; height: 90px; top: 108px; margin-left: -45px; transform: translateY(67px) scale(.3);
+                    transition: transform .65s cubic-bezier(.3,1.8,.5,1) .12s; }
+  .escena.sacude .grupo { animation: sacude .85s ease-in-out; }
+  .escena.abierta .grupo { animation: none; }
+  .escena.abierta .tapa { transform: translate(70px, -150px) rotate(40deg); opacity: 0; }
+  .escena.abierta .muneco { transform: none; }
+  .escena.salta .muneco { animation: salta .75s ease-out; }
+  .confeti { position: absolute; left: 50%; top: 190px; width: 8px; height: 12px; border-radius: 2px;
+             animation: confeti var(--dura) cubic-bezier(.2,.6,.4,1) forwards; }
+  @keyframes vaiven { 50% { transform: translateY(-7px); } }
+  @keyframes sacude {
+    12% { transform: rotate(-6deg) scale(1.03, .97); } 25% { transform: rotate(6deg) scale(.98, 1.03); }
+    37% { transform: rotate(-9deg) scale(1.06, .95); } 50% { transform: rotate(9deg) scale(.97, 1.05); }
+    62% { transform: rotate(-13deg) scale(1.1, .92); } 75% { transform: rotate(13deg) scale(.95, 1.08); }
+    88% { transform: rotate(-5deg) scale(1.04, .98); } }
+  @keyframes salta { 25% { transform: translateY(-18px); } 50% { transform: none; } 75% { transform: translateY(-9px); } }
+  @keyframes confeti {
+    0% { transform: translate(-50%, 0) rotate(0); opacity: 1; }
+    70% { opacity: 1; }
+    100% { transform: translate(calc(-50% + var(--x)), var(--y)) rotate(var(--giro)); opacity: 0; } }
   .regalo .nombre { font-size: 34px; font-weight: 700; color: var(--acento); margin: 12px 0 4px; word-break: break-word; }
   .oculto { display: none !important; }
   .pequeno { font-size: 14px; }
   footer { margin-top: 30px; text-align: center; font-size: 14px; color: var(--tenue); }
   footer a { color: var(--tenue); }
-  @media (prefers-reduced-motion: reduce) { .regalo .caja { transition: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .escena .grupo, .escena.sacude .grupo, .escena.salta .muneco { animation: none; }
+    .escena .tapa, .escena .muneco { transition: none; }
+    .confeti { display: none; } }
 </style>
 </head>
 <body>
@@ -78,6 +106,85 @@ var APK = 'https://em3ge.github.io/amigo-invisible/misteryfriend.apk';
 var PAQUETE = 'io.github.em3ge.amigoinvisible';
 
 var vista = document.getElementById('vista');
+// Los mismos colores de monigote que en el panel de quien organiza (por orden de llegada).
+var COLORES = ['#ff6b6b', '#4dabf7', '#69db7c', '#ffd43b', '#da77f2', '#ff922b', '#38d9a9', '#f783ac', '#a9e34b', '#91a7ff', '#ffffff', '#c69c6d'];
+var NS = 'http://www.w3.org/2000/svg';
+
+function dibujo(clase, caja, trazos) {
+  var s = document.createElementNS(NS, 'svg');
+  s.setAttribute('class', clase);
+  s.setAttribute('viewBox', caja);
+  s.setAttribute('aria-hidden', 'true');
+  trazos.forEach(function (t) {
+    var p = document.createElementNS(NS, 'path');
+    Object.keys(t).forEach(function (k) { p.setAttribute(k, t[k]); });
+    s.appendChild(p);
+  });
+  return s;
+}
+
+function escenaRegalo(color) {
+  var marco = el('div', {class: 'escena'});
+  var muneco = dibujo('muneco', '0 0 24 24', [
+    // Cuerpo del color que toca (igual que ic_monigote_cuerpo.xml de la aplicación)
+    {fill: 'none', stroke: color, 'stroke-width': '2.3', 'stroke-linecap': 'round', d: 'M8.9,14.6 L5.2,10.6 M15.1,14.6 L18.8,10.6'},
+    {fill: color, d: 'M4.1,10.1 a1.45,1.45 0 1 0 2.9,0 a1.45,1.45 0 1 0 -2.9,0Z M17,10.1 a1.45,1.45 0 1 0 2.9,0 a1.45,1.45 0 1 0 -2.9,0Z'},
+    {fill: color, d: 'M7.2,21.2 C7.2,15.2 8.9,12.6 12,12.6 C15.1,12.6 16.8,15.2 16.8,21.2 C16.8,22.3 15.9,22.8 15,22.8 L9,22.8 C8.1,22.8 7.2,22.3 7.2,21.2Z'},
+    {fill: color, d: 'M6.6,7.4 a5.4,5.2 0 1 0 10.8,0 a5.4,5.2 0 1 0 -10.8,0Z'},
+    // Carita (ic_monigote_cara.xml)
+    {fill: 'none', stroke: '#2a0f1c', 'stroke-opacity': '.5', 'stroke-width': '.6',
+     d: 'M6.6,7.4 a5.4,5.2 0 1 0 10.8,0 a5.4,5.2 0 1 0 -10.8,0Z M7.2,21.2 C7.2,15.2 8.9,12.6 12,12.6 C15.1,12.6 16.8,15.2 16.8,21.2 C16.8,22.3 15.9,22.8 15,22.8 L9,22.8 C8.1,22.8 7.2,22.3 7.2,21.2Z'},
+    {fill: '#ffffff', 'fill-opacity': '.25', d: 'M8.2,5.6 a2.1,1.5 0 1 0 4.2,0 a2.1,1.5 0 1 0 -4.2,0Z'},
+    {fill: '#2a0f1c', d: 'M9.1,7.3 a0.95,1.15 0 1 0 1.9,0 a0.95,1.15 0 1 0 -1.9,0Z M13,7.3 a0.95,1.15 0 1 0 1.9,0 a0.95,1.15 0 1 0 -1.9,0Z'},
+    {fill: '#ffffff', d: 'M9.6,6.9 a0.35,0.35 0 1 0 0.7,0 a0.35,0.35 0 1 0 -0.7,0Z M13.5,6.9 a0.35,0.35 0 1 0 0.7,0 a0.35,0.35 0 1 0 -0.7,0Z'},
+    {fill: '#ff5a7a', 'fill-opacity': '.4', d: 'M7.6,9.2 a0.9,0.6 0 1 0 1.8,0 a0.9,0.6 0 1 0 -1.8,0Z M14.6,9.2 a0.9,0.6 0 1 0 1.8,0 a0.9,0.6 0 1 0 -1.8,0Z'},
+    {fill: 'none', stroke: '#2a0f1c', 'stroke-width': '.75', 'stroke-linecap': 'round', d: 'M10.6,9.4 Q12,10.6 13.4,9.4'},
+    {fill: '#000000', 'fill-opacity': '.35', d: 'M11.4,16 a0.6,0.6 0 1 0 1.2,0 a0.6,0.6 0 1 0 -1.2,0Z M11.4,18.6 a0.6,0.6 0 1 0 1.2,0 a0.6,0.6 0 1 0 -1.2,0Z'}]);
+  var grupo = dibujo('grupo', '21 21 66 66', [
+    {fill: '#e0a93a', d: 'M33,58 h42 v3 h-42Z'},
+    {fill: '#ffc857', d: 'M33,61 h42 v19 a4,4 0 0 1 -4,4 h-34 a4,4 0 0 1 -4,-4Z'},
+    {fill: '#c2334d', d: 'M50.5,58 h7 v26 h-7Z'}]);
+  var tapa = document.createElementNS(NS, 'g');
+  tapa.setAttribute('class', 'tapa');
+  [['#ffc857', 'M54,45 C47,30 33,32 38,41 C40,44.5 47,45 54,45Z M54,45 C61,30 75,32 70,41 C68,44.5 61,45 54,45Z'],
+   ['#ffc857', 'M32,45 h44 a3,3 0 0 1 3,3 v8 h-50 v-8 a3,3 0 0 1 3,-3Z'],
+   ['#c2334d', 'M50.5,45 h7 v11 h-7Z'], ['#c2334d', 'M50,45 a4,4 0 1 0 8,0 a4,4 0 1 0 -8,0Z']].forEach(function (t) {
+    var p = document.createElementNS(NS, 'path');
+    p.setAttribute('fill', t[0]);
+    p.setAttribute('d', t[1]);
+    tapa.appendChild(p);
+  });
+  grupo.appendChild(tapa);
+  marco.appendChild(muneco);
+  marco.appendChild(grupo);
+  marco.abrir = function (luego) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      marco.classList.add('abierta');
+      luego();
+      return;
+    }
+    marco.classList.add('sacude');
+    setTimeout(function () {
+      marco.classList.add('abierta');
+      for (var i = 0; i < 34; i++) {
+        var c = document.createElement('span');
+        c.className = 'confeti';
+        var angulo = (-160 + Math.random() * 140) * Math.PI / 180;
+        var lejos = 120 + Math.random() * 120;
+        c.style.setProperty('--x', Math.round(Math.cos(angulo) * lejos) + 'px');
+        c.style.setProperty('--y', Math.round(Math.sin(angulo) * lejos + 120) + 'px');
+        c.style.setProperty('--giro', Math.round(-720 + Math.random() * 1440) + 'deg');
+        c.style.setProperty('--dura', (1.3 + Math.random() * 0.5) + 's');
+        c.style.background = i % 5 === 0 ? 'var(--acento)' : COLORES[Math.floor(Math.random() * COLORES.length)];
+        if (Math.random() < 0.5) { c.style.width = c.style.height = '7px'; c.style.borderRadius = '50%'; }
+        marco.appendChild(c);
+      }
+      setTimeout(function () { marco.classList.add('salta'); }, 780);
+      setTimeout(luego, 520);
+    }, 850);
+  };
+  return marco;
+}
 var buscar = new URLSearchParams(location.search);
 var simulado = buscar.get('api') === 'simulado';
 // El código de una sesión es una palabra graciosa con dos números («Zascandil27»).
@@ -172,7 +279,7 @@ function portada() {
   var a = el('p', {class: 'aviso'});
   vista.replaceChildren(
     el('h1', {texto: 'El amigo invisible sin papelitos'}),
-    el('p', {class: 'tenue', texto: 'Quien organiza crea la sesión y comparte un código QR. Cada uno se apunta con su nombre y su correo, deja una idea de lo que le gustaría y, el día del sorteo, le llega un correo con su amigo invisible. Nadie más lo sabe: si quien organiza lo desbloquea para mirarlo, todos quedan avisados.'}),
+    el('p', {class: 'tenue', texto: 'Quien organiza crea la sesión y comparte un código QR. Cada uno se apunta con su nombre y su correo, deja una idea de lo que le gustaría y, el día del sorteo, le llega un correo con su amigo invisible. Nadie más lo sabe; solo quien organiza puede desbloquearlo si hace falta.'}),
     el('div', {class: 'tarjeta'}, [
       el('h2', {texto: '¿Tienes un código?'}),
       el('label', {for: 'codigo', texto: 'Código de la sesión'}), campo,
@@ -285,7 +392,7 @@ function confirmarVista(s, r) {
     cabecera(s),
     el('div', {class: 'tarjeta'}, [
       el('h2', {texto: 'Mira tu correo'}),
-      el('p', {texto: 'Te hemos mandado un código de 4 números a ' + r.correo + '. Escríbelo aquí. Si no lo ves, busca en la carpeta de spam.'}),
+      el('p', {texto: 'Te hemos mandado un código de 4 números a ' + r.correo + '. Escríbelo aquí. Si no lo ves, busca en la carpeta de spam y márcalo como «No es spam»: así el del sorteo te llegará bien.'}),
       el('label', {for: 'palabra', texto: 'El código del correo'}), palabra, boton, otro, a
     ])
   );
@@ -294,11 +401,9 @@ function confirmarVista(s, r) {
 
 function mioVista(r, mia) {
   var s = r.sesion, partes = [cabecera(s)];
-  if (s.revelada) {
-    partes.push(el('p', {class: 'nota', texto: '🔓 Quien organiza ha desbloqueado el reparto: sabe quién le regala a quién.'}));
-  }
   if (s.estado === 'sorteada' && r.toca) {
-    var caja = el('div', {class: 'caja', 'aria-hidden': 'true', texto: '🎁'});
+    var color = r.toca.color >= 0 ? COLORES[r.toca.color % COLORES.length] : COLORES[0];
+    var caja = escenaRegalo(color);
     var nombre = el('p', {class: 'nombre oculto', texto: r.toca.nombre});
     var suyo = el('div', {class: 'oculto'}, [
       r.toca.deseo ? el('p', {}, [el('b', {texto: 'Le gustaría: '}), document.createTextNode(r.toca.deseo)]) : null,
@@ -307,17 +412,15 @@ function mioVista(r, mia) {
     ]);
     var abrir = el('button', {class: 'principal', texto: 'Ver a quién le regalo'});
     abrir.onclick = function () {
-      caja.style.transform = 'scale(1.25) rotate(-8deg)';
-      setTimeout(function () {
-        caja.textContent = '🎉';
-        caja.style.transform = '';
+      abrir.classList.add('oculto');
+      caja.abrir(function () {
         nombre.classList.remove('oculto');
         suyo.classList.remove('oculto');
         abrir.classList.add('oculto');
         tapar.classList.remove('oculto');
         nombre.setAttribute('tabindex', '-1');
         nombre.focus();
-      }, 450);
+      });
     };
     var tapar = el('button', {class: 'oculto', texto: 'Taparlo otra vez'});
     tapar.onclick = function () { mioVista(r, mia); };
