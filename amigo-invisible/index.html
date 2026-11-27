@@ -172,7 +172,7 @@ function portada() {
   var a = el('p', {class: 'aviso'});
   vista.replaceChildren(
     el('h1', {texto: 'El amigo invisible sin papelitos'}),
-    el('p', {class: 'tenue', texto: 'Quien organiza crea la sesión y comparte un código QR. Cada uno se apunta con su nombre y su correo, deja una idea de lo que le gustaría y, el día del sorteo, le llega un correo con su amigo invisible. Nadie más lo sabe, ni siquiera quien organiza.'}),
+    el('p', {class: 'tenue', texto: 'Quien organiza crea la sesión y comparte un código QR. Cada uno se apunta con su nombre y su correo, deja una idea de lo que le gustaría y, el día del sorteo, le llega un correo con su amigo invisible. Nadie más lo sabe: si quien organiza lo desbloquea para mirarlo, todos quedan avisados.'}),
     el('div', {class: 'tarjeta'}, [
       el('h2', {texto: '¿Tienes un código?'}),
       el('label', {for: 'codigo', texto: 'Código de la sesión'}), campo,
@@ -294,6 +294,9 @@ function confirmarVista(s, r) {
 
 function mioVista(r, mia) {
   var s = r.sesion, partes = [cabecera(s)];
+  if (s.revelada) {
+    partes.push(el('p', {class: 'nota', texto: '🔓 Quien organiza ha desbloqueado el reparto: sabe quién le regala a quién.'}));
+  }
   if (s.estado === 'sorteada' && r.toca) {
     var caja = el('div', {class: 'caja', 'aria-hidden': 'true', texto: '🎁'});
     var nombre = el('p', {class: 'nombre oculto', texto: r.toca.nombre});
