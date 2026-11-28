@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ChitON: política de privacidad</title>
+<title>ChitON: política de privacidad · privacy policy</title>
 <style>
   :root { --fondo: #0b1026; --texto: #eef0ff; --tenue: #b8bde8; --acento: #ffd86b; --tarjeta: rgba(255,255,255,.07); }
   @media (prefers-color-scheme: light) {
@@ -21,12 +21,29 @@
   ul { padding-left: 1.2em; }
   li { margin: 6px 0; }
   a { color: var(--acento); }
+  .idiomas { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; }
+  .idiomas a { text-decoration: none; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--tenue); color: var(--tenue); font-size: 15px; }
+  .idiomas a.elegido { background: var(--acento); border-color: var(--acento); color: var(--fondo); }
+  section + section { margin-top: 64px; }
+  .js section { display: none; }
+  .js section.visible { display: block; }
+  .js section + section { margin-top: 0; }
 </style>
+<script>document.documentElement.className = "js";</script>
 </head>
 <body>
 <main>
+  <nav class="idiomas" aria-label="Idioma / Language">
+    <a href="#es" data-idioma="es" lang="es">Español</a>
+    <a href="#en" data-idioma="en" lang="en">English</a>
+    <a href="#pt" data-idioma="pt" lang="pt">Português</a>
+    <a href="#fr" data-idioma="fr" lang="fr">Français</a>
+    <a href="#de" data-idioma="de" lang="de">Deutsch</a>
+  </nav>
+
+<section lang="es" id="es">
   <h1>ChitON: política de privacidad</h1>
-  <p class="fecha">En vigor desde el 26 de noviembre de 2026.</p>
+  <p class="fecha">En vigor desde el 28 de noviembre de 2026.</p>
 
   <div class="resumen">
     <p><strong>En corto:</strong> ChitON no recoge, no guarda y no envía ningún dato tuyo.</p>
@@ -34,22 +51,24 @@
   </div>
 
   <h2>Qué es ChitON</h2>
-  <p>ChitON es una aplicación para Android que suaviza los picos de volumen de lo que suena en el móvil: aplausos, risas, golpes y música que suben mucho respecto a la voz.</p>
+  <p>ChitON es una aplicación para Android que suaviza los picos de volumen de lo que suena en el móvil: aplausos, risas, gritos, golpes y música que suben mucho respecto a la voz.</p>
 
   <h2>Qué datos trata</h2>
   <ul>
     <li><strong>El sonido que reproducen otras aplicaciones de tu móvil.</strong> Para corregirlo, ChitON lo recibe, lo mide, baja el volumen de las partes ruidosas y lo vuelve a emitir. Todo ocurre dentro del teléfono, en memoria y en el momento. El sonido no se graba en ningún archivo y no sale del dispositivo.</li>
-    <li><strong>Tus ajustes.</strong> La fuerza elegida, el tema de colores y opciones parecidas se guardan en el propio móvil. Se borran al desinstalar la aplicación.</li>
+    <li><strong>Tus ajustes.</strong> La fuerza elegida, el idioma, el tema de colores y opciones parecidas se guardan en el propio móvil. Se borran al desinstalar la aplicación.</li>
   </ul>
   <p>ChitON no usa el micrófono, la cámara, tu ubicación, tus contactos ni tus archivos. No tiene anuncios ni herramientas de medición o de seguimiento.</p>
 
   <h2>Para qué son los permisos</h2>
   <ul>
     <li><strong>Grabar audio.</strong> Es el nombre que Android da al permiso necesario para medir y capturar el sonido que reproducen otras aplicaciones. ChitON lo usa solo para eso; no escucha por el micrófono.</li>
-    <li><strong>Capturar el contenido que se reproduce.</strong> Android lo pide cada vez que se enciende el modo anticipado y muestra su propio indicador mientras dura. ChitON solo toma el sonido, nunca la imagen de la pantalla.</li>
-    <li><strong>Avisos.</strong> Para el aviso fijo que mantiene la aplicación encendida y permite apagarla.</li>
+    <li><strong>Capturar el contenido que se reproduce.</strong> Android lo pide cada vez que se enciende el modo anticipado, con el aviso de «grabar o emitir la pantalla», y muestra su propio indicador mientras dura. ChitON solo toma el sonido, nunca la imagen de la pantalla.</li>
+    <li><strong>Notificaciones.</strong> Para el aviso fijo que mantiene la aplicación encendida y permite apagarla o cambiar el volumen.</li>
     <li><strong>Servicio en primer plano.</strong> Para seguir corrigiendo el sonido con la pantalla apagada o con otra aplicación delante.</li>
+    <li><strong>Arranque del móvil.</strong> Solo para volver a programar el aviso del horario cuando se reinicia el teléfono.</li>
   </ul>
+  <p>ChitON puede recomendarte quitar el ahorro de batería para que el móvil no la cierre de noche. Solo te lleva a los ajustes de Android: el cambio lo haces tú y ChitON no modifica nada por su cuenta.</p>
 
   <h2>Reconocimiento de sonidos</h2>
   <p>Para distinguir aplausos y risas de la voz, ChitON usa un modelo de reconocimiento de sonidos que funciona dentro del móvil. No se envía nada a ningún servidor.</p>
@@ -57,6 +76,12 @@
   <h2>Con quién se comparten los datos</h2>
   <p>Con nadie. ChitON no envía datos a su autor ni a terceros.</p>
   <p>El buzón de sugerencias no manda nada por su cuenta: abre tu aplicación de correo con el texto que has escrito, la versión de ChitON y el modelo de tu móvil, y eres tú quien decide enviarlo. Si lo envías, tu dirección de correo y ese texto llegan al autor, que los usa solo para contestarte y mejorar la aplicación.</p>
+
+  <h2>Donaciones</h2>
+  <p>Fuera de Google Play (en la versión web y en la que se instala directamente), ChitON ofrece donar con PayPal. El botón solo abre la página de PayPal en tu navegador o en su aplicación; el pago lo gestiona PayPal con su propia política de privacidad, y ChitON no recibe ni guarda ningún dato del pago. La versión de Google Play no tiene botón de donar.</p>
+
+  <h2>Registro de pruebas</h2>
+  <p>La copia de pruebas que se instala directamente tiene un interruptor para guardar un registro técnico de una noche (niveles de volumen, batería y estado de la aplicación) en el propio móvil. Está apagado salvo que lo actives, no contiene sonido ni datos personales y no sale del teléfono. La versión de Google Play no lo tiene.</p>
 
   <h2>Menores</h2>
   <p>ChitON no recoge datos de nadie, tampoco de menores.</p>
@@ -66,6 +91,232 @@
 
   <h2>Contacto</h2>
   <p>Para cualquier pregunta sobre privacidad puedes escribir a <a href="mailto:jarvis.cordoba.ia@gmail.com">jarvis.cordoba.ia@gmail.com</a>.</p>
+</section>
+<section lang="en" id="en">
+  <h1>ChitON: privacy policy</h1>
+  <p class="fecha">In effect since November 28, 2026.</p>
+
+  <div class="resumen">
+    <p><strong>In short:</strong> ChitON does not collect, store or send any of your data.</p>
+    <p>The app has no Internet permission, so it cannot send anything off your phone.</p>
+  </div>
+
+  <h2>What ChitON is</h2>
+  <p>ChitON is an Android app that smooths out volume peaks in what plays on your phone: applause, laughter, shouting, bangs and music that get much louder than the voices.</p>
+
+  <h2>What data it handles</h2>
+  <ul>
+    <li><strong>The sound played by other apps on your phone.</strong> To correct it, ChitON receives it, measures it, lowers the volume of the loud parts and plays it again. Everything happens inside the phone, in memory and in real time. The sound is never recorded to a file and never leaves the device.</li>
+    <li><strong>Your settings.</strong> The chosen strength, language, color theme and similar options are stored on the phone itself. They are deleted when you uninstall the app.</li>
+  </ul>
+  <p>ChitON does not use the microphone, the camera, your location, your contacts or your files. It has no ads and no analytics or tracking tools.</p>
+
+  <h2>What the permissions are for</h2>
+  <ul>
+    <li><strong>Record audio.</strong> This is the name Android gives to the permission needed to measure and capture the sound played by other apps. ChitON uses it only for that; it does not listen through the microphone.</li>
+    <li><strong>Capture the content being played.</strong> Android asks for this every time the anticipation mode is turned on, with the "record or cast your screen" prompt, and shows its own indicator while it lasts. ChitON only takes the sound, never the image on the screen.</li>
+    <li><strong>Notifications.</strong> For the persistent notification that keeps the app running and lets you turn it off or change the volume.</li>
+    <li><strong>Foreground service.</strong> To keep correcting the sound with the screen off or with another app in front.</li>
+    <li><strong>Phone startup.</strong> Only to reschedule the schedule reminder when the phone restarts.</li>
+  </ul>
+  <p>ChitON may recommend that you turn off battery optimization so the phone does not close it at night. It only takes you to the Android settings: you make the change yourself, and ChitON does not change anything on its own.</p>
+
+  <h2>Sound recognition</h2>
+  <p>To tell applause and laughter apart from voices, ChitON uses a sound recognition model that runs inside the phone. Nothing is sent to any server.</p>
+
+  <h2>Who the data is shared with</h2>
+  <p>No one. ChitON does not send data to its author or to third parties.</p>
+  <p>The suggestion box does not send anything on its own: it opens your email app with the text you have written, the ChitON version and your phone model, and you decide whether to send it. If you send it, your email address and that text reach the author, who uses them only to reply to you and improve the app.</p>
+
+  <h2>Donations</h2>
+  <p>Outside Google Play (in the web version and in the version installed directly), ChitON offers donations through PayPal. The button only opens the PayPal page in your browser or in its app; the payment is handled by PayPal under its own privacy policy, and ChitON does not receive or store any payment data. The Google Play version has no donate button.</p>
+
+  <h2>Test log</h2>
+  <p>The test copy that is installed directly has a switch to save a one-night technical log (volume levels, battery and app status) on the phone itself. It is off unless you turn it on, contains no sound or personal data, and never leaves the phone. The Google Play version does not have it.</p>
+
+  <h2>Children</h2>
+  <p>ChitON does not collect data from anyone, including children.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>If the app changes in a way that affects your privacy, this page will be updated and the date above will change.</p>
+
+  <h2>Contact</h2>
+  <p>For any privacy question, you can write to <a href="mailto:jarvis.cordoba.ia@gmail.com">jarvis.cordoba.ia@gmail.com</a>.</p>
+</section>
+<section lang="pt" id="pt">
+  <h1>ChitON: política de privacidade</h1>
+  <p class="fecha">Em vigor desde 28 de novembro de 2026.</p>
+
+  <div class="resumen">
+    <p><strong>Em resumo:</strong> o ChitON não coleta, não guarda e não envia nenhum dado seu.</p>
+    <p>O aplicativo não tem permissão de Internet, então não consegue enviar nada para fora do seu celular.</p>
+  </div>
+
+  <h2>O que é o ChitON</h2>
+  <p>O ChitON é um aplicativo para Android que suaviza os picos de volume do que toca no celular: aplausos, risadas, gritos, batidas e música que ficam muito mais altos que a voz.</p>
+
+  <h2>Quais dados ele trata</h2>
+  <ul>
+    <li><strong>O som reproduzido por outros aplicativos do seu celular.</strong> Para corrigi-lo, o ChitON o recebe, mede, abaixa o volume das partes barulhentas e o reproduz de novo. Tudo acontece dentro do telefone, na memória e em tempo real. O som não é gravado em nenhum arquivo e não sai do dispositivo.</li>
+    <li><strong>Suas configurações.</strong> A intensidade escolhida, o idioma, o tema de cores e opções parecidas ficam guardados no próprio celular. Eles são apagados quando você desinstala o aplicativo.</li>
+  </ul>
+  <p>O ChitON não usa o microfone, a câmera, sua localização, seus contatos nem seus arquivos. Não tem anúncios nem ferramentas de medição ou rastreamento.</p>
+
+  <h2>Para que servem as permissões</h2>
+  <ul>
+    <li><strong>Gravar áudio.</strong> É o nome que o Android dá à permissão necessária para medir e capturar o som reproduzido por outros aplicativos. O ChitON a usa só para isso; ele não escuta pelo microfone.</li>
+    <li><strong>Capturar o conteúdo que está sendo reproduzido.</strong> O Android pede isso toda vez que o modo antecipado é ligado, com o aviso de “gravar ou transmitir a tela”, e mostra seu próprio indicador enquanto durar. O ChitON só pega o som, nunca a imagem da tela.</li>
+    <li><strong>Notificações.</strong> Para o aviso fixo que mantém o aplicativo ligado e permite desligá-lo ou mudar o volume.</li>
+    <li><strong>Serviço em primeiro plano.</strong> Para continuar corrigindo o som com a tela apagada ou com outro aplicativo na frente.</li>
+    <li><strong>Inicialização do celular.</strong> Só para reprogramar o aviso do horário quando o telefone é reiniciado.</li>
+  </ul>
+  <p>O ChitON pode recomendar que você desative a economia de bateria para que o celular não o feche à noite. Ele só leva você às configurações do Android: quem faz a mudança é você, e o ChitON não altera nada por conta própria.</p>
+
+  <h2>Reconhecimento de sons</h2>
+  <p>Para distinguir aplausos e risadas da voz, o ChitON usa um modelo de reconhecimento de sons que funciona dentro do celular. Nada é enviado para nenhum servidor.</p>
+
+  <h2>Com quem os dados são compartilhados</h2>
+  <p>Com ninguém. O ChitON não envia dados ao seu autor nem a terceiros.</p>
+  <p>A caixa de sugestões não envia nada por conta própria: ela abre seu aplicativo de e-mail com o texto que você escreveu, a versão do ChitON e o modelo do seu celular, e é você quem decide enviar. Se você enviar, seu endereço de e-mail e esse texto chegam ao autor, que os usa só para responder a você e melhorar o aplicativo.</p>
+
+  <h2>Doações</h2>
+  <p>Fora do Google Play (na versão web e na que é instalada diretamente), o ChitON oferece a opção de doar com PayPal. O botão só abre a página do PayPal no seu navegador ou no aplicativo dele; o pagamento é processado pelo PayPal com sua própria política de privacidade, e o ChitON não recebe nem guarda nenhum dado do pagamento. A versão do Google Play não tem botão de doação.</p>
+
+  <h2>Registro de testes</h2>
+  <p>A cópia de testes instalada diretamente tem um botão para guardar um registro técnico de uma noite (níveis de volume, bateria e estado do aplicativo) no próprio celular. Ele fica desligado a menos que você o ative, não contém som nem dados pessoais e não sai do telefone. A versão do Google Play não tem esse registro.</p>
+
+  <h2>Menores de idade</h2>
+  <p>O ChitON não coleta dados de ninguém, inclusive de menores de idade.</p>
+
+  <h2>Alterações nesta política</h2>
+  <p>Se o aplicativo mudar de um jeito que afete sua privacidade, esta página será atualizada e a data acima será alterada.</p>
+
+  <h2>Contato</h2>
+  <p>Para qualquer pergunta sobre privacidade, você pode escrever para <a href="mailto:jarvis.cordoba.ia@gmail.com">jarvis.cordoba.ia@gmail.com</a>.</p>
+</section>
+<section lang="fr" id="fr">
+  <h1>ChitON : politique de confidentialité</h1>
+  <p class="fecha">En vigueur depuis le 28 novembre 2026.</p>
+
+  <div class="resumen">
+    <p><strong>En bref :</strong> ChitON ne collecte, ne conserve et n'envoie aucune de tes données.</p>
+    <p>L'application n'a pas l'autorisation d'accéder à Internet : elle ne peut donc rien envoyer en dehors de ton téléphone.</p>
+  </div>
+
+  <h2>Ce qu'est ChitON</h2>
+  <p>ChitON est une application Android qui atténue les pics de volume de ce qui est diffusé sur ton téléphone : applaudissements, rires, cris, coups et musique qui montent beaucoup plus fort que la voix.</p>
+
+  <h2>Les données traitées</h2>
+  <ul>
+    <li><strong>Le son diffusé par les autres applications de ton téléphone.</strong> Pour le corriger, ChitON le reçoit, le mesure, baisse le volume des passages bruyants et le diffuse à nouveau. Tout se passe dans le téléphone, en mémoire et en temps réel. Le son n'est enregistré dans aucun fichier et ne quitte pas l'appareil.</li>
+    <li><strong>Tes réglages.</strong> L'intensité choisie, la langue, le thème de couleurs et les options similaires sont enregistrés sur le téléphone lui-même. Ils sont effacés lorsque tu désinstalles l'application.</li>
+  </ul>
+  <p>ChitON n'utilise ni le micro, ni l'appareil photo, ni ta position, ni tes contacts, ni tes fichiers. Il n'a ni publicité ni outil de mesure d'audience ou de suivi.</p>
+
+  <h2>À quoi servent les autorisations</h2>
+  <ul>
+    <li><strong>Enregistrer de l'audio.</strong> C'est le nom qu'Android donne à l'autorisation nécessaire pour mesurer et capturer le son diffusé par les autres applications. ChitON l'utilise uniquement pour cela ; il n'écoute pas par le micro.</li>
+    <li><strong>Capturer le contenu diffusé.</strong> Android le demande chaque fois que le mode anticipé est activé, avec le message « enregistrer ou caster l'écran », et affiche son propre indicateur tant que cela dure. ChitON ne prend que le son, jamais l'image de l'écran.</li>
+    <li><strong>Notifications.</strong> Pour la notification permanente qui maintient l'application active et permet de l'arrêter ou de changer le volume.</li>
+    <li><strong>Service de premier plan.</strong> Pour continuer à corriger le son quand l'écran est éteint ou qu'une autre application est ouverte par-dessus.</li>
+    <li><strong>Démarrage du téléphone.</strong> Uniquement pour reprogrammer le rappel de l'horaire lorsque le téléphone redémarre.</li>
+  </ul>
+  <p>ChitON peut te recommander de désactiver l'optimisation de la batterie pour que le téléphone ne le ferme pas pendant la nuit. Il t'emmène seulement dans les paramètres d'Android : c'est toi qui fais le changement, et ChitON ne modifie rien de lui-même.</p>
+
+  <h2>Reconnaissance des sons</h2>
+  <p>Pour distinguer les applaudissements et les rires de la voix, ChitON utilise un modèle de reconnaissance des sons qui fonctionne dans le téléphone. Rien n'est envoyé à aucun serveur.</p>
+
+  <h2>Avec qui les données sont partagées</h2>
+  <p>Avec personne. ChitON n'envoie aucune donnée à son auteur ni à des tiers.</p>
+  <p>La boîte à suggestions n'envoie rien d'elle-même : elle ouvre ton application de messagerie avec le texte que tu as écrit, la version de ChitON et le modèle de ton téléphone, et c'est toi qui décides de l'envoyer. Si tu l'envoies, ton adresse e-mail et ce texte parviennent à l'auteur, qui les utilise uniquement pour te répondre et améliorer l'application.</p>
+
+  <h2>Dons</h2>
+  <p>En dehors de Google Play (dans la version web et dans celle qui s'installe directement), ChitON propose de faire un don avec PayPal. Le bouton ouvre seulement la page PayPal dans ton navigateur ou dans son application ; le paiement est géré par PayPal selon sa propre politique de confidentialité, et ChitON ne reçoit ni ne conserve aucune donnée de paiement. La version Google Play n'a pas de bouton de don.</p>
+
+  <h2>Journal de test</h2>
+  <p>La copie de test qui s'installe directement dispose d'un interrupteur pour enregistrer un journal technique d'une nuit (niveaux de volume, batterie et état de l'application) sur le téléphone lui-même. Il est désactivé sauf si tu l'actives, ne contient ni son ni données personnelles et ne quitte pas le téléphone. La version Google Play ne l'a pas.</p>
+
+  <h2>Mineurs</h2>
+  <p>ChitON ne collecte de données sur personne, y compris sur les mineurs.</p>
+
+  <h2>Modifications de cette politique</h2>
+  <p>Si l'application change d'une manière qui touche à ta vie privée, cette page sera mise à jour et la date indiquée en haut changera.</p>
+
+  <h2>Contact</h2>
+  <p>Pour toute question sur la confidentialité, tu peux écrire à <a href="mailto:jarvis.cordoba.ia@gmail.com">jarvis.cordoba.ia@gmail.com</a>.</p>
+</section>
+<section lang="de" id="de">
+  <h1>ChitON: Datenschutzerklärung</h1>
+  <p class="fecha">Gültig seit dem 28. November 2026.</p>
+
+  <div class="resumen">
+    <p><strong>Kurz gesagt:</strong> ChitON erhebt, speichert und sendet keine deiner Daten.</p>
+    <p>Die App hat keine Internetberechtigung und kann deshalb nichts von deinem Handy nach außen senden.</p>
+  </div>
+
+  <h2>Was ChitON ist</h2>
+  <p>ChitON ist eine Android-App, die Lautstärkespitzen in dem glättet, was auf deinem Handy abgespielt wird: Applaus, Lachen, Schreie, Knalle und Musik, die viel lauter werden als die Stimmen.</p>
+
+  <h2>Welche Daten verarbeitet werden</h2>
+  <ul>
+    <li><strong>Der Ton, den andere Apps auf deinem Handy abspielen.</strong> Um ihn zu korrigieren, empfängt ChitON ihn, misst ihn, senkt die Lautstärke der lauten Stellen und gibt ihn wieder aus. Alles geschieht im Telefon selbst, im Arbeitsspeicher und in Echtzeit. Der Ton wird in keiner Datei aufgezeichnet und verlässt das Gerät nicht.</li>
+    <li><strong>Deine Einstellungen.</strong> Die gewählte Stärke, die Sprache, das Farbschema und ähnliche Optionen werden auf dem Handy selbst gespeichert. Sie werden gelöscht, wenn du die App deinstallierst.</li>
+  </ul>
+  <p>ChitON nutzt weder das Mikrofon noch die Kamera, deinen Standort, deine Kontakte oder deine Dateien. Die App enthält keine Werbung und keine Analyse- oder Tracking-Werkzeuge.</p>
+
+  <h2>Wofür die Berechtigungen dienen</h2>
+  <ul>
+    <li><strong>Audio aufnehmen.</strong> So nennt Android die Berechtigung, die nötig ist, um den von anderen Apps abgespielten Ton zu messen und zu erfassen. ChitON nutzt sie nur dafür; die App hört nicht über das Mikrofon mit.</li>
+    <li><strong>Wiedergegebene Inhalte erfassen.</strong> Android fragt das jedes Mal ab, wenn der vorausschauende Modus eingeschaltet wird, mit dem Hinweis „Bildschirm aufnehmen oder streamen“, und zeigt dabei sein eigenes Symbol an. ChitON nimmt nur den Ton, niemals das Bild des Bildschirms.</li>
+    <li><strong>Benachrichtigungen.</strong> Für die dauerhafte Benachrichtigung, die die App aktiv hält und mit der du sie ausschalten oder die Lautstärke ändern kannst.</li>
+    <li><strong>Vordergrunddienst.</strong> Damit der Ton auch bei ausgeschaltetem Bildschirm oder mit einer anderen App im Vordergrund weiter korrigiert wird.</li>
+    <li><strong>Start des Handys.</strong> Nur um die Erinnerung für den Zeitplan neu einzurichten, wenn das Telefon neu startet.</li>
+  </ul>
+  <p>ChitON kann dir empfehlen, die Akkuoptimierung zu deaktivieren, damit das Handy die App nachts nicht beendet. ChitON bringt dich nur zu den Android-Einstellungen: Die Änderung nimmst du selbst vor, und ChitON verändert nichts von sich aus.</p>
+
+  <h2>Geräuscherkennung</h2>
+  <p>Um Applaus und Lachen von Stimmen zu unterscheiden, nutzt ChitON ein Modell zur Geräuscherkennung, das im Handy selbst läuft. Es wird nichts an einen Server gesendet.</p>
+
+  <h2>Mit wem Daten geteilt werden</h2>
+  <p>Mit niemandem. ChitON sendet keine Daten an den Entwickler oder an Dritte.</p>
+  <p>Der Vorschlagskasten sendet nichts von sich aus: Er öffnet deine E-Mail-App mit dem Text, den du geschrieben hast, der ChitON-Version und dem Modell deines Handys, und du entscheidest, ob du ihn sendest. Wenn du ihn sendest, erhält der Entwickler deine E-Mail-Adresse und diesen Text und nutzt sie nur, um dir zu antworten und die App zu verbessern.</p>
+
+  <h2>Spenden</h2>
+  <p>Außerhalb von Google Play (in der Webversion und in der direkt installierten Version) bietet ChitON an, mit PayPal zu spenden. Die Schaltfläche öffnet nur die PayPal-Seite in deinem Browser oder in der PayPal-App; die Zahlung wird von PayPal nach dessen eigener Datenschutzerklärung abgewickelt, und ChitON erhält oder speichert keine Zahlungsdaten. Die Google-Play-Version hat keine Spenden-Schaltfläche.</p>
+
+  <h2>Testprotokoll</h2>
+  <p>Die direkt installierte Testversion hat einen Schalter, um ein technisches Protokoll einer Nacht (Lautstärkepegel, Akku und App-Status) auf dem Handy selbst zu speichern. Es ist ausgeschaltet, solange du es nicht aktivierst, enthält weder Ton noch personenbezogene Daten und verlässt das Telefon nicht. Die Google-Play-Version hat diese Funktion nicht.</p>
+
+  <h2>Minderjährige</h2>
+  <p>ChitON erhebt von niemandem Daten, auch nicht von Minderjährigen.</p>
+
+  <h2>Änderungen dieser Erklärung</h2>
+  <p>Wenn sich die App so ändert, dass deine Privatsphäre betroffen ist, wird diese Seite aktualisiert und das Datum oben geändert.</p>
+
+  <h2>Kontakt</h2>
+  <p>Bei Fragen zum Datenschutz kannst du an <a href="mailto:jarvis.cordoba.ia@gmail.com">jarvis.cordoba.ia@gmail.com</a> schreiben.</p>
+</section>
 </main>
+<script>
+  // Se ve un idioma: el del enlace (#en), el del navegador o, si no está, inglés.
+  (function () {
+    var hay = ["es", "en", "pt", "fr", "de"];
+    function poner(c) {
+      document.querySelectorAll("section").forEach(function (s) { s.classList.toggle("visible", s.id === c); });
+      document.querySelectorAll(".idiomas a").forEach(function (a) { a.classList.toggle("elegido", a.dataset.idioma === c); });
+      document.documentElement.lang = c;
+    }
+    var c = location.hash.slice(1);
+    if (hay.indexOf(c) < 0) {
+      c = (navigator.language || "en").slice(0, 2).toLowerCase();
+      if (hay.indexOf(c) < 0) { c = "en"; }
+    }
+    poner(c);
+    window.addEventListener("hashchange", function () {
+      var h = location.hash.slice(1);
+      if (hay.indexOf(h) >= 0) { poner(h); }
+    });
+  })();
+</script>
 </body>
 </html>
